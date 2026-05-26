@@ -1,0 +1,197 @@
+[
+  {
+    "id": 1,
+    "type": "mcq",
+    "title": "Distance Metric Properties",
+    "description": "Which of the following is NOT a required property for a valid distance metric?",
+    "options": [
+      "Symmetry: d(x, y) = d(y, x)",
+      "Triangle inequality: d(x, z) ≤ d(x, y) + d(y, z)",
+      "Reflexivity: d(x, x) = 0 for all x",
+      "Monotonicity: d increases with feature magnitude"
+    ],
+    "correct": [3],
+    "explanation": "Valid distance metrics require non-negativity, identity (d(x,x)=0), symmetry, and triangle inequality. Monotonicity is not a universal requirement—metrics can behave non-monotonically with respect to individual feature magnitudes. The Minkowski p-norms satisfy the core properties, but don't mandate monotonic scaling behavior."
+  },
+  {
+    "id": 2,
+    "type": "multi",
+    "title": "Comparing Distance Metrics on Image Data",
+    "description": "A team is classifying handwritten digits (28×28 pixel images). They're comparing Euclidean (L2), Manhattan (L1), and Chebyshev distance metrics for k-NN. Select all statements that are correct:",
+    "options": [
+      "Euclidean distance is most influenced by a single outlier pixel differing significantly from others",
+      "Manhattan distance treats all directions equally, unlike Euclidean which emphasizes diagonal differences",
+      "Chebyshev distance will produce the same neighborhoods as Euclidean for k=1 if features are independently uniformly distributed",
+      "For identical datasets, Chebyshev always produces tighter decision boundaries than Manhattan",
+      "In high dimensions, all three metrics converge toward measuring extreme coordinate differences"
+    ],
+    "correct": [0, 4],
+    "explanation": "Euclidean (L2) squares differences, so outliers have outsized influence. Chebyshev (L∞) focuses on the maximum coordinate difference, and in high dimensions, the max dominates the sum—so all metrics eventually converge to similar behavior. Manhattan (L1) treats axes equally but isn't equivalent to Euclidean's diagonal emphasis. Chebyshev doesn't necessarily produce tighter boundaries than Manhattan universally."
+  },
+  {
+    "id": 3,
+    "type": "multi",
+    "title": "k-NN Decision Boundaries and Voronoi Cells",
+    "description": "In k-NN classification with k=1, a new point falls near the Voronoi cell boundary between two training examples from different classes. Select all true statements:",
+    "options": [
+      "The decision boundary is the perpendicular bisector between the two nearest examples",
+      "Small perturbations in the new point's position can flip its predicted class if it's exactly on the Voronoi edge",
+      "Increasing k to 3 will definitely smooth this sharp boundary by voting across multiple neighbors",
+      "The Voronoi cell for each training example contains all points closer to it than to any other training example",
+      "In very high dimensions, the curse of dimensionality makes the nearest neighbor distance nearly equal to the distance to far neighbors"
+    ],
+    "correct": [1, 3, 4],
+    "explanation": "k=1 creates Voronoi cells (each point owns all space closer to it). Decision boundaries align with Voronoi edges—small moves can flip classification. Larger k does smooth boundaries via majority voting. The curse of dimensionality makes high-dimensional distances collapse toward a common scale, so 'nearest' becomes less meaningful. The perpendicular bisector statement is true for 2D Euclidean but not general."
+  },
+  {
+    "id": 4,
+    "type": "mcq",
+    "title": "k-NN Bias-Variance Tradeoff",
+    "description": "As k increases in k-NN, how do bias and variance change?",
+    "options": [
+      "Both bias and variance decrease",
+      "Bias increases, variance decreases",
+      "Bias decreases, variance increases",
+      "Both bias and variance increase"
+    ],
+    "correct": [1],
+    "explanation": "Small k (like k=1) fits the training data closely—low bias, high variance. Large k averages over many neighbors, smoothing predictions—high bias (underfitting), low variance. The optimal k balances this tradeoff."
+  },
+  {
+    "id": 5,
+    "type": "multi",
+    "title": "k-Means Centroid Initialization Effects",
+    "description": "A researcher is clustering 1000 customer records into 5 clusters using k-means. They experiment with two initialization strategies: (A) random selection of 5 data points as initial centroids, and (B) k-means++ (seeding first centroid randomly, then selecting subsequent ones with probability proportional to squared distance from nearest centroid). Select all accurate statements:",
+    "options": [
+      "Strategy B is guaranteed to find the global optimum faster than Strategy A",
+      "Strategy A may converge to a local optimum with high inertia, while Strategy B is more likely to avoid poor local optima",
+      "Both strategies will converge in the same number of iterations once initialized",
+      "Strategy B requires more computation during initialization but often leads to better final clustering",
+      "Changing the initialization strategy can change the final inertia value without changing the number of iterations"
+    ],
+    "correct": [1, 3, 4],
+    "explanation": "k-means++ improves initialization by spreading seeds far apart, reducing the risk of poor local optima—but no guarantee of global optimum. Both strategies run the same algorithm after initialization, so convergence rate depends on quality of start. Poor initialization (A) often yields higher inertia. Strategy B costs more upfront but typically produces better solutions. Different inertias with same iteration count confirms initialization matters for final quality, not just speed."
+  },
+  {
+    "id": 6,
+    "type": "multi",
+    "title": "Scaling Sensitivity in Distance-Based Clustering",
+    "description": "A dataset contains two features: Age (1-100 years) and Annual Income (20,000-500,000 dollars). A team applies k-means without feature scaling. Select all consequences they should anticipate:",
+    "options": [
+      "Income dominates the distance calculation because its range is much larger",
+      "Clusters will be elongated in the Income direction rather than spherical",
+      "Feature scaling using min-max normalization or z-score standardization will change cluster assignments",
+      "The inertia value is no longer interpretable without scaling normalization",
+      "Hierarchical clustering with Euclidean distance will show the same Income-dominance effect"
+    ],
+    "correct": [0, 1, 2, 4],
+    "explanation": "Without scaling, large-range features (Income) dwarf small-range features (Age) in Euclidean distance. This skews clusters toward aligning with Income, creating elongated clusters. Scaling rescales both features to comparable ranges, changing cluster membership. Inertia itself is still a valid sum-of-squares metric, but its interpretation relative to scaled data differs. Hierarchical clustering suffers the same issue when using Euclidean distance. Only (3) is misleading—inertia remains calculable; interpretation context changes."
+  },
+  {
+    "id": 7,
+    "type": "mcq",
+    "title": "K-Medoids vs K-Means Centroids",
+    "description": "Why might a researcher prefer k-medoids (PAM algorithm) over k-means for clustering real-world customer records?",
+    "options": [
+      "k-medoids always converges faster because it uses actual data points instead of geometric means",
+      "k-medoids centroids are guaranteed to be real, interpretable records; k-means centroids are synthetic points that may not represent any actual customer",
+      "k-medoids is immune to the curse of dimensionality while k-means is highly sensitive",
+      "k-medoids can only work with Euclidean distance, making it more robust"
+    ],
+    "correct": [1],
+    "explanation": "k-medoids selects actual data points as centers, so results are immediately interpretable. k-means computes geometric centroids that don't exist in the dataset. k-medoids is computationally more expensive (O(n²k) vs O(nk)), not faster. Both suffer curse of dimensionality similarly. k-medoids works with any distance metric, not just Euclidean."
+  },
+  {
+    "id": 8,
+    "type": "multi",
+    "title": "Silhouette Coefficient Interpretation",
+    "description": "A k-means clustering produces silhouette coefficients for four data points: s1 = 0.8, s2 = 0.05, s3 = -0.2, s4 = -0.9. Select all correct interpretations:",
+    "options": [
+      "Point 1 is well-clustered; it lies deep within its cluster",
+      "Point 2 is ambiguous; it's roughly equidistant from its own cluster and a neighboring cluster",
+      "Point 3 should be moved to a different cluster to improve the clustering",
+      "Point 4 is significantly closer to a different cluster than its assigned cluster",
+      "The overall silhouette coefficient for the clustering is positive, indicating reasonable cluster quality"
+    ],
+    "correct": [0, 1, 3],
+    "explanation": "Silhouette s_i = (b_i - a_i) / max(a_i, b_i), where a_i = avg within-cluster distance, b_i = min avg to other clusters. Positive s means a_i < b_i (closer to own cluster). s1=0.8 shows tight clustering. s2≈0 means equidistance. s3,s4 negative means points are closer to other clusters—they may be misclustered, but moving them isn't inherent to the silhouette calculation itself (that's post-hoc interpretation). Statement (4) is correct but (3) overstates—silhouette describes fit, not prescribes reassignment. Overall average isn't necessarily positive with mixed scores."
+  },
+  {
+    "id": 9,
+    "type": "multi",
+    "title": "Hierarchical Clustering Linkage Functions",
+    "description": "A researcher performs hierarchical agglomerative clustering on 100 customer records and examines four different linkage strategies. Match properties to linkage functions—select all correct statements:",
+    "options": [
+      "Single linkage can produce 'chain' effects where clusters elongate by merging one edge point at a time",
+      "Complete linkage tends to produce compact, roughly spherical clusters by merging when the farthest pair is closest",
+      "Average linkage is computationally faster than complete linkage because it requires fewer pairwise distance comparisons",
+      "Centroid linkage uses the Euclidean distance between cluster centroids, making it sensitive to the scale of features",
+      "Single linkage is guaranteed to outperform complete linkage in high-dimensional spaces"
+    ],
+    "correct": [0, 1, 3],
+    "explanation": "Single linkage (min distance) can create elongated chains by progressively merging peripheral points. Complete linkage (max distance) avoids this by enforcing tighter clusters. Average linkage isn't computationally faster—all linkages compute pairwise distances; complexity is similar. Centroid linkage measures distance between cluster means, so it inherits scaling sensitivity from the underlying metric. Neither linkage dominates universally in high dimensions; behavior depends on data structure."
+  },
+  {
+    "id": 10,
+    "type": "mcq",
+    "title": "Dendrogram Interpretation",
+    "description": "A dendrogram from hierarchical clustering shows a tall vertical line at merge height h=50 (merging two large clusters) and many short lines at h<10 (merging small clusters). What does this suggest?",
+    "options": [
+      "There are two naturally distinct groups in the data separated by a large distance",
+      "The dataset contains one large cluster with many small subclusters",
+      "The algorithm is unstable and produced inconsistent clustering",
+      "The data is too high-dimensional to cluster effectively"
+    ],
+    "correct": [0],
+    "explanation": "A tall merge line indicates two well-separated clusters bridged at high distance. Many short lines below indicate tight subclusters within each group. This pattern suggests a natural two-cluster structure (or k-cluster if you see k prominent tall lines). This isn't instability—it's a clear hierarchical structure. High dimensionality would show more gradual merging, not this stark separation."
+  },
+  {
+    "id": 11,
+    "type": "open",
+    "title": "Choosing k in k-Means",
+    "description": "Explain the elbow method for choosing k in k-means clustering. Why is it called 'elbow', and what are its limitations?",
+    "options": [],
+    "correct": [],
+    "explanation": "The elbow method plots inertia (within-cluster sum of squares) against k. Inertia decreases monotonically as k increases (more clusters → tighter groups → lower inertia). The 'elbow' is the point where the inertia curve bends sharply—adding more clusters beyond this point provides diminishing returns. The elbow suggests a natural number of clusters. Limitations: (1) Not all datasets have obvious elbows. (2) Elbow location is subjective. (3) Inertia doesn't directly measure cluster quality (silhouette or other metrics are more interpretable). (4) High-dimensional data makes elbow detection unreliable. Alternative methods: silhouette analysis, gap statistic, or domain knowledge."
+  },
+  {
+    "id": 12,
+    "type": "open",
+    "title": "Curse of Dimensionality in k-NN",
+    "description": "Describe how the curse of dimensionality affects k-NN classifier performance in high dimensions. What specifically changes about nearest-neighbor distances?",
+    "options": [],
+    "correct": [],
+    "explanation": "In high dimensions, most data points become nearly equidistant from a query point. Specifically: (1) The distance to the nearest neighbor approaches the distance to the farthest neighbor—neighborhoods become uninformative. (2) Euclidean distances in d dimensions concentrate around a mean value that grows with √d. (3) The relative difference between nearest and farthest neighbors shrinks, making the 'nearest' neighbor less special. (4) Sparse sampling: finite data becomes increasingly sparse in high dimensions—neighbors are far away. Consequences: k-NN requires much larger k to find meaningful neighbors; majority voting becomes noisy; feature scaling and dimensionality reduction (PCA) become essential. This affects all distance-based methods similarly (k-means, hierarchical clustering)."
+  },
+  {
+    "id": 13,
+    "type": "multi",
+    "title": "Comparing Clustering Evaluation Metrics",
+    "description": "A researcher has two clusterings of the same dataset—one from k-means with k=3 and another from hierarchical clustering cut at height h producing 3 clusters. They compute inertia and silhouette coefficient for both. Select all true statements:",
+    "options": [
+      "If k-means inertia is lower, it necessarily produces a better clustering in terms of compactness",
+      "k-means minimizes inertia by definition, so its inertia will always be lower than or equal to any other partitional method with the same k",
+      "Silhouette coefficient directly measures the same optimization objective as inertia",
+      "A clustering can have high inertia but high average silhouette coefficient if clusters are well-separated despite being loose",
+      "Silhouette coefficient accounts for cluster separation, while inertia only measures within-cluster compactness"
+    ],
+    "correct": [1, 4],
+    "explanation": "k-means minimizes inertia, so its inertia ≤ any other partitional clustering with k clusters. Lower inertia doesn't guarantee better clustering—it only measures tightness. Silhouette s_i = (b_i - a_i) / max(a_i, b_i) balances within-cluster (a_i) and between-cluster (b_i) distances, making it more comprehensive. A loose but well-separated clustering can have high silhouette despite high inertia. Inertia and silhouette optimize different objectives."
+  },
+  {
+    "id": 14,
+    "type": "multi",
+    "title": "Real-World Clustering Scenario: Customer Segmentation",
+    "description": "An e-commerce company wants to segment 50,000 customers using purchase history features (frequency, recency, monetary value). They need interpretable clusters for targeted marketing. Which approaches and considerations are most relevant? Select all that apply:",
+    "options": [
+      "Use k-medoids so cluster centers are actual customers they can inspect as prototypes",
+      "Scale features (z-score or min-max) before clustering to prevent high-value customers from dominating distance calculations",
+      "Use hierarchical clustering instead of k-means because dendrograms directly show the optimal k value",
+      "Apply silhouette analysis to both k-means and k-medoids to compare cluster quality, not just inertia",
+      "Start with k=5 clusters because the elbow method is unreliable; use domain knowledge and silhouette scores to refine k",
+      "Use k-means instead of k-medoids because it scales better to 50,000 customers, then document that centroids are synthetic aggregates"
+    ],
+    "correct": [0, 1, 3, 5],
+    "explanation": "k-medoids (A) gives interpretable customer prototypes for marketing personas. Scaling (B) prevents monetary value (high range) from dominating. Silhouette (D) evaluates cluster quality better than inertia alone. k-means (F) scales better than k-medoids for large n, with clear caveat that centroids are synthetic. Hierarchical clustering (C) is expensive for 50K points and dendrograms don't automatically reveal k. Starting with k=5 and refining via silhouette (E) is sound practice, not because elbow is universally unreliable, but because domain knowledge improves initial selection."
+  }
+]

@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "type": "multi",
+    "topic": "Task Types",
+    "prompt": "Which of the following are considered predictive tasks in machine learning?",
+    "options": ["Classification", "Regression", "Descriptive clustering", "Association rule mining", "Subgroup discovery"],
+    "correct": [0, 1],
+    "explanation": "Predictive tasks predict a target variable from features (classification for categorical targets, regression for numerical). Descriptive clustering, association rule mining, and subgroup discovery are descriptive tasks that don't predict a target."
+  },
+  {
+    "id": 2,
+    "type": "mcq",
+    "topic": "Supervised Learning",
+    "prompt": "In supervised learning, what must be provided for each training example?",
+    "options": ["Only the features", "Features and a target label", "Only the target label", "Nothing, the model learns independently"],
+    "correct": [1],
+    "explanation": "Supervised learning requires labeled instances—each training example must have both features (inputs) and the corresponding true target value (output) so the model can learn the relationship between them."
+  },
+  {
+    "id": 3,
+    "type": "multi",
+    "topic": "Model Categorization",
+    "prompt": "Which statements correctly describe model categorizations discussed in the lecture?",
+    "options": ["Geometric models use distance and hyperplanes", "Probabilistic models reduce uncertainty using probability distributions", "Logical models are always more accurate than geometric models", "Grouping models have infinite resolution in theory"],
+    "correct": [0, 1],
+    "explanation": "Geometric and probabilistic models are correctly described. Logical models aren't always more accurate than geometric ones—it depends on the task. Grading models (not grouping models) have infinite resolution; grouping models have finite resolution."
+  },
+  {
+    "id": 4,
+    "type": "open",
+    "topic": "Features",
+    "prompt": "Explain what a feature is in machine learning and provide an example.",
+    "options": [],
+    "correct": [],
+    "explanation": "A feature is a measurement or function that maps from an instance in the instance space to a feature value. For example, in weather prediction, features might be temperature, humidity, and wind speed. Features are the inputs that a model uses to make predictions about a target variable."
+  },
+  {
+    "id": 5,
+    "type": "multi",
+    "topic": "Descriptive Tasks",
+    "prompt": "Which of the following are descriptive machine learning tasks?",
+    "options": ["Descriptive clustering", "Association rule mining", "Subgroup discovery", "Regression", "Predictive clustering"],
+    "correct": [0, 1, 2],
+    "explanation": "Descriptive tasks exploit underlying data structure without predicting a target. Descriptive clustering, association rule mining, and subgroup discovery all fall into this category. Regression and predictive clustering predict a target variable, so they are predictive, not descriptive."
+  },
+  {
+    "id": 6,
+    "type": "mcq",
+    "topic": "Model Phases",
+    "prompt": "Which phase of model development is typically much slower and more computationally expensive?",
+    "options": ["Inference phase", "Training phase", "Feature extraction phase", "Validation phase"],
+    "correct": [1],
+    "explanation": "Training is the process of creating a model from data, requiring optimization of model parameters and is much slower than inference. Inference—using a trained model on new data—is much faster."
+  },
+  {
+    "id": 7,
+    "type": "multi",
+    "topic": "Model Intuitions",
+    "prompt": "Which of the following correctly pair model types with their main characteristics?",
+    "options": ["Geometric models use separating hyperplanes and distance metrics", "Probabilistic models aim for reducing uncertainty through probability distributions", "Logical models are defined using easily interpretable rules", "All geometric models are also probabilistic models"],
+    "correct": [0, 1, 2],
+    "explanation": "The first three statements accurately describe the main intuitions behind these model types. Geometric, probabilistic, and logical models are distinct categories—not all geometric models are probabilistic."
+  },
+  {
+    "id": 8,
+    "type": "open",
+    "topic": "Unsupervised Learning",
+    "prompt": "What is the main difference between supervised and unsupervised learning in terms of training data?",
+    "options": [],
+    "correct": [],
+    "explanation": "In supervised learning, training data includes labeled instances (inputs paired with true target values). In unsupervised learning, data points are unlabeled—there are no target values provided. The model must find patterns or structure in the data without guidance from labels."
+  },
+  {
+    "id": 9,
+    "type": "mcq",
+    "topic": "Applications vs Tasks",
+    "prompt": "What is the correct relationship between applications and tasks in machine learning?",
+    "options": ["Applications and tasks are the same thing", "Applications are general skills; tasks are specific instances of those skills", "Tasks are general skills; applications are specific uses of those tasks", "There is no meaningful relationship between applications and tasks"],
+    "correct": [2],
+    "explanation": "The lecture clarifies that browsing recommendations, detecting dogs, and other applications use underlying machine learning tasks (like classification). Tasks are general skills (classification, regression, clustering), while applications are specific uses of those tasks."
+  },
+  {
+    "id": 10,
+    "type": "multi",
+    "topic": "Feature Engineering",
+    "prompt": "Which of the following are valid approaches to feature engineering mentioned in the lecture?",
+    "options": ["Feature construction from raw data", "Discretization of numerical features", "Feature transformation to project data into new spaces", "Removing all numerical features"],
+    "correct": [0, 1, 2],
+    "explanation": "Feature construction, discretization, and feature transformation are all legitimate feature engineering techniques. Removing all numerical features is not a valid general strategy—the choice of features depends on the task and data characteristics."
+  },
+  {
+    "id": 11,
+    "type": "mcq",
+    "topic": "Instance Space",
+    "prompt": "In geometric models, what does the instance space represent?",
+    "options": ["The set of training examples only", "The set of all possible or describable instances, including those not in the training data", "The set of features extracted from instances", "The output space where predictions are made"],
+    "correct": [1],
+    "explanation": "The instance space is the complete set of all possible instances that could be described using the features, whether or not they appear in the training data. For example, a 2D Cartesian coordinate system represents an instance space for geometrical models."
+  },
+  {
+    "id": 12,
+    "type": "multi",
+    "topic": "Grouping vs Grading Models",
+    "prompt": "Which statements accurately describe the differences between grouping and grading models?",
+    "options": ["Grouping models divide instance space into segments with fixed resolution", "Grading models form a single global model over the instance space", "Grading models have infinite resolution in theory when using Cartesian spaces", "Grouping models can handle any instance type without limitation"],
+    "correct": [0, 1, 2],
+    "explanation": "Grouping and grading models differ fundamentally: grouping breaks space into segments (finite resolution), while grading creates a global model (infinite resolution in theory). However, grouping models cannot distinguish between instances beyond their segment resolution, so the last statement is false."
+  },
+  {
+    "id": 13,
+    "type": "open",
+    "topic": "ML Fundamentals",
+    "prompt": "According to the lecture's lesson learned, what three key components must align for successful machine learning?",
+    "options": [],
+    "correct": [],
+    "explanation": "Machine learning requires using the right features to build the right models that achieve the right tasks. These three components—features, models, and tasks—must be properly aligned: appropriate features for the task, the right model architecture to use those features, and a well-defined machine learning task."
+  }
+]

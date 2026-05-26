@@ -1,0 +1,188 @@
+[
+  {
+    "id": 1,
+    "type": "mcq",
+    "topic": "History of Neural Networks",
+    "prompt": "Who is credited with establishing the foundational concept of neurons through anatomical studies in the early 1900s?",
+    "options": [
+      "Warren McCulloch",
+      "Santiago Ramón y Cajal",
+      "Frank Rosenblatt",
+      "Geoffrey Hinton"
+    ],
+    "correct": [1],
+    "explanation": "Santiago Ramón y Cajal conducted pioneering anatomical studies of the nervous system in the early 1900s and established the concept of discrete neurons communicating through synapses."
+  },
+  {
+    "id": 2,
+    "type": "multi",
+    "topic": "McCulloch-Pitts Neuron",
+    "prompt": "Which of the following are characteristics of the McCulloch-Pitts neuron model?",
+    "options": [
+      "Uses a step function as activation function",
+      "Can learn weights through training",
+      "Takes binary inputs and produces binary outputs",
+      "Requires continuous activation functions"
+    ],
+    "correct": [0, 2],
+    "explanation": "The McCulloch-Pitts neuron uses a step function for activation and processes binary inputs/outputs. However, it has fixed weights and cannot learn; weights must be manually set."
+  },
+  {
+    "id": 3,
+    "type": "multi",
+    "topic": "Perceptron vs Logistic Regression",
+    "prompt": "Which statements correctly distinguish the perceptron from logistic regression?",
+    "options": [
+      "Perceptron uses step activation while logistic regression uses sigmoid",
+      "Logistic regression outputs probabilities between 0 and 1",
+      "Perceptron is suitable for multi-class classification",
+      "Both use the same loss function for optimization"
+    ],
+    "correct": [0, 1],
+    "explanation": "The perceptron uses a step function for hard classification (0/1), while logistic regression uses sigmoid activation for probabilistic outputs. Logistic regression naturally models class probabilities. Neither is designed for multi-class tasks independently."
+  },
+  {
+    "id": 4,
+    "type": "open",
+    "topic": "Backpropagation Mechanism",
+    "prompt": "Explain how backpropagation uses the chain rule to compute gradients through a multi-layer neural network. Why is the chain rule necessary, and how does it enable efficient gradient computation?",
+    "options": [],
+    "correct": [],
+    "explanation": "Backpropagation applies the chain rule of calculus to compute how changes in final layer parameters affect the loss function. For nested function composition (layer outputs feed into next layer), dz/dx = (dz/dy) * (dy/dx). This recursive application through layers is necessary because parameters are not directly connected to the loss; gradients must propagate backwards. The chain rule enables efficient computation in O(n) time compared to numerical differentiation which requires O(n²) loss evaluations."
+  },
+  {
+    "id": 5,
+    "type": "mcq",
+    "topic": "Activation Functions",
+    "prompt": "Which activation function is computationally most efficient and addresses the vanishing gradient problem common with sigmoid and tanh?",
+    "options": [
+      "Sigmoid function",
+      "Hyperbolic tangent (tanh)",
+      "Rectified Linear Unit (ReLU)",
+      "Linear activation"
+    ],
+    "correct": [2],
+    "explanation": "ReLU (f(x) = max(0, x)) is computationally efficient requiring only a simple comparison and has a gradient of either 0 or 1, avoiding the small gradients produced by sigmoid's derivative (max 0.25) or tanh's derivative (max 1.0)."
+  },
+  {
+    "id": 6,
+    "type": "multi",
+    "topic": "Output Layer and Loss Functions",
+    "prompt": "Select the correct pairings of output activation function with appropriate loss function for different tasks:",
+    "options": [
+      "Regression task: linear output with Mean Squared Error (MSE) loss",
+      "Binary classification: sigmoid output with cross-entropy loss",
+      "Multi-class classification: softmax output with categorical cross-entropy loss",
+      "All classification tasks: linear output with binary cross-entropy loss"
+    ],
+    "correct": [0, 1, 2],
+    "explanation": "Task-specific output activations and loss functions are critical: regression uses linear output with MSE (measures difference magnitude), binary classification uses sigmoid with cross-entropy (probabilistic), and multi-class uses softmax with categorical cross-entropy. Linear outputs are inappropriate for classification tasks."
+  },
+  {
+    "id": 7,
+    "type": "mcq",
+    "topic": "Universal Approximation",
+    "prompt": "What does the Universal Approximation Theorem state about neural networks?",
+    "options": [
+      "A single neuron can approximate any function",
+      "A feedforward network with sufficient hidden units can approximate any continuous function",
+      "Neural networks can only approximate linear functions",
+      "Approximation requires infinitely many layers"
+    ],
+    "correct": [1],
+    "explanation": "The Universal Approximation Theorem proves that a feedforward neural network with a single hidden layer containing sufficient units can approximate any continuous function on a compact domain. This provides theoretical justification for using neural networks for complex function approximation."
+  },
+  {
+    "id": 8,
+    "type": "multi",
+    "topic": "Gradient Descent and Learning Rate",
+    "prompt": "Which of the following correctly describe the effects and considerations of learning rate in gradient descent?",
+    "options": [
+      "A learning rate that is too small causes oscillations and divergence",
+      "A learning rate that is too large results in slow convergence",
+      "The learning rate is a critical hyperparameter affecting convergence",
+      "The optimal learning rate is always the same across different problems"
+    ],
+    "correct": [2],
+    "explanation": "Learning rate is critical: too small causes slow convergence, too large causes oscillation/divergence. A well-tuned learning rate enables stable, efficient convergence. Optimal values vary by problem, dataset, and network architecture; requires tuning or adaptive methods."
+  },
+  {
+    "id": 9,
+    "type": "mcq",
+    "topic": "Training Strategies",
+    "prompt": "When training a large dataset with 1 million samples, which approach typically provides the best balance between computational efficiency and stable convergence?",
+    "options": [
+      "Batch gradient descent using all 1 million samples per step",
+      "Stochastic gradient descent with single samples",
+      "Mini-batch gradient descent with batches of 32-256 samples",
+      "Gradient descent with random sample selection"
+    ],
+    "correct": [2],
+    "explanation": "Mini-batch gradient descent balances computational efficiency (parallelizable operations) with gradient stability. Batch GD is computationally expensive per update; SGD is noisy and slow. Mini-batches leverage modern hardware while maintaining sufficient gradient signal."
+  },
+  {
+    "id": 10,
+    "type": "multi",
+    "topic": "Network Architecture Design",
+    "prompt": "What design decisions are important when building a multi-layer perceptron for image classification?",
+    "options": [
+      "Input layer size should match image dimensions (e.g., 784 for 28×28 images)",
+      "Hidden layer width determines network capacity and representational power",
+      "Adding more layers always improves generalization",
+      "Output layer configuration depends on number of classes (softmax for multi-class)"
+    ],
+    "correct": [0, 1, 3],
+    "explanation": "Input size matches problem dimensionality (784 neurons for flattened 28×28 images). Hidden layer width (number of units) controls capacity for learning representations. Deeper networks have higher capacity but require regularization to avoid overfitting; more layers alone do not guarantee improvement. Output layer must match task: 1 sigmoid for binary, K softmax units for K-class classification."
+  },
+  {
+    "id": 11,
+    "type": "open",
+    "topic": "Representation Learning",
+    "prompt": "How do hidden layers in neural networks enable automatic feature extraction, and how does this concept differ from traditional manual feature engineering in machine learning?",
+    "options": [],
+    "correct": [],
+    "explanation": "Hidden layers learn intermediate representations of input data automatically during training through backpropagation. Early layers capture low-level features (edges, textures), while deeper layers combine these into high-level concepts (shapes, objects). This automatic feature learning removes the burden of manual feature engineering where practitioners previously designed features by domain expertise. Neural networks learn task-relevant features directly from data, often discovering non-obvious patterns humans might miss."
+  },
+  {
+    "id": 12,
+    "type": "multi",
+    "topic": "Modern Neural Network Architectures",
+    "prompt": "Which neural network architectures are designed for specific problem types?",
+    "options": [
+      "Convolutional Neural Networks (CNNs) for image data with spatial structure",
+      "Recurrent Neural Networks (RNNs) for sequential data like time series or text",
+      "Autoencoders for unsupervised feature learning and dimensionality reduction",
+      "All architectures perform equally well on all data types"
+    ],
+    "correct": [0, 1, 2],
+    "explanation": "CNN architecture uses convolutional layers to exploit spatial structure in images. RNNs maintain hidden state to process sequential dependencies in time series and text. Autoencoders compress data into bottleneck layer for unsupervised representation learning. Each architecture is optimized for specific data characteristics; no universal architecture excels at all tasks."
+  },
+  {
+    "id": 13,
+    "type": "mcq",
+    "topic": "Non-linearity in Neural Networks",
+    "prompt": "Why is non-linear activation essential for neural networks to learn complex patterns?",
+    "options": [
+      "Non-linear activations enable the network to learn only linear decision boundaries",
+      "Composition of linear functions remains linear, limiting expressiveness without non-linearity",
+      "Non-linear activations increase computational complexity unnecessarily",
+      "Linear networks are sufficient for all practical machine learning problems"
+    ],
+    "correct": [1],
+    "explanation": "A network composed of purely linear layers (y = Wx) remains linear regardless of depth, as matrix multiplication is associative. Non-linear activation functions break this linearity, allowing the network to learn curved decision boundaries and approximate arbitrary non-linear functions. Without non-linearity, deep networks provide no advantage over shallow linear models."
+  },
+  {
+    "id": 14,
+    "type": "multi",
+    "topic": "Training and Evaluation Workflow",
+    "prompt": "Which steps are essential in the neural network training and evaluation process?",
+    "options": [
+      "Split data into training, validation, and test sets",
+      "Initialize weights randomly rather than to zero",
+      "Perform hyperparameter tuning using the test set",
+      "Report evaluation metrics on the test set only, not during training"
+    ],
+    "correct": [0, 1, 3],
+    "explanation": "Proper workflow requires data splitting to prevent overfitting and enable unbiased evaluation. Random initialization breaks symmetry and enables diverse feature learning (zero initialization causes all neurons to learn identical features). Test set must remain unseen until final evaluation; using it for tuning causes overfitting to test data. Validation set (separate from test) is used for hyperparameter selection."
+  }
+]

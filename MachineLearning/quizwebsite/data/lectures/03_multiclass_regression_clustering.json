@@ -1,0 +1,119 @@
+[
+  {
+    "id": 1,
+    "type": "mcq",
+    "topic": "One-versus-rest",
+    "prompt": "In a one-versus-rest (OvR) multi-class classification scheme with 5 classes, how many binary classifiers are trained?",
+    "options": ["4", "5", "10", "15"],
+    "correct": [1],
+    "explanation": "One-versus-rest trains k classifiers for k classes, one for each class against all others. With 5 classes, exactly 5 OvR classifiers are trained."
+  },
+  {
+    "id": 2,
+    "type": "multi",
+    "topic": "One-versus-one",
+    "prompt": "Which statements about one-versus-one (OvO) classifiers are true?",
+    "options": ["A separate classifier is trained for every pair of classes", "OvO requires k(k-1)/2 classifiers for k classes", "Training data is reduced for each classifier since only two classes are involved", "OvO typically produces faster inference than one-versus-rest"],
+    "correct": [0, 1, 2],
+    "explanation": "OvO trains classifiers for each pair of classes (requiring k(k-1)/2 models), each using only two-class data. However, inference is slower due to more classifiers needing evaluation."
+  },
+  {
+    "id": 3,
+    "type": "mcq",
+    "topic": "Multi-class evaluation",
+    "prompt": "For a 3-class multi-class confusion matrix, how is the overall weighted precision calculated?",
+    "options": ["Average of all three class precisions equally", "Weighted average based on the number of instances per class", "Only the precision of the majority class", "Macro-average across all classes equally"],
+    "correct": [1],
+    "explanation": "Weighted precision sums per-class precisions multiplied by their class proportions. For a 20% class 1, 30% class 2, 50% class 3 split: 0.20*prec1 + 0.30*prec2 + 0.50*prec3."
+  },
+  {
+    "id": 4,
+    "type": "open",
+    "topic": "Regression residuals",
+    "prompt": "What are residuals in regression, and why are they important for evaluating a regression model?",
+    "options": [],
+    "correct": [],
+    "explanation": "Residuals are the differences between actual and predicted values (f(x) - f_hat(x)). They measure model error and are essential for evaluation: loss functions (MSE, MAE) apply to residuals to quantify how well the model fits the data."
+  },
+  {
+    "id": 5,
+    "type": "multi",
+    "topic": "Overfitting bias-variance",
+    "prompt": "Select all correct statements about the bias-variance dilemma in regression:",
+    "options": ["High-complexity models eliminate bias but suffer from high variance", "Low-complexity models have lower variance but may introduce systematic bias", "The bias-variance decomposition shows total error = bias^2 + variance + irreducible error", "Increasing polynomial degree always improves generalization"],
+    "correct": [0, 1, 2],
+    "explanation": "The bias-variance tradeoff is fundamental: complex models reduce bias but increase variance sensitivity to training data; simple models are stable but potentially biased. The decomposition equation is correct, but higher complexity doesn't guarantee better generalization."
+  },
+  {
+    "id": 6,
+    "type": "mcq",
+    "topic": "Polynomial fitting",
+    "prompt": "When fitting polynomials to data with only 5 data points, why is a degree-4 polynomial problematic?",
+    "options": ["It will have extremely high bias", "It can fit the data perfectly but likely overfits", "It violates the rule that parameters should be considerably less than data points", "It cannot be computed mathematically"],
+    "correct": [2],
+    "explanation": "A degree-4 polynomial has 5 parameters for 5 data points (1:1 ratio). To avoid overfitting, the number of parameters should be considerably less than the number of data points."
+  },
+  {
+    "id": 7,
+    "type": "multi",
+    "topic": "Clustering scatter",
+    "prompt": "Which of the following are true about scatter in distance-based clustering?",
+    "options": ["Within-cluster scatter measures distances between points in the same cluster", "Between-cluster scatter measures distances between cluster exemplars", "A good clustering minimizes total within-cluster scatter relative to overall data scatter", "Scatter can be computed without defining a distance metric"],
+    "correct": [0, 1, 2],
+    "explanation": "Scatter is a distance-based measure. Within-cluster scatter quantifies cohesion; between-cluster scatter quantifies separation. Good clustering maximizes separation while minimizing cohesion. A distance metric is always required."
+  },
+  {
+    "id": 8,
+    "type": "mcq",
+    "topic": "Silhouette coefficient",
+    "prompt": "A data point with silhouette coefficient close to 0 indicates what about its clustering assignment?",
+    "options": ["The point is well-separated from neighboring clusters", "The point is close to the decision boundary between clusters", "The point is definitely in the wrong cluster", "The point has zero distance to its cluster center"],
+    "correct": [1],
+    "explanation": "Silhouette coefficient near 0 means b≈a (distance to nearest other cluster ≈ distance to own cluster), placing the point on or near the boundary between two clusters, suggesting ambiguous assignment."
+  },
+  {
+    "id": 9,
+    "type": "open",
+    "topic": "Subgroup discovery vs classification",
+    "prompt": "Explain the key difference between subgroup discovery and classification in terms of their objectives.",
+    "options": [],
+    "correct": [],
+    "explanation": "Classification maximizes overall prediction accuracy across the entire dataset. Subgroup discovery seeks to find small, statistically unusual population subgroups with unusual class distributions—not predicting labels for all instances, but identifying exceptional regions in the data."
+  },
+  {
+    "id": 10,
+    "type": "multi",
+    "topic": "Clustering evaluation",
+    "prompt": "For evaluating clustering without ground truth, which metrics are appropriate?",
+    "options": ["Silhouette coefficient", "Rand-index with known labels", "Chi-squared test for subgroup discovery", "Davies-Bouldin Index"],
+    "correct": [0, 3],
+    "explanation": "Silhouette coefficient and Davies-Bouldin Index are internal validation metrics requiring no ground truth. Rand-index and chi-squared tests require labeled ground truth or a specific subgroup evaluation context."
+  },
+  {
+    "id": 11,
+    "type": "mcq",
+    "topic": "Multi-class ROC curves",
+    "prompt": "What is macro-average ROC in multi-class classification?",
+    "options": ["One ROC curve per class, then average all TPR/FPR values equally", "Aggregated TPR/FPR treating each instance equally across all classes", "ROC curve for the majority class only", "Weighted ROC by class size"],
+    "correct": [0],
+    "explanation": "Macro-average computes TPR and FPR independently for each class, then averages them equally, treating all classes fairly regardless of instance distribution."
+  },
+  {
+    "id": 12,
+    "type": "multi",
+    "topic": "Predictive vs descriptive clustering",
+    "prompt": "Which statements correctly distinguish predictive from descriptive clustering?",
+    "options": ["Predictive clustering learns to generalize to unseen data (X → C)", "Descriptive clustering maps only training data and emphasizes interpretability (D → C)", "Descriptive clustering requires ground truth labels for validation", "Both use the same distance-based clustering algorithms"],
+    "correct": [0, 1, 3],
+    "explanation": "Predictive clustering maps the instance space to predict labels on new data; descriptive clustering focuses on describing the actual data. Descriptive clustering doesn't require ground truth. Both can use distance-based methods."
+  },
+  {
+    "id": 13,
+    "type": "open",
+    "topic": "Confusion matrix multi-class",
+    "prompt": "Given a 3-class confusion matrix, how would you calculate the F1 score and what does it measure?",
+    "options": [],
+    "correct": [],
+    "explanation": "For multi-class, calculate per-class precision and recall, then compute F1 = 2*(precision*recall)/(precision+recall) for each class. Average F1 scores (weighted or unweighted) across classes. F1 balances precision (positive prediction accuracy) and recall (positive identification rate)."
+  }
+]

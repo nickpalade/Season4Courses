@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "type": "mcq",
+    "topic": "Feature Types",
+    "prompt": "Which of the following is a characteristic of categorical features?",
+    "options": ["They can be ordered from lowest to highest", "They do not allow statistical operations beyond mode", "They always involve numerical values", "They require normalization before use in models"],
+    "correct": [1],
+    "explanation": "Categorical/nominal features only allow the mode as a statistical summary; operations like mean or median are not meaningful for categories without an inherent order."
+  },
+  {
+    "id": 2,
+    "type": "multi",
+    "topic": "Feature Statistics",
+    "prompt": "Which statistical measures are appropriate for ordinal features?",
+    "options": ["Mean and standard deviation", "Median and quantiles", "Mode only", "All measures including mean, median, and mode"],
+    "correct": [1],
+    "explanation": "Ordinal features have ordering but no meaningful scale, so quantiles and median are appropriate, but mean is not."
+  },
+  {
+    "id": 3,
+    "type": "mcq",
+    "topic": "Normalization",
+    "prompt": "What is the main purpose of min-max normalization in feature preprocessing?",
+    "options": ["To center data around zero", "To scale all features to the same range (e.g., [0,1])", "To remove outliers from the dataset", "To convert categorical variables to numerical ones"],
+    "correct": [1],
+    "explanation": "Min-max normalization scales features to a common range using (value-min)/(max-min), ensuring different features have comparable scales."
+  },
+  {
+    "id": 4,
+    "type": "multi",
+    "topic": "Discretisation",
+    "prompt": "Which discretisation methods can be used to convert quantitative features to ordinal?",
+    "options": ["Equal-width binning", "Equal-frequency binning", "Information gain-based splitting", "Using only the median value"],
+    "correct": [0, 1, 2],
+    "explanation": "Equal-width, equal-frequency, and supervised methods like information gain splitting are valid discretisation techniques; using only the median is not."
+  },
+  {
+    "id": 5,
+    "type": "mcq",
+    "topic": "PCA",
+    "prompt": "What does the first principal component in PCA represent?",
+    "options": ["The direction of minimum variance in the data", "The direction of maximum variance in the data", "The average value of all features", "A randomly chosen orthogonal direction"],
+    "correct": [1],
+    "explanation": "PCA finds directions where data variance is maximized; the first PC is the direction with the highest variance."
+  },
+  {
+    "id": 6,
+    "type": "multi",
+    "topic": "PCA Properties",
+    "prompt": "Which of the following are true about principal components?",
+    "options": ["They are uncorrelated to each other", "They are computed using eigendecomposition of the covariance matrix", "They require categorical features only", "They preserve 100% of the original variance when all components are used"],
+    "correct": [0, 1, 3],
+    "explanation": "PCs are uncorrelated, derived from covariance matrix eigenanalysis, and preserve all variance when all components are retained. PCA works on quantitative features, not categorical."
+  },
+  {
+    "id": 7,
+    "type": "open",
+    "topic": "Feature Engineering",
+    "prompt": "Explain why feature engineering and preprocessing are critical steps in the machine learning pipeline before model training.",
+    "options": [],
+    "correct": [],
+    "explanation": "Preprocessing ensures data quality, handles missing values, and normalizes scales. Feature engineering creates meaningful representations that improve model performance and generalization by capturing domain knowledge and reducing noise."
+  },
+  {
+    "id": 8,
+    "type": "mcq",
+    "topic": "Curse of Dimensionality",
+    "prompt": "How does PCA help address the curse of dimensionality?",
+    "options": ["By removing all features with zero variance", "By reducing the number of features while preserving most variance", "By converting all features to categorical type", "By increasing the dataset size to match feature count"],
+    "correct": [1],
+    "explanation": "PCA reduces dimensionality by projecting data onto fewer principal components that capture the most variance, thereby reducing computational cost and improving model efficiency."
+  },
+  {
+    "id": 9,
+    "type": "multi",
+    "topic": "Feature Transformation",
+    "prompt": "When converting categorical variables using one-hot encoding, what must you consider?",
+    "options": ["One-hot encoding avoids imposing false ordering on categories", "It can lead to a larger feature space", "The resulting binary features remain uncorrelated", "You should drop one category to avoid multicollinearity"],
+    "correct": [0, 1, 3],
+    "explanation": "One-hot encoding treats categories as independent (no false order), increases dimensions, and should use the (k-1) rule to prevent perfect multicollinearity in linear models."
+  },
+  {
+    "id": 10,
+    "type": "mcq",
+    "topic": "Variance Preservation",
+    "prompt": "In PCA, if the first 3 principal components explain 85% of the variance, what percentage of variance is lost if you use only these components?",
+    "options": ["3%", "15%", "85%", "Unable to determine without more information"],
+    "correct": [1],
+    "explanation": "If 3 PCs explain 85% of total variance, the remaining components account for 100% - 85% = 15% of variance that would be lost."
+  },
+  {
+    "id": 11,
+    "type": "open",
+    "topic": "Normalization Choice",
+    "prompt": "Compare when you would use z-score normalization versus min-max normalization, and justify your choice for a dataset with extreme outliers.",
+    "options": [],
+    "correct": [],
+    "explanation": "Z-score centers on mean and divides by std dev, which is sensitive to outliers. Min-max scales to [0,1] but extreme outliers still dominate the range. For outlier-heavy data, z-score might be preferred as it's in standard units, or robust scaling (using median/IQR) is better."
+  },
+  {
+    "id": 12,
+    "type": "multi",
+    "topic": "Data Preprocessing",
+    "prompt": "What are valid steps in a preprocessing pipeline before training a machine learning model?",
+    "options": ["Data cleaning and handling missing values", "Feature normalization and scaling", "Dimensionality reduction via PCA", "Removing all features with low variance"],
+    "correct": [0, 1, 2],
+    "explanation": "Data cleaning, normalization, and PCA are standard preprocessing steps. Removing all low-variance features can lose information; selective removal should be based on domain knowledge."
+  },
+  {
+    "id": 13,
+    "type": "mcq",
+    "topic": "Supervised vs Unsupervised",
+    "prompt": "Is PCA a supervised or unsupervised dimensionality reduction technique?",
+    "options": ["Supervised—it requires labels to find principal components", "Unsupervised—it finds directions of maximum variance without considering target labels", "Semi-supervised—it partially uses label information", "Neither—it is a preprocessing operation, not a learning technique"],
+    "correct": [1],
+    "explanation": "PCA is unsupervised because it finds variance-preserving directions without access to class labels or target values."
+  },
+  {
+    "id": 14,
+    "type": "open",
+    "topic": "Structured Features",
+    "prompt": "Describe two approaches to constructing structured features from raw text data and explain when you might use each.",
+    "options": [],
+    "correct": [],
+    "explanation": "Word frequencies/bag-of-words is simple and fast for basic tasks. N-grams and phrase detection capture local context. More complex methods like embeddings capture semantic meaning. Choice depends on task complexity and available computational resources."
+  }
+]

@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "type": "multi",
+    "topic": "Tree Structure Components",
+    "prompt": "Which of the following are valid components of a decision tree structure?",
+    "options": ["Root node", "Internal decision nodes", "Leaf (terminal) nodes", "Edge connections between nodes", "Hidden layers"],
+    "correct": [0, 1, 2, 3],
+    "explanation": "Decision trees consist of a root node (where classification starts), internal decision nodes (where splits occur based on feature values), leaf nodes (where final class predictions are made), and edges connecting them. Hidden layers are part of neural networks, not decision trees."
+  },
+  {
+    "id": 2,
+    "type": "mcq",
+    "topic": "Tree Growing Algorithm",
+    "prompt": "In the GrowTree recursive algorithm, what is the primary goal when selecting the best split at each node?",
+    "options": ["Maximize the depth of the tree", "Maximize information gain or minimize impurity", "Split the dataset into equal-sized groups", "Achieve perfect classification on training data immediately"],
+    "correct": [1],
+    "explanation": "GrowTree selects the best split by maximizing information gain (entropy reduction) or minimizing impurity (Gini, etc.). This greedy approach doesn't aim for equal group sizes or immediate perfect classification, and depth is controlled by stopping criteria, not selection strategy."
+  },
+  {
+    "id": 3,
+    "type": "multi",
+    "topic": "Impurity Measures Comparison",
+    "prompt": "Which statements correctly compare different impurity metrics used in decision trees?",
+    "options": ["Entropy measures disorder using log base 2 and ranges from 0 to 1", "Gini index is symmetric and reaches maximum at uniform class distribution", "sqrt(Gini) is typically used to scale Gini to the 0-1 range", "Minority class error only counts misclassification of the majority class", "All three metrics (entropy, Gini, minority error) are mathematically equivalent"],
+    "correct": [0, 1, 2],
+    "explanation": "Entropy (0-1 range with log₂), Gini (symmetric, max 0.5 at uniform distribution, sometimes sqrt-scaled to 0-1), and sqrt(Gini) scaling are all correct. Minority class error counts misclassification of minority class, not majority. The metrics are NOT equivalent—they have different sensitivities to class distribution imbalance."
+  },
+  {
+    "id": 4,
+    "type": "open",
+    "topic": "Information Gain Calculation",
+    "prompt": "Explain how information gain is calculated for a potential split in a decision tree, and why it reflects split quality.",
+    "options": [],
+    "correct": [],
+    "explanation": "Information gain = entropy(parent) - weighted average of entropy(children). Gain measures how much entropy is reduced by the split. A higher gain means the split better separates classes, reducing disorder more effectively. This greedy criterion drives the GrowTree algorithm to select splits that maximize class purity in child nodes."
+  },
+  {
+    "id": 5,
+    "type": "multi",
+    "topic": "Feature Handling",
+    "prompt": "How do decision trees handle different types of features?",
+    "options": ["Categorical features are used directly as split values", "Continuous features are discretized using thresholds (e.g., age < 25)", "Each categorical level becomes a separate branch from a node", "Continuous features are always binned into equal-width intervals", "Both categorical and continuous features can be split at any split point"],
+    "correct": [0, 1, 2],
+    "explanation": "Categorical features split directly into branches per category. Continuous features are split using threshold comparisons (binary or multi-way). All split points are tested, not just equal-width bins. Equal-width binning is not mandatory—thresholds are chosen to maximize gain."
+  },
+  {
+    "id": 6,
+    "type": "mcq",
+    "topic": "Pruning Methods",
+    "prompt": "What is the primary difference between reduced error pruning (REP) and cost-complexity pruning (CCP)?",
+    "options": ["REP uses a separate validation set; CCP uses penalty tuning with a parameter alpha", "Both methods require the same computational cost", "REP prunes greedily from leaves; CCP generates a sequence of trees", "CCP cannot handle continuous features"],
+    "correct": [0],
+    "explanation": "Reduced error pruning greedily removes nodes based on error on a validation set. Cost-complexity pruning uses a penalty term (alpha) that trades accuracy vs. tree size, generating a sequence of nested trees. REP is simpler but requires extra validation data; CCP is more flexible for finding optimal tree size."
+  },
+  {
+    "id": 7,
+    "type": "multi",
+    "topic": "Class Imbalance in Trees",
+    "prompt": "Which techniques address class imbalance problems in decision trees?",
+    "options": ["Stratified sampling to maintain class ratios in splits", "Assigning misclassification costs higher to minority class", "Growing deeper trees to memorize minority examples", "Adjusting prior probabilities or class weights", "Pruning minority-class leaves more aggressively"],
+    "correct": [0, 1, 3],
+    "explanation": "Stratified sampling, class weights/costs, and adjusted priors help balance minority class representation. Simply growing deeper trees leads to overfitting. Aggressive pruning of minority leaves worsens imbalance. Cost-sensitive learning and stratified approaches are standard remedies."
+  },
+  {
+    "id": 8,
+    "type": "open",
+    "topic": "Code Bug Detection",
+    "prompt": "A student wrote this pseudocode for computing information gain. Identify the bug: `gain = entropy(parent) - len(left_child)/len(parent)*entropy(left_child) + len(right_child)/len(parent)*entropy(right_child)`. Explain the fix.",
+    "options": [],
+    "correct": [],
+    "explanation": "Bug: The formula uses + (plus) instead of - (minus) before the second term. Correct formula: gain = entropy(parent) - [len(left)/len(parent)*entropy(left) + len(right)/len(parent)*entropy(right)]. The second term is a weighted sum subtracted from parent entropy, not added. This bug would incorrectly compute or even negate gain values."
+  },
+  {
+    "id": 9,
+    "type": "multi",
+    "topic": "Regression Trees",
+    "prompt": "Which statements apply to regression trees (trees for continuous output)?",
+    "options": ["Splits minimize variance reduction in child nodes", "Leaf predictions are the mean (or median) of target values in that leaf", "Impurity is measured as sum of squared deviations from leaf mean", "Categorical features cannot be used in regression trees", "Pruning is not necessary for regression trees"],
+    "correct": [0, 1, 2],
+    "explanation": "Regression trees minimize variance (sum of squared errors). Leaf values are typically means. Impurity is measured as within-node variance. Categorical features are allowed. Pruning is essential to prevent overfitting regression trees, just as for classification."
+  },
+  {
+    "id": 10,
+    "type": "mcq",
+    "topic": "Tree Growth Stopping",
+    "prompt": "Which criterion is NOT typically used as a stopping condition in GrowTree?",
+    "options": ["Minimum number of instances in a leaf (e.g., >= 5)", "All instances in the node belong to a single class (pure)", "Maximum tree depth reached", "Total number of leaves exceeds a threshold"],
+    "correct": [3],
+    "explanation": "Standard stopping criteria include leaf purity (pure node), minimum leaf size, and maximum depth. Stopping when total leaf count exceeds a threshold is less common because tree size is better controlled via pruning. Growth stopping criteria focus on local node properties, not global tree size."
+  },
+  {
+    "id": 11,
+    "type": "multi",
+    "topic": "Tree Bias-Variance",
+    "prompt": "How do tree depth and pruning affect the bias-variance tradeoff?",
+    "options": ["Deeper trees have lower bias but higher variance", "Pruning increases bias but decreases variance", "Very shallow trees risk underfitting due to high bias", "Pruning always improves test accuracy", "Cross-validation helps select optimal tree complexity"],
+    "correct": [0, 1, 2, 4],
+    "explanation": "Deep unpruned trees fit training data closely (low bias, high variance, overfitting). Pruning simplifies the tree (higher bias, lower variance). Shallow trees may underfit. Pruning doesn't always improve accuracy—only when tree complexity is excessive. Cross-validation is standard for selecting optimal complexity."
+  },
+  {
+    "id": 12,
+    "type": "open",
+    "topic": "Multi-way vs Binary Splits",
+    "prompt": "Explain the difference between multi-way splits (k branches for k categorical values) and binary splits (two branches) for categorical features. When might binary splits be preferred?",
+    "options": [],
+    "correct": [],
+    "explanation": "Multi-way splits create one branch per category (e.g., {small, medium, large} → 3 branches). Binary splits group categories ({small, medium} vs {large}). Binary splits are often preferred because they: (1) reduce fragmentation (fewer very small nodes), (2) search more split points for better information gain, (3) create more balanced trees, and (4) are computationally more efficient."
+  },
+  {
+    "id": 13,
+    "type": "multi",
+    "topic": "Ensemble Methods with Trees",
+    "prompt": "Which properties characterize Random Forests and Gradient Boosting ensembles of trees?",
+    "options": ["Random Forests grow trees in parallel with bootstrap samples", "Gradient Boosting grows trees sequentially to correct previous errors", "Random Forests reduce variance by averaging independent trees", "Gradient Boosting reduces bias by combining weak learners", "Random Forests require shallow trees for best performance"],
+    "correct": [0, 1, 2, 3],
+    "explanation": "Random Forests: parallel growth, bootstrap sampling, variance reduction through averaging. Gradient Boosting: sequential, corrects errors iteratively, reduces bias through weak learner combination. Shallow trees work in both, but aren't required (depth is often a hyperparameter). Both are powerful ensemble techniques."
+  },
+  {
+    "id": 14,
+    "type": "mcq",
+    "topic": "Feature Importance from Trees",
+    "prompt": "In decision trees, how is feature importance typically measured?",
+    "options": ["By counting how many times a feature appears in the tree", "By summing information gain (or impurity reduction) across all splits using that feature, weighted by node sample size", "By the depth at which a feature first appears", "Equally for all features that appear in the tree"],
+    "correct": [1],
+    "explanation": "Feature importance sums weighted impurity reductions across all splits using that feature. Features causing large impurity reductions early (affecting large node samples) have higher importance. Simple counts ignore split quality and node size; depth is irrelevant. All features don't have equal importance by definition."
+  }
+]

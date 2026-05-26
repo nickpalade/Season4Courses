@@ -1,0 +1,188 @@
+[
+  {
+    "id": 1,
+    "type": "mcq",
+    "topic": "Binary Classification Basics",
+    "prompt": "What is a binary classifier?",
+    "options": [
+      "A classifier that maps input instances to a finite set of two class labels",
+      "A classifier that only works with numerical data",
+      "A classifier that requires exactly two feature dimensions",
+      "A classifier that can only achieve 50% accuracy"
+    ],
+    "correct": [0],
+    "explanation": "A binary classifier is specifically a mapping from instance space to exactly two class labels (e.g., positive/negative, spam/ham, True/False), regardless of the number of features or data type."
+  },
+  {
+    "id": 2,
+    "type": "multi",
+    "topic": "Confusion Matrix Elements",
+    "prompt": "Which of the following correctly describe elements in a binary classification confusion matrix?",
+    "options": [
+      "True positives are instances correctly predicted as the positive class",
+      "False negatives occur when a positive instance is incorrectly predicted as negative",
+      "False positives are instances incorrectly predicted as the negative class",
+      "True negatives are instances where predictions match actual class labels"
+    ],
+    "correct": [0, 1],
+    "explanation": "In a confusion matrix, TP are correct positive predictions, FN are missed positives (predicted negative but actually positive), and TN are correct negative predictions. FP are positive predictions on actual negatives."
+  },
+  {
+    "id": 3,
+    "type": "mcq",
+    "topic": "Accuracy and Error Rate",
+    "prompt": "A classifier predicts correctly on 75 out of 100 test instances. What is its accuracy?",
+    "options": [
+      "0.75 or 75%",
+      "0.25 or 25%",
+      "0.75 but expressed as error rate",
+      "Cannot be determined from this information"
+    ],
+    "correct": [0],
+    "explanation": "Accuracy is calculated as (TP + TN) / Total, which equals the number of correct predictions divided by total instances. With 75 correct out of 100, accuracy = 75/100 = 0.75."
+  },
+  {
+    "id": 4,
+    "type": "multi",
+    "topic": "Performance Metrics",
+    "prompt": "Which metrics are based on actual positive instances?",
+    "options": [
+      "Sensitivity (true positive rate / recall)",
+      "Precision",
+      "Specificity",
+      "False negative rate"
+    ],
+    "correct": [0, 3],
+    "explanation": "Sensitivity/recall = TP/(TP+FN) uses actual positives. FNR = FN/(TP+FN) also uses actual positives. Precision = TP/(TP+FP) uses predicted positives. Specificity = TN/(TN+FP) uses actual negatives."
+  },
+  {
+    "id": 5,
+    "type": "mcq",
+    "topic": "Precision vs Recall",
+    "prompt": "In spam email filtering, which metric answers the question 'Of the emails I marked as spam, how many were actually spam?'",
+    "options": [
+      "Precision",
+      "Recall",
+      "Specificity",
+      "Sensitivity"
+    ],
+    "correct": [0],
+    "explanation": "Precision = TP/(TP+FP) answers 'of positive predictions, how many were correct?'. Recall/sensitivity answers 'of actual positives, how many did we find?'."
+  },
+  {
+    "id": 6,
+    "type": "open",
+    "topic": "Imbalanced Dataset Problem",
+    "prompt": "Why is accuracy misleading for imbalanced datasets? Give a concrete example with numbers.",
+    "options": [],
+    "correct": [],
+    "explanation": "Accuracy can be misleadingly high with imbalanced data. Example: with 99 actual positives and 1 negative, a 'naive' classifier that predicts everything as positive achieves 99% accuracy despite being useless. It fails to capture minority class performance. Use precision, recall, F-measure, or ROC-AUC instead."
+  },
+  {
+    "id": 7,
+    "type": "mcq",
+    "topic": "ROC Curve Interpretation",
+    "prompt": "What does a ROC curve plot?",
+    "options": [
+      "True positive rate versus false positive rate at different classification thresholds",
+      "Accuracy versus precision at different thresholds",
+      "Sensitivity versus specificity at a fixed threshold",
+      "Training loss versus validation loss during model training"
+    ],
+    "correct": [0],
+    "explanation": "ROC (Receiver Operating Characteristic) curve shows TPR on the y-axis and FPR (1-specificity) on the x-axis, plotting performance across all possible classification thresholds."
+  },
+  {
+    "id": 8,
+    "type": "multi",
+    "topic": "ROC Curve Characteristics",
+    "prompt": "Which statements about ROC curves are correct?",
+    "options": [
+      "A random classifier produces a diagonal line from (0,0) to (1,1)",
+      "A perfect classifier touches the point (0,1) on the ROC curve",
+      "The area under the curve (AUC) ranges from 0.5 to 1.0 for reasonable classifiers",
+      "ROC curves are useful because they show performance across all possible thresholds"
+    ],
+    "correct": [0, 1, 2, 3],
+    "explanation": "All statements are correct. Random classifier = diagonal. Perfect classifier = (0,1) where TPR=1 and FPR=0. AUC ranges 0.5-1.0. ROC's strength is showing threshold-independent performance via threshold variation."
+  },
+  {
+    "id": 9,
+    "type": "mcq",
+    "topic": "Scoring Classifiers",
+    "prompt": "What does a scoring classifier output?",
+    "options": [
+      "A real-valued score for each class indicating likelihood of class membership",
+      "A hard class label for each instance",
+      "A confidence interval for each prediction",
+      "A loss value indicating prediction error"
+    ],
+    "correct": [0],
+    "explanation": "A scoring classifier maps instances to R^k (real-valued vectors), with each score indicating likelihood of that class. This differs from hard classification which outputs a single class label."
+  },
+  {
+    "id": 10,
+    "type": "multi",
+    "topic": "Margin Concept",
+    "prompt": "In the margin framework for scoring classifiers, which statements are true?",
+    "options": [
+      "Margin z(x) = c(x) * s_hat(x) where c(x) is +1 for positive and -1 for negative examples",
+      "Positive margins indicate correct predictions",
+      "Negative margins indicate incorrect predictions",
+      "The margin indicates the confidence of the classifier"
+    ],
+    "correct": [0, 1, 2, 3],
+    "explanation": "The margin framework defines z(x) = c(x)*s_hat(x) where positive z means correct prediction, negative z means wrong prediction. Larger positive margins = higher confidence in correct prediction."
+  },
+  {
+    "id": 11,
+    "type": "mcq",
+    "topic": "Loss Functions",
+    "prompt": "The 0-1 loss function assigns zero loss when the margin is positive and one when negative. Which other loss function also penalizes based on margin magnitude?",
+    "options": [
+      "Hinge loss",
+      "Exponential loss",
+      "Logistic loss",
+      "All of the above"
+    ],
+    "correct": [3],
+    "explanation": "Hinge loss L_h(z) = (1-z) if z≤1, exponential L_exp(z) = exp(-z), and logistic L_log(z) = log(1+exp(-z)) all increase penalty for small/negative margins, rewarding large positive margins."
+  },
+  {
+    "id": 12,
+    "type": "open",
+    "topic": "Class Probability Estimation",
+    "prompt": "Describe how class probabilities are calculated from a decision tree leaf, and explain the constraint that must hold for probability estimates across all classes.",
+    "options": [],
+    "correct": [],
+    "explanation": "For a tree leaf with N_spam spam emails and N_ham ham emails, probability of spam = N_spam/(N_spam+N_ham). The key constraint is that probabilities for all classes must sum to 1.0, e.g., P(spam) + P(ham) = 1.0 in binary case."
+  },
+  {
+    "id": 13,
+    "type": "multi",
+    "topic": "Cross-Validation Purpose",
+    "prompt": "What problems does k-fold cross-validation help address?",
+    "options": [
+      "Uncertainty about whether the test set truly represents future data distribution",
+      "Overfitting to a specific train/test split",
+      "Selection bias in hyperparameter tuning",
+      "Need to compare multiple classification algorithms"
+    ],
+    "correct": [0, 1, 2],
+    "explanation": "Cross-validation addresses uncertainty about test set representativeness by testing on multiple folds. It reduces overfitting to a single split and prevents selection bias when tuning hyperparameters. While useful for comparison, that's not its primary purpose."
+  },
+  {
+    "id": 14,
+    "type": "mcq",
+    "topic": "Overfitting vs Underfitting",
+    "prompt": "A model achieves 95% accuracy on training data but only 60% on test data. Which phenomenon is this?",
+    "options": [
+      "Overfitting - the model learned training noise rather than true patterns",
+      "Underfitting - the model is too simple",
+      "Poor generalization that could be either overfitting or underfitting",
+      "Class imbalance affecting performance"
+    ],
+    "correct": [0],
+    "explanation": "Large gap between training (95%) and test (60%) accuracy indicates overfitting, where the model memorized training data including noise. Underfitting shows poor performance on both train and test sets."
+  }
+]

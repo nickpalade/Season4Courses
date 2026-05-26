@@ -1,0 +1,361 @@
+[
+  {
+    "id": 1,
+    "type": "multi",
+    "topic": "Tasks",
+    "prompt": "While purchasing a new washing machine in an online store, you are recommended to buy connection pipes and detergents. This is an example of which of the following tasks?",
+    "options": [
+      "Subgroup Discovery",
+      "Association rule mining",
+      "Descriptive clustering",
+      "Predictive clustering",
+      "Regression"
+    ],
+    "correct": [1],
+    "explanation": "Recommending complementary items = market-basket / association rule mining (e.g. {washing machine} -> {pipes, detergent})."
+  },
+  {
+    "id": 2,
+    "type": "multi",
+    "topic": "Model types",
+    "prompt": "Which statement(s) are true about grading models?",
+    "options": [
+      "Linear regression is an example of a grading model.",
+      "They create segments within the instance space.",
+      "They have a fixed and a finite resolution.",
+      "Tree-based models are examples of grading models.",
+      "SVM is an example of grading models"
+    ],
+    "correct": [0, 4],
+    "explanation": "Grading models output a score over the whole instance space (linear regression, SVM). Segmenting, finite resolution, and trees are *grouping* models."
+  },
+  {
+    "id": 3,
+    "type": "multi",
+    "topic": "Probabilistic models",
+    "prompt": "Which statement(s) are true about probabilistic models?",
+    "options": [
+      "Likelihood ratio is the product of posterior odds and prior odds.",
+      "Maximum a posteriori is used to face the overfitting problem",
+      "In a classification task, the prior probability refers to our prior knowledge about the value of features.",
+      "It is preferred to use the likelihood ratio when it cannot be assumed that the prior distribution is uniform.",
+      "Posterior odds is the product of likelihood ratio and prior odds."
+    ],
+    "correct": [1, 4],
+    "explanation": "Bayes (odds form): posterior odds = likelihood ratio x prior odds. MAP adds prior -> acts as regularizer against overfitting. Prior refers to class, not feature, knowledge. Likelihood ratio is fine only when prior is uniform."
+  },
+  {
+    "id": 4,
+    "type": "multi",
+    "topic": "Validation",
+    "prompt": "Sometimes, separate training, test, and validation sets are used in cross-validation. What is/are the validation set(s) used for?",
+    "options": [
+      "To evaluate the final model accuracy after all training and tuning is complete.",
+      "For evaluation of the classifications made by the model using numerous performance metrics.",
+      "For finetuning hyper-parameters on a separate set than the train/test",
+      "To monitor model performance during training and help select the best model.",
+      "To make predictions during the inference phase"
+    ],
+    "correct": [2, 3],
+    "explanation": "Validation set = hyperparameter tuning + model selection / monitoring. Final accuracy = test set."
+  },
+  {
+    "id": 5,
+    "type": "multi",
+    "topic": "Decision trees",
+    "prompt": "Which one(s) among the following is considered a property of decision trees?",
+    "options": [
+      "They require extensive data preprocessing like feature scaling.",
+      "They can be applied on both categorical and numerical data",
+      "It takes longer to train a decision tree model than to perform inference with it",
+      "The basic decision tree algorithm is highly resistant to overfitting."
+    ],
+    "correct": [1, 2],
+    "explanation": "Trees: no scaling needed, work on mixed data, training (search splits) costs more than inference (traverse). Basic trees overfit heavily without pruning."
+  },
+  {
+    "id": 6,
+    "type": "multi",
+    "topic": "Multiclass",
+    "prompt": "Select the option(s) that are true about one-versus-one classifiers.",
+    "options": [
+      "One model is trained per class, distinguishing between that class and all others.",
+      "A separate binary classifier is trained for every possible pair of classes.",
+      "The one-versus-one strategy can be applied in combination with binary classifiers like SVM.",
+      "The training data is split so that each binary classifier only sees examples from two classes."
+    ],
+    "correct": [1, 2, 3],
+    "explanation": "OvO trains C(k,2) classifiers, one per pair. The first option describes one-versus-rest, not OvO."
+  },
+  {
+    "id": 7,
+    "type": "mcq",
+    "topic": "Bias/Variance",
+    "prompt": "A classifier learns a highly wiggly decision boundary that closely follows individual training points. Considering bias and variance, the classifier:",
+    "options": [
+      "Has high bias and high variance",
+      "Has high bias and low variance",
+      "Has low bias and low variance",
+      "Has high variance and low bias"
+    ],
+    "correct": [3],
+    "explanation": "Wiggly boundary memorizes training data -> low bias, high variance (overfit)."
+  },
+  {
+    "id": 8,
+    "type": "multi",
+    "topic": "Metrics",
+    "prompt": "Which one(s) of the following shows that the binary classifier clf1 outperforms clf2?",
+    "options": [
+      "The R^2 of clf1 is higher than that of clf2.",
+      "The area under the ROC curve of clf1 is lower than that of clf2.",
+      "The RMSE of clf1 is lower than that of clf2."
+    ],
+    "correct": [],
+    "explanation": "R^2 and RMSE are regression metrics, not classification. Lower AUC means worse, not better. None of these prove clf1 better."
+  },
+  {
+    "id": 9,
+    "type": "multi",
+    "topic": "Classifiers",
+    "prompt": "Dataset with one numerical feature, classes arranged as dots-plus cluster-dots. Which technique(s) can find a decision boundary that perfectly classifies it?",
+    "options": [
+      "A decision tree",
+      "Expectation-maximization with two normal distributions (one per class).",
+      "A linear margin-maximizing classifier (like the SVM) in combination with a kernel.",
+      "A linear regression model."
+    ],
+    "correct": [0, 1, 2],
+    "explanation": "Need non-linear boundary (two thresholds). Tree can split twice, EM mixture handles it, SVM+kernel maps to separable space. Plain linear regression cannot."
+  },
+  {
+    "id": 10,
+    "type": "multi",
+    "topic": "Linear models",
+    "prompt": "Which of the following is/are true for linear models?",
+    "options": [
+      "They are stable and not affected by variations in data.",
+      "Linear models are parametric.",
+      "Linear models are prone to overfitting."
+    ],
+    "correct": [0, 1],
+    "explanation": "Linear = parametric, low variance / stable. They underfit more than overfit (high bias)."
+  },
+  {
+    "id": 11,
+    "type": "multi",
+    "topic": "SVM",
+    "prompt": "The effectiveness of an SVM classifier depends upon:",
+    "options": [
+      "Selection of kernels",
+      "Soft margin complexity hyperparameter C",
+      "The model's ability to avoid regularization altogether."
+    ],
+    "correct": [0, 1],
+    "explanation": "Kernel + C are the key knobs. SVM relies on regularization (margin maximization)."
+  },
+  {
+    "id": 12,
+    "type": "multi",
+    "topic": "PCA",
+    "prompt": "What can principal components analysis (PCA) be used for?",
+    "options": [
+      "Reducing the dimensionality of the data while preserving as much variance as possible.",
+      "Finding the best clusters among data.",
+      "Identifying the principal features used by a classification algorithm to perform a classification task.",
+      "For feature selection among categorical and numerical features"
+    ],
+    "correct": [0],
+    "explanation": "PCA = unsupervised variance-preserving projection. Not clustering, not feature attribution, not for categorical features."
+  },
+  {
+    "id": 13,
+    "type": "multi",
+    "topic": "Ensembles",
+    "prompt": "Which of the following are NOT an example of an ensemble learning algorithm?",
+    "options": [
+      "Random Forest",
+      "Adaboost",
+      "Gradient Boosting",
+      "Decision Trees"
+    ],
+    "correct": [3],
+    "explanation": "RF, Adaboost, GBM = ensembles. A single decision tree is a base learner, not an ensemble."
+  },
+  {
+    "id": 14,
+    "type": "mcq",
+    "topic": "Statistics",
+    "prompt": "Which one of the following is more probable for a right-skewed distribution?",
+    "options": [
+      "Mode < Median < Mean",
+      "Mean = Median = Mode",
+      "Mode < Mean < Median",
+      "Mean < Median < Mode"
+    ],
+    "correct": [0],
+    "explanation": "Right-skew = long right tail pulls mean up: Mode < Median < Mean."
+  },
+  {
+    "id": 15,
+    "type": "mcq",
+    "topic": "Ensembles",
+    "prompt": "After training a linear classifier on a single feature you observe high error. Best strategy to reduce error without switching algorithm?",
+    "options": [
+      "Stacking",
+      "Bagging",
+      "Boosting",
+      "Sub-space sampling"
+    ],
+    "correct": [2],
+    "explanation": "Linear = high bias. Boosting reduces bias by sequentially focusing on errors. Bagging mainly reduces variance."
+  },
+  {
+    "id": 16,
+    "type": "multi",
+    "topic": "Neural networks",
+    "prompt": "Neural Networks ____:",
+    "options": [
+      "Are trained through an optimisation approach on a convex surface formed based on the loss function.",
+      "Always output values between 0 and 1",
+      "Can be used for regression as well as classification",
+      "Can be used in an ensemble"
+    ],
+    "correct": [2, 3],
+    "explanation": "NN loss surfaces are non-convex. Output depends on activation. NN do regression+classification and can be ensembled."
+  },
+  {
+    "id": 17,
+    "type": "mcq",
+    "topic": "Neural networks",
+    "prompt": "Which activation function is suitable for the last layer of a feedforward NN trained for multi-class classification?",
+    "options": [
+      "Linear",
+      "Tanh",
+      "Softmax",
+      "Sigmoid"
+    ],
+    "correct": [2],
+    "explanation": "Softmax = normalized class probabilities summing to 1. Sigmoid is for binary / multi-label."
+  },
+  {
+    "id": 18,
+    "type": "mcq",
+    "topic": "Stats tests",
+    "prompt": "Which test can be used to compare the performance of multiple algorithms over multiple datasets?",
+    "options": [
+      "Null hypothesis",
+      "Friedman test",
+      "T-test",
+      "Stratified cross-validation"
+    ],
+    "correct": [1],
+    "explanation": "Friedman = non-parametric test for k algorithms over N datasets. T-test is pairwise only."
+  },
+  {
+    "id": 19,
+    "type": "multi",
+    "topic": "Fairness",
+    "prompt": "A company designs an ML model to process CVs. Which statements are highly probable?",
+    "options": [
+      "The model may inherit biases from historical data, leading to discrimination against certain groups.",
+      "The model will always be completely neutral and objective.",
+      "The use of the model can reduce human bias and result in fairer hiring decisions.",
+      "The model will always make more accurate decisions than human recruiters."
+    ],
+    "correct": [0],
+    "explanation": "Models inherit data bias. 'Always neutral/fair/accurate' claims are false."
+  },
+  {
+    "id": 20,
+    "type": "open",
+    "topic": "Curse of dimensionality",
+    "prompt": "Explain what you know about the curse of dimensionality.",
+    "options": [],
+    "correct": [],
+    "explanation": "As feature dimensionality grows: (1) data becomes sparse — equidistant points in high-D space, (2) volume grows exponentially, needing exponentially more samples for the same density, (3) distance-based methods (kNN, clustering) lose meaning since all pairwise distances converge, (4) overfitting risk rises, (5) computational cost explodes. Mitigations: feature selection, PCA / dimensionality reduction, regularization."
+  },
+  {
+    "id": 21,
+    "type": "open",
+    "topic": "Ensembles",
+    "prompt": "Explain bagging and boosting. What is the difference in terms of bias and variance?",
+    "options": [],
+    "correct": [],
+    "explanation": "Bagging: train many base learners in parallel on bootstrap samples, average / vote. Reduces VARIANCE, leaves bias unchanged. Good for high-variance models (deep trees -> Random Forest). Boosting: train learners sequentially, each focusing on residuals / misclassified samples from prior round, weighted combination. Reduces BIAS (and some variance). Good with weak learners (stumps -> AdaBoost, GBM). Bagging = independent learners + averaging; Boosting = dependent learners + reweighting."
+  },
+  {
+    "id": 22,
+    "type": "open",
+    "topic": "MAP vs MLE",
+    "prompt": "Classification problem where one outcome is extremely uncommon. Prefer MAP or MLE? Why?",
+    "options": [],
+    "correct": [],
+    "explanation": "MAP. MLE relies purely on observed frequencies, so for a rare class it produces near-zero or zero probability estimates (data-driven only, no smoothing). MAP incorporates a prior, which acts as a regularizer / smoother — it pulls the estimate away from zero and reflects domain knowledge about the rare outcome. With sparse data MAP is more stable and avoids the zero-frequency problem."
+  },
+  {
+    "id": 23,
+    "type": "open",
+    "topic": "xAI - LIME",
+    "prompt": "23a) Is there any issue with the proposed LIME-like Algorithm 1? Explain.",
+    "options": [],
+    "correct": [],
+    "explanation": "Yes — line 6 calls K-Lasso(X, K) using X (the original dataset) as features, but the perturbation samples and labels live in Z. It should fit K-Lasso on Z (the perturbed neighborhood samples z'_i with their labels f(z_i) and similarity weights pi_x(z_i)). Also, similarity weighting pi_x is collected but never used to weight the regression. Result: the surrogate model is not local to x."
+  },
+  {
+    "id": 24,
+    "type": "open",
+    "topic": "xAI - LIME",
+    "prompt": "23b) What are two drawbacks of the original LIME algorithm?",
+    "options": [],
+    "correct": [],
+    "explanation": "(1) Instability — random sampling around x produces different explanations on different runs (low fidelity / reproducibility). (2) Local-only — explains a single prediction, no global view. Other valid drawbacks: choice of neighborhood / kernel width is heuristic and strongly affects output; surrogate complexity K is fixed manually; ignores feature correlations during perturbation."
+  },
+  {
+    "id": 25,
+    "type": "multi",
+    "topic": "xAI - LIME",
+    "prompt": "23c) Which of the following statements are valid:",
+    "options": [
+      "Probing and LIME is part of the local explanations category in xAI",
+      "The LIME algorithm does not take into account the complexity of the black-box model.",
+      "LIME is a model-specific method",
+      "LIME explanations are generated after the training of the black-box model",
+      "The LIME algorithm does not take into account the complexity of the surrogate model."
+    ],
+    "correct": [0, 1, 3],
+    "explanation": "LIME is local + model-AGNOSTIC + post-hoc. It ignores black-box complexity but DOES control surrogate complexity via K (sparsity)."
+  },
+  {
+    "id": 26,
+    "type": "multi",
+    "topic": "Decision trees",
+    "prompt": "Decision tree for churn prediction has very low validation accuracy. Which options will potentially improve test accuracy?",
+    "options": [
+      "Hyperparameter tuning.",
+      "Normalising the numerical features.",
+      "Collecting more labelled data for training.",
+      "Reduced error pruning."
+    ],
+    "correct": [0, 2, 3],
+    "explanation": "Tuning depth/min-samples, more data, and pruning all help. Trees are scale-invariant — normalization has no effect."
+  },
+  {
+    "id": 27,
+    "type": "open",
+    "topic": "Decision trees",
+    "prompt": "25a) Is it a good idea to use the released _best_split code? If not, what is the issue?",
+    "options": [],
+    "correct": [],
+    "explanation": "No. The comparison is inverted: the code uses `if candidate_loss > best_so_far_loss` and updates the best. Since we want to MINIMIZE impurity, it should be `<`. As written, it picks the WORST split (highest impurity), not the best. Also `best_so_far_loss = 1` as init only works if impurity is bounded by 1 (Gini yes, entropy no — entropy can exceed 1)."
+  },
+  {
+    "id": 28,
+    "type": "open",
+    "topic": "Decision trees",
+    "prompt": "25b) Main differences between entropy and sqrt(Gini)?",
+    "options": [],
+    "correct": [],
+    "explanation": "Entropy: -sum p_i log p_i, bounded by log(k), sensitive to balanced distributions, costlier (log). sqrt(Gini): square root of 1 - sum p_i^2, bounded by ~sqrt((k-1)/k), differentiable everywhere, cheaper to compute. sqrt(Gini) is a metric (satisfies triangle inequality) while entropy is not. In practice both rank splits similarly, but sqrt(Gini) is convex w.r.t. class proportions, yielding smoother splits; entropy tends to favor more balanced partitions more strongly."
+  }
+]
