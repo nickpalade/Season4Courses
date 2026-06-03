@@ -1,0 +1,1636 @@
+Lecture 6: Application Security I
+Security Francesco Bariatti
+18 March 2026
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+1 / 25
+
+Software vulnerabilities
+At any time, many programs run on shared and/or public machines e.g. web servers, databases, production equipment, . . .
+Exploiting vulnerabilities in a program can allows attackers to get access to the machines
+Vulnerabilities can stem from programming bugs, or programming languages unwieldy behaviour e.g. in C, programmer is responsible for proper memory management
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+2 / 25
+
+Buffer overflow
+1. Buffer overflow Heap overflow
+2. Integer overflow 3. String formatting vulnerabilities 4. Other vulnerabilities
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+2 / 25
+
+Buffer overflow
+Buffer overflow: ever relevant
+
+Francesco Bariatti
+
+https://cwe.mitre.org/top25/archive/2025/2025_kev_list.html
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+3 / 25
+
+Buffer overflow
+Buffer overflow: ever relevant
+
+Francesco Bariatti
+
+https://cwe.mitre.org/top25/archive/2025/2025_kev_list.html
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+3 / 25
+
+Buffer overflow
+What is a buffer?
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+4 / 25
+
+Buffer overflow
+What is a buffer? A buffer is a (contiguous) memory region associated with a variable.
+
+A buffer overflow occurs when the program (is tricked to) access the memory beyond the theoretical limits of a buffer.
+
+Francesco Bariatti
+
+>>> l = [1,2,3] >>> l[42] = 67 Traceback (most recent call last):
+File "<stdin>", line 1, in <module> IndexError: list assignment index out of range
+Python preventing you from overflowing a buffer
+Lecture 6: Application Security I
+
+18 March 2026
+
+4 / 25
+
+Buffer overflow
+C standard states that accessing memory beyond a variable's limit is undefined behaviour = Compiler allowed to assume that it will never happen
+Protection against overflow lies with OS, compiler, and programmer OS has protections and compilers have checks to prevent overflow
+But many checks just raise a warning and are ignored Some situations impossible to predict at compile time ( halting problem) Runtime boundary checks can be costly, especially in low-latency scenarios
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+5 / 25
+
+Buffer overflow
+Read overflow ­ The Heartbleed vulnerability
+https://nvd.nist.gov/vuln/detail/CVE-2014-0160 Vulnerability in the OpenSSL library
+Most common library for secure communication and cryptography Vulnerability in the "heartbeat" protocol allows to read memory of cryptographic library
+e.g. cryptographic keys and passwords = High risk of enabling further attacks
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+6 / 25
+
+Buffer overflow
+Read overflow ­ The Heartbleed vulnerability
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+https://xkcd.com/1354/
+
+18 March 2026
+
+7 / 25
+
+Buffer overflow
+Read overflow ­ The Heartbleed vulnerability
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+https://xkcd.com/1354/
+
+18 March 2026
+
+7 / 25
+
+Buffer overflow
+Read overflow ­ The Heartbleed vulnerability
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+https://xkcd.com/1354/
+
+18 March 2026
+
+7 / 25
+
+Buffer overflow
+Read overflow ­ The Heartbleed vulnerability
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+https://xkcd.com/1354/
+
+18 March 2026
+
+7 / 25
+
+Buffer overflow
+Read overflow ­ The Heartbleed vulnerability
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+https://xkcd.com/1354/
+
+18 March 2026
+
+7 / 25
+
+Buffer overflow
+Read overflow ­ The Heartbleed vulnerability
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+https://xkcd.com/1354/
+
+18 March 2026
+
+7 / 25
+
+Buffer overflow
+Reminder: program memory layout
+static int y;
+static int x = 10;
+
+function(...) { int z;
+}
+
+OS stuff
+
+...
+
+Low addresses
+
+Program code Global variables and other data
+
+Heap
+
+rip
+
+malloc()
+
+Known at compile time
+
+...
+
+Stack
+
+Program arguments and others
+
+rsp & rbp
+
+High addresses
+
+Set at runtime
+
+Set at process start
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+8 / 25
+
+Buffer overflow
+Inside a function: stack memory
+
+int add(int a, int b) { int c; c = a + b; return c;
+}
+
+... c (4 bytes) b (4 bytes) a (4 bytes) old rbp (8 bytes) return address (8 bytes) Previous function stuff
+
+rsp
+
+rbp
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+9 / 25
+
+Buffer overflow
+Inside a function: stack memory
+
+int add(int a, int b) { int c; c = a + b; return c;
+}
+
+... c (4 bytes) b (4 bytes) a (4 bytes) old rbp (8 bytes) return address (8 bytes) Previous function stuff
+
+rsp
+
+rbp
+
+Stack frame of add
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+9 / 25
+
+Buffer overflow
+Our first buffer (not) overflow
+
+1 int f(char* arg1) {
+
+2
+
+char buffer[4];
+
+3
+
+strcpy(buffer, arg1);
+
+4
+
+// Rest of the function
+
+5}
+
+6 void main() {
+
+7
+
+char* myStr = "Hi!"
+
+8
+
+f(myStr);
+
+9
+
+// Rest of the function
+
+} 10
+
+...
+
+myStr
+... Main function stuff
+
+rip: "line 8" ...
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+10 / 25
+
+Buffer overflow
+Our first buffer (not) overflow
+
+1 int f(char* arg1) {
+
+2
+
+char buffer[4];
+
+3
+
+strcpy(buffer, arg1);
+
+4
+
+// Rest of the function
+
+5}
+
+...
+
+rip: "line 2" ...
+
+6 void main() {
+
+7
+
+char* myStr = "Hi!"
+
+8
+
+f(myStr);
+
+9
+
+// Rest of the function
+
+} 10
+
+... old rbp (8 bytes) "line 9" (8 bytes) Main function stuff
+rbp
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+10 / 25
+
+Buffer overflow
+Our first buffer (not) overflow
+
+1 int f(char* arg1) {
+
+2
+
+char buffer[4];
+
+3
+
+strcpy(buffer, arg1);
+
+4
+
+// Rest of the function
+
+5}
+
+6 void main() {
+
+7
+
+char* myStr = "Hi!"
+
+8
+
+f(myStr);
+
+9
+
+// Rest of the function
+
+} 10
+
+buffer
+
+... 0x00
+
+0x00
+
+0x00
+
+0x00
+
+... old rbp (8 bytes) "line 9" (8 bytes) Main function stuff
+
+rbp
+rip: "line 3" ...
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+10 / 25
+
+Buffer overflow
+Our first buffer (not) overflow
+
+1 int f(char* arg1) {
+
+2
+
+char buffer[4];
+
+3
+
+strcpy(buffer, arg1);
+
+4
+
+// Rest of the function
+
+5}
+
+6 void main() {
+
+7
+
+char* myStr = "Hi!"
+
+8
+
+f(myStr);
+
+9
+
+// Rest of the function
+
+} 10
+
+buffer
+
+... 0x48
+
+0x69
+
+0x21
+
+0x00
+
+... old rbp (8 bytes) "line 9" (8 bytes) Main function stuff
+
+rbp
+rip: "line 4" ...
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+10 / 25
+
+Our first buffer overflow
+
+Buffer overflow
+
+int f(char* arg1) { char buffer[4]; strcpy(buffer, arg1); // Rest of the function
+}
+
+6 void main() {
+
+7
+
+char* myStr = "I have hacked you!!";
+
+8
+
+f(myStr);
+
+9
+
+// Rest of the function
+
+} 10
+
+...
+
+myStr
+... Main function stuff
+
+rip: "line 8" ...
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+11 / 25
+
+Our first buffer overflow
+
+Buffer overflow
+
+int f(char* arg1) { char buffer[4]; strcpy(buffer, arg1); // Rest of the function
+}
+...
+rip: "line 2" ...
+
+6 void main() {
+
+7
+
+char* myStr = "I have hacked you!!";
+
+8
+
+f(myStr);
+
+9
+
+// Rest of the function
+
+} 10
+
+... old rbp (8 bytes) "line 9" (8 bytes) Main function stuff
+rbp
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+11 / 25
+
+Our first buffer overflow
+
+Buffer overflow
+
+int f(char* arg1) { char buffer[4]; strcpy(buffer, arg1); // Rest of the function
+}
+
+6 void main() {
+
+7
+
+char* myStr = "I have hacked you!!";
+
+8
+
+f(myStr);
+
+9
+
+// Rest of the function
+
+} 10
+
+buffer
+
+... 0x00
+
+0x00
+
+0x00
+
+0x00
+
+... old rbp (8 bytes) "line 9" (8 bytes) Main function stuff
+
+rbp
+rip: "line 3" ...
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+11 / 25
+
+Our first buffer overflow
+
+Buffer overflow
+
+int f(char* arg1) { char buffer[4]; strcpy(buffer, arg1); // Rest of the function
+}
+
+6 void main() {
+
+7
+
+char* myStr = "I have hacked you!!";
+
+8
+
+f(myStr);
+
+9
+
+// Rest of the function
+
+} 10
+
+buffer
+... 0x49
+
+0x20
+
+0x68
+
+0x61
+
+... 0x7665206861636b65 0x6420796f75212100 Main function stuff
+
+rbp
+rip: "line 4" ...
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+11 / 25
+
+Our first buffer overflow
+int f(char* arg1) { char buffer[4]; strcpy(buffer, arg1); // Rest of the function
+}
+
+Buffer overflow
+
+6 void main() {
+
+7
+
+char* myStr = "I have hacked you!!";
+
+8
+
+f(myStr);
+
+9
+
+// Rest of the function
+
+} 10
+
+buffer
+... 0x49
+
+0x20
+
+0x68
+
+0x61
+
+... 0x7665206861636b65 0x6420796f75212100 Main function stuff
+
+rbp
+
+Upon return from f: rbp will contain 0x7665206861636b65 instead of the original value Highly likely to crash the program if used  might need to guess a better value Program will execute instructions at address 0x6420796f75212100 instead of returning to main
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+11 / 25
+
+Buffer overflow
+Buffer overflow payload and challenges
+Now that we can overwrite program memory, what should we write?
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+12 / 25
+
+Buffer overflow
+Buffer overflow payload and challenges
+
+Now that we can overwrite program memory, what should we write?
+
+1 mov al, 60 2 xor rdi, rdi 3 syscall
+
+1 0xb0 0x3c 2 0x48 0x31 0xff 3 0x0f 0x05
+
+Remember: instructions are just bytes!
+
+Goal: injecting instructions and jumping to them
+
+Shellcode: binary instructions for running a shell  see execve syscall
+
+Binary depends on machine architecture
+
+Code needs to be self-contained (can not load libraries)
+
+Code can not contain all-zero bytes
+
+Why?
+
+Most machines have the same architecture and use the same environments
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+12 / 25
+
+Guessing the right address
+
+Buffer overflow
+
+buffer
+...
+
+padding
+
+saved rbp rbp
+
+0x1122334455667788
+
+shellcode
+
+0x1122334455667788
+
+...
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+13 / 25
+
+Guessing the right address
+
+Buffer overflow
+
+buffer
+...
+
+padding
+
+saved rbp rbp
+
+0x1122334455667788
+
+shellcode
+
+0x1122334455667788
+
+How to make sure that we pick the right address? Missing by one byte will completely misinterpret the code
+
+...
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+13 / 25
+
+Guessing the right address
+
+Buffer overflow
+
+buffer
+...
+
+padding
+
+saved rbp rbp
+
+0x1122334455667788
+
+shellcode
+
+0x1122334455667788
+
+How to make sure that we pick the right address? Missing by one byte will completely misinterpret the code
+On some (old or limited) systems, stack position is fixed and known Stack always starts from same fixed address Stack grows but not very deeply
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+...
+13 / 25
+
+NOP sled
+
+Buffer overflow
+
+nop or "no-op(eration)" is a one-byte instruction (0x90 on x86-64) that does nothing If we have a bunch of those instructions, executing any of those bytes will just move to the next . . . . . . eventually arriving at the actual payload
+
+buffer
+
+Good guess
+
+... padding
+
+saved rbp
+
+0x1122334455ffffff
+
+nop
+
+nop
+
+...
+
+nop
+
+0x1122334455667788 rbp
+
+shellcode
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+14 / 25
+
+Buffer overflow
+Overflow exploits without custom code
+
+Possible to exploit a buffer overflow without writing our own (shell)code
+
+1 int f(char* arg1) {
+
+2
+
+int authenticated = 0;
+
+3
+
+char buffer[4];
+
+4
+
+strcpy(buffer, arg1);
+
+5
+
+if (authenticated) {
+
+6
+
+// Restricted area
+
+7
+
+}
+
+8}
+
+9 void main() {
+
+10
+
+char* myStr = "BBBBBBBB";
+
+11
+
+f(myStr);
+
+12
+
+// Rest of the function
+
+} 13
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+15 / 25
+
+Buffer overflow
+Overflow exploits without custom code
+
+Possible to exploit a buffer overflow without writing our own (shell)code
+
+1 int f(char* arg1) {
+
+2
+
+int authenticated = 0;
+
+3
+
+char buffer[4];
+
+4
+
+strcpy(buffer, arg1);
+
+5
+
+if (authenticated) {
+
+6
+
+// Restricted area
+
+7
+
+}
+
+8}
+
+9 void main() {
+
+10
+
+char* myStr = "BBBBBBBB";
+
+11
+
+f(myStr);
+
+12
+
+// Rest of the function
+
+} 13
+
+buffer
+
+authenticated
+
+...
+
+0x00000000
+
+0x00000000
+
+old rbp (8 bytes) "line 12" (8 bytes) Main function stuff
+
+rbp
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+15 / 25
+
+Buffer overflow
+Overflow exploits without custom code
+
+Possible to exploit a buffer overflow without writing our own (shell)code
+
+1 int f(char* arg1) {
+
+2
+
+int authenticated = 0;
+
+3
+
+char buffer[4];
+
+4
+
+strcpy(buffer, arg1);
+
+5
+
+if (authenticated) {
+
+6
+
+// Restricted area
+
+7
+
+}
+
+8}
+
+9 void main() {
+
+10
+
+char* myStr = "BBBBBBBB";
+
+11
+
+f(myStr);
+
+12
+
+// Rest of the function
+
+} 13
+
+buffer
+
+authenticated
+
+...
+
+0x42424242
+
+0x42424242
+
+old rbp (8 bytes) "line 12" (8 bytes) Main function stuff
+
+rbp
+
+Reminder: any non-0 value is considered "true" in C
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+15 / 25
+
+Heap overflow
+
+Buffer overflow Heap overflow
+
+Until now, we have been doing "stack smashing"
+. . . but programs use another memory region: the heap! Memory reserved via malloc Memory used to survive beyond a function's end Many high-level languages (Java, Python) use the heap a lot for object-oriented programming
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+16 / 25
+
+Heap overflow
+
+Buffer overflow Heap overflow
+
+Until now, we have been doing "stack smashing" . . . but programs use another memory region: the heap!
+Memory reserved via malloc Memory used to survive beyond a function's end Many high-level languages (Java, Python) use the heap a lot for object-oriented programming
+void f() { char* buf = (char*) malloc(4); char* buf2 = (char*) malloc(42); char* user_input = /*read user input*/ strcpy(buf,user_input); // Rest of the function
+}
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+16 / 25
+
+Heap overflow
+
+Buffer overflow Heap overflow
+
+Until now, we have been doing "stack smashing"
+. . . but programs use another memory region: the heap! Memory reserved via malloc Memory used to survive beyond a function's end Many high-level languages (Java, Python) use the heap a lot for object-oriented programming
+
+void f() { char* buf = (char*) malloc(4); char* buf2 = (char*) malloc(42); char* user_input = /*read user input*/ strcpy(buf,user_input); // Rest of the function
+}
+
+If user input > 4, then overwrite heap
+It might be buf2, it might be something unrelated!
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+16 / 25
+
+Buffer overflow Heap overflow
+Heap overflow consequences
+Overflow into adjacent objects In object-oriented programming: overflow into vtables (class information) = Change object methods! Overflow heap metadata itself
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+17 / 25
+
+Integer overflow
+1. Buffer overflow Heap overflow
+2. Integer overflow 3. String formatting vulnerabilities 4. Other vulnerabilities
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+17 / 25
+
+Integer overflow
+
+Integer overflow
+
+1 char** read_network_packet() {
+
+2
+
+packet* p = wait_for_packet();
+
+3
+
+int n_strings = p->header->n_strings;
+
+4
+
+char** strings = (char**) malloc(n_strings * sizeof(char*));
+
+5
+
+for (int i = 0; i < n_strings; i++)
+
+6
+
+strings[i] = p->get_string(i);
+
+7
+
+return strings;
+
+8}
+
+What is the problem?
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+18 / 25
+
+Integer overflow
+
+Integer overflow
+
+1 char** read_network_packet() {
+
+2
+
+packet* p = wait_for_packet();
+
+3
+
+int n_strings = p->header->n_strings;
+
+4
+
+char** strings = (char**) malloc(n_strings * sizeof(char*));
+
+5
+
+for (int i = 0; i < n_strings; i++)
+
+6
+
+strings[i] = p->get_string(i);
+
+7
+
+return strings;
+
+8}
+
+What is the problem?
+
+n_string received over the network  unsanitized user input What if n_string = 536870912?
+536870912 * sizeof(char*) = 536870912 * 8 = 4294967296 More than the max value in an int! 536870912 * sizeof(char*) overflows to 0 malloc allocates 0 bytes: all writes overflow
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+18 / 25
+
+Integer underflow
+
+Integer overflow
+
+1 void process_input(const char *input, unsigned int length) {
+
+2
+
+char buffer[100];
+
+3
+
+// We only have space for 99 characters plus null terminator
+
+4
+
+if (length - 1 > 100) {
+
+5
+
+printf("Input too long!\n");
+
+6
+
+return;
+
+7
+
+}
+
+8
+
+// Rest of function
+
+9}
+
+What is the problem?
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+19 / 25
+
+Integer underflow
+
+Integer overflow
+
+1 void process_input(const char *input, unsigned int length) {
+
+2
+
+char buffer[100];
+
+3
+
+// We only have space for 99 characters plus null terminator
+
+4
+
+if (length - 1 > 100) {
+
+5
+
+printf("Input too long!\n");
+
+6
+
+return;
+
+7
+
+}
+
+8
+
+// Rest of function
+
+9}
+
+What is the problem?
+
+If length = 0, then length -1 = MAX_INT Will pass check while conceptually being wrong
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+19 / 25
+
+Buffer overflow summary
+
+Integer overflow
+
+A buffer is a (contiguous) memory region associated with a variable.
+A buffer overflow occurs when the program (is tricked to) access the memory beyond the theoretical limits of a buffer.
+Dangers: Code injection Modify program's state Read restricted information
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+20 / 25
+
+String formatting vulnerabilities
+1. Buffer overflow Heap overflow
+2. Integer overflow 3. String formatting vulnerabilities 4. Other vulnerabilities
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+20 / 25
+
+Formatting strings
+
+String formatting vulnerabilities
+
+Format string
+1 printf("Printing a string: %s, and a number: %d\n", buffer, x); 2 // Defined as 3 printf(const char* format, ...);
+
+Francesco Bariatti
+
+Format specifiers
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+21 / 25
+
+String formatting vulnerabilities
+String formatting vulnerabilities
+
+void safe() { char buf[80]; // Assume this is safe get_user_input(buf); printf("User entered:\n",buf); printf("%s",buf);
+}
+
+1 void vulnerable() {
+
+2
+
+char buf[80];
+
+3
+
+// Assume this is safe
+
+4
+
+get_user_input(buf);
+
+5
+
+printf("User entered:\n",buf);
+
+6
+
+printf(buf);
+
+7}
+
+What is the problem with the vulnerable function?
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+22 / 25
+
+String formatting vulnerabilities
+String formatting vulnerabilities
+
+void safe() { char buf[80]; // Assume this is safe get_user_input(buf); printf("User entered:\n",buf); printf("%s",buf);
+}
+
+1 void vulnerable() {
+
+2
+
+char buf[80];
+
+3
+
+// Assume this is safe
+
+4
+
+get_user_input(buf);
+
+5
+
+printf("User entered:\n",buf);
+
+6
+
+printf(buf);
+
+7}
+
+What is the problem with the vulnerable function?
+
+User can inject their own format printf assumes that it is called with enough arguments It will happily print whatever happens to be where arguments normally are
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+22 / 25
+
+printf attacks
+
+String formatting vulnerabilities
+
+printf("100% devilish");
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+23 / 25
+
+printf attacks
+
+String formatting vulnerabilities
+
+printf("100% devilish");  Ignore spaces: prints the first "argument" as integer (%d)
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+23 / 25
+
+printf attacks
+
+String formatting vulnerabilities
+
+printf("100% devilish");  Ignore spaces: prints the first "argument" as integer (%d) printf("%s");
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+23 / 25
+
+printf attacks
+
+String formatting vulnerabilities
+
+printf("100% devilish");  Ignore spaces: prints the first "argument" as integer (%d) printf("%s");  Prints bytes at address given by first "argument"
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+23 / 25
+
+printf attacks
+
+String formatting vulnerabilities
+
+printf("100% devilish");  Ignore spaces: prints the first "argument" as integer (%d) printf("%s");  Prints bytes at address given by first "argument" printf("100% no way!");
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+23 / 25
+
+printf attacks
+
+String formatting vulnerabilities
+
+printf("100% devilish");  Ignore spaces: prints the first "argument" as integer (%d) printf("%s");  Prints bytes at address given by first "argument" printf("100% no way!");  Writes to address given by first "argument"
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+23 / 25
+
+Other vulnerabilities
+1. Buffer overflow Heap overflow
+2. Integer overflow 3. String formatting vulnerabilities 4. Other vulnerabilities
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+23 / 25
+
+TOCTOU
+
+Other vulnerabilities
+
+1 if(can_access("file.txt") == 0) {
+
+2
+
+printf("Unauthorized!\n");
+
+3
+
+exit(1);
+
+4}
+
+5 fd = open("file.txt", /*options*/ );
+
+6 write(fd, /*content*/ );
+
+What is the problem?
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+24 / 25
+
+TOCTOU
+
+Other vulnerabilities
+
+1 if(can_access("file.txt") == 0) {
+
+2
+
+printf("Unauthorized!\n");
+
+3
+
+exit(1);
+
+4}
+
+5 fd = open("file.txt", /*options*/ );
+
+6 write(fd, /*content*/ );
+
+What is the problem?
+
+What if attacker changes meaning of file.txt on disk between line 2 and 6? e.g. symlink file.txt  /etc/passwd
+
+This is a Time-Of-Check Time-Of-Use vulnerability (TOCTOU) Previous result of a check is used, but that result should have changed A type of race condition
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+24 / 25
+
+Other vulnerabilities
+Supply-chain vulnerabilities
+Software uses many third-party libraries to make programming easier Vulnerabilities in libraries become vulnerabilities in your program Example: log4j vulnerability CVE-2021-44228
+Widely-used logging framework Allowed easy remote code execution on target machine Can happen with any programming language
+
+https://www.crowdstrike.com/en-gb/cybersecurity-101/exposure-management/log4j-vulnerability/
+
+Francesco Bariatti
+
+Lecture 6: Application Security I
+
+18 March 2026
+
+25 / 25
+

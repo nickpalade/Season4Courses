@@ -1,0 +1,712 @@
+Unveiling Shadows: An Interactive Exploration of the Online Tracking
+Ecosystem
+Leiden University
+ Güne Acar - Digital Security group & iHub Radboud University
+Partial slides credit: Asuman Senol, Zahra Moti
+
+About me
+ Assistant Professor at Radboud University  Digital Security group  iHub
+ Post-doctoral fellow  2019-21, Postdoc, FWO, KU Leuven (BE)  2017-19, Postdoc, Princeton University (USA)
+ PhD, 2017, from KU Leuven, COSIC research group (BE)
+Security, Leiden University - 22/04/2026
+
+https://gunesacar.net
+
+About me
+ Online tracking and advertisements  browser fingerprinting, evercookies  personal data exfiltration  smart/connected devices
+ Dark patterns  Anonymous communications
+Security, Leiden University - 22/04/2026
+
+https://gunesacar.net
+
+Outline
+ Online tracking mechanisms  Web, Mobile  Cookies, Evercookies, Fingerprinting  Personal data exfiltration
+ Online advertisements  Malicious and improper ads
+ Future of tracking and advertisements  Google Privacy Sandbox
+ What can we do to mitigate privacy and security risks?
+
+Online tracking mechanisms
+
+Online Tracking on the web
+ Third-party tracking, cross-site tracking ...  Various techniques:
+ Cookies  Evercookies (aka Zombie cookies)  Browser fingerprinting  Identity-based tracking
+Security, Leiden University - 22/04/2026
+
+12
+
+Cookies
+
+ Small text-based data  Used to keep state and identifiers, e.g.
+ shopping cart content, volume level
+ unique user identifiers   Critical for security (e.g. login)  Enable linking of different visits across
+sites (if, SameSite=None)
+
+Source: www.codeproject.com
+
+Security, Leiden University - 22/04/2026
+
+193
+
+Client Server
+
+www.news.com
+News!
+
+BUY
+
+www.health.com/depression
+e-health BUY
+
+GET: Cookie:
+
+IcDa=r_3b4a5nner.jpg
+
+GETC:ohookmiee: _IDba=n3n4e5r.jpg
+
+news.com
+
+First party
+
+tracker.com
+Cookie UID = 345def news.com/health, 1/6/24, 16:58:35 health.com/pregnancy,1/96/24, 17:58:35 ...
+
+Third party
+
+health.com
+
+First party
+
+Security, Leiden University - 22/04/2026
+
+16
+
+"Third-party" resources and JavaScript
+ First vs third party  Images, banners, fonts,
+analytics, social buttons, scripts  "Third-party" cookies
+
+Security, Leiden University - 22/04/2026
+
+11
+
+Cookie based tracking
+ by far the most popular technique, but
+ can be deleted, viewed  expire  to be potentially phased out*
+*: 3rd-party cookies
+ alternatives..?
+Security, Leiden University - 22/04/2026
+
+Evercookies
+
+- aka supercookies
+- aka zombie cookies
+- hard to get rid of (on purpose)
+- store identifiers in various client-side storage
+- may survive cookie clears, clear browsing data...
+- localStorage, IndexedDB, FileSystem API, Cache (ETag)
+
+Security, Leiden University - 22/04/2026
+
+13
+
+localStorage
+- persistent, no expiry - only accessed via JS - Set:
+- localStorage.setItem('UID', '0123456789'); - localStorage['UID'] = '0123456789';
+- Get:
+- localStorage.getItem('UID'); // '0123456789' - let user_id = localStorage['UID'] // '0123456789'
+
+Security, Leiden University - 22/04/2026
+
+14
+
+Cache ETag (entity tag)
+- Version number for the cached resources
+- Browser -> Server: `I have version=123 (ETag) of jquery.js' - Server -> Browser: `That's the latest version, you don't have to download
+again'
+- Abuse: set a unique ETag for each user, use it for tracking
+- Demo: https://cable.ayra.ch/toys/track.php
+
+Security, Leiden University - 22/04/2026
+
+15
+
+Browser fingerprinting
+
+ browser plugins, screen dimensions, timezone, fonts, software versions, clock skew, canvas, JS engine performance...
+
+ overcomes the limitations of cookies:
+
+ not subject to deletion or expiration
+ hard to spoof (cf. unique identifiers (UUID etc.)
+
+ hard to notice
+
+Security, Leiden University - 22/04/2026
+
+Panopticlick
+ collected browser plugins, fonts, user agent string, screen size
+ measured the entropy of the fingerprint
+ 94.2% with Flash or Java are unique
+ has shown the feasibility of stateless identification
+
+https://coveryourtracks.e .org/
+by Peter Eckersley, EFF (1979-2022)
+
+Security, Leiden University - 22/04/2026
+
+Canvas Fingerprinting
+
+ Canvas and WebGL API  depends on
+ OS  browser  fonts  font library  graphics card & driver  physical display
+(ClearType)
+
+Di erence maps in reSnedceruinrigtyt,hLe esaidmeenteUxnt iwviethrsAirtiyal-. S2o2u/r0ce4:/M2o0w2e6ry & Shacham (W2SP'2012)
+
+Canvas Fingerprinting
+ 5542 of top 100K sites
+ 90% from AddThis (social share buttons)
+Acar et al., The Web never forgets: Persistent tracking mechanisms in the wild, ACM CCS'14
+Security, Leiden University - 22/04/2026
+
+Other APIs
+ AudioContext API (Englehardt & Narayanan)  67 of 1M sites already using
+Source: webtransparency.cs.princeton.edu/webcensus
+Source: audiofingerprint.openwpm.com
+Security, Leiden University - 22/04/2026
+
+Other APIs - Battery Status API
+ Battery level, charging status and time-to-(dis)charge
+ Battery level was exposed with double precision on Firefox for Linux (fixed thanks to our disclosures)
+ Determine the battery capacity by solving
+
+Source: Olejnik et al. DPM'15
+
+Security, Leiden University - 22/04/2026
+
+https://amiunique.org
+
+Cross-device tracking
+ Defragment user profile across multiple devices
+ e.g. show ads on smartphone based on the your visits on laptop
+Source: http://blog.adroll.com/product/adroll-mobile-retargeting
+Security, Leiden University - 22/04/2026
+
+Pixels (aka web beacons)
+ Invisible 1x1 px images that trigger a request to the tracker domain  Present on >94% of the websites (Fouad et al., PoPETS'20)
+Security, Leiden University - 22/04/2026
+
+Email Tracking
+ "I saw you open my email yesterday, but you haven't replied yet."
+Security, Leiden University - 22/04/2026
+
+Personal data exfiltration
+
+Number of tracking-related
+requests
+
+Session replay scripts
+"Watch recordings of your visitors' sessions. Discover how they browse as if you're looking over their shoulder!" (clicktale.com)
+
+Security, Leiden University - 22/04/2026
+
+Source: https://metrica.yandex.com/about?
+
+The problem: recordings require a lot of data
+
+Full page source and text
+
+Mouse movements & clicks
+
+Keypresses
+
+Security, Leiden University - 22/04/2026
+
+How can things go wrong?
+We found session recordings containing:
+
+Passwords (Propeller Ads, ...)
+
+Credit Card details (Bonobos)
+
+Student data (Gradescope)
+
+Health data (Walgreens)
+
+Purchase details (Lenovo)
+
+Security, Leiden University - 22/04/2026
+
+Passwords leak to Fullstory on PropellerAds
+Security, Leiden University - 22/04/2026
+
+CC#, CVV and name leak to Fullstory on Bonobos
+Security, Leiden University - 22/04/2026
+
+Passwords leak to Userreplay on Capella University
+Security, Leiden University - 22/04/2026
+
+Login manager abuse
+
+ 2022 CNIL-INRIA Privacy Protection Award
+Security, Leiden University - 22/04/2026
+
+Leaky Forms ­ Web Crawler
+Built on Tracker Radar Collector (developed by DuckDuckGo)
+37
+
+Results - EU vs US
+Visited websites Websites where we filed Emails sent to 1st party Emails sent to 3rd party Emails sent to trackers
+addthis.com, yahoo.com, doubleclick.net and criteo.com
+
+EU
+99,380 52,055 4,395 2,633 1,844
+
+US
+99,437 53,038 5,518 3,790 2,950
+
+60% difference
+
+Only appear in the US crawl
+
+Results - Email Leaks
+
+Results - Top ten websites with email leaks
+
+Results - Website Categories
+
+42
+
+Results - Received Emails  290 emails from
+88 distinct sites
+Email from: diabetes.org.uk Tracker domain: freshaddress.biz
+43
+
+Password Leaks on 52 websites
+Incidental collection by  Yandex Metrica: likely due to React framework (50
+websites)  Mixpanel: due to outdated SDK usage (1 website)  LogRocket: No response (1 website)
+44
+
+Practice
+ Devtools  Network panel
+ HAR (HTTP Archive) files  = JSON files containing HTTP headers, payload and metadata
+
+Security, Leiden University - 22/04/2026
+
+45
+
+Challenge
+ Find the personal data exfiltration on the following pages:
+ https://gistcdn.githack.com/gunesacar/dbe8bbe67d15a8cb679a 422482e9b5e1/raw/8aa8bc366da37a7cfcad52bbf7094f0bd208b3 1d/web-sec-challenge-1.html
+ https://gistcdn.githack.com/gunesacar/55a8c94d0d34a09ef9713 5b2abb02082/raw/77b574f08b3c9e05e2f62a32fc61599f6657b238/ web-sec-challenge-2.html
+
+Security, Leiden University - 22/04/2026
+
+47
+
+Summary
+ Various tracking mechanisms  cookies, evercookies, fingerprinting, identifier-based tracking
+ Personal data exfiltration  email, password, credit card leaks to third parties
+ Limited transparency  technically challenging to analyze
+Security, Leiden University - 22/04/2026
+
+ Tracking on mobile
+
+https://www.nytimes.com/interactive/2019/12/19/opinion/location-tracking-cell-phone.html
+
+https://www.nytimes.com/interactive/2019/12/19/opinion/location-tracking-cell-phone.html
+
+Mobile tracking: what's different?
+ Mobile web vs mobile apps  Tracking across mobile apps
+ 3rd-party libraries or SDKs instead of 3rd-party scripts
+ Access to novel data
+ precise geolocation  sensors  always with the user  app interactions
+Security, Leiden University - 22/04/2026
+
+Mobile tracking: what's different?
+ Permission system
+ 3rd party SDKs inherit permission from apps
+ Identifiers:
+ Web: IDs stored in cookies  Mobile: IDFA (iOS), Advertising ID (Android)
+ same ID across all apps  Apple iOS 14.5 update: Put IDFA behind user permission
+ >$10B ad revenue drop  for Facebook, ...  App Tracking Transparency (ATT)
+Security, Leiden University - 22/04/2026
+
+Mobile IDs
+ Unique to device/account
+ IDFA: EA7583CD-A667-48BC-B806-42ECB2B48606  Ad ID: cdda802e-fb9c-47ad-9866-0794d394c912
+ Zeroed out if...
+ iOS 14.5: no consent to tracking (ATT )  Android 12+: opt-out of personalized ads
+Security, Leiden University - 22/04/2026
+
+Mobile IDs - bypass/alternatives
+ Reports of app fingerprinting
+ settings, volume level, brightness level with 15-digit precision
+ Apple forbids fingerprinting....
+https://blog.lockdoSwencpurirviatyc,y.Lceoimd/e2n02U1n/i0v9e/r2s2i/tsytu- d2y2-e/f0fe4c/t2iv0e2n6ess-of-apples-app-tracking-transparency.html
+
+Mobile IDs - bypass/alternatives
+ Apple - Uber fingerprinting code drama
+ Uber geofenced to exclude Apple's Cupertino HQ
+ reportedly for for fraud prevention
+ Dramatized in Super Pumped: The Battle For Uber
+Security, Leiden UnLiinvkertsoitthye-N2Y2T/0ar4ti/c2le02(g6ifted)
+
+SecuritLy,inLketiodtehne UNnYiTvaerrtsicitley (-g2if2te/d0)4/2026
+
+Mobile IDs
+ "AnONymOuS"   pseudonym/pseudonymous ID
+ "A pseudonym is an identifier of a subject other than one of the subject's real names" (Pfitzmann and Hansen)
+ Note: GDPR's Pseudonymization may be a higher bar:
+ "...processing of personal data in such a way that the data can no longer be attributed to a specific data subject without the use of additional information, as long as such additional information is kept separately
+Security, Leiden University - 22/04/2026
+
+Mobile IDs
+ "Data is linked to some IDs. Not real people"  Is this okay then?
+Security, Leiden University - 22/04/2026
+
+https://gizmodo.com/Sa-epcriuersitt-yw,aLse-oiduetend-Ubny-ihvies-rpshitoyne- s2-l2o/c0a4ti/o2n-0d2a6ta-anyone-1847334277
+
+https://www.pillarcatholic[.]com/p/pillar-investigates-usccb-gen-sec
+
+https://www.datatilsynet.no/en/regulations-and-tools/regulations/avgjorelser-fra-datatilsynet/2021/gebyr-til-grindr/
+
+
+httpSse:/c/guirthituyb, .Lceoimd/eSnINUTnEiFv-e9r0s1i2ty/g-ri2n2dr/-0pr4iv/a2c0y2-l6eaks
+
+https://themarkup.org/privacy/S20e2c1u/r0it9y/,3L0e/tihdeernesU-an-mivuelrtsibiitlylio-n2-d2o/l0la4r-/m2a0r2k6et-for-your-phones-location-data
+
+Location data
+https://www.eff.org/deeplinSkse/c20u2r0it/y12, /Llaewi-denefnorcUenmievnet-rpsurictyha-si2ng2-c/o0m4m/e2r0ci2al6ly-available-geolocation-data
+
+https://www.vice.com/en/article/dy8eba/google-predicio-ban-muslim-prayer-app
+
+https://www.wired.com/story/how-pentagon-learned-targeted-ads-to-find-targets-and-vladimir-putin/
+
+https://www.wired.com/story/how-pentagon-learned-targeted-ads-to-find-targets-and-vladimir-putin/
+
+https://datarade.ai/data-providers/veraset/profile
+
+https://datarade.ai/data-products/historical-geospatial-movement-data-170-countries-veraset
+
+Google location history issue
+ Location History: off
+ still recording precise location when Web and App Activity is on
+ Proof: UI, Google Takeout
+https://apnews.com/article/north-Sameecruicrai-styci,eLnceei-dteechnnoUlongiyv-beurssiniteyss-a2p-2to/p0-n4e/w2s0-8286aefab64d4411bac257a07c1af0ecb
+
+Google location history issue
+https://apnSewecs.ucroimty/, aLretiicdlee/n7cU7n2i8v5e0r9s4it8y0-902920/70846/6240b2ec6d40170e64
+
+https://www.theguardian.com/Steecchunroiltoyg, yL/e2i0d2e2n/nUonv/i1v4e/rgsoitoyg-le2-s2e/t0tl4em/2e0n2t-460-states-user-location-tracking
+
+https://apnews.com/article/7c728509480909078664becd40170e64
+
+Children game apps
+ "Won't Somebody Think of the Children?" Examining COPPA Compliance at Scale. Reyes et al. (PETS '18)
+ large-scale COPPA violations (The Children's Online Privacy Protection Act)
+ 66% transmit non-resettable, persistent identifiers
+Security, Leiden University - 22/04/2026
+
+Permission system bypasses
+ 50 Ways to Leak Your Data: An Exploration of Apps' Circumvention of the Android Permissions System. Reardon et al. (USENIX Security '19)
+ use of side-channels to access to restricted data (e.g. IMEI)  SD-card as a side channel  AES encryption (Baidu)  Shutterfly reading location from EXIF of photos
+Security, Leiden University - 22/04/2026
+
+Access to sensor data: No permission required!
+· Orientation
+· Orientation about the X, Y, Z axis (°)
+· Motion
+· Accelerometer (m/s2) · Accelerometer w/o gravity (m/s2) · Gyroscope (°/s)
+· Ambient light
+· Light sensor (lux)
+· Proximity
+· Proximity sensor (cm)
+· Demo: https://sensor-js.xyz/demo.html
+Security, Leiden University - 22/04/2026
+
+How to analyze app traffic
+ Emulator or real device  Proxy or VPN  TLS man-in-the-middle
+(mitmproxy, etc.)  Get root access to install
+mitm certificates  Disable certificate pinning
+Security, Leiden University - 22/04/2026
+
+How to analyze app traffic
+ Frida: function call tracing  objection: disable SSL
+pinning,...  mitm-apk: Apk repackaging  adb: Android Debugging
+Bridge
+Security, Leiden University - 22/04/2026
+
+Location Privacy beyond Smartphones
+
+Location Services
+ MAC address -> Precise location
+ BSSID: Basic Service Set Identifier
+ Apple, Google: Location services
+ Android and iOS devices  Browsers!
+Security, Leiden University - 22/04/2026
+
+ PETS'25
+
+Findings
+ 2 billion unique IDs BSSIDs (MACs)  No rate limiting by Apple  No license key  Returned 400 neighbour BSSIDs
+Security, Leiden University - 22/04/2026
+
+Risks
+ Locate people fleeing intimate partner violence  Military movements including personnel and
+equipment  Mass migrations/displacements
+Security, Leiden University - 22/04/2026
+
+Security, Leiden University - 22/04/2026
+
+Security, Leiden University - 22/04/2026
+
+Security, Leiden University - 22/04/2026
+
+Recap
+ Tracking by platform ad identifiers
+ cross-app tracking instead of cross-site tracking on the web
+ Sensitive details can be inferred from precise locations  Users can be identified based on their movement
+patterns
+
+Online advertisements
+
+Online Advertisements
+ Ads help publishers to monetize their content
+ $378B in 2020  Google: >80% revenue due to
+ads  Contextual, Behavioral
+(targeted)
+https://www.insiderintelligence.com/content/digital-ad-spend-worldwide-pass-600-billion-this-year
+Security, Leiden University - 22/04/2026
+
+SecuriMtya,rLketidinegnteUcnhivlaenrdssitcyap- e2,22/00240/2026
+
+https://www.bleepingcomputer.com/news/security/hackers-push-malware-via-google-search-ads-for-vlc-7-zip-ccleaner/
+100
+
+101
+
+https://web.archive.org/web/20230301165938/https://twitter.com/AlexanderHatala/status/1617738996284813313
+102
+
+https://www.euronews.com/health/2024/06/07/a-case-of-when-ratherthan-if-why-are-hospitals-becoming-more-of-a-target-for-ransomware-a
+
+https://www.rapid7.com/blog/post/2024/05/13/ongoing-malvertising-campaign-l eads-to-ransomware/
+
+Targeted and Troublesome: Tracking and Advertising on Children's Websites
+2024 IEEE Security and Privacy
+Joint work with: Zahra Moti (partial slides credit) Asuman Senol | Hamid Bostani Frederik Zuiderveen Borgesius Veelasha Moonsamy | Arunesh Mathur
+Güne Acar
+
+"Food industry advertising that targets children and youth has been linked to the increase of childhood obesity". Source: apa.org
+
+Ad-serving protections for children Advertising Policies Help (Google)
+https://support.google.com/ adspolicy/answer/9683742? hl=en
+
+Motivations
+ No large-scale study of tracking and advertising on children's websites
+ DSA prohibits targeted ads to children  What's the state of targeted/personalized ads shown to children now?
+ DSA brings additional ad transparency requirements for VLOPs  a need to verify the completeness and accuracy of the ad transparency interfaces
+
+Crawling process
+
+Detecting targeted ads
+
+Results - Overview
+ Scraped 70,303 ads from 804 of the 2,004 distinct websites
+ On avg. 36% of the pages contained one or more ads  On avg. 27% of the pages contained targeted ads  Over 70% of ads are targeted in nature (targeting
+enabled)
+Security, Leiden University - 22/04/2026
+
+Popularity of sites with and without targeted ads
+ Popular websites more prone to disabling ad targeting  X axis: Tranco (popularity) rank
+
+Ads targeted from anywhere
+
+Improper ad detection ML pipeline
+
+Improper ads on child-directed sites
+
+NSFW
+
+Reachout
+ Shared our results on inappropriate ads with 5 ad companies  3 responded  Call with one of the companies  They explained what went wrong  Another reportedly began an internal review
+Security, Leiden University - 22/04/2026
+
+Summary
+ Trackers on 90% of children's websites.  Ads on 36% of children's websites.  Targeted ads on 27% of children's websites.  Hundreds of improper ads
+ racy ads  mental health  dating
+
+Security, Leiden University - 22/04/2026
+
+Countermeasures
+
+~Recent developments against online tracking
+ Safari Intelligent Tracking Protection
+ App Tracking Transparency on iOS
+ Firefox Enhanced Tracking Protection
+ Total Cookie Protection
+ Brave Shields  DuckDuckGo Browser  Mullvad Browser  Chrome Privacy Sandbox (in progress)
+Security, Leiden University - 22/04/2026
+
+Firefox Total Cookie Protection (Partitioning)
+Separate "cookie jar" for each website
+https://blog.mozilla.org/en/mozilla/firefox-androidSse-nceuwr-iptryi,vaLceyi-dfeeanturUe-ntoivtael-rcsoiotykie--p2r2o/te0c4ti/o2n-0s2to6ps-companies-from-keeping-tabs-on-your-moves/
+
+Client Server
+
+www.news.com
+News!
+
+BUY
+
+www.health.com/depression
+e-health BUY
+
+GET: Cookie:
+
+IcDa=r_3b4a5nner.jpg
+
+GETC:ohookmiee: _IDba=n3n4e5r.jpg
+
+news.com
+
+First party
+
+tracker.com
+Cookie ID = 345 news.com, 1/9/21, 16:58:35 health.com/depression,1/9/21, 17:58:35 ...
+
+Third party
+
+health.com
+
+First party
+
+Security, Leiden University - 22/04/2026
+
+16
+
+Client Server
+
+www.news.com
+News!
+
+BUY
+
+www.health.com/depression
+e-health BUY
+
+GET: Cookie:
+
+IcDa=r_3b4a5nner.jpg
+
+GETC:ohookmiee: _IDba=n3n4e5r.jpg
+
+news.com
+tracker.com
+Cookie ID = 345, (news.com) Cookie ID = 678, (health.com) ...
+health.com
+
+Security, Leiden University - 22/04/2026
+
+First party
+Third party
+First party
+16
+
+Safari Intelligent Tracking Protection
+ Partitioned and time-limited cookies  Classification of "known trackers"
+https://wwSw.eccouokriietsyt,aLtuesi.dceomn /Usanfiavrei/r#sciltayss-ifi2c2a/ti0on4-/o2f-0kn2o6wn-trackers
+
+Consent dialog auto-interactions
+ DuckDuckGo
+ Opts-out where possible
+ Brave
+ blocks consent dialogs
+https:/S/beracvuer.citoym, /Lperiivdaecny-uUpndaivteesr/s2i1t-ybl-oc2k2in/g0-c4o/o2k0ie2-n6otices/
+
+Google Privacy Sandbox - Deprecated
+ Phase-out 3rd party cookies
+ Profiling, targeting, remarketing on the client side (in the browser)
+ Advertising ~without cross-site tracking
+ Last update: discontinued
+https://privacysandbox.com/open-web/
+Security, Leiden University - 22/04/2026
+
+Privacy Sandbox: Topics API
+ 469 topics of potential interest
+ populated based on browsing history
+ Google-provided model to associate hostnames -> topics
+Security, LeidenhtUtpnsi:v//egritshiutby.c-o2m2//p0at4c/g2-in0d2iv6idual-drafts/topics/blob/main/taxonomy_v2.md
+
+Privacy Sandbox: Topics API (Draft)
+ Topics are derived from the visited websites that call the API
+ document.browsingTopics()  three topics in random order, one from each of the preceding
+three epochs (weeks)
+ Top 5 topics selected per user each week
+ a random topic is added with 5% probability
+ visits/topics forgotten after 3 weeks
+Security, Leiden University - 22/04/2026
+
+Security, Leiden University - 22/04/2026
+
+Security, Leiden University - 22/04/2026
+
+Security, Leiden University - 22/04/2026
+
+Countermeasures: Adblockers (aka: Tracking Protection Extensions)
+140
+
+https://www.cnet.com/news/privacy/ad-blocking-surges-as-millions-more-seek-privacy-security-and-less-annoyance/
+
+141
+
+142
+
+Adblocker Extensions
+ Adblock Plus  uBlock Origin  EFF Privacy Badger  DuckDuckGo Privacy Essentials  Ghostery, AdGuard...
+Security, Leiden University - 22/04/2026
+
+Adblockers: Mode of operation
+ Browser extensions (aka add-ons)  Detect and block tracking-related requests
+ or block cookies
+ Hide ads (cosmetic filters)  Commonly based on blocklists
+ EasyList (ads)  EasyPrivacy (tracking)  Disconnect (ads, tracking, cryptominers ...) ...
+
+Security, Leiden University - 22/04/2026
+
+144
+
+Adblocker Extensions: uBlock Origin
+ More comprehensive blocking than others  Disable pre-fetching (?)
+ <link rel="prefetch" href="/tracker-pixel.gif">  CNAME-based tracking on Firefox
+ Recall: CNAME sub.example.com -> hidden.tracker.com  Example: swa.bol.com
+Security, Leiden University - 22/04/2026
+
+Source: https://media.defense.gov/2019/Jul/16/2002158057/-1/-1/0/CSI-BLOCKING-UNNECESSARY-ADVERTISING-WEB-CONTENT.PDF
+Security, Leiden University - 22/04/2026
+
+Security, Leiden University - 22/04/2026
+
+"Internet has become world's largest
+surveillance network" Tim Berners-Lee
+Tim Berners-Lee (CERN, W3C) The inventor of the WWW
+
+What can we do to mitigate privacy and security risks?
+
+What can you do as an individual?
+ Use adblockers
+ Easiest solution with most impact  Install them on your parents' and grandparents' computers
+ Mobile 
+ Only allow location access when an app is in use  Turn off our GPS location  Mindful about the apps you install
+Security, Leiden University - 22/04/2026
+
+What can you do as an individual?
+ Exercise your privacy rights:
+ GDPR Subject Access Requests  Deletion requests
+ Complaints to the DPA
+https://www.bitsoffreeSdoemcu.nrli/t2y0, 2L4e/i0d6e/n27U/nlinivkeerdsinit-rye-st2ri2c/ts0-4ad/2-ta0r2g6eting-after-our-complaint/
+
+Thank you for listening!
+Questions?
+Email: g.acar@cs.ru.nl Website: gunesacar.net
+Security, Leiden University - 22/04/2026
+

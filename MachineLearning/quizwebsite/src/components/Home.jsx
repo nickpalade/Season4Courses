@@ -1,9 +1,20 @@
 import { useState } from "react";
 
-export default function Home({ questions, flagged, activeQuiz, onStart, onResume, onReset, history }) {
+export default function Home({
+  quiz,
+  questions,
+  flagged,
+  activeQuiz,
+  onStart,
+  onResume,
+  onReset,
+  onBack,
+  history,
+}) {
   const allTopics = [...new Set(questions.map((q) => q.topic))].sort();
   const [topics, setTopics] = useState(new Set());
   const [shuffle, setShuffle] = useState(false);
+  const [shuffleAnswers, setShuffleAnswers] = useState(false);
   const filteredCount = topics.size
     ? questions.filter((q) => topics.has(q.topic)).length
     : questions.length;
@@ -22,11 +33,21 @@ export default function Home({ questions, flagged, activeQuiz, onStart, onResume
   }
 
   function start(mode) {
-    onStart({ mode, topics: [...topics], shuffle });
+    onStart({ mode, topics: [...topics], shuffle, shuffleAnswers });
   }
 
   return (
     <section className="home-panel">
+      <div className="home-header">
+        <button className="link" onClick={onBack}>
+          ← Back to library
+        </button>
+        <div className="home-quiz-title">
+          <strong>{quiz.title}</strong>
+          <span className="muted">{quiz.subtitle}</span>
+        </div>
+      </div>
+
       <div className="study-board">
         <div>
           <span className="stat-value">{filteredCount}</span>
@@ -104,8 +125,16 @@ export default function Home({ questions, flagged, activeQuiz, onStart, onResume
           />
           Shuffle questions
         </label>
+        <label className="toggle-row">
+          <input
+            type="checkbox"
+            checked={shuffleAnswers}
+            onChange={(e) => setShuffleAnswers(e.target.checked)}
+          />
+          Shuffle answers
+        </label>
         <button className="link" onClick={onReset}>
-          Reset progress
+          Reset this quiz
         </button>
       </div>
 

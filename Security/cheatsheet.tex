@@ -1,0 +1,93 @@
+% Security Exam Cheat Sheet — A4 double-sided, MAX density.
+% Render: pdfLaTeX (MiKTeX/TeX Live). Overleaf-compatible.
+% Content filled CAVEMAN style (telegraphic, formulas exact). Covers all 11
+% Security lectures (L1..L12 + Web Privacy) + full quiz answer key.
+% Body font forced to ~6pt (extarticle ignores <8pt class option -> set manually).
+
+\documentclass[8pt,a4paper]{extarticle}
+
+\usepackage[a4paper,margin=0.6cm]{geometry}
+\usepackage{multicol}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage{lmodern}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{tikz}
+
+% ---------- COLORS ----------
+\definecolor{secblue}{RGB}{30,60,140}
+\definecolor{crit}{RGB}{180,0,0}
+\definecolor{hdbg}{RGB}{225,230,245}
+\definecolor{ansbg}{RGB}{205,238,205}
+\definecolor{lowgray}{RGB}{120,120,120}
+
+% ---------- CRUSH SPACING ----------
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\linespread{0.72}
+\setlength{\columnsep}{0.32em}
+\setlength{\columnseprule}{0.2pt}
+\setlength{\tabcolsep}{1.2pt}
+\renewcommand{\arraystretch}{0.78}
+\setlist{nosep,leftmargin=1.0em,topsep=0pt,partopsep=0pt,itemsep=0pt,parsep=0pt}
+\pagestyle{empty}
+% Narrow 4-col body: ragged-right + slack to kill underfull-hbox gaps.
+\setlength{\emergencystretch}{3pt}
+\hyphenpenalty=50
+\tolerance=9999
+
+% ---------- TINY FONT ----------
+\newcommand{\fivept}{\fontsize{3.4pt}{3.65pt}\selectfont}
+\newcommand{\bodyfont}{\fontsize{4.18pt}{4.6pt}\selectfont}
+
+% ---------- HEADERS / MARKERS ----------
+% \sct = lecture section bar (+ short quiz-weight tag). \hd = sub-header.
+\newcommand{\sct}[2]{\par\addvspace{1.6pt}\noindent\colorbox{secblue}{\color{white}\bfseries\,#1\,}\nobreak\,{\fivept\color{lowgray}#2}\par\nobreak\vspace{0.6pt}}
+\newcommand{\hd}[1]{\par\addvspace{0.8pt}\noindent\colorbox{hdbg}{\bfseries #1}\par\nobreak\vspace{0.3pt}}
+\newcommand{\R}[1]{\textcolor{crit}{\bfseries #1}}
+\newcommand{\K}[1]{\textbf{#1}}
+\newcommand{\ans}[1]{\colorbox{ansbg}{#1}}
+\newcommand{\fig}[2]{\begin{center}\includegraphics[width=#2cm]{#1}\end{center}}
+
+% ---------- MAKE MATH SYMBOLS USABLE IN TEXT MODE ----------
+% Fragments use \to, \Rightarrow, etc. in running text. Wrap in \ensuremath
+% so they work in BOTH text and math without "Missing $" errors.
+\let\ORGto\to            \renewcommand{\to}{\ensuremath{\ORGto}}
+\let\ORGRa\Rightarrow     \renewcommand{\Rightarrow}{\ensuremath{\ORGRa}}
+\let\ORGle\le             \renewcommand{\le}{\ensuremath{\ORGle}}
+\let\ORGge\ge             \renewcommand{\ge}{\ensuremath{\ORGge}}
+\let\ORGmid\mid           \renewcommand{\mid}{\ensuremath{\ORGmid}}
+\let\ORGapprox\approx     \renewcommand{\approx}{\ensuremath{\ORGapprox}}
+\let\ORGequiv\equiv       \renewcommand{\equiv}{\ensuremath{\ORGequiv}}
+\let\ORGcdot\cdot         \renewcommand{\cdot}{\ensuremath{\ORGcdot}}
+\let\ORGtimes\times       \renewcommand{\times}{\ensuremath{\ORGtimes}}
+\let\ORGoplus\oplus       \renewcommand{\oplus}{\ensuremath{\ORGoplus}}
+\let\ORGland\land         \renewcommand{\land}{\ensuremath{\ORGland}}
+\let\ORGlor\lor           \renewcommand{\lor}{\ensuremath{\ORGlor}}
+\let\ORGneg\neg           \renewcommand{\neg}{\ensuremath{\ORGneg}}
+\let\ORGne\ne             \renewcommand{\ne}{\ensuremath{\ORGne}}
+\let\ORGveps\varepsilon   \renewcommand{\varepsilon}{\ensuremath{\ORGveps}}
+
+\begin{document}
+\bodyfont
+\raggedright
+\begin{center}\colorbox{secblue}{\color{white}\bfseries\ SECURITY EXAM CHEAT SHEET\ }\end{center}
+\vspace{-2pt}
+\begin{multicols}{5}
+
+\input{frag1}   % L1 Foundations, L2 Risk, L3 Symmetric, L4 RSA
+\input{frag2}   % L5 Network, L6 Exploit, L7 Defences
+\input{frag3}   % L9 Web, L11 Access/IAM, Web Privacy, L12 Secure Comp
+\input{frag4}   % Quiz answer key (full)
+\input{frag5}   % High-yield extras (fills remaining space)
+\input{frag6}   % jaime.pdf extras: goal taxonomy, risk standards, more attacks
+\input{frag7}   % exam quick-ref drills: crypto math, hashing, TLS, AC models
+\input{frag8}   % fill gap: comparison tables, malware, side channels, attack map
+
+\end{multicols}
+\end{document}

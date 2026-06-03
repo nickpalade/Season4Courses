@@ -1,0 +1,231 @@
+Lecture 1: Introduction to Information Security
+
+Eleftheria Makri| Security
+
+04/02/2026
+
+Bij ons leer je de wereld kennen
+
+Today's agenda
+· Organizational details
+· How to succeed in learning and passing the course
+· Topic today: Introduction to Information Security
+· What is security? · Security trade-offs
+· Plan of the course
+
+Organizational details
+
+· Lecturers:
+· Eleftheria Makri · Francesco Bariatti
+· TA Team:
+· Anna · Cesar · Daan · Dheeraj · Jayme · Laith · Nicolas · Teun
+
+Contact the lecturer <e.makri@liacs.leidenuniv.nl> regarding course organization
+(deadline extension requests, questions about lecture material, readings, etc.)
+Email to contact about assignment questions and issues: <security2026@liacs.leidenuniv.nl>
+
+Literature and Readings
+· Recommended but not required textbook:
+· P. van Oorschot "Computer Security and the Internet. Tools and Jewels" Springer, 2021 [2020 is also fine]. PDF is available at the author's webpage.
+· Textbook is intended as support material; not as required reading.
+· Other additional readings will be provided per lecture.
+· Lecture slides and some material will be provided on Brightspace.
+Universiteit Leiden. Bij ons leer je de wereld kennen
+
+Course Structure & Success Criteria
+· Lectures (x14) - learning theory of security · In-person; no video recordings or online streaming
+· Practicals (x13) - working on practical assignments · In the Gorlaeus Building on Wednesdays 11.00 ­ 12.45 (in principle; for exceptions see timetable)
+· Average of 3 assignments --> Assignment grade · Written exam --> Exam grade · Final grade = 55% Exam grade + 45% Assignment grade
+· Both the final exam grade and the average grade of the 3 assignments must be at least 5.5 · Assignments are re-takeable towards the end of the semester, but we STRONGLY advice avoiding them (by passing the first chance),
+as the retakes are significantly more challenging than the first batch of exercises.
+· Exam resit is allowed
+
+Assignments
+· Release dates and deadlines:
+· Ass. 1 - February 18 ­ March 12: Bruteforcing
+· Ass. 2 - March 11 ­ April 16: Scenario-based vulnerability tracing (option 1)
+· Ass. 2 - March 11 ­ April 16: Application security (option 2)
+· Ass. 3 - April 15 ­ May 14: Web security
+· Retake - May 14 ­ May 28: Retake assignments (any)
+· Use the practicals to work on assignments. TAs are there to help you.
+· For all assignments submit a report and all requested supplementary material via ANS. You may work in groups of 2 students
+(recommended), or individually on each of the assignments. You may change your group for each assignment.
+· Deadline extensions will be granted by the lecturer strictly individually and in special circumstances, and only if requested at least 2
+days prior to the deadline.
+· Late submissions will be penalized as follows:
+Minus 1 point (on the 10-point scale) for each 24 hours of delay, starting from 5 minutes. Submitting 10 min late: -1 point; submitting 25 hours late: -2 points, etc.
+
+Assignments
+
+Bruteforcing (Feb 18 ­ Mar 12)
+
+"Hacker" track
+AppSec (Mar 11 ­ Apr 16)
+
+"Manager" track
+Scenario-based vulnerability tracing (Mar 11 ­ Apr 16)
+
+WebSec (Apr 17 ­ May 14)
+
+·Your assignments will
+focus on hard skills and soft skills.
+· Reporting is an important
+task in any cyber security career path.
+· Security tasks are not well-
+defined by nature (hence creativeness).
+https://www.varonis.com/blog/ working-in-cybersecurity/
+
+Plagiarism
+· Assignments are in individual or groups of 2. · Do discuss and help each other on the course content. · Do not share (partial) solutions to assignments outside your group. · Acknowledge all your sources.
+· Copying (parts of) solutions, from another group or from any other source is plagiarism. · We will report all plagiarism cases to the Board of Examiners. · Both who copied and who shared their solution will face consequences.
+
+Why Learning Security?
+
+Information Security ­ 2023 Breaches
+
+Information Security ­ 2023 Breaches
+
+Information Security ­ 2023 Breaches
+
+Information Security ­ 2023 Breaches
+
+Information Security ­ 2023 Breaches
+
+Major Security Breaches of 2025
+
+Computer Security (COMPUSEC)
+
+Information Systems Security (INFOSEC)
+
+Information Security
+
+Security Principles
+INTEGRITY
+
+Additional Security Properties
+(including the AAAA properties)
+
+Authenticity
+
+Authorization
+
+Accuracy
+
+Accountability
+
+Non-Repudiation
+
+Attack Types
+· Attacks are instances when a security requirement is violated.
+
+Attack/Threat Spoofing Tampering Repudiation Information disclosure Denial of service Elevation of privilege
+
+Security requirement Authenticity Integrity Non-repudiation Confidentiality Availability Authorization
+
+Security Controls/Countermeasures
+
+Physical
+
+Logical/ Administrative/
+
+Technical
+
+Policies
+
+Preventive (+deterrence)
+
+Detective
+
+Corrective/ Responsive
+
+Controls
+
+Physical
+
+Logical/ Administrative/
+
+Technical
+
+Policies
+
+Preventive (+deterrence)
+
+Security guard
+
+Firewall
+
+Employee screening policy
+
+Detective
+
+Security camera
+
+Intrusion detection system
+
+Policy to review transaction logs
+
+Corrective/ Responsive
+
+Fire sprinklers
+
+Backup servers
+
+Law enforcement liaison
+
+Security is Asset Protection
+
+Asset
+
+Vulnerability
+
+Trust
+
+Security is Hard!
+
+Why is Security hard?
+· Consider all potential attacks · Complex, multi-level, expensive mechanisms · Security is often an afterthought · Could be counterintuitive and not user-friendly · Requires monitoring and capabilities to respond · Benefits are evident best after a failure
+Security is a process, not a target
+
+Security in context
+· Security is needed to prevent and counteract the unwanted consequences
+· but security is not needed for its own sake · this leads to trade-offs or security dilemmas
+
+Security Dilemma 1
+Security unaware users want security but have no security expertise.
+
+Trade-off 2
+Security hinders ease of use, but if security mechanism is too difficult the users will find a way around it.
+
+Trade-off 3
+Security always has a cost, but offers no direct gain, only prevention and reduction of loss.
+
+Trade-off 4
+Sometimes failure could cost less than prevention.
+
+Security Dilemma 5
+Theory might say that an algorithm is secure, but its implementation will fail. and Practical security measures are often imperfect from the theoretical perspective.
+
+Security Dilemma 6
+More security increases system complexity, what increases the attack surface.
+
+So, what about those security jobs?
+
+Jobs in Security
+
+· We cannot study it all in one
+course, but we will try to focus on some key elements.
+· You will be equipped to
+continue on any career path in security.
+https://techshielder.com/the-best-cities-for-acybersecurity-job
+
+Course Content
+· Security management: · Threat modelling · Security risk management
+· System and application security: · Vulnerabilities · Secure software/Application Security · Malware analysis · Web security · Network security
+· Fundamentals: · Access control and identity management · Cryptography
+
+Disclaimer:
+This is a provisional plan and may be subject to changes
+
+Questions?
+Bij ons leer je de wereld kennen
+

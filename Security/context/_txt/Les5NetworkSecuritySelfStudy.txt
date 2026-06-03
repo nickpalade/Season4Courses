@@ -1,0 +1,45 @@
+Network Security
+Self-study Preparation material
+Eleftheria Makri
+2025-2026
+
+1
+Networking Architecture and Design
+1. OSI and TCP/IP
+The most commonly used network model, is the seven-layer OSI (Open System Interconnect) model, presented below. OSI is standardized under ISO/IEC 7498-1.
+· Physical Layer: Bits (from data link layer) converted to (electrical) signals. Includes: o Physical topologies o Hardware: mostly cables, but also hubs and modems.
+· Data Link Layer: Packets are transformed to error-free frames. o Uses HW addresses to transmit frames amongst physically connected devices o Divided into two sublayers:  Logical Link Control (LLC): Manages connections between two peers, providing error and flow control  Media Access Control (MAC): Transmits/Receives frames. Logical topologies and HW addresses are defined here.
+· Network Layer: Moves information between two hosts that are NOT physically connected. Uses only logical addressing (i.e., no HW addresses in use), created when hosts are configured. The most important network layer protocol is the Internet Protocol (IP). o Internet Protocol (IP) main functions:
+Network (Security): Self-study Preparation Eleftheria Makri
+
+2
+ Addressing (IP of destination used until reached)  Fragmentation (subdivision of packets depending on their size)
+It is a connectionless protocol (i.e., non error-free) o Routing Information Protocol (RIP): Uses distance vector algorithms to determine
+direction and distance to any link. Selects the path with the least hops.  v1 (RFC 1058): Updates routing tables at programmable intervals. Prevents infinite loops by setting max hop count = 15.  v2 (RFC 1723): Uses subnet mask and password authentication. Specifies the next hop address. Does not aggregate the routes on the network boundary.
+o Open Shortest Path First (OSPF): (v1 RFC 1131) Is based on shortest path first or linkstate algorithms. Each router sends its own topography of the network. Advantage: smaller & more frequent updates (preventing routing loops). Disadvantage: Requires large amount of CPU and memory.
+o v2 (RFC 2328): Learning dynamically routes from other routers (advertisements). Routes are called Link State Advertisements (LSAs). Finds lowest cost paths.
+o Border Gateway Protocol (BGP): Replaces Exterior Gateway Protocol for fully decentralized routing. Achieves interdomain routing in TCP/IP networks mainly between ASs (Autonomous Systems). Updates only when hosts detect changes, and only the affected part of the table is re-sent. BGP-4 allows administrators to configure cost metrics based on policy statements.
+o Internet Control Message Protocol (ICMP): (RFC 792) Consists of two main categories of messages:  ICMP Error Messages  ICMP Query Messages. Important Functions:  Announce network Errors  Announce network congestion  Assist Troubleshooting  Announce Timeouts
+· Transport Layer: End-to-end transport between hosts. Important protocols: o UDP (User Datagram Protocol): connectionless unreliable protocol. o TCP (Transmission Control Protocol): connection-oriented reliable protocol (providing integrity). Divides information into segments and reassembles them in the correct order. Guaranteed communication session via TCP Three Way Handshake.
+· Session Layer: Analogous to a conversation between applications exchanging information. Modes: o (Full) Duplex o Half Duplex o Simplex
+· Presentation Layer: Provides compatibility, by ensuring common format of data representation between peer applications.
+Network (Security): Self-study Preparation Eleftheria Makri
+
+3
+Architecture: o Services:  Data Conversion  Character code translation  Compression  Encryption/Decryption o Sublayers:  CASE (Common Application Service Element)  SASE (Specific Application Service Element)
+Important Protocols: o Telnet (remote terminal access protocol) o FTP (File Transfer Protocol) in between layers 6 and 7
+· Application Layer: It is the application's portal to network services.
+TCP/IP reference model
+The TCP/IP reference model is very similar to the OSI model and it has been developed by the U.S. Department of Defence. The layers comprising the TCP/IP model and their correspondence to the OSI model is presented in the figure below.
+Network (Security): Self-study Preparation Eleftheria Makri
+
+4
+2. Indicative Protocols and Services
+Domain Name System (DNS)
+DNS is one of the most prominent (and visible) network services to the user. Its role is to support the resolution of e-mail and www addresses. It is also a prominent target of attacks. Manipulating DNS can make possible to divert, intercept, or prevent the vast majority of end-user communications. It is robust, flexible and scalable, as it is based on a multi-tiered hierarchy for redundancy and security. If a DNS resolver goes offline, the integrity of the system as a whole is still maintained.
+HTTP (Hypertext Transfer Protocol)
+HTTP was originally a stateless version of FTP to support the exchange of information in Hypertext Markup Language. The standard port for http is 80/TCP. It offers no quality of service and no bidirectional communication. It does not support encryption, while authentication is simple username/password style.
+HTTP Proxying: · Anonymizing proxies: Used to avoid industrial espionage coming from the cleartext logged data on web servers · Open proxy servers: Used to allow unrestricted access to GET commands. Thus, they are used for attacks, or for obscuring the origin of illegitimate requests. · Content filtering: Used for logging or blocking traffic that is assumed to be non-business related
+HTTP Tunneling: Is applied not to circumvent security, but rather to "enhance" functionality. It is used to bypass user restrictions, and allow an application to function through a firewall. Usually tunneling is applied by encapsulating outgoing traffic from an application in an HTTP request and incoming traffic in a response. Countermeasures: Filtering on firewall or proxy server. However, the security officer must balance business value and effectiveness of the countermeasures.
+Network (Security): Self-study Preparation Eleftheria Makri
+

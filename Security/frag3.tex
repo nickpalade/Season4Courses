@@ -1,0 +1,95 @@
+\sct{L9 Web Security}{HIGH}
+
+\hd{HTTP / SOP}: HTTP = \R{stateless} \to state via cookies/sessions (session id in cookie). SOP (same-origin policy) = origin is (scheme, host, port); browser blocks cross-origin DOM/cookie read of scripts. \R{SOP is browser-side; does NOT protect server side}.
+
+\hd{HTTPS = HTTP over TLS}: \K{TLS} (Transport Layer Security) wraps HTTP, giving Confidentiality (encryption) + Integrity (HMAC/tags) + Authenticity (verify messages not tampered). Includes party authentication: server cert always, client optional (mutual TLS). Protects cookies \K{in transit}. \R{Does NOT hide who the parties are} (IP/DNS still visible; party identity confidentiality requires proxy).
+
+\hd{Cookies \& attributes}: session cookie (auth token), persistent cookie (expires). Flags: \K{Secure} = HTTPS only, block in plaintext HTTP; \K{HttpOnly} = JS cannot read (anti-XSS theft); \K{SameSite=Strict} = never cross-site, \K{SameSite=Lax} = safe cross-site GET but not POST; \K{Domain} = which hosts get it (e.g. .example.com covers subdomains); \K{Path} = URL path scope; \K{Expires/Max-Age} = lifetime (no Max-Age = session only).
+
+\hd{Session mgmt}: Use \K{random session id} (not predictable), regenerate on login + logout, timeout inactivity (server-side invalidation), server-side storage (DB not cookie, unless signed/encrypted). \R{Never trust client-side session state without MAC.}
+
+\hd{CSRF = Cross-Site Request Forgery}: Attacker tricks authed user into unwanted action on target site. Flow: user logs into bank.com, visits evil.com (in same browser), evil.com sends \texttt{<img src="bank.com/transfer?to=attacker">} \to request authed with bank.com cookies. Defenses: \K{anti-CSRF token} (form includes unique token, server verifies), \K{SameSite=Strict/Lax} (browser blocks cross-site cookies), check \K{Origin/Referer} header (server-side).
+
+\hd{SQLi = SQL Injection}: Attacker injects SQL via unsanitized input. Example: username field \texttt{' OR '1'='1} in query \texttt{SELECT * WHERE user='} + input + \texttt{'} becomes \texttt{SELECT * WHERE user='' OR '1'='1'} \to returns all rows. Fix: \K{prepared statements} (bind variables separately), input validation, \R{never concatenate user input into SQL strings}.
+
+\hd{XSS = Cross-Site Scripting}: Attacker injects malicious JS. \K{Reflected XSS} = payload in request reflected unsanitized into response, runs in victim browser (steal cookies via \texttt{document.cookie}). \K{Stored XSS} = payload persisted in DB, served to all users. \K{DOM-based XSS} = vulnerable client-side JS (e.g. \texttt{innerHTML = location.hash}) processes untrusted data. Fixes: \K{HttpOnly} cookies (JS can't read), \K{Content-Security-Policy} (CSP, restrict script origins), \K{output encoding} (encode \texttt{<}, \texttt{>}, \texttt{\&} as entities), \K{input validation}.
+
+\hd{Command injection}: App invokes shell with user input, e.g. \texttt{system("ping " + hostname)}. Input \texttt{; cat /etc/passwd} executes arbitrary command. Fix: avoid shell calls, use safe APIs (\texttt{exec} with array args, not string), whitelist input.
+
+\hd{IDOR = Insecure Direct Object Reference}: API exposes internal IDs without authz check. Example: \texttt{/api/user/123/profile} \to attacker changes 123 to 456, reads another user. Fix: \K{access control check} (verify user owns that resource), use opaque IDs, log access.
+
+\hd{SSRF = Server-Side Request Forgery}: App fetches URL from user input without validation, e.g. \texttt{fetch(user\_input)}. Attacker supplies \texttt{http://localhost:8080/admin} or \texttt{http://169.254.169.254/} (AWS metadata), app makes internal request. Fix: \K{URL validation} (allowlist protocols/hosts), no internal URLs, disable redirects, \R{never trust user URLs}.
+
+\hd{Path traversal}: App returns file based on user path without normalization, e.g. \texttt{/file?name=../../../../etc/passwd} \to reads \texttt{/etc/passwd}. Fix: \K{canonicalize path} (resolve \texttt{../}), check path is within allowed dir, \R{never trust user paths}.
+
+\hd{Auth(N) vs Auth(Z)}: \K{Authentication} = verify identity (who are you? password/biometric); \K{Authorization} = verify permissions (what can you do? access control).
+
+\hd{OWASP Top 10}: 1. \K{Broken Access Control} (IDOR, path traversal). 2. \K{Cryptographic Failures} (weak crypto, plaintext secrets). 3. \K{Injection} (SQLi, command injection). 4. \K{Insecure Design} (missing security features). 5. \K{Security Misconfiguration} (default creds, unnecessary services). 6. \K{Vulnerable Components} (outdated libraries). 7. \K{Auth Failures} (weak password, no MFA). 8. \K{Integrity Failures} (data tampering, CI/CD compromise). 9. \K{Logging Failures} (insufficient audit). 10. \K{SSRF}.
+
+\sct{L11 Access Ctrl / IAM}{HIGH}
+
+\hd{3 steps}: \K{Identification} = claim identity (username, email); \K{Authentication} = prove it (password/biometric/token/challenge); \K{Authorization} = decide what allowed (ACL, roles, attributes).
+
+\hd{Access Control Models}: \K{DAC} (Discretionary AC) = owner sets permissions (UNIX files, GitHub repos, \R{social networks = DAC}); \K{MAC} (Mandatory AC) = system/security policy enforces via labels (military, high/secret/top-secret), user cannot change; \K{RBAC} (Role-Based AC) = permissions assigned to roles, user gets role (admin, user, auditor); \K{ABAC} (Attribute-Based AC) = policy engine decides based on attributes (user dept, IP, time-of-day, resource owner, etc.).
+
+\hd{Bell-LaPadula model}: confidentiality focus. \K{No read up} (low-level process cannot read high-level data). \K{No write down} (high-level process cannot write to low-level, else leaks secrets). Prevents information flow upward. \R{Does not ensure integrity.}
+
+\hd{Biba model}: integrity focus. \K{No read down} (process cannot read lower-integrity data). \K{No write up} (process cannot modify higher-integrity data, else corrupts it). Dual of Bell-LaPadula.
+
+\hd{Clark-Wilson model}: integrity via well-formed transactions + audit log. Users invoke certified transactions on data items via constrained interfaces. Logs changes, reviewable.
+
+\hd{ACL vs Capability list}: \K{ACL} = per-resource, list of (user, permission) entries; scales to few users, many resources. \K{Capability list} = per-user, list of (resource, permission) entries; scales to many users, few resources.
+
+\hd{RBAC}: roles (admin, editor, viewer, auditor) assign permissions; user $\to$ role $\to$ permissions. Simplifies: change permission once, affects all users in role. \R{Does not handle context (IP, time, data sensitivity)}.
+
+\hd{ABAC}: policy \texttt{allow if (user.dept = "finance" AND resource.sensitivity = "public" AND time-of-day in [9am, 5pm])}. More expressive, requires policy engine. \K{Example use}: healthcare (doctor can read patient notes only if they're assigned to that patient).
+
+\hd{UNIX perms}: 3 classes (owner/group/world) $\times$ rwx (read/write/execute), octal e.g. 640 = owner rw(6), group r(4), world none(0); 755 = owner rwx(7), group rx(5), world rx(5). Graded privilege without listing every user. Example: shared project file \to owner rw, group r, world none.
+
+\hd{2FA = two-factor auth}: 2 DIFFERENT factor categories: \K{know} (PIN, password, secret question); \K{have} (hardware token, phone/SMS, U2F key); \K{are} (fingerprint, iris, face). Valid: PIN + fingerprint, password + token, password + SMS. \R{Invalid: PIN + password} (both ``know''). \R{SMS is weak} (SIM swap attacks); prefer TOTP, U2F, biometric.
+
+\hd{Biometrics}: \K{FAR} (False Accept Rate) = probability imposter accepted; \K{FRR} (False Reject Rate) = probability legitimate user rejected. Trade-off: lowering FAR raises FRR. \K{EER} (Equal Error Rate) = point where FAR = FRR; metric for comparison.
+
+\hd{Password best practices}: \K{Length} $\ge 12$ (exponentially harder to brute-force); \K{salt} (unique random per password), prevents rainbow tables; \K{hash} (bcrypt, Argon2, scrypt, slow to resist brute-force); \K{MFA} (2FA reduces password compromise impact); \K{NO password hints}; never reuse.
+
+\hd{Kerberos}: centralized auth for network. \K{KDC} (Key Distribution Center) issues tickets. User authenticates to KDC once, gets \K{TGT} (Ticket-Granting Ticket), uses TGT to request \K{service tickets} for resources. Mutual auth (user $\leftrightarrow$ server). No passwords over network (TGT encrypted with user key). Used in enterprise Windows/UNIX domains.
+
+\hd{SSO = Single Sign-On}: user logs in once, gains access to multiple systems (centralized session). \K{OAuth} (delegated authorization, e.g. ``Login with Google''), \K{SAML} (XML-based federated auth for enterprise), \K{OIDC} (OpenID Connect, OAuth 2.0 + identity layer, returns ID token). \K{OAuth flow}: user clicks ``Login with Provider'', redirected to provider, authorizes, provider redirects back with code, app exchanges code for access token, accesses user info. \K{SAML flow}: user $\to$ IdP (identity provider) authenticates, IdP sends signed assertion to SP (service provider).
+
+\hd{Least privilege}: user/process gets \K{minimum permissions} needed for role. Limits damage from compromise. \K{Example}: web server runs as unprivileged \texttt{www-data} user, not root.
+
+\sct{Web Privacy}{MED}
+
+\hd{Tracking mechanics}: \K{1st-party cookies} = domain sets for itself; \K{3rd-party cookies} = ad network sets via \texttt{<img>} or iframe from another site (both sent on request to their domain, reveal cross-site activity). \K{Evercookie} = respawns from multiple storage (Flash, localStorage, ETag); hard to clear. Browser now defaults to block 3rd-party.
+
+\hd{Browser fingerprinting}: \K{Canvas fingerprinting} = site draws invisible text, reads pixel-level diff (font rendering unique per OS/config); \K{fonts, plugins, screen resolution, user-agent, Accept-Language headers} = \R{NOT cookies}, persistent, hard to clear. Side-channel: timing attacks, feature enumeration. Fingerprint + IP = re-identify user across sites.
+
+\hd{Tracking defenses}: clear browsing data, disable 3rd-party cookies (browser setting), private/incognito mode (no persistent state), adblocker + anti-tracker extension, anti-fingerprint browser (randomize canvas, spoof user-agent). \R{Changing passwords does NOT stop fingerprinting; evercookie respawns unless multi-storage disabled.}
+
+\hd{ETag / cache tracking}: \K{ETag} (entity tag) = server-set hash of resource; if unchanged, server says 304 Not Modified; attacker can use ETag across sites as identifier. \K{HTTP cache headers} (Cache-Control, expires) can be abused similarly. Fix: strict cache policy, avoid predictable ETags.
+
+\hd{Supercookies}: cookies set via \texttt{Set-Cookie} headers from ads; \texttt{Domain=.com} cookies (shared by all .com sites, \R{not possible in modern browsers}). Flash/LSO (Local Shared Objects) ``Flash cookies'', HSTS preload list, Service Workers, IndexedDB = persistent storage not cleared with cookies.
+
+\hd{Do-Not-Track (DNT)}: HTTP header \texttt{DNT: 1} signals user preference; \R{not legally binding}, many sites ignore.
+
+\hd{EU cookie consent}: GDPR requires \K{informed consent} before non-essential cookies (tracking). \R{Not opt-out}, must be opt-in (user clicks accept). Privacy notice must disclose tracking.
+
+\hd{GDPR privacy rights}: \K{Right to access} (user can request copy of data); \K{right to rectification} (correct inaccurate data); \K{right to erasure} (``right to be forgotten'', delete personal data); \K{right to data portability} (export in machine-readable format); \K{right to object} (opt-out of processing). \K{Data controller} = entity deciding processing; \K{data processor} = entity processing on behalf of controller. Both liable.
+
+\hd{Anonymization techniques}: \K{Pseudonymization} = replace ID with pseudonym, reversible (e.g. user1 $\to$ 12345), still PII; \K{anonymization} = irreversible removal (delete name/ID, aggregate, noise), no longer PII. \K{$k$-anonymity} = each record indistinguishable from $k-1$ others (e.g. age=30--40, gender=any, zip=12***); \K{$l$-diversity} = $k$ records have $\ge l$ distinct values for sensitive attr (prevent homogeneity attack); \K{$t$-closeness} = distribution of sensitive attr in group $\approx$ distribution in population.
+
+\hd{Differential privacy}: add calibrated noise to query results, trade-off privacy loss ($\varepsilon$, privacy budget) vs accuracy. Smaller $\varepsilon$ = more noise = more privacy but less useful. \K{Example}: ``How many users older than 30?'' returns true count $\pm$ noise (unbiased but user privacy preserved across repeated queries).
+
+\sct{L12 Secure Computation}{LOW}
+
+\hd{MPC = Multi-Party Computation}: jointly compute function on private inputs, reveal only result, nothing about inputs. \K{Millionaires' problem} = two millionaires want to know who is richer w/o revealing wealth; MPC solves this. \K{Secret sharing} (Shamir scheme) = divide secret into $n$ shares, any $t$ shares reconstruct it (secure against adversary with $t-1$ shares). \R{Requires private channels or PKI.}
+
+\hd{Garbled circuits (Yao)}: encode Boolean circuit as encrypted truth tables; one party generates, other party obliviously evaluates on encrypted inputs, learns only output. \K{Oblivious transfer} = sender sends $2^n$ messages, receiver selects 1 w/o sender knowing which. Enables Yao: circuit generator doesn't know which inputs receiver picks.
+
+\hd{FHE = Fully Homomorphic Encryption}: compute on ciphertext w/o decrypting. $E(a) + E(b) = E(a+b)$, $E(a) \times E(b) = E(a \times b)$ (or similar via circuit evaluation). Allows cloud to process encrypted data; user never reveals plaintext. Slow, expensive; newer schemes (CKKS) faster.
+
+\hd{Commitments}: prover commits to value (e.g. hash), later reveals value \& randomness, verifier checks hash. Binding (prover can't change committed value) + hiding (verifier doesn't learn value until reveal). Used in auctions (bid commitments before opening).
+
+\hd{ZKP = Zero-Knowledge Proof}: prove statement true w/o revealing secret. \K{Example}: prove you know password w/o sending it: challenge-response (server sends challenge $c$, prover computes response $r = H(\text{password} || c)$, server verifies against stored hash); interactive or non-interactive (Fiat-Shamir). \K{Use cases}: private voting (prove your ballot is valid w/o revealing vote), sealed-bid auctions (prove bid is within range w/o revealing amount), prove age $> 21$ w/o revealing birthdate.
+
+\hd{Privacy-preserving compute}: MPC + FHE + ZKP enable private voting, confidential auctions, private set intersection (PSI = find common elements w/o revealing non-common), secure data analytics on encrypted data. Trade-off: computation cost vs. privacy gain.

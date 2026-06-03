@@ -1,0 +1,225 @@
+Lecture 3: Symmetric Cryptography
+
+Eleftheria Makri| Security
+
+25/02/2026
+
+Bij ons leer je de wereld kennen
+
+Symmetric Cryptography
+· Definition of Cryptology = Cryptography + Cryptanalysis
+· Security Goals related to Cryptography
+· Classification of Cryptography
+· Introduction to Symmetric(-Key) Cryptography · Underlying Basic Ideas · Stream Ciphers · Block Ciphers
+· Hash Functions
+
+Cryptography
+
+Cryptanalysis
+
+Cryptology =
++
+
+Important goals of cryptography
+· Confidentiality = keeping information secret for everyone except for authorized entities
+· Authentication · of entities = assuring the source of information · of data = assuring that the information has not been altered by unauthorized entities
+· Non-repudiation = assuring that actions or commitments in the past cannot be denied
+
+Classification of cryptography
+· Symmetric-key cryptography: · Mainly for confidentiality · Sender and receiver have the same secret key · Block ciphers and stream ciphers
+· Public-key cryptography: · Mainly for authentication (digital signatures) and key agreement · Sender and receiver have a different key (= public and private key)
+· Hash functions: · Mainly for the authentication of data · With or without secret key
+
+Symmetric-key cryptography
+
+Sender
+
+Receiver
+
+Hello Bob!
+
+Secret Key
+
+Exchange key using a secure
+channel
+
+Secret Key
+Hello Bob!
+
+Encryption
+
+&sdA %sdf LL)*$
+Ciphertext
+
+Decryption
+
+Substitution
+
+Transposition (or Permutation)
+
+SP-Network (Substitution-Permutation)
+
+Caesar Cipher
+
+Caesar Cipher
+Ciphertext: ODVW ZHHN WKH OHFWXUHU ZDV LOO
+
+Caesar Cipher
+Ciphertext: ODVW ZHHN WKH OHFWXUHU ZDV LOO Plaintext: LAST WEEK THE LECTURER WAS ILL
+
+Stream Ciphers
+
+and
+
+Block Ciphers
+
+Stream Ciphers
+
+Stream Ciphers
+
+One-time pad
+· "The perfect cipher" is the only proven method for cryptography that makes an unbreakable encryption possible. Other names are the onetime pad or the Vernam scheme (Gilbert Vernam, in 1917).
+· The key is completely random and has the same size as the plaintext. This makes the one-time pad impractical.
+· Example:
+01011 XOR 10111 = 11100 (plaintext XOR key = ciphertext) 11100 XOR 10111 = 01011 (ciphertext XOR key = plaintext)
+
+One-time pad: Encrypt-Decrypt
+
+One-time pad: Re-use of the same key
+· With the one-time pad, it is very important to NEVER use the same key more than once.
+
+One-time pad: Re-use of the same key - visualize
+Source: https://crypto.stackexchange.com
+
+Block Ciphers
+
+Block Ciphers
+
+Examples of Block Ciphers (1)
+DES = Data Encryption Standard · 1977 · Key size: 56 bits · Block size: 64 bits · 16-round Feistel structure · Brute-force attack possible · Derived version: Triple DES · 168-bit key (3x56 bits) · 2112 = 22x56 steps to perform a brute-force attack (meet in the middle)
+
+Let's simplify...
+E
+
+DES
+
+Double DES
+
+2DES: Meet-in-the-Middle Attack
+
+Triple DES
+
+Recommended key sizes for symmetric-key crypto
+Source: keylength.com (ECRYPT-CSA recommendations, 2018)
+
+Examples of block ciphers (2)
+· AES = Advanced Encryption Standard · 2001 · Key size: 128, 192 of 256 bits · Block size: 128 bits
+
+Block Ciphers: Encryption Modes
+
+Modes Effect...
+
+Modes Effect...
+
+Modes Effect...
+
+Properties block cipher modes of operation
+· Hiding patterns in the plaintext · ECB mode is insecure. · CTR mode is insecure if the counter is reset to the same value every time.
+· Error propagation · OFB mode and CTR mode do not propagate errors.
+· Synchronisation between sender and receiver · CFB is self-synchronising.
+· Speed · CFB mode is slow. · CTR mode is fast.
+
+Hash Functions
+
+Hash functions (1)
+
+· Hash functions are functions that project a message of arbitrary length to a message of fixed length.
+
+Original text Original bytes
+
+hello world 68:65:6c:6c:6f:20:77:6f:72:6c:64 (length=11)
+
+CRC32 MD5 SHA-1 SHA-256 SHA-384
+SHA-512
+Whirlpool
+
+0d4a1185 5eb63bbbe01eeed093cb22bb8f5acdc3 2aae6c35c94fcfb415dbe95f408b9ce91ee846ed b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9 fdbd8e75a67f29f701a4e040385e2e23986303ea10239211af907fcbb83578b3e417cb71 ce646efd0819dd8c088de1bd 309ecc489c12d6eb4cc40f50c902f2b4d0ed77ee511a7c7a9bcd3ca86d4cd86f989dd35b c5ff499670da34255b45b0cfd830e81f605dcf7dc5542e93ae9cd76f 6acb0f8614091b16187853927167576de1e3bae9b1302d607197f4e026ff4498d91296a3 98350faae2a612b6069d38af6cc5fcf73fd006adbeddf4cb5b84f904
+
+Try it yourself at: https://www.fileformat.info/tool/hash.htm
+
+Hash functions (2)
+· Another example:
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque cursus posuere neque, sit amet mollis ante. Donec pulvinar lacus vitae nulla malesuada, in aliquam dolor molestie. Duis at nulla in arcu convallis convallis. Maecenas in leo ut metus semper fermentum. Fusce orci lectus, fermentum et est at, rutrum tincidunt orci. Praesent dignissim turpis ex, eget porttitor neque porta mollis. Curabitur ac dictum turpis, eu fringilla felis. Sed semper dolor et quam facilisis mollis.
+
+Hash functions (3)
+
+Original text Original bytes
+
+Lorem ipsum ... 4c6f72656d20697073756d20646f6c6f722073697420616d65... (length=490)
+
+CRC32 MD5 SHA-1 SHA-256 SHA-384
+SHA-512
+
+d7aca16d baea9f76055eea8f0c162432611ead84 4f189835fab2bf72a4cfeaee072201ad2bb6f489 40f2a4e72d43359b9567b47d9d774bf5cca1055310b32b77e1320a7c56dabffc c739cf3cb6332b93b9813c83689d7b26156213bff9d2b3d7edd8d0dbad61ff7af78dec298854c1 9c2876bdd0133dda76 5cd61791060d8b26f05cab8c80556d281a98b151318295f216e622de9ad3861c6543d70733ffb 56ac429269c42b44ebf40cb9b80293adc407d92ff5ac7fd4303
+
+Whirlpool 56bac218d72c9cfc39b218c012405896bd9803dc254bfe7444c95ade63d68dbe4f8d30c1b9c73 b1cdde43adacf64245e6fb426746bfc28adb359d685143a5d6a
+
+Properties of hash functions
+The ideal hash function for cryptographic applications has the following properties:
+· It is easy to calculate the hash of a message
+· Given the hash value h, it is difficult to find a message that has h as a hash value = pre-image resistance
+· Given the message m1, it is difficult to find a message m2 that has the same hash value as the hash value of the message m1 = second pre-image resistance
+· It is difficult to find two different messages with the same hash value = collision resistance
+
+Commonly used hash functions
+Source: wikipedia
+
+The use of a secret key
+· Hash functions without a secret key are used to assure data integrity. They allow to detect changes in the transmitted messages.
+· Hash functions can also be used for authentication (of data). In this case, a secret key is used, together with the message, and we call the function a Message Authentication Code (MAC).
+
+Message Authentication Code ­ MAC
+
+Examples of MAC algorithms
+Commonly used MAC algorithms are: · CMAC: MAC based on a symmetric-key block cipher · HMAC: MAC based on a hash function
+
+CMAC
+
+HMAC
+
+Recommended size of the hash value
+Source: keylength.com (ECRYPT-CSA recommendations, 2018)
+
+Sender
+
+Receiver
+
+Hello Bob!
+
+Secret Key
+
+Exchange key using a secure
+channel
+
+Secret Key
+Hello Bob!
+
+Encryption
+
+&sdA %sdf LL)*$
+Ciphertext
+
+Decryption
+
+References
+· Nigel Smart, Cryptography Knowledge Area ­ The Cyber Security Body of Knowledge, Available at: https://www.cybok.org/media/downloads/Cryptography_v1.0.1.pdf (Chapters 3, 4 and 5)
+· Alfred J. Menezes, Paul C. van Oorschot and Scott A. Vanstone, Handbook of Applied Cryptography, Available at: https://cacr.uwaterloo.ca/hac/ (Chapters 1, 6, 7 and 9 ­ the relevant parts therein)
+
+Outlook
+· We covered the basics of Symmetric Encryption · Next week we move to Asymmetric Encryption · In a few weeks we will discuss Secure Computation Technologies,
+enabled by cryptographic techniques
+Stay Tuned.........
+
+Questions?
+Bij ons leer je de wereld kennen
+

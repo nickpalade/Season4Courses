@@ -1,0 +1,12 @@
+% frag5.tex — high-yield EXTRAS to fill remaining space. Input inside multicols{4}.
+\sct{Extras / High-yield}{bonus}
+\hd{Crypto extras}
+\K{Confusion} = hide key/ct relation (substitution); \K{diffusion} = spread plaintext over ct (permutation). Key sizes: AES 128+ ok; RSA 2048+; ECC 256 $\approx$ RSA 3072. \R{MD5, SHA-1 broken} (collisions) $\to$ use SHA-256/SHA-3. Kerckhoffs: only key secret.
+\hd{TLS handshake}
+ClientHello $\to$ ServerHello + cert $\to$ verify cert chain (CA) $\to$ key exchange (ECDHE, forward secrecy) $\to$ derive session key $\to$ symmetric encrypted data. Cert binds identity to pubkey.
+\hd{Password storage}
+\R{Never store plaintext.} Store \K{salt + hash} (unique salt per user $\to$ stops rainbow tables). Use slow KDF: \K{bcrypt / scrypt / Argon2} (resist brute force). Pepper = secret site-wide salt.
+\hd{Web extras}
+\K{CORS} = server opt-in relaxation of SOP (Access-Control-Allow-Origin). \K{CSP} = whitelist script sources $\to$ mitigate XSS. \K{Clickjacking} = invisible iframe $\to$ fix X-Frame-Options/frame-ancestors. SQLi/XSS = injection (untrusted input).
+\hd{Exam traps}
+SOP = browser only, not server. signature IDS = patterns, not crypto sig. fingerprint $\ne$ cookies. social nets = DAC. MAC(code) $\ne$ encryption. high detection useless if FPs swamp (base rate). 2FA needs 2 \emph{different} factors.

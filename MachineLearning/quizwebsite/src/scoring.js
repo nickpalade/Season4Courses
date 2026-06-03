@@ -16,3 +16,25 @@ export function shuffle(arr) {
   }
   return a;
 }
+
+// Reorder a question's options by `order` (array of original indices in their
+// new positions) and remap `correct` to the new positions. Returns a new
+// question; open questions or a missing order pass through unchanged.
+export function applyOptionOrder(q, order) {
+  if (!order || q.type === "open" || !q.options) return q;
+  const options = order.map((origIdx) => q.options[origIdx]);
+  const correctSet = new Set(q.correct);
+  const correct = order.reduce((acc, origIdx, newIdx) => {
+    if (correctSet.has(origIdx)) acc.push(newIdx);
+    return acc;
+  }, []);
+  return { ...q, options, correct };
+}
+
+// Produce a random option order for a question and the reordered question.
+// `order` is null when there are no options to shuffle (open questions).
+export function shuffleOptions(q) {
+  if (q.type === "open" || !q.options) return { q, order: null };
+  const order = shuffle(q.options.map((_, i) => i));
+  return { q: applyOptionOrder(q, order), order };
+}

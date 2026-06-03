@@ -1,0 +1,64 @@
+Asymmetric Cryptography Lecture Handout
+Eleftheria Makri 2025-2026
+
+1
+
+Asymmetric Cryptography
+Asymmetric Encryption (aka Public-Key Encryption): requires two separate keys, one of which is secret (private key), and one of which is public. The two parts of this key pair are mathematically linked. The public key is used to encrypt plaintext and to verify digital signatures, while the private key is used to decrypt ciphertext, or to create digital signatures.
+
+1. Hybrid Encryption
+Hybrid encryption combines symmetric and asymmetric encryption methods to provide both security and efficiency. It uses a public key to encrypt a symmetric key, which in turn is used to encrypt the actual data, allowing for secure and fast data transmission. This essentially uses asymmetric encryption as the out-of-band channel for exchanging securely a symmetric key. This symmetric key can be used temporarily for encrypting large amounts of data.
+
+2. Public-Key Cryptography
+
+2.1 (Diffie-Hellman) Key Exchange
+
+Diffie­Hellman (DH) key exchange is a mathematical method of securely generating a symmetric cryptographic key over a public channel and was one of the first public-key protocols as conceived by Ralph Merkle and named after Whitfield Diffie and Martin Hellman. It is one of the earliest practical examples of public key exchange implemented within the field of cryptography. Published in 1976 by Diffie and Hellman, this is the earliest publicly known work that proposed the idea of a private key and a corresponding public key.
+The DH protocol executed between Alice and Bob, works as follows:
+
+Alice
+
+Bob
+
+a  [2 , p-2]
+
+b  [2 , p-2]
+
+A = ga mod p
+
+B = gb mod p
+
+K = Ba = gba mod p
+
+K = Ab = gab mod p
+
+Asymmetric Cryptography: Lecture Handout Eleftheria Makri
+
+2
+2.2 Digital Signatures
+A digital signature aims in providing the same level of accountability for an electronic transaction as handwritten signatures do for physical transactions. A digital signature will provide assurance that the message
+· does indeed come from the person who claims to have sent it, · it has not been altered, · both parties have a copy of the same document, and · the person sending the document cannot claim later that s/he did not send it. Digital signatures provide authentication of a sender, and integrity of a sender's message. To not be confused with digitized versions of a person's handwritten signature! Non-Repudiation Definition by NIST: A service that is used to provide assurance of the integrity and origin of data in such a way that the integrity and origin can be verified by a third party as having originated from a specific entity in possession of the private key of the claimed signatory. In a general information security context, assurance that the sender of information is provided with proof of delivery and the recipient is provided with proof of the sender's identity, so neither can later deny having processed the information. Digital Signatures: How to? · Signature generation: The sender uses his private key to generate a signature. This is the
+encryption with the private key (of the hash value) of the message. · Signature verification: The receiver uses the public key of the sender to verify the digital
+signature. The receiver does this by: o Decrypting the digital signature with the public key; o Comparing the result with (the hash of) the message.
+· Algorithms for digital signatures: o DSA (Digital Signature Algorithm) o RSA (Rivest, Shamir, Adleman) o ECDSA (Elliptic Curve Digital Signature Algorithm)
+Asymmetric Cryptography: Lecture Handout Eleftheria Makri
+
+3
+2.3 (Public-Key) RSA Encryption
+Key Generation 1. Select two large prime numbers p and q 2. Compute n = pq 3. Compute Euler's function (n) = (p) (q) = (p ­ 1)(q ­ 1), and keep it secret. 4. Choose an integer e such that 1 < e < (n), and gcd(e, (n)) = 1 (which means e and (n) are coprime) 5. Determine d as d  e-1 (mod (n)), and keep it secret as the private key exponent.
+The public key is (n, e), and the private key is d. Encryption c  me (mod n), where m is the integer representation of the message to be encrypted Decryption m  cd (mod n) Padding Padding is the process of preparing the original message m for encryption (or signing), by adding random elements in this message (or simply appending this randomness at the end of the message). The reason for doing so is to introduce (extra) randomness, and/or to hide the length of the original message. With RSA padding is absolutely necessary, as the algorithm is otherwise deterministic (i.e., same messages will produce the exact same ciphertexts, when encrypted with the same key). Public-Key Encryption Pros & Cons: Advantages:
+· No need for prior key material exchange and distribution · Provide (additionally) non-repudiation, access control and data integrity Disadvantages: · Extremely slow compared to symmetric cryptography · Much larger produced ciphertext than the original plaintext
+Asymmetric Cryptography: Lecture Handout Eleftheria Makri
+
+4
+3. Public-Key Infrastructure (PKI)
+A PKI (Public Key Infrastructure) is a set of system, software, and communication protocols required to use, manage, and control public key cryptography. It has three primary purposes:
+1. publish public keys/certificates, 2. certify that a key is tied to an individual or entity, and 3. provide verification of the validity of a public key. Digital Certificates: are electronic documents containing the name of an organization or individual, the business address, the digital signature of the certificate authority issuing it, the certificate holder's public key, a serial number and the expiration date. Certificate Authority (CA): is an entity trusted by one or more users that issues, revokes, and manages digital certificates. Registration Authority (RA): performs certificate registration on behalf of a CA. It is a single purpose server, responsible for the accuracy of the information contained in a certificate request. It also performs user validation before issuing a certificate. Validation Authority (VA): can provide the information that proves the uniqueness of a person's identity to a third party, on behalf of the CA.
+Asymmetric Cryptography: Lecture Handout Eleftheria Makri
+
+5
+4. The TLS Protocol
+Transport Layer Security (TLS) is a cryptographic protocol that ensures secure communication over a computer network, primarily the Internet. It provides privacy, data integrity, and authentication for applications like web browsing, email, and instant messaging by encrypting the data transmitted between clients and servers. See specs below:
+TLS: Session Key Establishment
+Asymmetric Cryptography: Lecture Handout Eleftheria Makri
+

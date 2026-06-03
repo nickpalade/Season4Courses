@@ -2,64 +2,64 @@
   {
     "id": "08_001",
     "type": "mcq",
-    "difficulty": "medium",
-    "question": "You're building a spam detector with limited training data. Which estimation approach better incorporates domain knowledge that most emails are legitimate?",
+    "topic": "MLE vs MAP with Priors",
+    "prompt": "You're building a spam detector with limited training data. Which estimation approach better incorporates domain knowledge that most emails are legitimate?",
     "options": [
       "Maximum Likelihood Estimation (MLE) - it focuses purely on fitting the data",
       "Maximum A Posteriori (MAP) - it combines data likelihood with prior beliefs",
       "Naive Bayes - it assumes feature independence",
       "Logistic Regression - it directly models decision boundaries"
     ],
-    "correct": 1,
+    "correct": [1],
     "explanation": "MAP incorporates a prior P(Y) reflecting domain knowledge, while MLE ignores priors. MAP is superior when you have informative priors (e.g., P(spam) = 0.1) and limited data."
   },
   {
     "id": "08_002",
     "type": "mcq",
-    "difficulty": "medium",
-    "question": "In Bayes theorem P(Y|X) = P(X|Y)P(Y) / P(X), which component is the likelihood?",
+    "topic": "Bayes Theorem Components",
+    "prompt": "In Bayes theorem P(Y|X) = P(X|Y)P(Y) / P(X), which component is the likelihood?",
     "options": [
       "P(Y|X) - the posterior probability",
       "P(X|Y) - the likelihood of observing features given the class",
       "P(Y) - the prior probability",
       "P(X) - the evidence or normalization constant"
     ],
-    "correct": 1,
+    "correct": [1],
     "explanation": "The likelihood P(X|Y) quantifies how probable the observed features are under each class hypothesis. It's the core of data-driven learning."
   },
   {
     "id": "08_003",
     "type": "mcq",
-    "difficulty": "hard",
-    "question": "When would you prefer Naive Bayes over Logistic Regression for text classification?",
+    "topic": "Naive Bayes vs Logistic Regression",
+    "prompt": "When would you prefer Naive Bayes over Logistic Regression for text classification?",
     "options": [
       "When you have abundant labeled data and need maximum accuracy",
       "When you need interpretable models, have moderate data, and can tolerate the independence assumption",
       "When features are highly correlated and you want to capture those relationships",
       "When you want to minimize training time regardless of accuracy"
     ],
-    "correct": 1,
+    "correct": [1],
     "explanation": "Naive Bayes works well with moderate data and provides interpretable per-word probabilities. Logistic Regression is preferable with large datasets and correlated features. Naive Bayes is computationally efficient and often performs surprisingly well despite its independence assumption."
   },
   {
     "id": "08_004",
     "type": "mcq",
-    "difficulty": "medium",
-    "question": "For a Gaussian mixture model with two classes having equal variances, how does the decision boundary change compared to unequal variances?",
+    "topic": "Gaussian Decision Boundaries",
+    "prompt": "For a Gaussian mixture model with two classes having equal variances, how does the decision boundary change compared to unequal variances?",
     "options": [
       "It becomes quadratic instead of linear",
       "It becomes linear instead of quadratic",
       "It remains unchanged",
       "It becomes undefined"
     ],
-    "correct": 1,
+    "correct": [1],
     "explanation": "Equal variances simplify the quadratic discriminant to a linear one because the variance terms cancel out in the decision rule, reducing complexity."
   },
   {
     "id": "08_005",
     "type": "multi",
-    "difficulty": "medium",
-    "question": "Which statements correctly describe the relationship between MLE and MAP estimation?",
+    "topic": "MLE and MAP Relationship",
+    "prompt": "Which statements correctly describe the relationship between MLE and MAP estimation?",
     "options": [
       "MAP reduces to MLE when the prior is uniform (non-informative)",
       "MLE can perform better than MAP with very large datasets despite weaker priors",
@@ -73,8 +73,8 @@
   {
     "id": "08_006",
     "type": "multi",
-    "difficulty": "medium",
-    "question": "What are valid interpretations of conditional independence P(X₁, X₂|Y) = P(X₁|Y)P(X₂|Y)?",
+    "topic": "Conditional Independence",
+    "prompt": "What are valid interpretations of conditional independence P(X₁, X₂|Y) = P(X₁|Y)P(X₂|Y)?",
     "options": [
       "Features are independent given knowledge of the class",
       "Knowing the class makes the features statistically independent",
@@ -88,8 +88,8 @@
   {
     "id": "08_007",
     "type": "multi",
-    "difficulty": "hard",
-    "question": "For a Multinomial Naive Bayes model trained on email classification, which factors affect the estimated word probabilities P(word|spam)?",
+    "topic": "Multinomial Naive Bayes for Text",
+    "prompt": "For a Multinomial Naive Bayes model trained on email classification, which factors affect the estimated word probabilities P(word|spam)?",
     "options": [
       "The total number of word occurrences in spam emails",
       "The number of unique spam emails (document count)",
@@ -103,8 +103,8 @@
   {
     "id": "08_008",
     "type": "multi",
-    "difficulty": "medium",
-    "question": "When training a Naive Bayes classifier, which steps are necessary to estimate parameters?",
+    "topic": "Naive Bayes Training Steps",
+    "prompt": "When training a Naive Bayes classifier, which steps are necessary to estimate parameters?",
     "options": [
       "Estimate the class prior P(Y) from class label frequencies",
       "Estimate feature likelihoods P(Xᵢ|Y) separately for each feature and class",
@@ -118,64 +118,40 @@
   {
     "id": "08_009",
     "type": "open",
-    "difficulty": "hard",
-    "question": "Explain why the Naive Bayes conditional independence assumption P(X₁, X₂|Y) = P(X₁|Y)P(X₂|Y) is often violated in practice for text classification, yet the model still works reasonably well. What does this suggest about model design tradeoffs?",
-    "rubric": [
-      "Recognizes that words in text are correlated (e.g., 'Bayesian' and 'probability' co-occur)",
-      "Notes that despite the false assumption, the model learns useful decision boundaries",
-      "Explains the bias-variance tradeoff: simpler model (fewer parameters) despite biased assumptions",
-      "Discusses computational efficiency gains from the assumption",
-      "Concludes that model simplicity and efficiency can outweigh unrealistic assumptions"
-    ],
+    "topic": "Conditional Independence Violations in Text",
+    "prompt": "Explain why the Naive Bayes conditional independence assumption P(X₁, X₂|Y) = P(X₁|Y)P(X₂|Y) is often violated in practice for text classification, yet the model still works reasonably well. What does this suggest about model design tradeoffs?",
+    "correct": [],
     "explanation": "Naive Bayes assumes conditional independence of features given the class, which is almost always false in text (word co-occurrence patterns matter). Yet it works because: (1) the decision rule is robust to violation magnitude, (2) parameter count is O(vocab×classes) not O(2^vocab), (3) regularization via priors/smoothing helps, and (4) high-dimensional data often exhibits surprising behaviors. This illustrates that 'wrong' simple models beat 'right' complex ones when data is limited."
   },
   {
     "id": "08_010",
     "type": "open",
-    "difficulty": "medium",
-    "question": "You observe that a Naive Bayes spam detector trained on historical emails (80% legitimate, 20% spam) performs poorly on new data. Describe how you would use Maximum A Posteriori (MAP) estimation to incorporate prior knowledge that the new user's emails are actually 95% legitimate.",
-    "rubric": [
-      "Identifies the mismatch between training prior P(spam)=0.2 and true prior P(spam)=0.05",
-      "Explains that MLE P(Y) from training data is now misleading for new context",
-      "Proposes using MAP with explicit prior P(spam)=0.05, P(legit)=0.95",
-      "Notes that this re-weights the decision rule: MAP = argmax P(X|Y) × P(Y)",
-      "Explains that stronger prior downweights ambiguous cases toward the legitimate class"
-    ],
+    "topic": "MAP for Domain Adaptation",
+    "prompt": "You observe that a Naive Bayes spam detector trained on historical emails (80% legitimate, 20% spam) performs poorly on new data. Describe how you would use Maximum A Posteriori (MAP) estimation to incorporate prior knowledge that the new user's emails are actually 95% legitimate.",
+    "correct": [],
     "explanation": "MAP enables domain adaptation without retraining. By setting P(Y) to match the new environment, the posterior P(Y|X) shifts toward legitimate emails even when P(X|Y) is similar between classes. This is especially powerful when data distribution changes (concept drift). The prior acts as regularization, pulling decisions toward high-probability classes when evidence is weak."
   },
   {
     "id": "08_011",
     "type": "open",
-    "difficulty": "hard",
-    "question": "A student claims: 'Logistic Regression and Naive Bayes are equivalent because both model P(Y|X).' Evaluate this claim. How do their modeling approaches fundamentally differ?",
-    "rubric": [
-      "Recognizes that Logistic Regression directly models P(Y|X) = 1/(1+exp(-w·x)) without distributional assumptions",
-      "Notes that Naive Bayes derives P(Y|X) from generative assumptions: P(X|Y) and P(Y)",
-      "Explains the generative vs discriminative distinction",
-      "Notes that Naive Bayes assumes conditional independence of features; Logistic Regression does not",
-      "Discusses implications: Logistic Regression more flexible with features; Naive Bayes more interpretable and parameter-efficient"
-    ],
+    "topic": "Generative vs Discriminative Models",
+    "prompt": "A student claims: 'Logistic Regression and Naive Bayes are equivalent because both model P(Y|X).' Evaluate this claim. How do their modeling approaches fundamentally differ?",
+    "correct": [],
     "explanation": "Logistic Regression is discriminative: it learns P(Y|X) directly. Naive Bayes is generative: it assumes P(X|Y) follows a specific distribution (Bernoulli, Multinomial, or Gaussian), then inverts via Bayes rule. This means Naive Bayes requires specifying the feature distribution and assumes conditional independence, while Logistic Regression is more flexible. With abundant data, Logistic Regression usually outperforms; with limited data or need for interpretability, Naive Bayes excels."
   },
   {
     "id": "08_012",
     "type": "open",
-    "difficulty": "medium",
-    "question": "Explain the role of the evidence term P(X) in Bayes theorem: P(Y|X) = P(X|Y)P(Y) / P(X). Why is it often called the 'normalizing constant'? How would your classification decision change if you ignored it?",
-    "rubric": [
-      "Defines P(X) = Σ_y P(X|y)P(y) as the marginal probability of observing the features",
-      "Explains that P(X) appears in denominators for all classes, so it cancels in arg max decisions",
-      "Notes that P(X) ensures posteriors sum to 1 across all classes (normalization)",
-      "Clarifies that ignoring P(X) gives unnormalized posterior: P(Y|X) ∝ P(X|Y)P(Y)",
-      "Concludes that the decision ŷ = argmax P(Y|X) is unchanged if P(X) is constant across x"
-    ],
+    "topic": "Evidence Term P(X) in Bayes",
+    "prompt": "Explain the role of the evidence term P(X) in Bayes theorem: P(Y|X) = P(X|Y)P(Y) / P(X). Why is it often called the 'normalizing constant'? How would your classification decision change if you ignored it?",
+    "correct": [],
     "explanation": "P(X) is the total probability of observing the data, computed by summing over all classes. For classification, it's irrelevant: arg max_y P(Y|X) = arg max_y P(X|Y)P(Y) because P(X) is independent of y. However, computing P(X) is essential for getting calibrated probabilities: it normalizes the posterior to sum to 1, which matters for confidence estimates and decision thresholds."
   },
   {
     "id": "08_013",
     "type": "multi",
-    "difficulty": "hard",
-    "question": "Consider a bivariate Gaussian classifier with classes Y=0 and Y=1. Which of the following statements are true?",
+    "topic": "Bivariate Gaussian Classifier",
+    "prompt": "Consider a bivariate Gaussian classifier with classes Y=0 and Y=1. Which of the following statements are true?",
     "options": [
       "If Σ₀ = Σ₁ (equal covariances), the decision boundary is linear",
       "If Σ₀ ≠ Σ₁ (unequal covariances), the decision boundary is quadratic",
@@ -189,15 +165,15 @@
   {
     "id": "08_014",
     "type": "mcq",
-    "difficulty": "medium",
-    "question": "In the context of Naive Bayes training, why is Laplace smoothing (adding α to counts) crucial for text classification?",
+    "topic": "Laplace Smoothing",
+    "prompt": "In the context of Naive Bayes training, why is Laplace smoothing (adding α to counts) crucial for text classification?",
     "options": [
       "It increases the learned probability values to make them larger",
       "It prevents zero probabilities for words unseen in training, avoiding infinite log-likelihoods",
       "It makes all word probabilities equal regardless of observed frequency",
       "It ensures the model assigns 50% probability to each class"
     ],
-    "correct": 1,
+    "correct": [1],
     "explanation": "Without smoothing, P(word|class) = 0 for unseen words, making log P(word|class) = -∞. Laplace smoothing avoids this by adding pseudocounts: P(word|class) = (count + α) / (total + α×vocab_size). This allows the model to handle new words gracefully."
   }
 ]

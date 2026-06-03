@@ -170,8 +170,21 @@ export default function Quiz({
 
       {revealed && !submitted && (
         <div className="feedback reveal-feedback">
-          <div className="label">Answer revealed for this question</div>
-          <div>{q.explanation}</div>
+          <div className="label">Answer revealed</div>
+          {q.type !== "open" && q.correct.length > 0 && (
+            <div className="reveal-correct">
+              <span className="muted">Correct:</span>{" "}
+              {q.correct
+                .map((i) => `${String.fromCharCode(65 + i)} — ${q.options[i]}`)
+                .join("  ·  ")}
+            </div>
+          )}
+          {q.type !== "open" && q.correct.length === 0 && (
+            <div className="reveal-correct">
+              <span className="muted">Correct:</span> none of the options are correct.
+            </div>
+          )}
+          <div className="reveal-explanation">{q.explanation}</div>
         </div>
       )}
 
@@ -210,9 +223,12 @@ export default function Quiz({
           Previous
         </button>
         <div className="right-actions">
-          {!revealed && (
-            <button className="secondary-action" onClick={() => setRevealedQuestionId(q.id)}>
-              Reveal answer
+          {!submitted && (
+            <button
+              className="secondary-action"
+              onClick={() => setRevealedQuestionId(revealed ? null : q.id)}
+            >
+              {revealed ? "Hide answer" : "Reveal answer"}
             </button>
           )}
           {!submitted && <button onClick={submit}>Submit</button>}

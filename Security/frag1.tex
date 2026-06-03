@@ -1,0 +1,75 @@
+\sct{L1 Foundations}{MED}
+
+\hd{Security goals}: CIA = Confidentiality (secret, encrypt), Integrity (unchanged, hash/checksum), Availability (accessible, redundancy/DDoS-resist). PLUS Authenticity (genuine origin, verify identity), Accountability (trace to actor, audit logs), Non-repudiation (cannot deny, digital sig), Authorization (allowed?), Accuracy. \K{Parkerian hexad} adds Possession/Control (own data), Utility (can use it).
+
+\hd{Core terms}: asset=valuable thing (data, HW, SW, people, reputation); threat=potential harm; vulnerability=weakness in system; risk=likelihood$\times$impact; attack=realized threat; countermeasure/control=reduces risk; exploit=uses vuln. \R{Example}: SQL injection is vuln $\to$ attacker threat $\to$ risk if input not validated $\to$ attack if executed.
+
+\hd{Principles}: least privilege (min access needed); defense-in-depth (multi-layer); fail-safe defaults (deny by default); complete mediation (check every access); Kerckhoffs = \R{security NOT by obscurity} (assume attacker knows system, only key secret); separation of duties (no one person all access); open design (review-able); economy of mechanism (simple > complex); psychological acceptability (usable); need-to-know (info min); minimize attack surface (disable unused); weakest-link (chain breaks there); no single point of failure (redundancy).
+
+\hd{Security vs usability}: \R{tradeoff always exists}. Complex pwd = secure but annoying; biometric = usable but costly; MFA = adds friction. Design for \K{least friction at acceptable risk}.
+
+\hd{Attacker/threat types}: passive (eavesdrop, no modify) vs active (modify, inject); insider (employee) vs outsider; script kiddie (tools, low skill) $\to$ hacktivist (cause) $\to$ organized crime (profit) $\to$ nation-state/APT (resources, persistence).
+
+\sct{L2 Risk \& Threat}{HIGH}
+
+\hd{Risk formula}: Risk $= \text{Likelihood} \times \text{Impact}$. \K{Likelihood} \{Low, Med, High\} $\times$ \K{Impact} \{Low, Med, High\} $\to$ 3$\times$3 risk matrix = Low/Med/High/Critical risk. \K{Qualitative} = descriptive; \K{Quantitative} = numeric (dollar loss, \% chance). \K{ALE} (Annual Loss Expectancy) = SLE $\times$ ARO, where SLE = AV (Asset Value) $\times$ EF (Exposure Factor \%), ARO = times/year.
+
+\hd{Risk treatment (4)}: \K{Accept}=tolerate, bear it (low risk/cost too high to fix); \K{Avoid}=eliminate by not doing risky activity / change approach entirely; \K{Mitigate/Reduce}=apply controls to lower likelihood or impact (most common); \K{Transfer}=shift to 3rd party (insurance, outsource). \R{Residual risk} = risk after controls applied (never zero).
+
+\hd{Assets}: data (customer PII, IP, source code), hardware (servers, network), software (OS, apps), people (expertise, availability), reputation (brand trust, market cap).
+
+\hd{STRIDE $\to$ goal}:
+\K{Spoofing} $\to$ Authenticity; \K{Tampering} $\to$ Integrity; \K{Repudiation} $\to$ Non-repudiation/Accountability; \K{Info disclosure} $\to$ Confidentiality; \K{DoS} $\to$ Availability; \K{Elevation of priv} $\to$ Authorization. (Threat model = STRIDE per component.)
+
+\hd{Risk assess}: Steps: identify assets $\to$ identify threats $\to$ assess impact (low/med/hi\$) $\to$ estimate likelihood (\%/year) $\to$ quantify risk (ALE or matrix) $\to$ choose countermeasure (accept/avoid/mitigate/transfer).
+
+\hd{Attack chain (kill chain)}: \K{Recon} (gather intel) $\to$ \K{Weaponize} (craft payload) $\to$ \K{Deliver} (phishing, USB, etc) $\to$ \K{Exploit} (trigger vuln) $\to$ \K{Install} (backdoor, malware) $\to$ \K{C2} (command \& control) $\to$ \K{Act} (exfil, sabotage). \R{Early detection breaks chain.}
+
+\hd{Attack tree}: root = goal (steal DB), children = OR (pick lock $\mid$ crack pwd $\mid$ bribe admin), grandchildren = AND (get key AND decrypt). Leaf = basic event. Quantify by AND (multiply), OR (sum-overlaps).
+
+\hd{Defense in depth}: layers (perimeter $\to$ network $\to$ host $\to$ app $\to$ data). If 1 fails, others catch. Example: firewall + IDS + antivirus + input validation + encryption.
+
+\sct{L3 Symmetric Crypto}{LOW}
+
+\hd{Basics}: sym = 1 shared secret key, fast ($\times$100 vs asym), bulk encryption, gives confidentiality only. \R{Problem = key distribution} ($n$ users $\to$ $n(n-1)/2$ keys; out-of-band exchange or key server needed).
+
+\hd{Block structure}: \K{Feistel}: round $i$ = $L_i \parallel R_i$; $L_{i+1}=R_i$; $R_{i+1}=L_i \oplus f(R_i, k_i)$. Non-invertible $f$ becomes invertible network. \K{Confusion+Diffusion}: confusion = depend on key (S-box), diffusion = spread plaintext bits (permutation, mixing).
+
+\hd{DES}: 64-bit block, \R{56-bit key (weak, $2^{56}$ breakable)}. 16 Feistel rounds. Weak keys (all 0s, alternating). Use 3DES (3 passes) or switch to AES.
+
+\hd{AES}: 128-bit blocks, 128/192/256-bit keys $\to$ 10/12/14 rounds. \K{SubBytes} (S-box confusion), \K{ShiftRows} (row perm), \K{MixColumns} (column mix = diffusion), \K{AddRoundKey} (XOR with round key). Last round omits MixColumns. Fast, secure, standard.
+
+\hd{Modes}: \K{ECB} = each block $c_i = E_k(m_i)$ individually. \R{Bad: identical plaintext blocks $\to$ identical ciphertext (leaks pattern)}. \K{CBC} = $c_i = E_k(m_i \oplus c_{i-1})$, needs random IV. \R{IV must be random/unique}, never repeat with same key. \K{CTR} = counter mode: $c_i = m_i \oplus E_k(\text{nonce} \| i)$. Parallel, no padding, stream-like. \K{GCM} = Galois/Counter mode: CTR + polynomial auth tag (AEAD = confidentiality + integrity + authenticity in one pass).
+
+\hd{Stream vs block}: stream = one bit/byte at a time (chaining state or counter), block = whole blocks at once. \R{Never reuse keystream} (CTR/OTP) with same nonce/key = catastrophic (XOR two ciphertexts = plaintext XOR).
+
+\hd{Padding}: ECB/CBC need it (encrypt exact multiple of block). \K{PKCS7}: pad $n$ bytes with value $n$. Ex: 5 bytes missing $\to$ append \texttt{0x05 0x05 0x05 0x05 0x05}. Remove on decrypt.
+
+\hd{Caesar/OTP}: Caesar: shift key=3, decrypt = shift back 3. Ex: \texttt{khoor} (shift +3) $\to$ decrypt: shift -3 $\to$ \texttt{hello}. \R{Easy brute (26 keys)}. OTP = perfect secrecy IF key truly random, used \R{exactly once}, key length $\geq$ msg length. Impractical (key distribution = msg size).
+
+\hd{Key exchange problem}: sym needs pre-shared key (out-of-band, insecure channel, storage risk). Motivates asymmetric crypto.
+
+\sct{L4 Asymmetric / RSA}{HIGH}
+
+\hd{WHY RSA works}: \K{Euler}: if $\gcd(m,n)=1$, then $m^{\varphi(n)} \equiv 1 \pmod{n}$. So $m^{ed} = m^{1+k\varphi(n)} \equiv m \pmod{n}$ decrypts correctly. \R{Factoring $n$ breaks security} (learn $p,q \to \lambda \to d$).
+
+\hd{RSA recipe}: (1) Pick distinct primes $p,q$ (large, random); (2) $n = p \cdot q$; (3) $\lambda = \mathrm{lcm}(p{-}1, q{-}1)$ (or $\varphi = (p{-}1)(q{-}1)$); (4) pick $e$ s.t. $\gcd(e, \lambda) = 1$, usually $e = 65537 = 2^{16}+1$ (fast mod\_exp); (5) compute $d = e^{-1} \bmod \lambda$ (extended Euclidean); (6) \K{public key} = $(e,n)$, \K{private key} = $(d,n)$ or $(p,q,d)$.
+
+\hd{RSA example}: $p=5, q=7 \Rightarrow n=35$; $\lambda=\mathrm{lcm}(4,6)=12$; try $e=5$: $\gcd(5,12)=1$ OK; $d=5$ (check: $5 \cdot 5 = 25 \equiv 1 \pmod{12}$); plaintext $m=2$: ciphertext $c = 2^5 \bmod 35 = 32$; decrypt: $32^5 \bmod 35 = 2$ (recovers $m$; slow but correct). (In practice, use 2048+ bit primes.)
+
+\hd{Encrypt vs sign}: \K{Encrypt} (confidentiality) = $c = m^e \bmod n$ with recipient's \K{PUBLIC} key; decrypt = $m = c^d \bmod n$ with \K{PRIVATE} key. \K{Sign} (integrity + authenticity) = sign = encrypt hash with own \K{PRIVATE} key: $\sigma = H(m)^d \bmod n$; verify with sender's \K{PUBLIC} key: \R{Safe to publish pubkey.} Check $H(m) \stackrel{?}{=} \sigma^e \bmod n$.
+
+\hd{RSA gotchas}: \R{Never reuse $e$ with different $n$}; \R{small primes $p,q$ break}; \R{small plaintext $m$ vulnerable} (no padding); \R{deterministic} (use OAEP padding for encryption); timing attacks (use constant-time mod\_exp).
+
+\hd{Diffie-Hellman (DH)}: key exchange over insecure channel. Public: large prime $p$, generator $g$. Alice: pick random $a$, send $A = g^a \bmod p$. Bob: pick random $b$, send $B = g^b \bmod p$. Shared secret $s = A^b \equiv B^a \equiv g^{ab} \pmod{p}$ (Eve sees $p, g, A, B$ but not $a, b$ or $s$ assuming DL hard). \R{Vulnerable to MITM} if $A, B$ not authenticated (attacker substitutes own values). Use sig or certificate to bind $A, B$ to identities.
+
+\hd{Hybrid crypto}: RSA too slow for bulk data. Use RSA to exchange AES key: Alice generates random AES key $K$, encrypts with Bob's RSA pubkey: $c = K^e \bmod n$, sends $(c, E_{K}(\text{msg}))$. Bob decrypts $K = c^d \bmod n$, then decrypts msg. Combines speed (AES) + key distribution (RSA).
+
+\hd{MAC vs encryption}: \K{MAC} = integrity + authentication (shared key), no confidentiality (plaintext sent). May use hash (HMAC = $\text{Hash}(K \oplus \text{opad} \parallel \text{Hash}(K \oplus \text{ipad} \parallel M))$). \R{MAC $\neq$ encryption}. Hash = one-way (hard to invert), collision-resistant (find 2 inputs $\to$ same output is hard), fixed output (SHA-256 = 256 bits).
+
+\hd{Sym vs asym}: Sym = fast, 1 key, key distribution problem, bulk data; Asym = slow, pubkey/private pair, solves key distribution, small data (signature, exchange). \K{Standard hybrid}: use asym (DH/RSA) to agree on sym session key, then asym+sym together for full session.
+
+\hd{ECC (Elliptic Curve)}: smaller key sizes ($\approx 256$-bit $\approx$ 3072-bit RSA security), same hard problem (discrete log), modern standard (ECDSA, ECDH). Less studied than RSA.
+
+\hd{PKI / X.509}: \K{Certificate} = pubkey + identity + CA signature. \K{CA} (Certification Authority) signs cert to bind identity (name, email, domain) to pubkey, proving ownership. \K{Chain of trust}: end-entity cert signed by intermediate CA signed by root CA (self-signed, in trust store). Verify: check sig on cert (using CA pubkey) $\to$ check CA cert sig (using parent pubkey) $\to$ trust root (pre-loaded).
+

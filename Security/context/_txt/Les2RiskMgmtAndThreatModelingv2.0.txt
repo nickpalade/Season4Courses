@@ -1,0 +1,376 @@
+Lecture 2: Risk Management and
+Threat Modeling
+
+Eleftheria Makri| Security
+
+11/02/2025
+
+Bij ons leer je de wereld kennen
+
+Risk Management and Threat Modeling
+· Definition of Risk and Related Terminology
+· Risk Management · Qualitative Risk Assessment · Quantitative Risk Assessment · Strategies Against Risk · Cost Benefit Analysis
+· Security Design Principles, Best Practices, and Standards
+· Threat Modeling
+
+Risk Management
+
+Asset
+
+Vulnerability
+
+ISO 31000 Risk Management Process
+
+Qualitative Risk Assessment
+
+Quantitative Risk Assessment
+
+Identify Vulnerabilities
+
+Identify Threats
+
+Select Tools and Techniques for Risk Assessment
+
+Strategies Against Risk
+
+Four Strategies Against Risk
+
+Considerations for Countermeasures
+
+Asset Valuation and Cost Benefit Analysis
+
+Example: Risk of data disclosure
+Before installing controls Cost to recover data Likelihood (per year) Risk exposure: expected cost of incidents After installing controls Effectiveness of access control (risk reduction factor) Expected cost of incidents Costs of acquiring AC software Expected total cost Savings Savings per year Risk reduction 100.000 * 60% Risk leverage (100,000-40,000):25,000 Return on security investment factor (ROSI) (60,000-25,000):25,000
+
+US$1,000,000 10% US$ 100,000
+60% US$ 40,000 US$ 25,000 US$ 65,000
+US$ 35,000
+US$ 60,000
+2.4
+1.4
+
+Let's Practice!
+
+Risk Assessment Github
+Consider the GitHub platform (github.com) that is used by millions of developers to store their code.
+a. Identify three (3) important assets for GitHub.
+b. Identify three (3) threat scenarios that can have impact on the service owner (GitHub).
+c. Discuss how the identified assets can be impacted by these three (3) threat scenarios.
+d. Quantify these three (3) risks by estimating their likelihood and impact.
+e. Discuss one countermeasure per risk identified in (d), i.e., three (3) in total. Countermeasures can already be implemented or not yet implemented.
+
+Risk Assessment Github ­ Grading (a)
+Consider the GitHub platform (github.com) that is used by millions of developers to store their code.
+a. Identify three (3) important assets for GitHub. ­ 2.0 points
+Important aspects: assets should be relevant to the platform.
+
+Risk Assessment Github ­ Grading (b)
+Consider the GitHub platform (github.com) that is used by millions of developers to store their code.
+b. Identify three (3) threat scenarios that can have impact on the service owner (GitHub). ­ 2.0 points
+Important aspects: Threat scenarios should be diverse
+
+Risk Assessment Github ­ Grading (c)
+Consider the GitHub platform (github.com) that is used by millions of developers to store their code.
+c. Discuss how the identified assets can be impacted by these three (3) threat scenarios. . ­ 2.0 points
+Important aspects: Impacts should be relevant to GitHub.
+
+Risk Assessment Github ­ Grading (d)
+Consider the GitHub platform (github.com) that is used by millions of developers to store their code.
+d. Quantify these three (3) risks by estimating their likelihood and impact. ­ 2.0 points
+Important aspects: Risk quantification should include justified estimates of probability and impact; the answer should demonstrate knowledge of the main risk quantification formula: risk = impact x likelihood.
+
+Risk Assessment Github ­ Grading (e)
+Consider the GitHub platform (github.com) that is used by millions of developers to store their code.
+e. Discuss one countermeasure per risk identified in (d), i.e., three (3) in total. Countermeasures can already be implemented or not yet implemented. ­ 2.0 points
+Important aspects: Countermeasures should be adequate for the considered threat scenarios.
+
+Risk Assessment Github ­ Common Fallacies
+1.
+2. d. Quantify these three (3) risks by estimating their likelihood and impact. The answer does NOT demonstrate knowledge of the main risk quantification formula: risk = impact x likelihood. (nor can it be implied by the computations)
+
+Principles, Best Practices and Standards
+
+Design Principles (just 2 indicative)
+
+Separation of Duties
+
+Example of Conflicts ­ SoD to be applied
+
+Least Privilege Principle
+
+Best Practices and Standards
+
+Standards
+
+Compliance
+
+Security and Audit Frameworks
+
+Important Documents
+· ISO/IEC 27000 series: a set of standard on information security
+management systems (ISMSs)
+· ISO 31000: risk management standard · NIST 800-30: guide for conducting risk assessments
+https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication80030r1.pdf
+· NIST 800-53: security and privacy controls
+https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.80053r5.pdf
+· ISACA COBIT: a framework for IT systems management
+
+Methods for Risk Management
+· Tabular methods -- popular in industry · Graphical methods -- popular in academic circles
+
+Tabular Risk Management: NIST 800-30
+
+Threat Modeling
+
+STRIDE
+
+Threat Spoofing
+
+Concern
+
+Countermeasures
+
+Can you trust the identity of this entity Authentication, session
+
+(user, process, etc.) ?
+
+management, digital certificates
+
+Tampering
+
+Can you trust the integrity of the data? Digital signatures, access control,
+
+Can someone change it?
+
+auditing
+
+Repudiation Information disclosure Denial of service Elevation of privilege
+
+Can you prove who did something and when they did it?
+Is there a risk of data theft or a data leak?
+Can someone stop authorised users from getting access to the system?
+Can an unprivileged user gain privilege system access?
+
+Auditing and logging, digital certificates and digital signatures
+Access control, encryption
+Rate limiting, boundary protection, redundancy, elastic resources
+Authorization and access control, least privilege, type safety, input validation
+
+STRIDE Steps
+1. Define the key assets and security requirements for the system
+2. Design data flow diagram(s) for the system 3. Draw trust boundaries 4. Identify threats 5. Mitigate threats with controls 6. Validate that threats were mitigated
+
+STRIDE Example
+
+System Description
+· A simple e-commerce book webshop:
+· Two types of users [actors/external interactors]: customers and the shop owner (system administrator) · One web application run by a server [process] · One database with customer data and transaction information (Sales DB) [data store] · One database with warehouse data about books in stock (Books DB) [data store]
+· Interactions in this system (modelled as [data flows]):
+· Customers can send their shopping requests to the application, and will get web pages with information
+about available books
+· Owner will send information requests to the application, and will get web pages with sales data · Application can send requests to the Sales DB for the sales data · Application sends requests to the Books DB for the warehouse data
+
+Assets and Requirements
+· Assets: databases, web application process.
+· Requirements: · Confidentiality, integrity and availability of sales data. · Integrity and availability of books data. · Integrity and availability of web app.
+
+Data Flow Diagram (DFD)
+
+DFD with trust boundaries
+Trust boundaries demarcate trust zones Generally, relevant threats cross the trust boundaries
+
+STRIDE per element
+
+Element
+
+S
+
+T
+
+R
+
+I
+
+D
+
+E
+
+Actor
+
+x
+
+x
+
+Process
+
+x
+
+x
+
+x
+
+x
+
+x
+
+x
+
+Data flow
+
+x
+
+x
+
+x
+
+Data store
+
+x
+
+x
+
+x
+
+Each element is the victim, not the perpetrator
+
+STRIDE per interaction
+
+#
+
+Element
+
+Interaction
+
+STR
+
+I
+
+DE
+
+1
+
+Process
+
+Process has outbound data flow to data store
+
+x
+
+x
+
+2
+
+Process sends output to another process
+
+x
+
+x x xx
+
+3
+
+Process sends output to an actor (code)
+
+x
+
+xxx
+
+4
+
+Process sends output to an actor (human)
+
+x
+
+5
+
+Process has inbound data flow from data store
+
+xx
+
+xx
+
+6
+
+Process has inbound data flow from a process
+
+x
+
+x
+
+xx
+
+7
+
+Process has inbound data flow from an actor
+
+x
+
+xx
+
+8
+
+Data flow
+
+Crosses machine/trust boundary
+
+x
+
+xx
+
+9
+
+Data store
+
+Process has outbound data to data store
+
+xxxx
+
+10
+
+Process has inbound data from data store
+
+xxx
+
+11
+
+Actor
+
+Actor passes input to a process
+
+x
+
+xx
+
+12
+
+Actor gets input from a process
+
+x
+
+Some Threats
+· Web app process: · Spoofing of Owner: somebody else gets Sales data. · Spoofing of Books and Sales data (incoming) · Customer denies sending requests (repudiation) · A database is offline (DoS); not answering requests · Customer connects with higher privilege, potentially getting more data than needed
+(EoP)*
+· * not really modelled in this diagram, but it can be extended to model privileges.
+
+Take-aways
+· Risk management: quantification and prioritization of threats. We decide on
+defensive strategies and implement controls based on our risks.
+· Threat modelling: applied to brainstorm about possible attacks. The more we
+understand our threat landscape, the better we can prepare.
+· STRIDE - a methodology to identify threats for software systems. Focuses on
+most typical scenarios.
+
+References
+· NIST SP 800-12 An Introduction to Information Security
+https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-12r1.pdf -- a condensed introduction to security from the organisational perspective
+· CyBOK Risk Management and Governance
+https://www.cybok.org/media/downloads/Risk-Management--Governance-issue1.0.pdf
+
+Outlook
+· In the first two lectures, we · gave an Introduction to Security and related terminology; · worked on risk assessment and threat modeling.
+· This completes the main managerial component of our course, and allows us to move to the technical part.
+· Next week we move to the topic of Cryptography, concretely starting with Symmetric Encryption
+· Also related to Cryptography, towards the end of the course, we will discuss Secure Computation Technologies, enabled by cryptographic techniques
+Stay Tuned.........
+
+Questions?
+Bij ons leer je de wereld kennen
+

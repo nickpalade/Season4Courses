@@ -1,0 +1,114 @@
+\sct{L5 Network Security}{MED}
+
+\hd{OSI 7 Layers}: L1 Phys (cable, voltage); L2 DataLink (MAC, switching, ARP); L3 Net (IP routing); L4 Transport (TCP/UDP); L5 Session (connections); L6 Pres (encoding); L7 App (HTTP, DNS). TCP/IP 4-layer: Link \to Internet \to Transport \to App (compresses L1-L2, L5-L7).
+
+\hd{Common ports}: SSH 22; telnet 23; SMTP 25; DNS 53; HTTP 80; HTTPS 443; RDP 3389. \R{Telnet leaks creds plain-text!}
+
+\hd{TCP 3-way handshake}: client \to server SYN (SYN\_SENT); server \to client SYN-ACK (SYN\_RCVD); client \to server ACK (ESTABLISHED). Server keeps half-open state until ACK. \K{SYN flood}: attacker floods SYN without completing handshakes \to exhaust server backlog. \K{SYN cookies}: don't allocate state until ACK, verify ACK matches.
+
+\hd{Amplification attacks}: attacker spoofs victim's IP \to queries DNS/NTP servers, responses flood victim. \K{Smurf}: broadcast ICMP echo \to all hosts reply to victim. Prevent: block directed broadcasts, rate-limit replies.
+
+\hd{Session hijack}: attacker steals TCP seq/ack numbers (via sniffing or guessing) \to inject packets into established session. Mitigation: \K{IPsec}, TLS (crypto handshake + HMAC prevent guessing).
+
+\hd{Firewalls}: \K{packet filter} (L3/L4: IP/port rules, stateless); \K{stateful} (tracks TCP states, blocks out-of-order packets); \K{proxy} (L7, inspects content, breaks TCP connection \to re-establishes). \K{DMZ} = subnet between internet \& internal net for public servers (web, mail). External traffic \to DMZ only; DMZ \to internal requires second rule.
+
+\hd{IDS/IPS}: \K{signature}-based = match known attack patterns (\R{NOT public-key signature!}), fast, misses 0-day; \K{anomaly}-based = flag deviation from baseline, catches novel attacks, more false positives. \K{IDS} detects/alerts, \K{IPS} blocks inline. \K{NIDS} (network IDS, monitors wire) vs \K{HIDS} (host IDS, monitors logs/syscalls).
+
+\hd{Base rate Bayes} \fivept
+\noindent\resizebox{\linewidth}{!}{$P(m\mid a)=\dfrac{P(a\mid m)P(m)}{P(a\mid m)P(m)+P(a\mid\bar m)P(\bar m)}$}\par
+Base rate $P(m)=1/10^{5}$ (malicious rare). Worked: model $10^{6}$ pkts, 10 malicious. ADS: TPR=2/10=0.2, FP=1/$10^6$ \to $\approx 2$ true + 1 false \to $P\approx 2/3=$\R{67\%}. B3S4fe: TPR=9/10=0.9, FP=50/$10^6$ \to 9 true + 50 false \to $P=9/59\approx$\R{15\%}. \R{Lower base rate \to false positives dominate precision}. Pick ADS: higher precision, fewer false alarms (avoid alert fatigue), fewer SOC burnout.
+
+\hd{VPN modes}: \K{site-to-site} (net-to-net tunnel, e.g.\ branch office \to HQ); \K{remote access} (client \to corp net). \K{IPsec}: \K{AH} (Authentication Header, verifies+protects integrity, not confidentiality); \K{ESP} (Encapsulating Security Payload, encrypts+integrates, full protection). \K{Tunnel mode} (encrypt whole IP packet, new IP header wraps it, router-to-router); \K{transport mode} (encrypt payload only, keep IP header, host-to-host).
+
+\hd{NAT}: \K{Network Address Translation}, rewrites src/dst IP (e.g.\ internal 192.168.x.x \to external 203.0.113.x). Stateful: NAT maintains mapping of internal \to external tuple (allows inbound reply to match outbound flow). \R{NAT hides internal topology, semi-hides from simple scanning}.
+
+\hd{Honeypot}: decoy service/host (fake SSH, fake database) to detect intrusion, study attacker behavior, waste attacker time. Log all access; isolate from prod.
+
+\hd{Attacks}: \K{MITM} (intercept unencrypted traffic); \K{ARP spoof} (send fake ARP reply \to redirect traffic); \K{DNS spoof} (send fake DNS response, reroute to attacker); \K{DoS/DDoS} (flood with traffic \to exhaust resource); \K{port scan} (probe open services, e.g.\ SYN scan, Xmas scan). Mitigations: VPN/TLS (encryption stops MITM), static ARP entries, DNSSEC, rate-limiting, IPS.
+
+\sct{L6 App Sec / Exploit}{HIGH}
+
+\hd{Stack smashing (ORDER!)} \fivept
+Attack sequence (EXACT):
+\begin{enumerate}
+\setlength{\itemsep}{0pt}
+\item Find \K{vulnerable function} (unbounded write e.g.\ \texttt{strcpy}, \texttt{sprintf("...",arg)}, \texttt{scanf("\%s",buf)}).
+\item Locate \K{buffer on stack} (local var, \texttt{char buf[128]}).
+\item Calculate \texttt{offset to saved \%rip} = bytes from buffer start to saved return addr (\texttt{gdb}: \texttt{p \$rbp - \&buf}, add 8).
+\item Prepare \K{payload}: NOP sled (\texttt{0x90}) \to shellcode \to padding \to little-endian return addr into sled.
+\item \K{Overwrite saved rip} (return addr on stack) \to point into NOP sled, CPU resumes there, executes payload.
+\end{enumerate}
+
+\hd{Stack layout}: Low addr \to high: \texttt{buffer} (grows up on overflow) \ldots{} saved \texttt{rbp} (frame ptr) \ldots{} saved \texttt{rip}/return addr (8 bytes, little-endian: low byte first in memory). Stack grows toward \textit{low} addresses; buffer overflow grows \textit{toward high} \to overwrites saved rip.
+
+\hd{Shellcode parts}:
+\begin{itemize}
+\setlength{\itemsep}{0pt}
+\item \texttt{NOP sled} = chain of \texttt{0x90} (no-op, safe padding, slide to payload).
+\item \texttt{shellcode} = e.g.\ \texttt{execve("/bin/sh")} (write syscall to execute shell).
+\item \texttt{padding} = fill remaining buffer space (e.g.\ \texttt{0x42}='B' or garbage).
+\item \texttt{return addr} = little-endian stack address pointing \textit{into} sled.
+\end{itemize}
+Example (quiz): 70$\times$\texttt{\textbackslash x90}, 30-byte \texttt{execve} shellcode, 36$\times$\texttt{\textbackslash x42}, 6-byte addr \texttt{\textbackslash x70\textbackslash xec\textbackslash xff\textbackslash xff\textbackslash xff\textbackslash x7f} = \texttt{0x7fffffffec70} (little-endian).
+
+\hd{Buffer overflow}: write more bytes than buffer size \to overflow heap/stack; if heap: corrupt malloc metadata (\texttt{size}, \texttt{next}) \to heap corruption, crashes, code exec via \texttt{free()}. If stack: overwrite saved rip/rbp/locals.
+
+\hd{Format string}: attacker controls format string argument to \texttt{printf}, \texttt{fprintf}, \texttt{syslog}, etc. Exploits: \texttt{\%x} leaks stack values; \texttt{\%n} writes to memory (\R{dangerous!}). Example: \texttt{printf("\%x.\%x.\%x")} leaks 3 stack values; \texttt{printf("\%100x\%n", addr)} writes value to \texttt{addr}. Bypass: stack layout + ASLR guessing.
+
+\hd{Integer overflow}: \texttt{int size = input\_int; char buf[1024]; memcpy(buf, src, size);} If attacker passes \texttt{size = -1} or \texttt{2\^31}, \texttt{memcpy} casts to huge \texttt{size\_t} \to reads/writes out of bounds. Mitigation: bounds-check on \texttt{int} before use.
+
+\hd{TOCTOU}: \K{Time-of-check-to-time-of-use} race condition. Check \texttt{if(file\_readable("..."))}, then \texttt{open("...")}. Attacker changes file between check \& use. Mitigation: atomic open, error handling on actual operation.
+
+\hd{ROP}: \K{Return-oriented programming}; attacker chains return-to-\textit{gadgets} (short code sequences ending in \texttt{ret}), no injected code. Example: \texttt{pop rdi; ret} (set arg), \texttt{pop rsi; ret} (set arg), \texttt{syscall; ret} (make syscall). Overwrite rip \to gadget1, gadget1 returns to gadget2, etc. \R{Bypasses NX (no injected code)} but requires \K{code reuse}. Mitigated by \K{CFI}, \K{shadow stack} (store return addr in separate protected memory, verify on return).
+
+\hd{GOT/PLT overwrite}: Global Offset Table holds resolved addresses of library functions; Procedure Linkage Table holds stubs. If attacker overwrites GOT entry for \texttt{strlen} \to \texttt{system}, next call to \texttt{strlen} jumps to \texttt{system} instead. Requires: write-to-memory exploit (buffer overflow, format string).
+
+\hd{Use-after-free}: free pointer, then dereference it. If malloc reuses that memory for another object, dereference accesses wrong object \to read wrong data or corrupt new object. Example: \texttt{free(p); p\to field = x;}. Mitigation: set \texttt{p=NULL} after free, check before use.
+
+\hd{Double-free}: call \texttt{free(p)} twice. Second free corrupts malloc metadata (or crashes if guard bits present). Mitigation: set \texttt{p=NULL} after first free.
+
+\hd{Off-by-one}: buffer of size 10, loop writes 11 bytes (0-index through 10 inclusive). Last byte overwrites adjacent memory (canary, next local, or ret addr). Mitigation: careful loop bounds, \texttt{i < size} not \texttt{i <= size}.
+
+\hd{ASLR/PIE}: \K{ASLR} = Address Space Layout Randomization, OS randomizes stack/heap/text base on each run; \K{PIE} = Position-Independent Executable, compiled code has no fixed address. Without ASLR/PIE, hardcoded return addresses (ROP, ret2libc) work reliably. With: attacker must leak base address (format string, info leak) to compute correct addr. \R{Little-endian}: lowest byte first in memory (e.g.\ address \texttt{0x4000} = \texttt{\textbackslash x00\textbackslash x40} on little-endian).
+
+\hd{Injection types}: buffer overflow; format string (\texttt{\%n} writes, \texttt{\%x} leaks); integer overflow (underflow \to large \texttt{size\_t}); \K{SQLi} = mix data+SQL code, e.g.\ \texttt{SELECT \* FROM users WHERE id=}'' OR ''1''=''1; fix: parameterized/prepared queries (\texttt{?} placeholders); off-by-one; use-after-free; double-free.
+
+\sct{L7 App Defences}{HIGH}
+
+\hd{Stack canary}: compiler inserts random 8-byte value (``canary'') on stack before saved rip on function entry; checks it on return. If overflow overwrites canary, check fails \to abort. Defeated by: info leak (leak canary value), or brute-force (only 256 values if compressed to 1 byte).
+
+\hd{NX/DEP}: \K{Non-eXecute bit}/\K{Data Execution Prevention}; mark stack/heap non-executable in page tables. Injected shellcode won't run (CPU raises fault). Defeat: ROP (reuse code), ret2libc (call library functions).
+
+\hd{ASLR}: \K{Address Space Layout Randomization}; OS randomizes base address of stack, heap, libraries, code on each run. Hardcoded addresses fail. Defeat: info leak (format string, buffer over-read) \to compute base \to compute gadget/func addr. Some old systems had weak randomization (few bits entropy).
+
+\hd{PIE}: \K{Position-Independent Executable}; compile code relocatable, no fixed address. Requires ASLR to be effective (randomize relocation base).
+
+\hd{CFI}: \K{Control-Flow Integrity}; restrict indirect jumps/calls/returns to pre-computed valid targets only (computed at compile/link time or dynamically). Goal = stop hijacked control flow (ROP, ret2libc). Techniques: \K{shadow stack} (copy return addr to separate safe memory, verify on return), indirect branch targets (whitelist of valid \texttt{call} targets).
+
+\hd{ret2libc}: bypass NX by calling library functions (libc is executable). Example: set arg registers, jump to \texttt{system()} in libc \to execute command. No injected code, only code reuse. Defeated by CFI (restrict targets) or randomized libc base (ASLR, PIE).
+
+\hd{RELRO}: \K{Relocation Read-Only}; after linking, make GOT read-only, prevent GOT overwrites. Partial RELRO (only some sections), full RELRO (entire GOT). Partial is common (full has startup overhead).
+
+\hd{FORTIFY\_SOURCE}: compiler wrapper, bounds-check standard string functions. \texttt{memcpy(buf, src, n)} where \texttt{n} known at compile-time \to warn/fail if \texttt{n > sizeof(buf)}. Runtime checks on \texttt{strlen}, \texttt{strcpy}, etc. Level 1 (compile-time only), Level 2 (add runtime checks).
+
+\hd{Sanitizers}: \K{ASan} (AddressSanitizer, detect use-after-free, buffer overflow, double-free, heap/stack/global overflows); \K{UBSan} (UndefinedBehaviorSanitizer, detect signed overflow, division by zero, shift out of bounds). Compile-time instrumentation, catches bugs at runtime (slower, use in dev/test).
+
+\hd{Safe libraries}: \texttt{strncpy(buf, src, sizeof(buf)-1)} limit copy to buffer size; \texttt{snprintf(buf, sizeof(buf), fmt, ...)} bound output; \texttt{fgets(buf, sizeof(buf), stdin)} safe input. Avoid \texttt{strcpy}, \texttt{sprintf}, unbounded \texttt{scanf("\%s")}.
+
+\hd{Bounds checking}: validate array indices, buffer sizes, pointer offsets before access. Example: \texttt{if(i >= arr\_size) return error;} before \texttt{arr[i]}.
+
+\hd{Least privilege}: run process as unprivileged user; drop root/admin caps asap after init. \K{Sandbox} = restrict syscalls (\texttt{seccomp}) or file access (chroot, containerization). Example: web server runs as \texttt{www-data} user, sandbox blocks filesystem writes outside \texttt{/var/www}.
+
+\hd{Privilege drop}: \texttt{setuid()}, \texttt{setgid()}, drop capabilities (CAP\_NET\_ADMIN, etc.). Prevents: if attacker compromises service, limited to user's permissions (no root access to system).
+
+\hd{Seccomp}: filter syscalls at kernel level. Whitelist safe syscalls (\texttt{read}, \texttt{write}, \texttt{exit}); block dangerous ones (\texttt{execve}, \texttt{fork}). Stops ROP/shellcode that tries \texttt{execve}.
+
+\hd{Code review}: manual inspection for logic bugs, missing validation, crypto misuse. Static analysis (SAST): automated tool scans code (e.g.\ \texttt{clang-analyzer}, \texttt{Coverity}) for buffer overflows, SQL injection patterns, uninitialized vars. Dynamic analysis (DAST): runtime tool or fuzzing detects crashes, memory errors. Fuzzing: automated input generation (e.g.\ \texttt{libFuzzer}, \texttt{AFL}) to trigger bugs.
+
+\hd{Threat modeling}: \K{STRIDE}: Spoofing (auth bypass), Tampering (data modify), Repudiation (deny actions), Info disclosure (leak data), Denial of Service, Elevation of privilege. Map assets/actors, identify threats, design controls (e.g.\ TLS stops tampering, logs stop repudiation).
+
+\hd{Input validation}: \K{allowlist} safe values (strict, prefer); \K{sanitization} remove/escape dangerous chars; \K{output encoding} escape for context (HTML encode \texttt{\&}, \texttt{<}, \texttt{>} for XSS; SQL params for SQLi). Validation at boundaries (user input, API responses, file reads).
+
+\hd{Patch management}: track known vulns (CVEs), test patches, deploy asap (especially critical/high severity). Automated tools (e.g.\ \texttt{dependabot}) alert on outdated packages. Never ignore security updates.
+
+\hd{Secure dev flags}: \texttt{-fstack-protector-strong} (canary), \texttt{-D\_FORTIFY\_SOURCE=2} (bounds-check stdlib), \texttt{-fPIE} (position-independent), \texttt{-Wl,-z,relro,-z,now} (RELRO + eager binding). Use in release builds, not just debug.

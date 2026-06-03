@@ -1,0 +1,428 @@
+5
+Lecture 4: Asymmetric Cryptography
+
+Eleftheria Makri| Security
+
+04/03/2026
+
+Bij ons leer je de wereld kennen
+
+Asymmetric Cryptography
+· Quick Recap of Symmetric Cryptography
+· Asymmetric Cryptography (Why do we need it?)
+· Symmetric or Asymmetric Cryptography?  The best of both worlds
+· Public-Key Cryptography · Key Exchange · Digital Signatures · Public Key Encryption
+· Public-Key Infrastructure (PKI)
+· TLS Protocol (Transport Layer Security)
+· Some Bonus today...
+
+Quick Recap of Last Week... Symmetric Cryptography
+
+Cryptography
+
+Cryptanalysis
+
+Cryptology =
++
+
+Important goals of cryptography
+· Confidentiality = keeping information secret for everyone except for authorized entities
+· Authentication · of entities = assuring the source of information · of data = assuring that the information has not been altered by unauthorized entities
+· Non-repudiation = assuring that actions or commitments in the past cannot be denied
+
+Classification of cryptography
+· Symmetric-key cryptography: · Mainly for confidentiality · Sender and receiver have the same secret key · Block ciphers and stream ciphers
+· Public-key cryptography: · Mainly for authentication (digital signatures) and key agreement · Sender and receiver have a different key (= public and private key)
+· Hash functions: · Mainly for the authentication of data · With or without secret key
+
+Symmetric-key cryptography
+
+Sender
+
+Receiver
+
+Hello Bob!
+
+Secret Key
+
+Exchange key using a secure
+channel
+
+Secret Key
+Hello Bob!
+
+Encryption
+
+&sdA %sdf LL)*$
+Ciphertext
+
+Decryption
+
+Stream Ciphers
+
+and
+
+Block Ciphers
+
+Stream Ciphers
+
+Block Ciphers
+
+Recommended key sizes for symmetric-key crypto
+Source: keylength.com (ECRYPT-CSA recommendations, 2018)
+
+Hash Functions
+
+Properties of hash functions
+The ideal hash function for cryptographic applications has the following properties:
+· It is easy to calculate the hash of a message
+· Given the hash value h, it is difficult to find a message that has h as a hash value = pre-image resistance
+· Given the message m1, it is difficult to find a message m2 that has the same hash value as the hash value of the message m1 = second pre-image resistance
+· It is difficult to find two different messages with the same hash value = collision resistance
+
+The use of a secret key
+· Hash functions without a secret key are used to assure data integrity. They allow to detect changes in the transmitted messages.
+· Hash functions can also be used for authentication (of data). In this case, a secret key is used, together with the message, and we call the function a Message Authentication Code (MAC).
+
+Message Authentication Code ­ MAC
+
+Recommended size of the hash value
+Source: keylength.com (ECRYPT-CSA recommendations, 2018)
+
+Public-key cryptography
+
+Sender
+
+Receiver
+
+Hello Bob!
+
+Secret Key
+
+Exchange key using a secure
+channel
+
+Secret Key
+Hello Bob!
+
+Encryption
+
+&sdA %sdf LL)*$
+Ciphertext
+
+Decryption
+
+Hello Bob!
+
+Sender
+
+Receiver
+
+Using Public Key
+
+Public Key
+
+Public Key
+
+Public Key &
+Secret Key
+Computation
+Secret Key
+
+Hello Bob!
+
+Encryption
+
+&sdA %s^f LL)*$
+Ciphertext
+
+Decryption
+
+Hybrid Cryptography (Send)
+
+Hybrid Cryptography (Receive)
+
+Hybrid Cryptography (Combination)
+
+Public-Key Cryptography
+· Key exchange · Digital signature · Public-key encryption
+
+Public-Key Cryptography
+· Key exchange · Digital signature · Public-key encryption
+
+Diffie-Hellmann key exchange (1)
+· Key agreement with Diffie-Hellman (DH) · E.g., to agree on the secret key that is needed to encrypt/decrypt messages with symmetric-key cryptography. (all operations in the figure are modular operations)
+
+Diffie-Hellmann key exchange (2)
+
+All operations in the figure are modular.
+Alice a  [2 , p-2] A = ga mod p
+K = Ba = gba mod p
+
+Bob b  [2 , p-2] B = gb mod p
+K = Ab = gab mod p
+
+It is very difficult to calculate the established key K (= gab mod p) knowing only g, A (= ga mod p), B (= gb mod p) and the modulus p. This is called the
+Computational Diffie-Hellman problem (CDH). The CDH is related to the
+Discrete Logarithm Problem (DLP): it is very difficult to calculate a knowing only A (= ga mod p), g and the modulus p.
+
+Recommended sizes for crypto based on DLP
+Source: keylength.com (ECRYPT-CSA recommendations, 2018)
+
+Elliptic curve cryptography
+· In Elliptic curve cryptography (ECC) the modular exponentiation is replaced by a point multiplication · The points on the curve form a group with point addition as the group operation · The security is based on the Elliptic Curve Discrete Logarithm Problem (ECDLP)
+Source: keylength.com (ECRYPT-CSA recommendations, 2018)
+
+Man-in-the-middle (MITM) attack on DH
+
+· Eve pretends to be Bob in the
+
+communication with Alice
+
+· Eve pretends to be Alice in the
+
+Eve
+
+communication with Bob
+
+· After the key agreement, Eve shares
+
+a key with Alice (KA) and a key with Bob (KB) · In any further communication, Eve
+
+can decrypt all messages from Alice
+
+to Bob (or from Bob to Alice) with KA (or KB) in order to obtain the transmitted message.
+
+· If Eve encrypts the message
+
+afterwards with KB (or with KA) and sends it to Bob (or Alice), Alice and
+
+Bob do not notice that Eve can
+
+intercept all messages.
+
+Source figure: commons.wikimedia.org
+
+Man-in-the-middle attack on DH: solution
+· To prevent a MITM attack, Alice and Bob need to perform mutual authentication
+· This can be done with a digital signature
+
+Public-Key Cryptography
+· Key exchange · Digital signature · Public-key encryption
+
+Digital signature (1)
+· A digital signature assures the receiver of a message that the message has been sent by the claimed sender.
+· To generate/verify a digital signature, a public/private key pair is needed. · The public key is known to everyone · The private key is kept secret by the owner
+
+Digital signature (2)
+
+Digital signature (3)
+· Signature generation: The sender uses his private key to generate a signature. This is the encryption with the private key (of the hash value) of the message.
+· Signature verification: The receiver uses the public key of the sender to verify the digital signature. The receiver does this by: · Decrypting the digital signature with the public key; · Comparing the result with (the hash of) the message.
+· Algorithms for digital signatures: · DSA (Digital Signature Algorithm) · RSA (Rivest, Shamir, Adleman) · ECDSA (Elliptic Curve Digital Signature Algorithm)
+
+Public-Key Cryptography
+· Key exchange · Digital signature · Public-key encryption
+
+Public-key encryption/decryption (1)
+· Public-key encryption: The sender uses the public key of the receiver to encrypt the message.
+· Public-key decryption: The receiver uses his private key to decrypt the ciphertext.
+
+Public-key encryption/decryption (2)
+· Public-key encryption: The sender uses the public key of the receiver to encrypt the message.
+· Public-key decryption: The receiver uses his private key to decrypt the ciphertext.
+· Example ElGamal encryption/decryption (security based on DLP): private key: a public key: (g,A) with A = ga
+Encryption of the plaintext m: (x,y) = E(m), with x = gk and y = m*Ak (with k a random number)
+Decryption of the ciphertext (x,y): D(x,y) = (xa)-1*y = g-a*k*m*ga*k = m
+· Other example: RSA (see also exercises later)
+
+Public-key encryption/decryption (3)
+· Advantages of public-key encryption over symmetric-key encryption: · Different senders can use the public key of the receiver. · Only the receiver can decrypt the message using the private key.
+· Drawbacks compared to symmetric-key encryption: · Public-key algorithms require more computation time and are therefore slower than symmetric-key algorithms.
+
+Digital signatures vs. public-key encryption
+· Public-key encryption using public-key cryptography · encryption: use the public key of the receiver · decryption: use the private key of the receiver everyone can send, only the receiver can read
+· Digital signature using public-key cryptography · generation: use the private key of the sender · verification: use the public key of the sender only the sender can sign, everyone can verify
+Use different key pairs for encryption and digital signatures!!!
+
+Post-quantum cryptography
+· Shor's algorithm allows to calculate discrete logarithms or to do integer factorization in polynomial time (assuming that quantum computers will become available)
+· New algorithms that do not rely on discrete logarithms or integer factorization are needed
+· Post-quantum cryptography investigates how we can implement crypto after/if quantum computers become ubiquitous
+· Ongoing NIST Post-Quantum Cryptography competition
+
+A working combination
+
+Bringing it all together
+· Symmetric-key crypto needs the least computation time ­ used for fast transfer of data.
+· To establish a symmetric key over a public channel, we use public-key crypto. To generate and verify digital signatures, we use public-key crypto in combination with a hash function.
+· In order to both encrypt and authenticate data, authenticated encryption is used.
+
+Public-Key Infrastructure (PKI)
+
+Certificates
+· How can we be sure that a public key belongs to a certain entity?
+· A certification authority (CA) gives a certificate to an entity that shows that the public key belongs to that entity.
+· The CA is a trusted third party (TTP) that is trusted by the owner of the public key as well as other entities that use the public key.
+
+PKI
+
+PKI
+
+PKI
+
+PKI
+
+The TLS Protocol
+
+SSL-TLS: Protocol for secure Web communications
+TLS stands for Transport Layer Security (new name) · SSL stands for Secure Socket Layer (old name) · HTTPS = HTTP over TLS · TLS uses the PKI infrastructure and digital certificates of websites to ensure the
+following security goals: · secrecy of communication · authentication of parties · reliability (checks that messages are not corrupted in transit) · + good performance
+
+TLS Scheme
+
+TLS scheme: Session key establishment
+
+Client
+
+cert, pkS, skS
+Server
+
+nonce n
+
+(Client, C#, n)
+
+check that cert is valid and is for Server
+K1=hash(K0,n,m) key=hash(K1,n,m)
+
+(Server, S#, m, cert)
+
+nonce m
+
+{(K0)}pkS
+
+K1=hash(K0,n,m)
+
+{(finished, MAC(K1, all prev messg)}key
+
+key=hash(K1,n,m)
+
+{(finished, MAC(K1, all prev messg)}key, {data}key
+
+K0 is pre-master key K1 is master secret key key is session key
+MAC: message authentication code (like digital certificate but can be verified using shared key K 1)
+
+RSA exercise
+
+RSA
+Key generation:
+· Choose two different large primes (p and q) and compute n = p*q
+· Compute (n) = lcm(p-1,q-1) = (p-1)*(q-1)/gcd(p-1,q-1)
+(lcm = least common multiple) (gcd = greatest common divider)
+· Choose e < (n) and relatively prime to (n) · Calculate d = e-1 mod (n)
+Public key = (e,n) Private key = (p,q) or d
+Encryption: c = me mod n Decryption: m = cd mod n
+
+Example RSA
+
+Given: p = 19, q = 23, e = 13, m = 123 Requested: d, c
+Answer:
+
+(n) = 18*22/gcd(18,22) = 18*22/2 = 198
+
+d = 13-1 mod 198 = 61
+(because 13*61 mod 198 = 1)
+
+198 = 15*13 + 3 13 = 4*3 + 1 3 = 3*1 + 0
+
+1 = 13 - 4*3 1 = 13 - 4*(198-15*13) 1 = 61*13 - 4*198
+
+1 = 61*13 mod 198
+d = e-1 mod 198 e*d = 1 mod 198
+
+Extended Euclidean algorithm
+
+n = p*q = 437 c = me mod n = 12313 mod 437 = 386 (check: cd mod 437 = 38661 mod 437 = 123 = m)
+
+Homomorphism in RSA
+Given: c_1 = m_1e mod n and c_2 = m_2e mod n Unpadded RSA allows us to compute: c_1 * c_2 = (m_1e mod n) * (m_2e mod n) = (m_1 * m_2)e mod n , which then decrypts to the product of the two plaintexts: (c_1 * c_2 )d mod n = m_1 * m_2
+- Malleability... allows for attacks - But, also.... for Secure Computation schemes
+
+The three states of data
+
+Data in Transit
+
+Data at Rest
+
+Data in Use
+
+The three states of data
+
+Traditional Cryptography
+
+Data in Transit
+
+Data at Rest
+
+Data in Use
+
+The three states of data
+
+Traditional Cryptography
+
+Data in Transit
+
+Data at Rest
+
+Secure Computation
+Data in Use
+
+Multiparty Computation ­ MPC
+
+b
+
+a
+
+c
+
+e
+
+d
+
+ Securely compute f (a, b, c, d, e).
+
+Exercise RSA
+Given: p = 19, q = 17, e = 7, m = 321 Requested: d, c
+Solution: d = 103 c = 195
+
+Solution Exercise
+
+Given: p = 19, q = 17, e = 7, m = 321 Requested: d, c
+Answer:
+
+(n) = 18*16/gcd(18,16) = 18*16/2 = 144
+
+d = 7-1 mod 144
+= 103
+(because 7*(-41) mod 144 7*(-41+144) mod 144 7*103 mod 144 = 1)
+
+144 = 20*7 + 4 7 = 1*4 + 3 4 = 1*3 + 1 3 = 3*1 + 0
+
+1 = 4 - 1*3 1 = 4 - 1*(7 - 1*4) 1 = 2*4 - 1*7 1 = 2*(144 - 20*7) - 1*7 1 = 2*144 - 41*7
+
+n = p*q = 323 c = me mod n = 3217 mod 323 = 195 (check: cd mod n = 195103 mod 323 = 321 = m)
+
+References
+· Nigel Smart, Cryptography Knowledge Area ­ The Cyber Security Body of Knowledge, Available at: https://www.cybok.org/media/downloads/Cryptography_v1.0.1.pdf (Chapters 2, 6, 7 and 8)
+· Alfred J. Menezes, Paul C. van Oorschot and Scott A. Vanstone, Handbook of Applied Cryptography, Available at: https://cacr.uwaterloo.ca/hac/ (Chapters 3, 4, 8 and 11 ­ the relevant parts therein)
+
+Outlook
+· We covered the basics of Symmetric and Asymmetric Encryption
+· Next week we move to a new chapter: Network Security
+· However, we get back later in our course to discuss advanced cryptographic primitives that enable Secure Computation Technologies*
+Stay Tuned.........
+* We discuss other topics first, interleaving the general cryptography topic, due to the upcoming practical assignments, which are related
+
+Questions?
+Bij ons leer je de wereld kennen
+

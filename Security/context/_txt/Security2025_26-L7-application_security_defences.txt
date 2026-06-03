@@ -1,0 +1,1194 @@
+Lecture 7: Application Security II
+Security Francesco Bariatti
+1 April 2026
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+1 / 34
+
+Table of Contents
+1. Recap 2. Preventing exploits 3. Detecting exploits
+Control-flow integrity 4. Language-based prevention: Memory safety and Type safety
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+2 / 34
+
+Recap
+1. Recap 2. Preventing exploits 3. Detecting exploits
+Control-flow integrity 4. Language-based prevention: Memory safety and Type safety
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+2 / 34
+
+Recap
+Previous lecture recap
+In previous lecture: attacker perspective How can we exploit a vulnerable program? What steps do we take to make a vulnerable program do what we want?
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+3 / 34
+
+Recap
+Recap: buffer overflow to inject attacker code
+
+OS stuff
+
+...
+
+Low addresses
+
+Program code Global variables and other data
+rip
+
+Heap
+
+...
+
+Stack
+
+Program arguments and others
+
+rsp & rbp
+
+High addresses
+
+buffer
+... 0x00
+
+0x00
+
+0x00
+
+0x00
+
+old rbp (8 bytes)
+
+... ret. addr. (8 bytes) Previous function stuff
+
+buffer
+...
+
+padding
+
+rbp
+
+old rbp (8 bytes) rbp
+
+0x1122334455667788
+
+shellcode 0x1122334455667788
+
+...
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+4 / 34
+
+Recap
+Recap: buffer overflow to affect logic
+
+1 int f(char* arg1) {
+
+2
+
+int authenticated = 0;
+
+3
+
+char buffer[4];
+
+4
+
+strcpy(buffer, arg1);
+
+5
+
+if (authenticated) {
+
+6
+
+// Restricted area
+
+7
+
+}
+
+8}
+
+9 void main() {
+
+10
+
+char* myStr = "BBBBBBBB";
+
+11
+
+f(myStr);
+
+12
+
+// Rest of the function
+
+} 13
+
+buffer
+
+authenticated
+
+...
+
+0x42424242
+
+0x42424242
+
+old rbp (8 bytes) "line 12" (8 bytes) Main function stuff
+
+rbp
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+5 / 34
+
+Recap
+Recap: other attacks
+Heap smashing/overflow: similar to stack smashing/overflow Different targets, can have different impacts
+Format string vulnerabilities Unsanitized user input interpreted as formatting directives Unexpected formatting directives make program behave wrongly
+Integer over/underflow: numbers in computers are not infinite! Attackers affects program logic by carefully choosing values
+Time-Of-Check Time-Of-Use vulnerability: "race condition" between checking and using property
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+6 / 34
+
+Recap
+Attacker steps
+As an attacker, to exploit a vulnerable program: Find some code that we want to execute (but we should not be able to) If not exists, inject our own code as binary instructions
+Access memory beyond theoretical limits (overflow) to modify program status to execute that code If jumping: need to guess code's address Usage of NOP sleds allows for imperfect guesses
+Profit
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+7 / 34
+
+Recap
+Goal for this lecture
+Defender perspective: how can we make it more difficult for attackers to execute those steps?
+Three types of defences: Preventive: make exploits more difficult or impossible Detective: detect exploits happened and abort execution Reactive/Corrective: fix state after exploit happened
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+8 / 34
+
+Preventing exploits
+1. Recap 2. Preventing exploits 3. Detecting exploits
+Control-flow integrity 4. Language-based prevention: Memory safety and Type safety
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+8 / 34
+
+Preventing exploits
+To prevent exploits: Make exploitation steps more difficult or impossible Avoid bugs via secure coding and better code audit Automated tools, limit to subsets of C, . . . Improve architecture: improve OS, libraries, compiler, . . . Make exploits of all programs more difficult
+= These strategies are complementary and are all widely used
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+9 / 34
+
+Preventing exploits
+To prevent exploits: Make exploitation steps more difficult or impossible Avoid bugs via secure coding and better code audit Automated tools, limit to subsets of C, . . . Improve architecture: improve OS, libraries, compiler, . . . Make exploits of all programs more difficult
+= These strategies are complementary and are all widely used
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+9 / 34
+
+Non-executable memory
+
+Preventing exploits
+
+Attacker steps Inject our own instructions as binary on the stack. Overwrite rip so that execution moves to the stack.
+Defences?
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+10 / 34
+
+Non-executable memory
+
+Preventing exploits
+
+Attacker steps Inject our own instructions as binary on the stack. Overwrite rip so that execution moves to the stack.
+Defences? In modern systems CPU does not access memory directly  Memory Management Unit (MMU)
+Or Memory Protection Unit (MPU) for smaller systems
+OS can mark stack and heap segments1 as non-executable
+CPU refuses to execute instructions from non-executable segments Segmentation fault
+
+1Modern systems use pages of memory and not segments, but you can think of a segment as a sequence of pages.
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+10 / 34
+
+Preventing exploits
+
+OS stuff
+
+...
+
+Low addresses
+
+Program code Global variables and other data
+rip
+
+Heap
+
+...
+
+Program arguments Stack
+
+and others
+
+rsp & rbp
+
+High addresses
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+11 / 34
+
+Preventing exploits
+
+OS stuff
+
+...
+
+Low addresses
+
+Program code Global variables and other data
+rip
+
+Heap
+
+Read Read Read
+
+Execute
+
+Write
+
+Read Write
+
+...
+
+Program arguments Stack
+
+and others
+
+rsp & rbp
+
+High addresses
+
+Read Write
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+11 / 34
+
+Preventing exploits
+Return-oriented programming (ROP)
+Does non-executable memory solve everything? What can it not solve?
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+12 / 34
+
+Preventing exploits
+Return-oriented programming (ROP)
+Does non-executable memory solve everything? What can it not solve?
+Attacker can still overwrite stack content if buffer overflow available In particular, return addresses
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+12 / 34
+
+Preventing exploits
+Return-oriented programming (ROP)
+Does non-executable memory solve everything? What can it not solve?
+Attacker can still overwrite stack content if buffer overflow available In particular, return addresses
+Attacker can "frankenstein" their payload from existing instructions in executable memory
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+12 / 34
+
+Preventing exploits
+Return-oriented programming (ROP)
+Does non-executable memory solve everything? What can it not solve?
+
+Attacker can still overwrite stack content if buffer overflow available In particular, return addresses
+Attacker can "frankenstein" their payload from existing instructions in executable memory
+libc (standard C library) particularly juicy target: return-to-libc attacks e.g. contains function to execute command (system), contains string "/bin/sh" Contains all sort of functions with all sorts of instructions: e.g. loading register value from stack Has well-known structure at well-known addresses
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+12 / 34
+
+ASLR
+
+Preventing exploits
+
+Attacker steps Exploit the fact that libc is loaded at well-known address and jump to it.
+Defences?
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+13 / 34
+
+ASLR
+
+Preventing exploits
+
+Attacker steps Exploit the fact that libc is loaded at well-known address and jump to it.
+Defences?
+Address Space Layout Randomization (ASLR): place standard libraries and other useful elements randomly in memory
+Prevents return oriented programming (and return-to-libc in particular) Prevents guessing return address in "standard" stack smashing
+NOP sled of little help if random space too big Currently deployed on all OSs
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+13 / 34
+
+ASLR caveats
+
+Preventing exploits
+
+Only randomizes start positions, not contents
+To be applied to program instructions, compiler needs to support it All major compilers and OSs should support it nowadays
+Needs enough randomness in the possible addresses Should not be a problem with 64-bit address space Needs to actually be random Attackers can try to reduce possibilities with information leak (e.g. printf format vulnerabilities) Memory alignment requirements can reduce possibilities
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+14 / 34
+
+Detecting exploits
+1. Recap 2. Preventing exploits 3. Detecting exploits
+Control-flow integrity 4. Language-based prevention: Memory safety and Type safety
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+14 / 34
+
+Stack canaries
+
+Detecting exploits
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+15 / 34
+
+Stack canaries
+
+Detecting exploits
+
+A canary is an alert system that fails early before more important systems fail.
+
+...
+
+Local variables ...
+
+Canary 0xAABB
+
+old rbp (8 bytes)
+
+... ret. addr. (8 bytes) Previous function stuff
+
+rbp
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+15 / 34
+
+Stack canaries
+
+Detecting exploits
+
+A canary is an alert system that fails early before more important systems fail.
+
+...
+
+Local variables ...
+
+Canary 0xAABB
+
+old rbp (8 bytes)
+
+... ret. addr. (8 bytes) Previous function stuff
+
+...
+
+Local variables padding
+
+Canary
+
+rbp
+
+rbp (8 bytes)
+
+0x1122334455667788
+
+shellcode
+
+...
+
+rbp
+
+Compiler adds code to every function to check canary value before loading return address If loaded canary does not have expected value: immediately abort
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+15 / 34
+
+Canary values
+
+Detecting exploits
+
+What should we set the canary value to? Definitely not a well-known value that the attacker can easily inject!
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+16 / 34
+
+Canary values
+
+Detecting exploits
+
+What should we set the canary value to? Definitely not a well-known value that the attacker can easily inject!
+Terminator canaries: contain null or other (e.g. \n) bytes that can not be injected via classic vulnerable functions (e.g. strcpy, scanf)
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+16 / 34
+
+Canary values
+
+Detecting exploits
+
+What should we set the canary value to? Definitely not a well-known value that the attacker can easily inject!
+Terminator canaries: contain null or other (e.g. \n) bytes that can not be injected via classic vulnerable functions (e.g. strcpy, scanf)
+Random canaries: generated at runtime for each process. True value stored somewhere else than stack. Default for gcc when using canaries (default if "sensitive" functions called)
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+16 / 34
+
+Canary values
+
+Detecting exploits
+
+What should we set the canary value to? Definitely not a well-known value that the attacker can easily inject!
+Terminator canaries: contain null or other (e.g. \n) bytes that can not be injected via classic vulnerable functions (e.g. strcpy, scanf)
+Random canaries: generated at runtime for each process. True value stored somewhere else than stack. Default for gcc when using canaries (default if "sensitive" functions called)
+Random XOR canaries: random value XOR-ed with control flow info (e.g. return address mask) Protects against attacker targeting saved rip directly via non-buffer-overflow pointer manipulation
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+16 / 34
+
+Canary caveats
+
+Detecting exploits
+
+buffer
+
+authenticated
+
+...
+
+0x42424242
+
+0x42424242
+
+Canary 0xAABB
+
+old rbp (8 bytes) ret. addr. (8 bytes) Main function stuff
+
+rbp
+
+Does not protect all variables against overwriting: just return address (and saved rbp) Would need canary after every memory location  uses more memory Would need code to check after every memory assignment  takes longer
+
+Read overflow could allow attacker to read canary value Increases steps that attacker needs to take and vulnerabilities that need to be present
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+17 / 34
+
+Behaviour-based detection
+
+Detecting exploits Control-flow integrity
+
+? How can we detect an ongoing attack? If a program deviates from its expected behaviour, it might be compromised
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+18 / 34
+
+Behaviour-based detection
+
+Detecting exploits Control-flow integrity
+
+? How can we detect an ongoing attack? If a program deviates from its expected behaviour, it might be compromised
+What is expected behaviour? What is deviation? How to check in a way that is is difficult to compromise?
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+18 / 34
+
+Detecting exploits Control-flow integrity
+Control Flow Integrity (CFI)
+A function consists of basic blocks (pieces of code) A program execution is made of control transfers among basic blocks
+Here: only look at control transfer between functions
+Connections between basic blocks can be modeled as Control Flow Graph (CFG) Expected behaviour follows CFG
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+19 / 34
+
+Call graph
+
+Detecting exploits Control-flow integrity
+
+void sort(int x[], int len, /*function*/  f) {
+// Omitted // Calls f at some point(s) }
+int sort2(int a[], int b[], int len) { sort(a, len, lt); sort(b, len, gt);
+}
+
+bool lt(int x, int y) { return x < y;
+}
+bool gt(int x, int y) { return x > y;
+}
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+20 / 34
+
+Call graph
+void sort(int x[], int len, /*function*/  f) {
+// Omitted // Calls f at some point(s) }
+int sort2(int a[], int b[], int len) { sort(a, len, lt); sort(b, len, gt);
+}
+
+Detecting exploits Control-flow integrity
+bool lt(int x, int y) { return x < y;
+} bool gt(int x, int y) {
+return x > y; }
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+20 / 34
+
+Call graph
+void sort(int x[], int len, /*function*/  f) {
+// Omitted // Calls f at some point(s) }
+int sort2(int a[], int b[], int len) { sort(a, len, lt); sort(b, len, gt);
+}
+
+Detecting exploits Control-flow integrity
+bool lt(int x, int y) { return x < y;
+} bool gt(int x, int y) {
+return x > y; }
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+20 / 34
+
+Detecting exploits Control-flow integrity
+Control Flow Integrity: compliance with CFG
+To check whether execution is compliant: Compute CFG: during compilation or by static analysis of resulting instructions CFG captures expected behaviour
+Monitor behaviour during execution: ensure only paths in CFG are followed Direct calls do not need to be monitored (assuming code is immutable) Indirect calls (via saved values, based on registers, function tables, etc) need to be monitored
+Depend on data that can be dynamically altered Monitoring part called In-line Reference Monitor (IRM)
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+21 / 34
+
+void sort(int x[], int len, /*function*/  f) {
+// Omitted // Calls f at some point(s) }
+int sort2(int a[], int b[], int len) { sort(a, len, lt); sort(b, len, gt);
+}
+
+Detecting exploits Control-flow integrity
+bool lt(int x, int y) { return x < y;
+}
+bool gt(int x, int y) { return x > y;
+}
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+22 / 34
+
+Detecting deviations
+
+Detecting exploits Control-flow integrity
+
+Add instructions to the program to check that current control flow is expected
+Insert a label (canary value) before each possible jump target In the code, before the first instruction of jump target
+Before jump, check that target address contains label or abort
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+23 / 34
+
+Detecting deviations
+
+Detecting exploits Control-flow integrity
+
+Add instructions to the program to check that current control flow is expected
+
+Insert a label (canary value) before each possible jump target In the code, before the first instruction of jump target
+Before jump, check that target address contains label or abort
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+23 / 34
+
+Detecting deviations
+
+Detecting exploits Control-flow integrity
+
+Add instructions to the program to check that current control flow is expected
+
+Insert a label (canary value) before each possible jump target In the code, before the first instruction of jump target
+Before jump, check that target address contains label or abort
+
+Does not prevent reuse: can jump to any target that is valid at least once
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+23 / 34
+
+Detailed labelling
+
+Detecting exploits Control-flow integrity
+
+Constraints on labels:
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+24 / 34
+
+Detailed labelling
+
+Detecting exploits Control-flow integrity
+
+Constraints on labels:
+lt and gt both called from sort: must share a label Two possible return sites from sort: must share a label = This is starting to get difficult. . .
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+24 / 34
+
+CFI implementation
+
+Detecting exploits Control-flow integrity
+
+Martín Abadi et al. "Control-flow integrity principles, implementations, and applications". In: ACM Trans. Inf. Syst.
+
+Secur. 13.1 (Nov. 2009), 4:1­4:40. DOI: 10.1145/1609956.1609960
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+25 / 34
+
+Possible attacks on CFI
+
+Detecting exploits Control-flow integrity
+
+Attacker injects code that has a legal label Not possible for non-executable memory and non-writable code segments
+Modify code labels to allow new control flows Not possible for non-writable code segment
+Make it look like a CFI check passed CFI computations done in registers only: unavailable for attacker No stack usage for CFI labels
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+26 / 34
+
+CFI caveats
+
+Detecting exploits Control-flow integrity
+
+CFI defeats all attacks that change expected control flow: ROP, code injection, . . .
+CFI analysis and instrumentation can be heavy Control flow analysis: very close to halting problem. . . Check on "hot paths" (functions called many times) can eventually slow down program
+Still allows control transfer that are compliant mimicry attacks Constraints for complex programs may limit actual label diversity
+Does not prevent data leak or data corruption In particular: read overflow, buffer overflow to affect control flow inside a basic block
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+27 / 34
+
+Language-based prevention: Memory safety and Type safety
+1. Recap 2. Preventing exploits 3. Detecting exploits
+Control-flow integrity 4. Language-based prevention: Memory safety and Type safety
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+27 / 34
+
+Language-based prevention: Memory safety and Type safety
+Memory safety
+A programming language is memory-safe if all possible programs written in the language are memory-safe A program is memory-safe if all possible executions are memory-safe
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+28 / 34
+
+Language-based prevention: Memory safety and Type safety
+Memory safety
+A programming language is memory-safe if all possible programs written in the language are memory-safe A program is memory-safe if all possible executions are memory-safe
+Memory-safe execution: Temporal safety: only access memory that is defined (active) Memory is undefined if not yet allocated, uninitialized, deallocated (freed) = Only create pointers through standard means: p = malloc(), p = &x, . . .
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+28 / 34
+
+Language-based prevention: Memory safety and Type safety
+Memory safety
+A programming language is memory-safe if all possible programs written in the language are memory-safe A program is memory-safe if all possible executions are memory-safe
+Memory-safe execution: Temporal safety: only access memory that is defined (active) Memory is undefined if not yet allocated, uninitialized, deallocated (freed) = Only create pointers through standard means: p = malloc(), p = &x, . . .
+Spatial safety: when using a pointer to access memory, only access memory that belongs to that pointer
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+28 / 34
+
+Language-based prevention: Memory safety and Type safety
+Memory safety
+
+A programming language is memory-safe if all possible programs written in the language are memory-safe
+A program is memory-safe if all possible executions are memory-safe
+
+Memory-safe execution: Temporal safety: only access memory that is defined (active) Memory is undefined if not yet allocated, uninitialized, deallocated (freed) = Only create pointers through standard means: p = malloc(), p = &x, . . .
+
+Spatial safety: when using a pointer to access memory, only access memory that belongs to that pointer
+
+= Spatial safety ensure that access is to a legal region, temporal safety ensures that content is still valid
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+28 / 34
+
+Language-based prevention: Memory safety and Type safety
+Spatial safety
+"Extended" pointer representation (p, b, e) p is actual pointer b is base (i.e. start) of memory region that p can access e is extent (i.e. end/size) of memory region that p can access
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+29 / 34
+
+Language-based prevention: Memory safety and Type safety
+Spatial safety
+"Extended" pointer representation (p, b, e) p is actual pointer b is base (i.e. start) of memory region that p can access e is extent (i.e. end/size) of memory region that p can access
+Pointer arithmetic can change p, but does not change b and e Access allowed if and only if b  p  e - sizeof (typeof (p))
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+29 / 34
+
+Language-based prevention: Memory safety and Type safety
+Spatial safety
+"Extended" pointer representation (p, b, e) p is actual pointer b is base (i.e. start) of memory region that p can access e is extent (i.e. end/size) of memory region that p can access
+Pointer arithmetic can change p, but does not change b and e Access allowed if and only if b  p  e - sizeof (typeof (p))
+int x; int* y = &x; // p = addr(x), b = addr(x), e = addr(x)+4 (assuming 4-byte int)
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+29 / 34
+
+Language-based prevention: Memory safety and Type safety
+Spatial safety
+"Extended" pointer representation (p, b, e) p is actual pointer b is base (i.e. start) of memory region that p can access e is extent (i.e. end/size) of memory region that p can access
+Pointer arithmetic can change p, but does not change b and e Access allowed if and only if b  p  e - sizeof (typeof (p))
+int x; int* y = &x; // p = addr(x), b = addr(x), e = addr(x)+4 (assuming 4-byte int) int* z = y+1; // p = addr(x)+4, b = addr(x), e = addr(x)+4
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+29 / 34
+
+Language-based prevention: Memory safety and Type safety
+Spatial safety
+
+"Extended" pointer representation (p, b, e) p is actual pointer b is base (i.e. start) of memory region that p can access e is extent (i.e. end/size) of memory region that p can access
+Pointer arithmetic can change p, but does not change b and e Access allowed if and only if b  p  e - sizeof (typeof (p))
+int x; int* y = &x; // p = addr(x), b = addr(x), e = addr(x)+4 (assuming 4-byte int) int* z = y+1; // p = addr(x)+4, b = addr(x), e = addr(x)+4 *y = 42; // OK: addr(x) <= addr(x) <= addr(x)+4-4 *z = 42; // ERROR: addr(x) <= addr(x)+4 > addr(x)+4-4
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+29 / 34
+
+Language-based prevention: Memory safety and Type safety
+char buf[4]; // p = addr(buf), b = addr(buf), e = addr(buf)+4
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+30 / 34
+
+Language-based prevention: Memory safety and Type safety
+char buf[4]; // p = addr(buf), b = addr(buf), e = addr(buf)+4 y[2] = "A"; // OK: p = addr(buf)+2, addr(buf) <= addr(buf)+2 <= addr(buf)+4-1
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+30 / 34
+
+Language-based prevention: Memory safety and Type safety
+char buf[4]; // p = addr(buf), b = addr(buf), e = addr(buf)+4 y[2] = "A"; // OK: p = addr(buf)+2, addr(buf) <= addr(buf)+2 <= addr(buf)+4-1 y[4] = "B"; // ERROR: p = addr(buf)+4, addr(buf) <= addr(buf)+4 > addr(buf)+4-1
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+30 / 34
+
+Language-based prevention: Memory safety and Type safety
+Memory safety violations
+Buffer overflow is spatial safety violation: accessing memory beyond e Format string vulnerabilities can allow spatial safety violations
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+31 / 34
+
+Language-based prevention: Memory safety and Type safety
+Memory safety violations
+Buffer overflow is spatial safety violation: accessing memory beyond e Format string vulnerabilities can allow spatial safety violations
+Use-after-free is a temporal safety violation Holding a pointer pointing inside a function's stack after the function returns is a temporal safety violation
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+31 / 34
+
+Language-based prevention: Memory safety and Type safety
+Memory safety violations
+Buffer overflow is spatial safety violation: accessing memory beyond e Format string vulnerabilities can allow spatial safety violations
+
+Use-after-free is a temporal safety violation
+
+Holding a pointer pointing inside a function's stack after the function returns is a temporal safety violation
+
+Integer overflows do not violate memory safety as long as they don't cause an illegal pointer to be
+made
+1 unsigned short x = 65535; 2 x = x+1; // Overflows and becomes 0 3 printf("%d\n",x); // OK: memory-safe 4 char* p = malloc(x); // Allocates size-0 buffer 5 p[65535] = "A"; // ERROR
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+31 / 34
+
+Language-based prevention: Memory safety and Type safety
+Memory-safe languages
+
+Many languages will take care of memory safety for you Python, Java, C#, Rust, . . . Rust explicitly implements "borrow checker": checks temporal safety at compile-time by automatically marking pointers as invalid
+= Easiest way to avoid buffer overflow vulnerabilities Most of the time: add checks at runtime
+C and C++ are not memory-safe C and C++ are not going away
+Although rustacean are trying really hard to make it so :) Possible to write memory-safe C/C++: compiler-added checks for memory violations
+Not universally used due to performance penalties Many ways to create a wrong pointer in C
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+32 / 34
+
+Language-based prevention: Memory safety and Type safety
+Type safety
+Each object has a type: int, pointer to int, struct, pointer to function, etc Implicit in some languages, but definitely there
+Type safety ensures that operations on objects are always compatible with types Injecting shellcode in a buffer and jumping via a valid buffer pointer is technically memory-safe w.r.t. the pointer. . . but not type-safe!
+Dynamically-typed languages (e.g. Python) have additional metadata to identify the type of each object
+If an operation is not possible for the current type, throw exception Well-defined behaviour and thus type-safe
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+33 / 34
+
+Language-based prevention: Memory safety and Type safety
+Costs of safety
+Type and memory safety enforcement is expensive computationally Garbage-collected languages avoid temporal violations, but require more memory (and time) than malloc/free Runtime bounds check take time on each access but avoid spatial violations Verifying violations at compile time removes runtime costs but increases compilation costs Generally a good tradeoff  Rust
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+34 / 34
+
+[Aba+09]
+
+Language-based prevention: Memory safety and Type safety
+Martín Abadi et al. "Control-flow integrity principles, implementations, and applications". In: ACM Trans. Inf. Syst. Secur. 13.1 (Nov. 2009), 4:1­4:40. DOI: 10.1145/1609956.1609960.
+
+Francesco Bariatti
+
+Lecture 7: Application Security II
+
+1 April 2026
+
+34 / 34
+

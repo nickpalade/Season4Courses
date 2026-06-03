@@ -4,7 +4,7 @@
 
 ### Friday, May 29
 - **Machine Learning - Tentamen 101**
-  - Time: 12:00 - 15:00 (3 hours)
+  - Time: 12:00 - 13:00 (1 hour)
   - Location: Universitair Sportcentrum - Hall 2
   - Staff: Athanasiadis, C. | Baratchi, M.
 

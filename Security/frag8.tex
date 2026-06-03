@@ -1,0 +1,46 @@
+% frag8.tex — fill page-2 gap w/ more exam content: comparison tables, malware,
+% social eng, side channels, master attack map.
+\sct{Comparison tables}{drill}
+\hd{Symmetric ciphers}
+\K{DES}: 64-bit block, 56-bit key (\R{broken}), 16 Feistel rounds. \K{3DES}: 3$\times$DES, 112/168-bit effective, slow/legacy. \K{AES}: 128-bit block, 128/192/256-bit key $\to$10/12/14 rounds, SP-network, fast+secure standard.
+\hd{Public-key schemes}
+\K{RSA}: factoring hard; 2048+ bit; encrypt+sign. \K{DH}: discrete log; key exchange only. \K{ECC}: ECDLP; 256-bit$\approx$RSA 3072; ECDSA/ECDH, small keys. \K{ElGamal}: discrete log; encrypt+sign. \R{All classical broken by Shor (quantum)} $\to$ post-quantum (lattices).
+\hd{Sym vs Asym}
+Sym: 1 shared key, fast, bulk, key-distribution problem. Asym: key pair, slow, small data (key exchange/sig), solves distribution. \K{Hybrid} = asym agrees session key $\to$ sym encrypts bulk.
+\hd{Modes recap}
+ECB(\R{leaks patterns}), CBC(IV chain, needs random IV), CFB(self-sync), OFB/CTR(no error propagation, stream-like, \R{never reuse nonce}), GCM(CTR+auth=AEAD).
+
+\sct{Malware \& social eng}{MED}
+\hd{Malware types}
+\K{Virus} = attaches to host file, needs user to run. \K{Worm} = self-propagates over network, no host. \K{Trojan} = disguised as legit. \K{Ransomware} = encrypts files, demands payment (Availability). \K{Rootkit} = hides presence, kernel/boot level. \K{Botnet} = compromised hosts under C2 (used for DDoS/spam). \K{Spyware/keylogger} = covert data capture. \K{Logic bomb} = triggers on condition.
+\hd{Social engineering}
+\K{Phishing} = mass fake email/site for creds. \K{Spear phishing} = targeted. \K{Whaling} = exec target. \K{Pretexting} = invented scenario. \K{Baiting} = malicious USB/download. \K{Tailgating} = follow into building. \K{Vishing/smishing} = voice/SMS. Fix: training, MFA, verify out-of-band, email filtering, DMARC/SPF/DKIM.
+\hd{Email auth}
+\K{SPF} = which IPs may send for domain. \K{DKIM} = signed email headers. \K{DMARC} = policy + reporting on SPF/DKIM fail. Together reduce spoofing.
+
+\sct{Side channels \& misc}{LOW}
+\hd{Side-channel attacks}
+\K{Timing} = exec time leaks secret (compare/branch). \K{Power analysis} (SPA/DPA) = power trace leaks key. \K{Cache} (Spectre/Meltdown) = cache timing leaks across boundary. \K{EM/acoustic} = emanations. Fix: constant-time code, blinding, masking.
+\hd{Clickjacking}
+Invisible iframe over legit-looking button $\to$ user clicks unintended action. Fix: \K{X-Frame-Options}, \K{frame-ancestors} (CSP).
+\hd{CORS}
+Server opt-in relaxation of SOP via \texttt{Access-Control-Allow-Origin}. Misconfig (\texttt{*} + credentials) $\to$ cross-origin data theft.
+\hd{Certificate revocation}
+\K{CRL} = list of revoked cert serials. \K{OCSP} = online status query. \K{OCSP stapling} = server attaches fresh status. Revoke on key compromise/CA breach.
+
+\sct{Master attack map}{ref}
+{\fivept\sloppy
+\K{attack}$\to$STRIDE$\to$goal$\to$fix:\par
+\K{SQLi}: Tamper/Disclose/EoP; Conf/Integ/Authz; prepared stmt.\par
+\K{XSS}: Tamper/Spoof/Disclose; Conf/Integ; encode+CSP+HttpOnly.\par
+\K{CSRF}: Spoof/Tamper; Authz/Integ; token+SameSite.\par
+\K{Buf overflow}: Tamper/EoP; Integ/Authz; canary+NX+ASLR.\par
+\K{ROP/ret2libc}: EoP; Integ; CFI+shadow stack.\par
+\K{MITM}: Spoof/Tamper/Disclose; Auth/Conf/Integ; TLS+cert.\par
+\K{SYN flood}: DoS; Avail; SYN cookies.\par
+\K{DNS poison}: Spoof/Tamper; Authenticity/Integ; DNSSEC.\par
+\K{Heartbleed}: Disclose; Conf; patch+bounds.\par
+\K{Phishing}: Spoof; Auth; MFA+training.\par
+\K{Priv esc}: EoP; Authz; least privilege.\par
+\K{Tracking}: Disclose; Privacy; block 3rd-party+anti-fp.\par
+}

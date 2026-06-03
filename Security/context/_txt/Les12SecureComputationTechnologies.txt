@@ -1,0 +1,611 @@
+Lecture 12: Secure Computation Technologies
+
+Eleftheria Makri| Security
+
+13/05/2025
+
+Bij ons leer je de wereld kennen
+
+Secure Computation Technologies
+· Reminder of Homomorphism in RSA
+· Why Secure Computation?
+· Securing Data in Use ­ PETs (Privacy Enhancing Technologies) · Differential Privacy · Data Anonymization · Cryptographic Techniques · Homomorphic Encryption · Multiparty Computation (MPC)
+· A closer look at MPC
+· Concrete Application Scenarios
+
+Privacy Enhancing Technologies
+
+Homomorphism in RSA
+Given: c_1 = m_1e mod n and c_2 = m_2e mod n Unpadded RSA allows us to compute: c_1 * c_2 = (m_1e mod n) * (m_2e mod n) = (m_1 * m_2)e mod n , which then decrypts to the product of the two plaintexts: (c_1 * c_2 )d mod n = m_1 * m_2
+- Malleability... allows for attacks - But, also.... for Secure Computation schemes
+
+Why Secure Computation?
+
+The three states of data
+
+Data in Transit
+
+Data at Rest
+
+Data in Use
+
+The three states of data
+
+Traditional Cryptography
+
+Data in Transit
+
+Data at Rest
+
+Data in Use
+
+The three states of data
+
+Traditional Cryptography
+
+Data in Transit
+
+Data at Rest
+
+Secure Computation
+Data in Use
+
+Data in Use
+
+Autonomous Driving
+
+Internet of Things
+
+Smart Cities Online Social Networking
+
+Medical Research
+
+Data in Use
+
+"How to allow the collection and purposeful processing of private data, without compromising individual privacy?"
+
+Securing Data in Use ­ PETs
+Data Anonymization
++
+Differential Privacy
+
+Data in Use
+
+Cryptographic Techniques for Secure Computation
+
+DP ­ Ensuring individual privacy
+
+DP ­ Ensuring individual privacy
+
+DP ­ The Penalties
+· Inherent information leakage, called privacy budget in DP terms.
+· Inherent tradeoff between data privacy and data utility
+
+Securing Data in Use ­ PETs
+Data Anonymization
++
+Differential Privacy
+
+Data in Use
+
+Cryptographic Techniques for Secure Computation
+
+Data Anonymization
+
+Data Anonymization
+
+Securing Data in Use ­ PETs
+Data Anonymization
++
+Differential Privacy
+
+Data in Use
+
+Cryptographic Techniques for Secure Computation
+
+Homomorphic Encryption
+
+Types of Homomorphic Encryption
+
+HE Type
+
+Type of Operation Number of Operations
+
+Partially Homomorphic Encryption (PHE)
+Somewhat Homomorphic Encryption (SHE)
+Fully Homomorphic Encryption (FHE)
+
+One (Addition OR Multiplication)
+Two (Addition AND Multiplication)
+Two (Addition AND Multiplication)
+
+Unlimited Limited Unlimited
+
+Homomorphic Encryption Context
+· Outsourcing the computation to one single party (server) · Inherently trust the server to perform the computation correctly and honestly · One round of communication: Query ­ Response · Communication and computational cost is considerably larger than
+plaintext computations
+
+Multiparty Computation ­ MPC
+
+b
+
+a
+
+c
+
+e
+
+d
+
+ Securely compute f (a, b, c, d, e).
+
+"Two millionaires wish to know who is richer; however, they do not want to find out inadvertently any additional information about each other's wealth. How can they carry out such a conversation?"
+-Andrew Yao, 1982
+
+Multiparty Computation Context
+· A minimum of two parties (servers) is required to perform computation · Trust is distributed and there are various security models one can consider · Multiple rounds of communication required in an interactive protocol · Communication and computational cost is considerably larger than
+plaintext computations (yet more efficient than HE solutions!)
+
+A closer look at MPC
+
+Security Models
+
+· Active Security
+
+vs.
+
+· Passive Security
+
+Corruption Thresholds
+
+· Dishonest Majority
+
+vs.
+
+· Honest Majority
+
+Corruption Thresholds
+
+· Dishonest Majority
+
+vs.
+in the active model
+
+· Honest Majority
+
+OR in the passive model
+
+Types of Parties
+
+Types of Parties
+
+Computational Power of Parties
+
+Available Network Setting/Resources
+
+Available Network Setting/Resources
+
+Minimum Data Transfer
+
+Minimum Number of Rounds
+
+Secret Sharing-based MPC (e.g., additive)
+
+b
+
+a
+
+c
+
+e
+
+d
+
+Secret x = a + b + c + d + e
+
+(mod p)
+
+Available Network Setting/Resources
+
+Minimum Data Transfer
+
+Minimum Number of Rounds
+
+Garbling Based (MPC)
+
+Available Network Setting/Resources
+
+Minimum Data Transfer
+
+Minimum Number of Rounds
+
+The Preprocessing Model
+
+Offline Phase · Data independent
+
+Online Phase · Data dependent
+
+· Any time prior to protocol execution
+· Prepare (random) material for input sharing and multiplication computations
+
+· Synchronous protocol execution with all parties online
+· Consume preprocessed material to (more efficiently) complete the computation at hand
+
+Share Input x (online phase)
+
+Using preprocessed (r, [r]) r = r1 + r2 + r3 + r4 + r5
+=x+r
+x5 =  ­ r5
+
+x1 = ­r1
+
+x2 = ­r2
+
+x4 = ­r4
+
+x3 = ­r3
+
+Compute Product z = x  y (online phase) 1/3
+
+Using preprocessed ([a], [b], [c]), with c = a  b, and a, b random
+
+2= x2 ­ a2 2 = y2 ­ b2
+
+1 = x1 ­ a1 1 = y1 ­ b1
+
+3 = x3 ­ a3 3 = y3 ­ b3
+
+5 = x5 ­ a5 5 = y5 ­ b5
+
+4 = x4 ­ a4 4 = y4 ­ b4
+
+Compute Product z = x  y (online phase) 2/3
+
+Using preprocessed ([a], [b], [c]), with c = a  b, and a, b random
+
+Open =x­a =y­b
+
+Compute Product z = x  y (online phase) 3/3
+
+Using preprocessed ([a], [b], [c]), with c = a  b, and a, b random
+
+z2 = c2 +   b2 +   a2+   
+
+z1 = c1 +   b1 +   a1+   
+z5 = c5 +   b5 +   a5+    Set [z] = [c] +   [b] +   [a] +   
+
+z3 = c3 +   b3 +   a3+    z4 = c4 +   b4 +   a4+   
+
+The tradeoffs
+
+Functionality
+
+Security
+
+Efficiency
+
+The tradeoffs
+
+Functionality
+
+Security
+
+Efficiency
+
+MPC Applications
+· Auctions · e-Voting · Statistical Analysis and Collaborative Analytics · Fraud Detection · e-Health and general medical research applications · Key Management · Machine Learning
+According to Gartner, by 2025, 50% of large organizations will implement privacyenhancing computation to process data in untrusted environments and multiparty data
+analytics use cases.
+
+Concrete Application Scenarios with MPC
+
+EPIC: Efficient Private Image Classification
+
+Image Classification
+
+EPIC: Efficient Private Image Classification
+
+Zoom into Feature Extraction
+Feature Extraction
+
+Transfer Learning Feature Extraction (or: Learning from the Masters)
+
+Where does the MPC happen?
+
+EPIC Security Active Security
+EPIC
+
+vs.
+
+Passive Security
+
+All other protocols in the related work
+
+Step 1: Create the ML Model
+
+Alice
+
+Inception­v3 CNN
+
+Linear SVM
+
+Dragos Rotaru
+
+54
+
+54
+
+Step 2: Alice secret shares the ML model
+
+ Alice
+
+ Bob
+
+Charlie
+
+Step 2: Alice secret shares the ML model
+
+
+
+ Charlie
+
+Alice
+
+Bob
+
++ + 1
+
+2
+
+3
+
+Dragos Rotaru
+=
+
+Step 3: Bob extracts features
+
+Bob Inception­v3 CNN
+
+Features
+
+
+57
+
+Step 4: Bob secret shares features
+
+ Alice
+
+ Charlie
+
+Bob
+
+Dragos Rotaru
+
+Step 4: Bob secret shares features
+
+
+
+ 
+
+ Charlie
+
+Alice
+
+
+
+Bob
+
+Dragos
+
+Rotaru
+
+1
+
++ + 2
+
+3
+
+= CNN-Feat(
+
+)
+
+59
+
+Step 5: Parties use MPC to help Charlie compute label of SVM-Alice(Bob-Image)
+
+ 
+
+Alice
+
+
+ Charlie
+
+
+
+Bob
+
+60
+
+Step 5: Parties use MPC to help Charlie compute label of SVM-Alice(Bob-Image)
+
+ 
+
+Alice
+
+
+ Charlie
+***"Florist"***
+
+
+
+Bob
+
+61
+
+EPIC Performance ­ Simple Variant
+
+Computation Cost
+
+Runtimes (s)
+4
+
+3.5
+
+3
+
+2.5
+
+2
+
+1.5
+
+1
+
+0.5
+
+0 CIFAR-10
+(88.8% accuracy)
+
+MIT-67 (72.2% accuracy)
+
+Caltech-101 (91.4% accuracy)
+
+Offline Online Total
+
+Communication Cost
+
+Communication (MB)
+300
+
+250
+
+200
+
+150
+
+100
+
+50
+
+0 CIFAR-10
+(88.8% accuracy)
+
+MIT-67 (72.2% accuracy)
+
+Caltech-101 (91.4% accuracy)
+
+Offline Online Total
+
+Performance of the state-of-the-art private image classification
+
+Computation Cost
+
+Communication Cost
+
+Runtimes (s)
+1000
+
+Communication (MB)
+10000
+
+100
+
+1000
+
+10 100
+
+1
+
+MiniONN*
+
+Gazelle**
+
+EPIC
+
+(81.61% accuracy) (81.61% accuracy) (88.8% accuracy)
+
+10
+
+0.1
+
+0.01 0.001
+
+Offline Online Total
+
+1 MiniONN*
+(81.61% accuracy)
+0.1
+
+Gazelle** (81.61% accuracy)
+
+EPIC (88.8% accuracy)
+
+Offline Online Total
+
+* Jian Liu, Mika Juuti, Yao Lu, N. Asokan. Oblivious Neural Network Predictions via MiniONN Transformations. In Proceedings of the 2017 ACM SIGSAC Conference on Computer and Communications Security (pp. 619-631). ACM. ** Chiraag Juvekar, Vinod Vaikuntanathan, and Anantha Chandrakasan. GAZELLE: A low latency framework for secure neural network inference. In 27th USENIX Security Symposium (USENIX Security '18), Baltimore, MD, 2018. USENIX Association.
+
+EPIC Efficiency Gain over the state-of-the-art
+· EPIC vs. Gazelle1 on CIFAR-10: · 34 times faster runtime; · 50 times improvement of communication cost; · 7% higher classification accuracy.
+· EPIC vs. Gazelle1 with the same accuracy: · 700 times faster runtime; · 500 times improvement of communication cost.
+1 Chiraag Juvekar, Vinod Vaikuntanathan, and Anantha Chandrakasan. GAZELLE: A low latency framework for secure neural network inference. In 27th USENIX Security Symposium (USENIX Security '18), Baltimore, MD, 2018. USENIX Association.
+
+Privacy Preserving Genome Wide Association Studies
+
+Privacy Preserving GWAS
+
+MPC-based Solution
+
+MPC-based Solution
+
+Problem of re-identification
+
+Problem of re-identification
+
+MPC-based GWAS ­ Performance
+
+Medical Centers
+20 40 60 80 100
+
+Number of Patients
+200000 400000 600000 800000 1000000
+
+CPU Time (Server 1)
+2.2ms 2.3ms 2.3ms 2.5ms 2.4ms
+
+Data Sent (Server 1)
+12.7KB 17.8KB 23KB 28.1KB 33.2KB
+
+CPU Time (Server 2, and
+Server 3) 1.9ms
+2.0ms
+2.0ms
+2.2ms
+2.1ms
+
+MPC-based GWAS
+
+vs.
+
+HE-based GWAS
+
+· CPU time in the range of milliseconds
+· Total communication cost in the range of KB
+· Multiple parties ( 2) required to perform the computation
+· Active Security Guarantees
+72
+
+· CPU time in the range of seconds
+· Total communication cost in the range of MB
+· One party performs the computation
+· Semi-honest Decryptor assumption
+
+References
+· David Evans, Vladimir Kolesnikov, Mike Rosulek, A Pragmatic Introduction to Secure Multi-Party Computation, Available at: https://www.cs.virginia.edu/~evans/pragmaticmpc/pragmaticmpc.pdf (Chapters 1, 2.1, 2.2, and 3.1)
+· See also handout for application references
+
+Outlook
+Prepare to ace the final exam!
+
+Questions?
+Bij ons leer je de wereld kennen
+

@@ -1,0 +1,18 @@
+% frag7.tex — fill remaining space w/ high-yield exam drills + quick tables.
+\sct{Exam quick-reference}{drill}
+\hd{Crypto math drills}
+\K{Mod exp fast}: $2^5\bmod35$: $2^5{=}32$, $32{<}35\to32$. Square-and-multiply for big exp. \K{Ext Euclid} finds $d=e^{-1}\bmod\lambda$: back-substitute $\gcd(e,\lambda){=}1$. \K{Euler}: $\varphi(pq){=}(p{-}1)(q{-}1)$; $\lambda{=}\mathrm{lcm}(p{-}1,q{-}1)$. \K{DH numeric}: $p{=}23,g{=}5$; $a{=}6\to A{=}5^6\bmod23{=}8$; $b{=}15\to B{=}5^{15}\bmod23{=}19$; secret $=19^6\bmod23=2=8^{15}\bmod23$.
+\hd{Hashing}
+\K{SHA-256}=256-bit digest; \K{SHA-3}=Keccak sponge. \R{MD5/SHA-1 broken} (collisions). \K{Birthday bound}: collision after $\approx2^{n/2}$ tries (256-bit$\to2^{128}$). Properties: preimage (given $h$, find $m$), 2nd-preimage (given $m_1$, find $m_2$ same hash), collision (find any $m_1{\ne}m_2$ same hash). Collision easiest (birthday).
+\hd{TLS internals}
+\K{Handshake}: negotiate cipher, auth via cert, key exchange (ECDHE = forward secrecy). \K{Record}: bulk symmetric encrypt + MAC/AEAD. \K{Forward secrecy} = ephemeral keys, past traffic safe if long-term key later leaked. Cert validation: check sig chain to trusted root + hostname + validity dates + not revoked (CRL/OCSP).
+\hd{Access-model star notation}
+\K{Bell-LaPadula} (conf): simple = no read up; $\star$-prop = no write down. \K{Biba} (integ): simple = no read down; $\star$-prop = no write up. \K{Clark-Wilson}: well-formed transactions + separation of duties + audit. \K{Chinese Wall}: dynamic, no access across conflict-of-interest classes once you've seen a competitor's data.
+\hd{AC model pick}
+\K{DAC}=owner delegates (UNIX, social nets, GitHub). \K{MAC}=system labels, no delegate (military). \K{RBAC}=user$\to$role$\to$perms (enterprise). \K{ABAC}=attribute policy (context: time/IP/dept). \K{ACL}=per-object list; \K{Capability}=per-subject token, easy delegate.
+\hd{Auth factors}
+\K{Know} (password/PIN), \K{have} (token/card/phone), \K{are} (biometric: fingerprint/iris/face=physiological; voice/typing/gait=behavioral). \K{FAR}=imposter accepted (Type II); \K{FRR}=legit rejected (Type I); \K{EER}=FAR=FRR crossover. MFA needs $\ge2$ DIFFERENT categories.
+\hd{IDS precision (base rate)}
+Precision $=\dfrac{TP}{TP+FP}$. Rare attacks $\to$ even tiny FPR floods alerts (base-rate fallacy). Worked: $10^6$ pkts, 10 malicious. Det A: TPR 0.2,FPR $10^{-6}\to$ 2 TP,1 FP$\to$67\%. Det B: TPR 0.9,FPR $5{\times}10^{-5}\to$ 9 TP,50 FP$\to$15\%. \R{Pick higher precision (A)}.
+\hd{Last-second goal map}
+Spoof$\to$Authenticity; Tamper$\to$Integrity; Repud$\to$Non-rep/Acct; Disclosure$\to$Conf/Privacy; DoS$\to$Availability; EoP$\to$Authz. \K{Defense-in-depth}: firewall+IDS+AV+input-validation+encryption. \K{Kerckhoffs}: only the key is secret.

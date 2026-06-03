@@ -2,8 +2,8 @@
   {
     "id": 1,
     "type": "multi",
-    "difficulty": "medium",
-    "question": "Which of the following statements about bootstrap sampling are correct?",
+    "topic": "Bootstrap Sampling",
+    "prompt": "Which of the following statements about bootstrap sampling are correct?",
     "options": [
       "Bootstrap sampling draws samples with replacement from original dataset",
       "Bootstrap samples have same size as original dataset",
@@ -11,14 +11,14 @@
       "Bootstrap aggregating (bagging) reduces variance by averaging predictions",
       "Each bootstrap sample is guaranteed to exclude certain original instances"
     ],
-    "correct_answers": [0, 1, 3],
+    "correct": [0, 1, 3],
     "explanation": "Bootstrap samples size with replacement to match original size, making some instances repeated and others absent. Bagging applies multiple models to bootstrap samples and averages predictions to reduce variance. Stratification is optional, not mandatory."
   },
   {
     "id": 2,
     "type": "multi",
-    "difficulty": "medium",
-    "question": "Which characteristics define Random Forest ensembles?",
+    "topic": "Random Forest",
+    "prompt": "Which characteristics define Random Forest ensembles?",
     "options": [
       "Trees are built on bootstrap samples of the dataset",
       "At each split, only a random subset of features is considered",
@@ -27,14 +27,14 @@
       "Final prediction is majority vote (classification) or average (regression)",
       "Random Forest requires global optimization of feature selection"
     ],
-    "correct_answers": [0, 1, 2, 4],
+    "correct": [0, 1, 2, 4],
     "explanation": "Random Forests combine bootstrap aggregation with random feature subsampling to decorrelate trees. At each node, only m features (e.g., sqrt(d) for classification) are available, reducing correlation and improving ensemble diversity. Local randomization avoids global optimization."
   },
   {
     "id": 3,
     "type": "multi",
-    "difficulty": "hard",
-    "question": "Which statements accurately describe boosting algorithms like AdaBoost?",
+    "topic": "AdaBoost",
+    "prompt": "Which statements accurately describe boosting algorithms like AdaBoost?",
     "options": [
       "Boosting weights misclassified instances higher in subsequent rounds",
       "Boosting trains weak learners sequentially, not independently",
@@ -43,14 +43,14 @@
       "Boosting always requires balanced class distributions",
       "Each weak learner focuses on instances difficult for previous learners"
     ],
-    "correct_answers": [0, 1, 3, 5],
+    "correct": [0, 1, 3, 5],
     "explanation": "Boosting trains learners sequentially, increasing weights for misclassified instances. AdaBoost combines predictions as weighted majority vote where weights depend on learner accuracy. Error rate follows multiplicative bound under margin theory. No requirement for balanced data; boosting adapts automatically."
   },
   {
     "id": 4,
     "type": "multi",
-    "difficulty": "hard",
-    "question": "What are the key differences between bagging and boosting for bias-variance reduction?",
+    "topic": "Bagging vs Boosting",
+    "prompt": "What are the key differences between bagging and boosting for bias-variance reduction?",
     "options": [
       "Bagging primarily reduces variance; boosting primarily reduces bias",
       "Bagging uses parallel training; boosting uses sequential training",
@@ -59,14 +59,14 @@
       "Boosting can lead to overfitting if weak learners are too strong",
       "Bagging is computationally expensive due to sequential training"
     ],
-    "correct_answers": [0, 1, 2, 4],
+    "correct": [0, 1, 2, 4],
     "explanation": "Bagging (parallel) reduces variance via averaging; boosting (sequential) reduces bias by focusing on hard instances. Bagging works best with high-variance learners like deep trees; boosting with weak learners. Strong learners in boosting risk overfitting. Bagging parallelizes, making it computationally efficient."
   },
   {
     "id": 5,
     "type": "multi",
-    "difficulty": "medium",
-    "question": "In the context of stacking, which statements are correct?",
+    "topic": "Stacking",
+    "prompt": "In the context of stacking, which statements are correct?",
     "options": [
       "Level-0 models are base learners trained on original dataset",
       "Level-1 model (meta-model) learns from Level-0 predictions as features",
@@ -75,14 +75,14 @@
       "Stacking can combine diverse base learner types",
       "Train/test split is not necessary for stacking Level-0 models"
     ],
-    "correct_answers": [0, 1, 2, 4],
+    "correct": [0, 1, 2, 4],
     "explanation": "Stacking uses cross-validated predictions from diverse base learners as meta-features for Level-1 model. k-fold CV prevents data leakage. Meta-model can be any learner, not restricted to linear regression. Diverse base learners (trees, SVM, NB) improve meta-learning."
   },
   {
     "id": 6,
     "type": "multi",
-    "difficulty": "hard",
-    "question": "Which aspects of the bias-variance tradeoff are correctly described?",
+    "topic": "Bias-Variance Tradeoff",
+    "prompt": "Which aspects of the bias-variance tradeoff are correctly described?",
     "options": [
       "Bias measures systematic error from model assumptions",
       "Variance measures sensitivity to training data fluctuations",
@@ -91,91 +91,95 @@
       "Bagging reduces variance without increasing bias significantly",
       "Boosting reduces bias by iteratively correcting errors"
     ],
-    "correct_answers": [0, 1, 2, 4, 5],
+    "correct": [0, 1, 2, 4, 5],
     "explanation": "Bias-variance decomposition shows test error = bias² + variance + noise. Complex models have low bias, high variance; simple models opposite. Bagging averages to reduce variance with minimal bias increase. Boosting reduces bias by sequentially correcting mispredictions."
   },
   {
     "id": 7,
     "type": "mcq",
-    "difficulty": "medium",
-    "question": "In a paired t-test comparing two algorithms on a single dataset with 5-fold cross-validation, what are the degrees of freedom?",
+    "topic": "Paired t-test Degrees of Freedom",
+    "prompt": "In a paired t-test comparing two algorithms on a single dataset with 5-fold cross-validation, what are the degrees of freedom?",
     "options": [
       "df = 4 (number of folds minus 1)",
       "df = 5 (number of folds)",
       "df = 10 (total test samples)",
       "df = 9 (total samples across folds minus 1)"
     ],
-    "correct_answer": 0,
+    "correct": [0],
     "explanation": "Paired t-test has df = k-1 where k is number of paired measurements (folds). With 5-fold CV, df = 5-1 = 4. This tests if mean performance difference is significant."
   },
   {
     "id": 8,
     "type": "mcq",
-    "difficulty": "hard",
-    "question": "In the Friedman test with 5 algorithms evaluated on 10 datasets, what is the test statistic under null hypothesis (all algorithms rank equally)?",
+    "topic": "Friedman Test Statistic",
+    "prompt": "In the Friedman test with 5 algorithms evaluated on 10 datasets, what is the test statistic under null hypothesis (all algorithms rank equally)?",
     "options": [
       "χ²_F ≈ 12n(k-1)/(k(k+1)) × sum of squared rank deviations",
       "χ²_F = (12×10×4)/(5×6) × sum of squared deviations ≈ 16",
       "t-statistic with df = 49",
       "F-statistic with df₁=4, df₂=36"
     ],
-    "correct_answer": 1,
+    "correct": [1],
     "explanation": "Friedman test χ²_F = (12n(k-1))/(k(k+1)) × Σ(R_j - R̄)² where n=datasets, k=algorithms. With k=5, n=10: χ²_F = (12×10×4)/(5×6) × variance = 16. Compare to χ²(4) critical value (~9.49 at α=0.05)."
   },
   {
     "id": 9,
     "type": "mcq",
-    "difficulty": "medium",
-    "question": "Which distribution is used for Wilcoxon's signed-rank test with 15 datasets?",
+    "topic": "Wilcoxon Signed-Rank Test",
+    "prompt": "Which distribution is used for Wilcoxon's signed-rank test with 15 datasets?",
     "options": [
       "t-distribution with df=14",
       "Normal approximation (z-test) since n=15 > 10",
       "Wilcoxon exact distribution table lookup",
       "χ² distribution with df=15"
     ],
-    "correct_answer": 1,
+    "correct": [1],
     "explanation": "Wilcoxon test uses exact distribution for small n, but normal approximation (z-test) is recommended for n > 10 due to asymptotic normality. With n=15, use z~N(0,1) approximation."
   },
   {
     "id": 10,
     "type": "mcq",
-    "difficulty": "hard",
-    "question": "In post-hoc Nemenyi test, the critical difference CD = q_α × sqrt(k(k+1)/(6n)) for comparing 4 algorithms on 12 datasets with α=0.05 is approximately:",
+    "topic": "Nemenyi Critical Difference",
+    "prompt": "In post-hoc Nemenyi test, the critical difference CD = q_α × sqrt(k(k+1)/(6n)) for comparing 4 algorithms on 12 datasets with α=0.05 is approximately:",
     "options": [
       "CD ≈ 2.67 (q_α ≈ 2.57 from Studentized range distribution)",
       "CD ≈ 3.85 (q_α ≈ 3.75 from t-distribution)",
       "CD ≈ 1.92 (q_α ≈ 1.88 from normal)",
       "CD ≈ 4.20 (q_α ≈ 4.10 from Tukey HSD)"
     ],
-    "correct_answer": 0,
+    "correct": [0],
     "explanation": "Nemenyi uses q_α from Studentized range distribution (table values). For k=4, α=0.05: q_α ≈ 2.57. CD = 2.57 × sqrt(4×5/(6×12)) = 2.57 × 0.995 ≈ 2.56-2.67. Algorithms rank difference > CD are significantly different."
   },
   {
     "id": 11,
     "type": "open",
-    "difficulty": "medium",
-    "question": "Explain the bootstrap sampling process and why it enables bagging to reduce variance. How does the size and overlap of bootstrap samples relate to the reduction in ensemble variance?",
-    "model_answer": "Bootstrap sampling draws n samples with replacement from original dataset D (n instances). Each bootstrap sample B_i has size n but contains ~63.2% unique instances; ~36.8% are duplicates or absent. Bagging trains k models on k independent bootstrap samples, then averages predictions. Averaging reduces variance by factor ~1/k when predictions are uncorrelated. Variance reduction = Var(B) - Var(1/k * Σ predictions). Larger k increases variance reduction (asymptotic limit). Overlap in bootstrap samples (due to replacement) prevents complete de-correlation, but random sampling still decorrelates substantially."
+    "topic": "Bootstrap Sampling and Variance Reduction",
+    "prompt": "Explain the bootstrap sampling process and why it enables bagging to reduce variance. How does the size and overlap of bootstrap samples relate to the reduction in ensemble variance?",
+    "correct": [],
+    "explanation": "Bootstrap sampling draws n samples with replacement from original dataset D (n instances). Each bootstrap sample B_i has size n but contains ~63.2% unique instances; ~36.8% are duplicates or absent. Bagging trains k models on k independent bootstrap samples, then averages predictions. Averaging reduces variance by factor ~1/k when predictions are uncorrelated. Variance reduction = Var(B) - Var(1/k * Σ predictions). Larger k increases variance reduction (asymptotic limit). Overlap in bootstrap samples (due to replacement) prevents complete de-correlation, but random sampling still decorrelates substantially."
   },
   {
     "id": 12,
     "type": "open",
-    "difficulty": "hard",
-    "question": "Describe the AdaBoost algorithm workflow: how weights evolve, how error rates are calculated, and why the multiplicative weight update rule leads to exponentially better performance with weak learners. Include the mathematical relationship between individual weak learner accuracy and ensemble error rate.",
-    "model_answer": "AdaBoost: (1) Initialize equal weights w_i=1/n for all instances. (2) Train weak learner h_t on weighted dataset; compute weighted error ε_t = Σ w_i·I(h_t(x_i)≠y_i). (3) Compute learner weight α_t = ln((1-ε_t)/ε_t). (4) Update weights: w_i ← w_i·exp(-α_t·y_i·h_t(x_i)), renormalize. (5) Repeat T rounds. Final prediction: sign(Σ α_t·h_t(x)). Multiplicative weight update focuses next learner on misclassified instances. Ensemble error rate ≤ Π sqrt(ε_t(1-ε_t)) (product bound). If each weak learner has accuracy > 50% (ε_t < 0.5), product shrinks exponentially: error ≤ exp(-2·T·γ²) where γ = 0.5 - max(ε_t). This exponential advantage explains boosting's power."
+    "topic": "AdaBoost Algorithm Workflow",
+    "prompt": "Describe the AdaBoost algorithm workflow: how weights evolve, how error rates are calculated, and why the multiplicative weight update rule leads to exponentially better performance with weak learners. Include the mathematical relationship between individual weak learner accuracy and ensemble error rate.",
+    "correct": [],
+    "explanation": "AdaBoost: (1) Initialize equal weights w_i=1/n for all instances. (2) Train weak learner h_t on weighted dataset; compute weighted error ε_t = Σ w_i·I(h_t(x_i)≠y_i). (3) Compute learner weight α_t = ln((1-ε_t)/ε_t). (4) Update weights: w_i ← w_i·exp(-α_t·y_i·h_t(x_i)), renormalize. (5) Repeat T rounds. Final prediction: sign(Σ α_t·h_t(x)). Multiplicative weight update focuses next learner on misclassified instances. Ensemble error rate ≤ Π sqrt(ε_t(1-ε_t)) (product bound). If each weak learner has accuracy > 50% (ε_t < 0.5), product shrinks exponentially: error ≤ exp(-2·T·γ²) where γ = 0.5 - max(ε_t). This exponential advantage explains boosting's power."
   },
   {
     "id": 13,
     "type": "open",
-    "difficulty": "hard",
-    "question": "In a scenario where you need to compare 6 machine learning algorithms on 15 different datasets with statistical significance testing, outline the complete experimental design: sampling strategy, cross-validation setup, which statistical test to use, and how to interpret results for algorithm ranking.",
-    "model_answer": "Experimental design: (1) Data sampling: Each dataset split into 10 folds for cross-validation. Repeat 5 times with different random seeds to handle stochasticity. (2) Training: For each fold and repeat, train all 6 algorithms, record test accuracy. (3) Statistical testing: Use Friedman test (non-parametric, handles multiple datasets/algorithms). H₀: all algorithms rank equally. Compute mean rank R_j for each algorithm across 15 datasets. χ²_F = (12×15×5)/(6×7) × Σ(R_j - 3.5)² (critical value ~11.07 at α=0.05, df=5). (4) If Friedman rejects H₀, use post-hoc Nemenyi test: CD = q_α × sqrt(6×7/(6×15)) ≈ 2.92. Rank differences > CD indicate significant difference. Plot critical difference diagram with algorithms ranked; overlapping error bars = no significant difference."
+    "topic": "Experimental Design for Algorithm Comparison",
+    "prompt": "In a scenario where you need to compare 6 machine learning algorithms on 15 different datasets with statistical significance testing, outline the complete experimental design: sampling strategy, cross-validation setup, which statistical test to use, and how to interpret results for algorithm ranking.",
+    "correct": [],
+    "explanation": "Experimental design: (1) Data sampling: Each dataset split into 10 folds for cross-validation. Repeat 5 times with different random seeds to handle stochasticity. (2) Training: For each fold and repeat, train all 6 algorithms, record test accuracy. (3) Statistical testing: Use Friedman test (non-parametric, handles multiple datasets/algorithms). H₀: all algorithms rank equally. Compute mean rank R_j for each algorithm across 15 datasets. χ²_F = (12×15×5)/(6×7) × Σ(R_j - 3.5)² (critical value ~11.07 at α=0.05, df=5). (4) If Friedman rejects H₀, use post-hoc Nemenyi test: CD = q_α × sqrt(6×7/(6×15)) ≈ 2.92. Rank differences > CD indicate significant difference. Plot critical difference diagram with algorithms ranked; overlapping error bars = no significant difference."
   },
   {
     "id": 14,
     "type": "open",
-    "difficulty": "medium",
-    "question": "Compare stacking and Random Forest as ensemble methods. Discuss their differences in base learner diversity, training methodology (parallel vs. sequential), meta-learning mechanisms, and when you would choose one over the other.",
-    "model_answer": "Stacking vs Random Forest: (1) Base learner diversity: RF uses same algorithm (decision tree) with random feature subsets; stacking uses diverse algorithms (SVM, NB, trees, etc.). (2) Training: RF parallel (no information sharing); stacking uses cross-validation to avoid data leakage (k-fold for Level-0). (3) Meta-learning: RF uses voting/averaging; stacking trains meta-model (Level-1) on Level-0 predictions. (4) Variance reduction: RF reduces via averaging on correlated ensemble; stacking leverages algorithm diversity. (5) When to choose: RF for speed, interpretability, single algorithm preference; stacking for maximum performance when diverse learners available. Stacking incurs meta-model training overhead but exploits complementary strengths. RF excels with limited training data due to parallelization; stacking more data-efficient with k-fold CV."
+    "topic": "Stacking vs Random Forest",
+    "prompt": "Compare stacking and Random Forest as ensemble methods. Discuss their differences in base learner diversity, training methodology (parallel vs. sequential), meta-learning mechanisms, and when you would choose one over the other.",
+    "correct": [],
+    "explanation": "Stacking vs Random Forest: (1) Base learner diversity: RF uses same algorithm (decision tree) with random feature subsets; stacking uses diverse algorithms (SVM, NB, trees, etc.). (2) Training: RF parallel (no information sharing); stacking uses cross-validation to avoid data leakage (k-fold for Level-0). (3) Meta-learning: RF uses voting/averaging; stacking trains meta-model (Level-1) on Level-0 predictions. (4) Variance reduction: RF reduces via averaging on correlated ensemble; stacking leverages algorithm diversity. (5) When to choose: RF for speed, interpretability, single algorithm preference; stacking for maximum performance when diverse learners available. Stacking incurs meta-model training overhead but exploits complementary strengths. RF excels with limited training data due to parallelization; stacking more data-efficient with k-fold CV."
   }
 ]

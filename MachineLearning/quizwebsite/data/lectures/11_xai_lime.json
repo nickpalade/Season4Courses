@@ -1,0 +1,188 @@
+[
+  {
+    "id": 1,
+    "type": "multi",
+    "topic": "Core Requirements of xAI",
+    "prompt": "Which of the following are core requirements for explainable AI (xAI) according to the lecture?",
+    "options": [
+      "Producing human-understandable justifications for model predictions",
+      "Increasing model accuracy above 99% at all times",
+      "Verifying that models operate as intended without hidden biases",
+      "Enabling debugging of model failures and unexpected behaviors",
+      "Ensuring AI systems can be made trustworthy and aligned with human values"
+    ],
+    "correct": [0, 2, 3, 4],
+    "explanation": "xAI focuses on interpretability, bias detection, debugging, and alignment. High accuracy alone is not a requirement for explainability."
+  },
+  {
+    "id": 2,
+    "type": "multi",
+    "topic": "LIME Characteristics",
+    "prompt": "LIME (Local Interpretable Model-agnostic Explanations) exhibits which of the following characteristics?",
+    "options": [
+      "Works as a black-box method without requiring access to model internals",
+      "Provides explanations for individual predictions (local explanations)",
+      "Uses a surrogate model trained on perturbed samples weighted by proximity",
+      "Requires complete retraining of the original model to generate explanations",
+      "Balances local fidelity with interpretability through a loss function"
+    ],
+    "correct": [0, 1, 2, 4],
+    "explanation": "LIME is model-agnostic, local, uses weighted surrogate models, and trades off fidelity vs interpretability. It does NOT require retraining the original model."
+  },
+  {
+    "id": 3,
+    "type": "multi",
+    "topic": "Gradient-Based Attribution Methods",
+    "prompt": "Which feature attribution methods fall into the gradient-based category of explainability?",
+    "options": [
+      "Saliency maps",
+      "LIME and SHAP surrogate models",
+      "Integrated gradients",
+      "Layer-wise Relevance Propagation (LRP)",
+      "Class Activation Mapping (CAM)"
+    ],
+    "correct": [0, 2],
+    "explanation": "Gradient-based methods use backpropagation to compute feature importance. Saliency maps and integrated gradients are gradient-based. LIME/SHAP are surrogate-based; LRP and CAM are different decomposition/activation methods."
+  },
+  {
+    "id": 4,
+    "type": "multi",
+    "topic": "Interpretability vs Explainability",
+    "prompt": "Which of these statements correctly describe the relationship between interpretability and explainability in xAI?",
+    "options": [
+      "Interpretability refers to understanding the mechanics of how a model maps inputs to outputs",
+      "Explainability means producing justifications for specific predictions",
+      "Interpretability and explainability are identical concepts",
+      "A model can be interpretable but not necessarily explainable",
+      "Explainability methods can be applied post-hoc to black-box models"
+    ],
+    "correct": [0, 1, 4],
+    "explanation": "Interpretability is about understanding model mechanics; explainability is about justifying predictions. They are distinct concepts. Post-hoc methods like LIME apply to black-boxes."
+  },
+  {
+    "id": 5,
+    "type": "multi",
+    "topic": "LIME Limitations",
+    "prompt": "Which of the following are limitations or disadvantages of using LIME for explainability?",
+    "options": [
+      "LIME explanations can be unstable due to randomness in the sampling process",
+      "LIME is too slow to use in real-time applications",
+      "Adversaries can manipulate LIME explanations through strategic input perturbations",
+      "LIME only works for images and not for text or tabular data",
+      "LIME requires access to the internal weights of the black-box model"
+    ],
+    "correct": [0, 2],
+    "explanation": "LIME has stability issues and can be exploited by adversaries. LIME works across data types, is model-agnostic, and doesn't need internals."
+  },
+  {
+    "id": 6,
+    "type": "multi",
+    "topic": "Inherently Interpretable Models",
+    "prompt": "In the context of xAI, which of the following are examples of inherently interpretable models?",
+    "options": [
+      "Decision trees",
+      "Linear regression and logistic regression",
+      "Support Vector Machines (SVMs)",
+      "Logical models and rule-based systems",
+      "Deep neural networks"
+    ],
+    "correct": [0, 1, 3],
+    "explanation": "Decision trees, linear models, and logical systems are intrinsically interpretable. SVMs and neural networks are considered black-boxes and require post-hoc explanation methods."
+  },
+  {
+    "id": 7,
+    "type": "mcq",
+    "topic": "Local vs Global Explanations",
+    "prompt": "What is the primary difference between local and global explainability methods?",
+    "options": [
+      "Local methods explain individual predictions while global methods explain overall model behavior",
+      "Global methods are more accurate than local methods",
+      "Local methods require training data while global methods do not",
+      "Global methods only work for classification while local methods work for any task"
+    ],
+    "correct": [0],
+    "explanation": "Local explanations target specific instances (e.g., LIME), while global methods characterize the model's overall decision-making process (e.g., probing, mechanistic interpretability)."
+  },
+  {
+    "id": 8,
+    "type": "mcq",
+    "topic": "LIME Loss Function",
+    "prompt": "In LIME, what is the purpose of the locality-aware loss function L(f,g,πx) = Σz∈Z πx(z)(f(z) - g(z'))² + Ω(g)?",
+    "options": [
+      "To maximize the global accuracy of the surrogate model across the entire input space",
+      "To balance local fidelity (surrogate accuracy near the instance) with interpretability (model simplicity)",
+      "To penalize the original model for making incorrect predictions",
+      "To ensure the surrogate model is never simplified using regularization"
+    ],
+    "correct": [1],
+    "explanation": "The loss function weights errors by proximity (πx) to ensure local accuracy near the instance of interest, while Ω(g) regularizes model complexity for interpretability. This balances two competing goals."
+  },
+  {
+    "id": 9,
+    "type": "mcq",
+    "topic": "Super-Pixels in LIME for Images",
+    "prompt": "When applying LIME to image classification, what are super-pixels used for?",
+    "options": [
+      "To increase the resolution of the input image",
+      "To represent interpretable components that can be turned on or off during perturbation",
+      "To replace the neural network with a simpler convolutional model",
+      "To extract raw pixel values for direct model interpretation"
+    ],
+    "correct": [1],
+    "explanation": "Super-pixels segment images into interpretable regions. LIME perturbs super-pixels (on/off) rather than individual pixels, making explanations human-understandable by showing which regions matter for the prediction."
+  },
+  {
+    "id": 10,
+    "type": "open",
+    "topic": "LIME Algorithm Steps",
+    "prompt": "Describe the key steps of the LIME algorithm for explaining a black-box model's prediction on a single input instance. Include how the algorithm generates perturbed samples and trains the surrogate model.",
+    "correct": [],
+    "explanation": "LIME creates a local dataset by perturbing the input, querying the model, and weighting samples by proximity. A simple surrogate (e.g., linear model) is fit to this local weighted dataset, and its learned weights explain which features drove the original prediction. Key steps: (1) start with instance x and interpretable representation x', (2) generate perturbed versions, (3) obtain black-box predictions on perturbations, (4) weight samples by proximity to x, (5) train interpretable surrogate on weighted dataset, (6) use surrogate weights as explanation."
+  },
+  {
+    "id": 11,
+    "type": "open",
+    "topic": "Model-Specific vs Model-Agnostic Methods",
+    "prompt": "Explain the difference between model-specific and model-agnostic explainability methods. Provide one example of each and discuss when you would choose one approach over the other.",
+    "correct": [],
+    "explanation": "Model-specific methods exploit model architecture and require access to internals (weights, gradients, activations) — e.g., saliency maps, integrated gradients, LRP for neural networks. Model-agnostic methods query the model as a black-box — e.g., LIME, SHAP, counterfactuals. Use model-specific when you have access and need precision; use model-agnostic for unknown or proprietary models, or for universal applicability across architectures."
+  },
+  {
+    "id": 12,
+    "type": "open",
+    "topic": "Fairness and Bias Detection",
+    "prompt": "In the context of fairness and bias detection, explain how explainability methods can help identify and prevent discriminatory behavior in machine learning models. Give a specific example.",
+    "correct": [],
+    "explanation": "Explainability exposes hidden biases by revealing which features influence decisions. It can detect if sensitive attributes (race, gender) are used directly or indirectly as proxies (redlining). Example: a loan approval model where LIME reveals postal code (acting as a race proxy) heavily drives denials despite legal prohibition — this surfaces unlawful discrimination. Enables stakeholders to audit models, ensure regulatory compliance (e.g., EU AI Act), and debug disparate impact across demographic groups."
+  },
+  {
+    "id": 13,
+    "type": "multi",
+    "topic": "Criticisms of Explainability",
+    "prompt": "Which of the following are valid criticisms or challenges of explainability in machine learning?",
+    "options": [
+      "Explanations may not reveal the true decision-making process, only a plausible narrative",
+      "Users may overtrust explanations and miss model failures",
+      "Explanations are always 100% accurate representations of model logic",
+      "Post-hoc explanations cannot guarantee fidelity to the original model",
+      "Generating explanations adds significant computational overhead"
+    ],
+    "correct": [0, 1, 3, 4],
+    "explanation": "Explanations can be misleading, lead to over-trust, lack guaranteed fidelity, and cost computation time. The claim that explanations are 100% accurate is false — they are approximations, not absolute truths."
+  },
+  {
+    "id": 14,
+    "type": "multi",
+    "topic": "Global Explainability Methods",
+    "prompt": "Which global explainability methods and concepts are discussed in the lecture?",
+    "options": [
+      "Probing: training supervised models on hidden layer representations",
+      "Mechanistic interpretability: identifying causal circuits and neuron roles",
+      "Concept-based explanability using TCAVs (Testing with Concept Activation Vectors)",
+      "LIME and SHAP surrogate models applied at the global level",
+      "Causal interventions to understand feature importance in the model"
+    ],
+    "correct": [0, 1, 2, 4],
+    "explanation": "Probing, mechanistic interpretability, TCAVs, and causal interventions are global methods. LIME/SHAP are primarily local methods, not global."
+  }
+]

@@ -1,0 +1,65 @@
+Symmetric Cryptography Lecture Handout
+Eleftheria Makri 2025-2026
+
+1
+Cryptography
+Cryptography is both an art and a science ­ the use of deception and mathematics to hide data, as in steganography, to render data unintelligible through the transformation of data into an unreadable state, and to ensure that a message has not been altered in transit. Cryptography is the practice and study of techniques for secure communication in the presence of third parties (called adversaries). Another feature of some cryptographic systems is the ability to provide assurance of who sent the message, authentication of source, and proof of delivery.
+1. History of Cryptography
+The Early (Manual) Era · Ancient Egypt (set of hieroglyphics encrypted with a simple substitution algorithm) · Spartan scytale (transmitting a message by wrapping a leather belt around a tapered dowel) · Julius Caesar ­ Caesar's cipher (substitution cipher shifting the alphabet 3 positions)
+The Mechanical Era · German Enigma machine · Confederate Army's Cipher Disk · Japanese Red and Purple Machines
+2. Core Information Security Principles Related to Cryptography
+· Confidentiality: keeping information secret for everyone except for authorized entities · Authentication
+o of entities: assuring the source of information o of data: assuring that the information has not been altered by unauthorized entities · Non-repudiation: assuring that actions or commitments in the past cannot be denied
+3. Classification of Cryptography
+· Symmetric-key cryptography: o Mainly for confidentiality o Sender and receiver have the same secret key o Block ciphers and stream ciphers
+Symmetric Cryptography: Lecture Handout Eleftheria Makri
+
+2
+· Public-key cryptography: o Mainly for authentication (digital signatures) and key agreement o Sender and receiver have a different key (= public and private key)
+· Hash functions: o Mainly for the authentication of data o With or without secret key
+4. Symmetric Cryptography
+Symmetric Encryption: Encryption and Decryption algorithms use the same key to encrypt the plaintext, and decrypt the ciphertext, respectively. The key represents a shared secret between two or more parties, which is one of the main drawbacks compared to public-key encryption. (more on this, next lecture!): Asymmetric Encryption (aka Public-Key Encryption): requires two separate keys, one of which is secret (private key), and one of which is public. The two parts of this key pair are mathematically linked. The public key is used to encrypt plaintext and to verify digital signatures, while the private key is used to decrypt ciphertext, or to create digital signatures.
+5. Classical Cryptosystems
+The most widely known cryptosystems: · Monoalphabetic Substitution Ciphers: o Caesar's Cipher o Affine Cipher · Polyalphabetic Substitution Ciphers: o Vigenère Cipher · Transposition Ciphers o The Rail Fence o Rectangular Substitution Tables
+For more information please see: http://practicalcryptography.com/ciphers/
+6. The three Big Ideas
+1. Confusion: is obscuring the relationship between the real message and the encrypted message, by substituting every letter of the real message alphabet with another letter of an (possibly different) alphabet.
+2. Diffusion: is spreading out the message, by permuting ("transpositioning") the letters of the ciphertext.
+Symmetric Cryptography: Lecture Handout Eleftheria Makri
+
+3
+3. Kerckhoffs's Principle (Secrecy Only in the Key): A cryptosystem should be secure, even if everything about the system, except the key, is public knowledge.
+SP-network: is the process described by Claude Shannon, used in most block ciphers to increase their strength. SP stands for substitution-permutation, and most block ciphers apply several series of them to add confusion and diffusion to the encryption process.
+7. Symmetric Key Encryption Algorithm Types
+· Stream Ciphers: Encryption is performed on a bit-by-bit basis. o One-time Pad: If used correctly, one time pad is the only cipher system asserted as unbreakable. This is the property of perfect secrecy: One-time pads are "informationtheoretically secure" in that the encrypted message (i.e., the ciphertext) provides no information about the original message to a cryptanalyst (except the maximum possible length of the message). This is a very strong notion of security first developed during WWII by Claude Shannon and proved, mathematically, to be true for the onetime pad by Shannon at about the same time. In this technique, a plaintext is paired with random, secret key (or pad). Then, each bit or character of the plaintext is encrypted by combining it with the corresponding bit or character from the pad using modular addition. If the key is truly random, and at least as long as the plaintext, and never reused in whole or in part, and kept completely secret, then the resulting ciphertext will be impossible to decrypt or break. Problems:  Key distribution  Authentication  True randomness
+· Block Ciphers: Encryption is performed on blocks or chunks of text (of preset size). o Initialization Vector (IV): is a non-secret binary vector used as the initializing input for encryption. It increases security by introducing additional cryptographic variance. (Used with some modes of operation ­ see below) o Modes of Operation:  Electronic Codebook Mode (ECB): 1. Same plaintext blocks produce same ciphertext blocks (obviously when the same key is being used). 2. Encryption and Decryption can be performed in parallel for all blocks 3. Error Propagation: One or more errors at the bits of a ciphertext block affect only the decryption of this specific block.  Cipher Block Chaining Mode (CBC) 1. Same plaintext blocks produce same ciphertext blocks only if both the same key is being used, and the same IV.
+Symmetric Cryptography: Lecture Handout Eleftheria Makri
+
+4
+2. Every ciphertext block depends on the corresponding plaintext block and all the previous ones. To correctly decrypt one block, we have to have correctly decrypted the previous one.
+3. Error Propagation: One bit error in the ciphertext block affects the decryption of this specific ciphertext block, and the next one. While the first decrypted block will be random, the second one will have errors at exactly the same positions as the previous ciphertext.
+ Cipher Feedback Mode (CFB) 1. Same plaintext blocks produce same ciphertext blocks only if the same IV is being used. 2. Every ciphertext block depends on the corresponding plaintext block and all the previous ones. To correctly decrypt one block, we have to have correctly decrypted the previous n/r blocks, where n is the number of bits in a block, and r the number of bits used for encryption and decryption per block. 3. Error Propagation: One bit error in the ciphertext block affects the decryption of the next n/r ciphertext blocks. The decrypted block (plaintext) will have errors at exactly the same positions as the corresponding ciphertext.
+ Output Feedback Mode (OFB) 1. Same plaintext blocks produce same ciphertext blocks only if the same IV is being used. 2. Every ciphertext block depends on the corresponding plaintext block and all the previous ones. To correctly decrypt one block, we have to have correctly decrypted the previous n/r blocks, where n is the number of bits in a block, and r the number of bits used for encryption and decryption per block. 3. Error Propagation: One or more bits error in the ciphertext block affect only the decryption of this specific ciphertext at exactly the same positions. Hence error do not propagate (much) 4. The keystream blocks can be pre-computed, as they do not depend on the plaintexts or ciphertexts. This can be speed up the processes significantly.
+ Counter Mode (CTR) 1. Same plaintext blocks do not produce same ciphertext blocks 2. Encryption and Decryption can be performed in parallel for all blocks 3. Error Propagation: One or more errors at the bits of a ciphertext block affect only the decryption of this specific block.
+Symmetric Cryptography: Lecture Handout Eleftheria Makri
+
+5
+8. Symmetric Key Encryption Pros & Cons
+Advantages: · Very fast · Provide confidentiality, some integrity and authentication · Low cost implementations for hardware and software
+Disadvantages: · Very difficult key management · Number of keys: n(n ­ 1)/2, where n is the number of users · Unable to provide non-repudiation, access control, or digital signatures · Challenges in secure key distribution
+9. Hash Functions
+Hash function is a one-way mathematical operation, reducing a message (or file) into a smaller fixed length output, called the hash value, or (message) digest. It is used to ensure integrity; thus, there should be one hash exclusively for a given input, and no two different messages producing the same hash. Key properties of hash functions are:
+· Uniformly distributed (non-predictable output) · Weak collision resistant (difficult to find a second input that hashes to the same value):
+Property of collision resistance · Difficult to invert (given a hash value, difficult to find message that hashes to the same value):
+Property of pre-image resistance · Strong collision resistant (difficult to find any two inputs that hash to the same value):
+Property of second pre-image resistance
+Deterministic (always generate the same hash on the same input)
+10. Message Authentication Code (MAC)
+Message Authentication Code (MAC): also known as cryptographic checksum, is a small block of data that is generated using a secret key and then appended to the message, to ensure message integrity. MACs have the following characteristics:
+· A MAC is much smaller than the message generating it. · Given the MAC it is impractical to compute the message that generated it. · Given a MAC and the message that generated it, it is impractical to find another message
+generating the same MAC. a. CBC-MAC
+Symmetric Cryptography: Lecture Handout Eleftheria Makri
+
+6 To produce the MAC a symmetric encryption algorithm is used (e.g., DES) in Cipher Block Chaining (CBC) mode. The whole message is encrypted, and only the last encrypted block is sent together with the message so as to allow integrity to be verified. The receiver can reproduce the CBC-MAC by encrypting the received message again, with the secret key s/he shares with the sender. b. HMAC HMACs work by adding a secret key value to the hash input function along with the source message. The HMAC operation provides cryptographic strength similar to a hashing algorithm, except that it now has the additional protection of a secret key, and still operates nearly as rapidly as a standard hash operation.
+Symmetric Cryptography: Lecture Handout Eleftheria Makri
+

@@ -1,0 +1,54 @@
+\sct{Quiz: questions + answers}{ans}
+{\fivept
+\hd{1. True/False (1p)}
+\K{1a} ``Mixing data+code = main reason for SQLi.'' \ans{T}\par
+\K{1b} ``HTTP is stateless.'' \ans{T}\par
+\K{1c} ``Same-origin policy prevents stealing cookies on server side.'' \ans{F} (SOP browser-side only).\par
+\K{1d} ``MACs may use cryptographic hash functions.'' \ans{T} (HMAC).\par
+\K{1e} ``Return-to-libc mitigated by CFI.'' \ans{T}\par
+\K{1f} ``TLS can protect cookies from theft.'' \ans{T} (in transit).\par
+\K{1g} ``Browser fingerprinting relies on cookies in HTTP headers.'' \ans{F} (uses browser props).\par
+\K{1h} ``Social-network access control usually = MAC.'' \ans{F} (DAC).\par
+\K{1i} ``Safe to post public key publicly; comms secure even if adversary knows it.'' \ans{T}\par
+\K{1j} ``Signature IDS named for public-key signature of source host.'' \ans{F} (= attack pattern match).\par
+
+\hd{2. Multi-select (1p, all-or-nothing)}
+\K{2a} Brightspace shows all grades; traced to former admin. Goals violated? \ans{Confidentiality} + \ans{Accountability}. (NOT Integrity/Avail/Authenticity/Accuracy.)\par
+\K{2b} Protect from web tracking? \ans{adblocker} \ans{clear browsing data} \ans{disable 3rd-party cookies}. (NOT evercookie / change passwords / enable 3rd-party.)\par
+\K{2c} Stack-smashing steps? \ans{load shellcode on stack} \ans{find vulnerable function} \ans{find buffer location} \ans{find stored \%rip} \ans{find nop instruction(s)}. (NOT ``find the shellcode'', NOT ``find the stack''.)\par
+\K{2d} Goals ensured by TLS? \ans{conf of msgs} \ans{integrity of msgs} \ans{authenticity of msgs} \ans{authenticity of parties}. (NOT confidentiality of parties.)\par
+\K{2e} Valid 2FA? \ans{PIN+fingerprint} \ans{token+password}. (NOT voice+movement [both biometric], NOT PIN+password [both know], NOT voice+token [course: voice = 1 biometric, weak pairing].)\par
+
+\hd{3. Short (5p)}
+\K{3a} 4 risk strategies: \ans{Accept} (tolerate residual), \ans{Avoid} (drop risky activity), \ans{Mitigate/Reduce} (controls lower likelihood/impact), \ans{Transfer} (insurance/outsource).\par
+\K{3b} DAC = owner sets/delegates permissions at discretion (UNIX files, social nets, GitHub).\par
+\K{3c} CFI goal = restrict indirect jumps/calls/returns to valid CFG targets $\to$ stop control-flow hijack (ROP/ret2libc). Ensured via computed CFG + inserted runtime checks / shadow stack.\par
+\K{3d} Reflected XSS: malicious script in URL/request reflected unsanitized into response, runs in victim browser under site origin $\to$ steal cookies/act as user. Not stored; one-shot via crafted link.\par
+\K{3e} STRIDE: \K{Repudiation}$\to$Non-repudiation/Accountability; \K{Info disclosure}$\to$Confidentiality(/Privacy); \K{DoS}$\to$Availability.\par
+\K{3f} Identification = claim id; Authentication = prove it (password/token/biometric); Authorization = decide what allowed.\par
+\K{3g} owner/group/world = graded privilege without listing every user. Ex: shared project file $\to$ owner rw, group r, world none.\par
+\K{3h} Cookie theft locs+fix: in transit$\to$TLS/Secure flag; browser JS/XSS$\to$HttpOnly; server store/logs$\to$encrypt + rotate/regen session.\par
+\K{3i} \texttt{zhoo grqh}, key 3, shift back 3 = \ans{well done}.\par
+
+\hd{4. GitHub risk assessment (2p each)}
+\K{4a} Assets: repos/source code, credentials (OAuth/SSH tokens), CI/CD + platform availability.\par
+\K{4b/c} Threats $\to$ impact: \textit{token theft} $\to$ private repo exfil (IP/credential loss); \textit{DDoS/outage} $\to$ blocks millions of dev/CI workflows; \textit{malicious commit/supply-chain} $\to$ downstream compromise.\par
+\K{4d} Risk = likelihood $\times$ impact: token theft Med$\times$High; outage Med$\times$High; supply-chain Low/Med$\times$Very-high.\par
+\K{4e} Countermeasures: MFA + token scopes + secret scanning; DDoS protection + redundancy + rate limit; branch protection + signed commits + least-priv CI tokens.\par
+
+\hd{5. Base rate fallacy}
+Precision $= TP/(TP+FP)$. $10^6$ pkts, base rate $1/10^5 \to 10$ malicious.\par
+\K{5a} ADS: TPR $2/10$, FP $1/10^6$ $\to$ TP$=2$, FP$=1$ $\to$ \ans{2/3 = 67\%}.\par
+\K{5b} B3S4fe: TPR $9/10$, FP $50/10^6$ $\to$ TP$=9$, FP$=50$ $\to$ \ans{9/59 = 15\%}.\par
+\K{5c} Choose \ans{ADS}: higher precision (67 vs 15\%), fewer false alarms $\to$ less alert fatigue. Base-rate fallacy: rare attacks $\to$ FPs dominate despite high TPR.\par
+
+\hd{6. Vulnerable program (\texttt{scanf("\%s",username[128])})}
+\K{6a} \ans{A} = \texttt{70$\times$0x90} NOP sled (slide to payload). \ans{B} = \texttt{execve("/bin/sh")} shellcode (spawn shell). \ans{C} = \texttt{36$\times$0x42} padding + 6-byte return addr \texttt{0x7fffffffec70} (little-endian) overwriting saved \%rip $\to$ points into sled.\par
+\K{6b} Fix line \texttt{scanf("\%s",username)} $\to$ bounded \texttt{scanf("\%127s",...)} or \texttt{fgets(username,128,stdin)}. Add canary (-fstack-protector), NX, ASLR.\par
+
+\hd{7. RSA ($p{=}5,q{=}7,e{=}5$)}
+\K{7a} $n = p\cdot q$. \K{7b} $n=\ans{35}$.\par
+\K{7c} $\lambda = \mathrm{lcm}(p{-}1,q{-}1)$. \K{7d} $\lambda=\mathrm{lcm}(4,6)=\ans{12}$.\par
+\K{7e} $d = e^{-1}\bmod\lambda$. \K{7f} $5d\equiv1\:(12)\to d=\ans{5}$ ($5{\cdot}5{=}25{\equiv}1$).\par
+\K{7g} $c = m^e \bmod n$. \K{7h} $c = 2^5\bmod35 = 32\bmod35 = \ans{32}$.\par
+}

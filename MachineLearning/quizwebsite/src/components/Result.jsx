@@ -1,4 +1,4 @@
-export default function Result({ answers, pool, mode, onHome }) {
+export default function Result({ answers, pool, mode, onHome, onLibrary }) {
   const total = pool.length;
   const raw = pool.reduce((s, q) => s + (answers[q.id]?.score || 0), 0);
   const pct = total ? (raw / total) * 100 : 0;
@@ -30,6 +30,11 @@ export default function Result({ answers, pool, mode, onHome }) {
       </div>
 
       <div className="actions">
+        {onLibrary && (
+          <button className="secondary-action" onClick={onLibrary}>
+            Library
+          </button>
+        )}
         <button onClick={onHome}>Back to home</button>
       </div>
     </section>

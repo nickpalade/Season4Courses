@@ -1,0 +1,102 @@
+% frag6.tex — jaime.pdf extras: deeper goals/STRIDE, risk standards, more
+% network/web/privacy/secure-comp attacks + per-attack goal violations. Inside multicols{4}.
+\sct{Security Goals — full taxonomy}{anchor}
+\hd{10 goals + typical violations}
+\K{Confidentiality}: only authorized read. Broken by grade leak, cookie theft, Heartbleed mem disclosure, DB dump, DNS redirect.
+\K{Integrity}: state not improperly modified. Broken by SQL UPDATE/DROP, DNS poison, hidden-field tamper, buffer overflow var change.
+\K{Availability}: reliable access. Broken by DoS/DDoS, SYN flood, Teardrop crash, ransomware, outage.
+\K{Authenticity}: origin genuine. Broken by spoofing, MITM, unauth DH, email spoof, fake DNS/cert.
+\K{Authentication}: verify id claim. Broken by impersonation, stolen session cookie.
+\K{Authorization}: only approved access. Broken by grade exposure, EoP, DAC/RBAC error, CSRF.
+\K{Accountability}: trace to actor. Broken by missing logs, shared creds, spoofing.
+\K{Non-repudiation}: cannot deny. Broken by no signatures/audit trail.
+\K{Accuracy}: data correct/fit purpose. Broken by corrupt/stale data even if not malicious.
+\K{Privacy}: personal data per policy. Broken by tracking, fingerprinting, replay leak, deanonymization.
+
+\hd{STRIDE — question + goal + fix}
+\K{Spoofing}: trust claimed id? $\to$ Authenticity/Authentication/Acct. Fix: auth, certs, MFA, session mgmt.
+\K{Tampering}: change data/code? $\to$ Integrity/Accuracy/Authz. Fix: access ctrl, digital sig, MAC, audit.
+\K{Repudiation}: prove who/when? $\to$ Accountability/Non-rep. Fix: logging, audit, sig, certs.
+\K{Info disclosure}: data leak? $\to$ Confidentiality/Privacy. Fix: access ctrl, encryption, minimization.
+\K{DoS}: access prevented? $\to$ Availability. Fix: rate limit, redundancy, load balance.
+\K{Elevation of priv}: low$\to$high priv? $\to$ Authz/Integrity/Conf. Fix: least priv, input validation, type safety.
+
+\hd{Control types}
+By \K{nature}: physical, logical/technical, administrative/policy. By \K{timing}: preventive/deterrent, detective, corrective/responsive. Ex: lock(phys-prev), camera(phys-det), sprinkler(phys-corr), firewall(tech-prev), IDS(tech-det), backup(tech-corr), screening policy(admin-prev), log review(admin-det), incident response(admin-corr).
+\hd{Trust terms}
+\K{Trusted} = relied on for security. \K{Trustworthy} = deserves trust (proven). \R{Not all trusted are trustworthy.} \K{TCB} = minimal set that must be correct for security to hold. \R{Security = process, not a target} (threats/systems change).
+
+\sct{Risk — standards \& methods}{ref}
+\hd{Quantitative}
+\K{ROSI} = (risk reduction $-$ control cost)/control cost. \K{Risk exposure} = expected incident cost. \K{Risk leverage} = reduction benefit vs control cost. Choose control by cost, effectiveness, residual risk, fit.
+\hd{Standards}
+\K{ISO 31000} = risk mgmt standard; \K{NIST SP 800-30} = conducting risk assessments; \K{NIST SP 800-53} = security/privacy controls catalog; \K{COBIT} = IT governance. Methods: \K{CRAMM, OCTAVE, FRAP, FMEA, FTA, VAR} (mix qual/quant).
+\hd{Threat-model workflow}
+1 define assets+requirements; 2 draw DFD (actors, processes, data stores, flows); 3 draw trust boundaries; 4 identify threats (STRIDE/element); 5 mitigate w/ controls; 6 validate. \K{Element map}: Actors$\to$spoof/repud; Processes$\to$all; Data flows$\to$tamper/disclosure/DoS; Data stores$\to$tamper/disclosure/DoS. \R{Vague ``hackers'' threat weaker than concrete scenario.}
+
+\sct{Network — extra attacks}{HIGH}
+\hd{Routing protocols}
+\K{RIP} = distance-vector, least-hop, v1 max hop 15, v2 adds subnet mask+password. \K{OSPF} = link-state/shortest-path, exchanges topology LSAs, low loop risk but CPU/mem cost. \K{BGP} = decentralized interdomain (between AS), policy-based path. \K{ICMP} = error/query msgs (errors, congestion, timeouts).
+\hd{Teardrop}
+Malformed overlapping IP fragments $\to$ target computes invalid/negative reassembly length $\to$ stack crash. STRIDE \K{DoS}. Violates Availability.
+\hd{Overlapping fragment}
+1st fragment looks harmless to filter; later overlapping fragment overwrites content after inspection $\to$ malicious reassembled packet bypasses filter. STRIDE Tampering/evasion. Violates Integrity, Authz. Fix: disallow overwrite, normalize/reassemble before filtering.
+\hd{Source routing}
+Attacker specifies packet route $\to$ enters unintended internal paths, bypass policy. Spoof/EoP/Tampering. Violates Authz, Authenticity. Fix: disable source routing, block source-routed pkts.
+\hd{Smurf vs Fraggle}
+\K{Smurf} = spoofed-source ICMP echo to broadcast $\to$ many replies flood victim. \K{Fraggle} = same but UDP (echo/chargen). Both DoS+Spoofing. Violate Availability, Authenticity.
+\hd{NFS attacks}
+Old NFS trusts IP/UID. Attacker spoofs IP/DNS or emits arbitrary UIDs $\to$ read/write files, abuse SetUID for EoP. Spoof+Disclosure+Tamper+EoP. Violates Conf, Integrity, Authz, Authenticity.
+\hd{Email spoofing}
+TELNET port 25, set forged SMTP sender fields $\to$ misleading origin. STRIDE Spoofing/Repudiation. Violates Authenticity, Accountability.
+\hd{DNS poisoning vs Pharming}
+\K{Poisoning} = inject fake records into resolver cache $\to$ users diverted. \K{Pharming} = modify local hosts file / compromise DNS server. Both Spoof/Tamper/Disclosure. Violate Authenticity, Integrity, Conf, Availability. Fix: DNSSEC authenticates DNS data.
+\hd{Stealth scans}
+\K{FIN/NULL/XMAS} = unusual TCP flags; closed port $\to$ RST, open $\to$ silent. Evade SYN logging. Recon; reduces Conf of attack surface. Fix: modern firewall, normalize, log unusual flags. \R{Port scan alone = recon, not direct CIA violation.}
+
+\sct{Web — extra detail}{MED}
+\hd{Capability vs hidden field}
+\K{Hidden field} = server stores price/role in form; user edits before submit $\to$ Tamper/EoP, violates Integrity/Authz/Accuracy. Fix: keep authoritative state server-side or MAC it. \K{Capability} = unpredictable token granting authority $\to$ unforgeable if random.
+\hd{Cookie theft — by location}
+\K{Network transit}: TLS + Secure flag + HSTS. \K{Browser JS/XSS}: HttpOnly, output encode, CSP, fix XSS. \K{Local disk/profile/malware}: OS protection, encryption, short-lived cookies, logout invalidation, endpoint security. \K{Server logs/DB}: don't log secrets, encrypt session store, rotate/invalidate.
+\hd{Input handling ladder}
+\K{Blacklisting} (delete bad chars, weak) $<$ \K{Escaping} (encode dangerous as data) $<$ \K{Whitelisting} (allow only matching) $<$ \K{Prepared statement} (separate code from data params). Defense-in-depth: limited DB privileges + encryption.
+\hd{XSS beats CSRF token}
+XSS script runs in trusted origin $\to$ reads same-origin CSRF token $\to$ bypasses it unless carefully protected. CSRF abuses automatic cookie send; XSS injects script.
+
+\sct{Web Privacy — extra}{MED}
+\hd{Session replay leak}
+3rd-party script records DOM, text, clicks, mouse, keypresses. Masking fails $\to$ passwords/grades/cards/health reach 3rd party. STRIDE Info disclosure. Violates Conf, Privacy, Authz. Fix: minimize scripts, strict masking, CSP, DPAs.
+\hd{Mobile tracking}
+\K{Advertising ID / IDFA} shared across apps via SDKs $\to$ cross-app profile. \K{ATT} = iOS App Tracking Transparency permission. Fix: reset/disable ad ID, fewer apps, restrict permissions. \K{Side-channel}: app reads SD card, EXIF, sensors $\to$ infer restricted data, bypass permission model.
+\hd{CNAME tracking}
+First-party-looking subdomain aliases a hidden tracker domain $\to$ evades 3rd-party-cookie blocking.
+\hd{Supercookie / evercookie / ETag}
+\K{Evercookie} respawns ID from cookies+localStorage+IndexedDB+cache+ETag; clearing one store $\to$ restored from another. \K{ETag} = per-user cache validator used as cookieless ID. Fix: clear ALL site data, partition caches.
+\hd{Malvertising}
+Buy/compromise ad slot $\to$ user sees trusted-looking ad $\to$ redirect to malware/phishing. Spoof/Tamper/Disclosure/EoP. Violates Authenticity, Integrity, Conf, Authz.
+\hd{Modern defenses}
+\K{Total Cookie Protection / partitioning} = separate cookie jar per first-party site. \K{Safari ITP} = classify trackers + partitioned/time-limited cookies. \K{Privacy Sandbox Topics API} = browser-side interest topics, forgotten after epochs. \K{Pseudonymous $\ne$ anonymous} (re-linkable via location/movement/aux data). \R{Password rotation does NOT stop tracking.}
+
+\sct{Secure Computation — extra}{LOW}
+\hd{Reidentification}
+Remove name/SSN, but link \K{quasi-identifiers} (ZIP, birth date, sex) to aux dataset (voter records) $\to$ ``anonymous'' record tied to person. Info disclosure. Violates Privacy, Conf. Fix: DP, stronger anonymization, minimization.
+\hd{Differential Privacy}
+Add \K{calibrated noise} (\K{Laplace mechanism} for numeric queries) $\to$ bound what output reveals about any record. \K{Privacy budget} ($\varepsilon$): each query leaks bounded info; too many queries exhaust budget $\to$ aggregate leak. Utility/privacy trade-off. Fix: enforce budget, query auditing.
+\hd{HE vs MPC}
+\K{HE} = 1 server computes on ciphertext, 1 query-response round, high cost; \R{client must trust correctness unless verifiable} (buggy/malicious server returns wrong result $\to$ Integrity/Accuracy fail). \K{MPC} = $\ge 2$ parties, trust distributed, interactive multi-round, often more efficient, network-sensitive.
+\hd{HE flavors}
+\K{PHE} = unlimited ops of ONE type (add OR mult). \K{SHE} = add+mult, limited depth. \K{FHE} = unlimited add+mult.
+\hd{MPC adversaries}
+\K{Passive / honest-but-curious} = follows protocol, records msgs, infers extra. \K{Active / malicious} = deviates arbitrarily, aborts, biases result (Tamper/Disclosure/DoS). \K{Honest majority} = $<$ half corrupt; \K{dishonest majority} = $>$ half (full-threshold = all-but-one). Active security costlier (commitments/MACs/ZK).
+\hd{MPC building blocks}
+\K{Secret-sharing MPC}: linear ops local, multiplication interactive; good for \K{LAN} (minimize data transfer). \K{Garbled circuit (Yao)}: garbler encodes circuit, evaluator evaluates gate-by-gate; good for \K{WAN} (minimize rounds), function must be circuit in advance. \K{Preprocessing/offline} = data-independent random material; \K{online} = data-dependent, consumes it.
+\hd{Data states}
+In transit, at rest, \R{in use}. Secure computation targets \K{data in use}. \K{Output leakage}: protocol hides inputs except what output implies $\to$ pick coarse outputs (yes/no) + combine with DP.
+
+\sct{Final drill — T/F traps}{ans}
+{\fivept
+``Mixing data+code = main SQLi cause'' \ans{T}. ``HTTP stateless'' \ans{T}. ``SOP prevents server-side cookie theft'' \ans{F}. ``MACs may use hash functions'' \ans{T}. ``ret2libc mitigated by CFI'' \ans{T}. ``TLS protects cookies from theft'' \ans{T for network, not all locations}. ``Fingerprinting relies on HTTP cookies'' \ans{F}. ``Social-network access ctrl = MAC'' \ans{F, DAC-like}. ``Public keys must stay secret'' \ans{F, authenticity matters not secrecy}. ``Signature IDS = public-key source sigs'' \ans{F, attack patterns}.
+\par\K{2FA valid}: PIN+fingerprint(know+are), token+password(have+know), voice+token(are+have). \R{Invalid}: PIN+password(both know), voice+movement(both biometric/one category).
+\par\K{TLS select}: conf msg, integrity msg, authenticity msg, server authenticity (client only if mutual TLS). \R{NOT}: confidentiality of parties, availability.
+}

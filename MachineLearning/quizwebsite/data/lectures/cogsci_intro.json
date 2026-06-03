@@ -1,0 +1,503 @@
+[
+  {
+    "id": 1,
+    "type": "mcq",
+    "topic": "Behaviourism vs Cognitive Science",
+    "prompt": "Why is behaviourism largely incompatible with the basic assumptions of cognitive science?",
+    "options": [
+      "Behaviourism is not scientific.",
+      "Behaviourists study non-psychological observable phenomena and measurable behaviour, while cognitive science is the study of cognition and mind.",
+      "Cognitive scientists are not interested in behaviour.",
+      "Behaviourists study non-psychological observable phenomena and measurable behaviour, while cognitive science is the study of association and reinforcement learning."
+    ],
+    "correct": [1],
+    "explanation": "Behaviourism restricts itself to observable, measurable behaviour and rejects appeals to internal mental states; cognitive science is precisely the study of cognition and mind."
+  },
+  {
+    "id": 2,
+    "type": "mcq",
+    "topic": "Conditioning",
+    "prompt": "What is the main difference between classical conditioning and operant conditioning (reinforcement learning)?",
+    "options": [
+      "Classical conditioning works through reflexive behaviour, while operant conditioning works through agent-initiated behaviour.",
+      "The main difference lies in the complexity of the organism; only complex organisms can learn to use reinforcement.",
+      "Classical conditioning uses reinforcers, while operant conditioning uses an unconditioned stimulus.",
+      "Classical conditioning works through agent-initiated behaviour, while operant conditioning works through reflexive behaviour."
+    ],
+    "correct": [0],
+    "explanation": "Classical conditioning pairs stimuli to produce reflexive responses; operant conditioning shapes agent-initiated behaviour through its consequences."
+  },
+  {
+    "id": 3,
+    "type": "mcq",
+    "topic": "Pavlovian Conditioning",
+    "prompt": "In Pavlov's experiments, before conditioning the bell was a(n) ______ stimulus, while the food was a(n) ______ stimulus.",
+    "options": [
+      "neutral; unconditioned",
+      "conditioned; unconditioned",
+      "unconditioned; neutral",
+      "neutral; conditioned"
+    ],
+    "correct": [0],
+    "explanation": "Before conditioning the bell elicits no relevant response (neutral); food naturally elicits salivation without learning (unconditioned)."
+  },
+  {
+    "id": 4,
+    "type": "mcq",
+    "topic": "History of Cognitive Science",
+    "prompt": "Which key idea in the development of cognitive science is attributable to Alan Turing?",
+    "options": [
+      "Information processing is fundamentally algorithmic.",
+      "The idea of hierarchically organised behaviour provides a clue for how the mind might process information.",
+      "Not all behaviour can be explained through conditioning.",
+      "The idea of syntax provides a clue for how the mind might process information."
+    ],
+    "correct": [0],
+    "explanation": "Turing's work on computability framed information processing as algorithmic symbol manipulation."
+  },
+  {
+    "id": 5,
+    "type": "mcq",
+    "topic": "Information Theory",
+    "prompt": "In his theory of information, Claude Shannon uses which concept to measure information?",
+    "options": ["A byte", "A bit", "A chunk", "An informaton"],
+    "correct": [1],
+    "explanation": "Shannon measures information in bits, the amount needed to resolve a choice between two equally likely alternatives."
+  },
+  {
+    "id": 6,
+    "type": "mcq",
+    "topic": "Marr's Theory of Vision",
+    "prompt": "In Marr's analysis of the visual system, the primal sketch, the 2.5D sketch, and the 3D sketch are constructed:",
+    "options": [
+      "In parallel",
+      "In sequence",
+      "Each independently of what happens at other levels"
+    ],
+    "correct": [1],
+    "explanation": "Marr's representations are built sequentially, each stage taking the previous representation as input."
+  },
+  {
+    "id": 7,
+    "type": "mcq",
+    "topic": "Physical Symbol System Hypothesis",
+    "prompt": "According to the physical symbol system hypothesis, being a physical symbol system is … being capable of intelligent action.",
+    "options": [
+      "necessary but not sufficient for",
+      "fundamentally different from",
+      "both necessary and sufficient for"
+    ],
+    "correct": [2],
+    "explanation": "The physical symbol system hypothesis (Newell & Simon) holds that being a physical symbol system is both necessary AND sufficient for general intelligent action. (Official paper marked B, which is incorrect.)"
+  },
+  {
+    "id": 8,
+    "type": "mcq",
+    "topic": "Problem Solving",
+    "prompt": "Newell and Simon think about problem-solving as a process of …",
+    "options": [
+      "finding a solution-state in a search space.",
+      "intuiting the correct answer.",
+      "applying brute-force algorithms."
+    ],
+    "correct": [0],
+    "explanation": "Newell and Simon model problem-solving as search through a problem space for a goal state."
+  },
+  {
+    "id": 9,
+    "type": "mcq",
+    "topic": "SHRDLU",
+    "prompt": "Terry Winograd's SHRDLU operates in a micro-world and so does not have to deal with the semantic aspects of language.",
+    "options": ["True", "False"],
+    "correct": [1],
+    "explanation": "False — SHRDLU still had to interpret meaning within its blocks micro-world; the micro-world limits scope, not semantics."
+  },
+  {
+    "id": 10,
+    "type": "mcq",
+    "topic": "Dynamical Systems",
+    "prompt": "The state space of a dynamical system always has …",
+    "options": [
+      "infinitely many dimensions.",
+      "as many dimensions as there are dimensions of variation in the system.",
+      "four dimensions (the three spatial dimensions, plus time)."
+    ],
+    "correct": [1],
+    "explanation": "The state space has one dimension per independent variable that can vary in the system."
+  },
+  {
+    "id": 11,
+    "type": "mcq",
+    "topic": "Multiple Realisability",
+    "prompt": "If cognitive processes are multiply realisable then that suggests that they are … processes.",
+    "options": ["Implementational", "Analog", "Digital", "Functional"],
+    "correct": [3],
+    "explanation": "Multiple realisability — the same cognitive process being realisable in different physical substrates — is the classic argument for functionalism, so it suggests cognitive processes are functional. (Official paper marked C 'Digital', which is incorrect.)"
+  },
+  {
+    "id": 12,
+    "type": "mcq",
+    "topic": "Brain Anatomy",
+    "prompt": "The cerebral cortex is part of the …",
+    "options": ["Limbic system", "Hindbrain", "Midbrain", "Forebrain"],
+    "correct": [3],
+    "explanation": "The cerebral cortex (telencephalon) is part of the forebrain. (Official paper marked B 'Hindbrain', which is incorrect.)"
+  },
+  {
+    "id": 13,
+    "type": "mcq",
+    "topic": "Neuron Structure",
+    "prompt": "A biological neuron has …",
+    "options": [
+      "Many axons and a single dendrite.",
+      "A single axon and many dendrites.",
+      "One axon and one dendrite.",
+      "Many axons and many dendrites."
+    ],
+    "correct": [1],
+    "explanation": "A neuron typically has one axon carrying output and many dendrites receiving inputs."
+  },
+  {
+    "id": 14,
+    "type": "mcq",
+    "topic": "Syntax",
+    "prompt": "In symbolising the sentence 'John has hit the ball' as the string of symbols 'NP1 + Aux + V + NP2', which aspect of the sentence has been revealed?",
+    "options": ["Its deep structure", "Its meaning", "Its surface structure", "Its pragmatic structure"],
+    "correct": [2],
+    "explanation": "The linear grammatical category sequence captures the sentence's surface structure."
+  },
+  {
+    "id": 15,
+    "type": "mcq",
+    "topic": "Learning Rules",
+    "prompt": "'Neurons that wire together, fire together' is a description of which type of learning?",
+    "options": ["Perceptron convergence", "Backpropagation of error", "Hebbian learning"],
+    "correct": [2],
+    "explanation": "Hebbian learning strengthens connections between co-active neurons."
+  },
+  {
+    "id": 16,
+    "type": "mcq",
+    "topic": "Connectionism",
+    "prompt": "In artificial neural networks (connectionist networks), information is stored in …",
+    "options": [
+      "the structure of the hidden layers.",
+      "individual units that form language-like structures.",
+      "the pattern of weights across the network.",
+      "the error signal."
+    ],
+    "correct": [2],
+    "explanation": "Knowledge in connectionist networks is distributed across the pattern of connection weights."
+  },
+  {
+    "id": 17,
+    "type": "mcq",
+    "topic": "Visual Processing",
+    "prompt": "Visual information about the distal environment is processed contra-laterally, so that information from the left side of space is processed in the right hemisphere.",
+    "options": ["True", "False"],
+    "correct": [0],
+    "explanation": "True — the visual field is processed contralaterally; the left visual field projects to the right hemisphere."
+  },
+  {
+    "id": 18,
+    "type": "mcq",
+    "topic": "Neuroimaging",
+    "prompt": "Which technology measures the BOLD signal?",
+    "options": ["fMRI", "ECG", "EEG", "PET"],
+    "correct": [0],
+    "explanation": "fMRI measures the Blood-Oxygen-Level-Dependent (BOLD) signal."
+  },
+  {
+    "id": 19,
+    "type": "mcq",
+    "topic": "Formal Systems",
+    "prompt": "The semantics of a formal system is given by …",
+    "options": [
+      "The interpretation of the basic symbols.",
+      "Heuristic search rules through the system's state-space.",
+      "The basic symbols of the formal system and the rules for manipulating them."
+    ],
+    "correct": [0],
+    "explanation": "Semantics is the interpretation (meaning) assigned to the basic symbols. Option C describes the formal system / its syntax, not its semantics. (Official paper marked C, which is incorrect.)"
+  },
+  {
+    "id": 20,
+    "type": "mcq",
+    "topic": "Channel Capacity",
+    "prompt": "An information channel with a channel capacity of n bits can discriminate how many pieces of information?",
+    "options": [
+      "2ⁿ pieces of information (so that a channel with a capacity of 3 bits can discriminate 8 items).",
+      "n² pieces of information (so that a channel with a capacity of 3 bits can discriminate 9 items).",
+      "n pieces of information (so that a channel with a capacity of 3 bits can discriminate 3 items).",
+      "2n pieces of information (so that a channel with a capacity of 3 bits can discriminate 6 items)."
+    ],
+    "correct": [0],
+    "explanation": "n bits encode 2ⁿ distinct states, so 3 bits discriminate 8 items."
+  },
+  {
+    "id": 21,
+    "type": "mcq",
+    "topic": "Attention",
+    "prompt": "When you read in a noisy coffee shop, you focus on your reading and are not distracted by the conversations around you. This is an example of …",
+    "options": ["Hierarchical organisation", "Chunking information", "Selective attention", "Spatial learning"],
+    "correct": [2],
+    "explanation": "Selective attention filters out irrelevant stimuli to focus on a chosen task."
+  },
+  {
+    "id": 22,
+    "type": "mcq",
+    "topic": "Probability",
+    "prompt": "The probability of a conjunction, p(A & B), where A and B are independent of each other, is calculated as:",
+    "options": ["p(A) + p(B)", "p(A) × p(B)", "p(A) / p(B)"],
+    "correct": [1],
+    "explanation": "For independent events the joint probability is the product of the individual probabilities."
+  },
+  {
+    "id": 23,
+    "type": "mcq",
+    "topic": "Bayesian Inference",
+    "prompt": "In order to apply Bayes's Rule to discover how probable a hypothesis is relative to the given evidence p(H|E), we start with p(E|H). This is called:",
+    "options": ["The likelihood", "The posterior probability", "The prior probability"],
+    "correct": [0],
+    "explanation": "p(E|H) is the likelihood — the probability of the evidence assuming the hypothesis is true."
+  },
+  {
+    "id": 24,
+    "type": "mcq",
+    "topic": "Game Theory",
+    "prompt": "The tit-for-tat algorithm instructs decision-makers to cooperate in prisoner's dilemmas if and only if they have evidence that the other player is going to cooperate.",
+    "options": ["True", "False"],
+    "correct": [1],
+    "explanation": "False — tit-for-tat cooperates on the first move and then simply copies the opponent's previous move."
+  },
+  {
+    "id": 25,
+    "type": "mcq",
+    "topic": "EEG",
+    "prompt": "Electroencephalograms (EEGs) allow experimenters to study event-related potentials.",
+    "options": ["False", "True"],
+    "correct": [1],
+    "explanation": "True — EEG is the standard technique for measuring event-related potentials (ERPs), thanks to its high temporal resolution. (Official paper marked False, which is incorrect.)"
+  },
+  {
+    "id": 26,
+    "type": "mcq",
+    "topic": "Poverty of the Stimulus",
+    "prompt": "Which of the following does Chomsky take as evidence for his poverty of the stimulus argument?",
+    "options": [
+      "Much of the language that young children hear is actually ungrammatical, but they are rarely told that it is.",
+      "Stimulus-response conditioning cannot account for language learning.",
+      "Young children constantly receive positive feedback when they learn a language."
+    ],
+    "correct": [0],
+    "explanation": "The linguistic input children receive is impoverished and noisy, yet they acquire grammar — evidence for innate structure."
+  },
+  {
+    "id": 27,
+    "type": "mcq",
+    "topic": "Word Segmentation",
+    "prompt": "The problem of word segmentation is the problem of learning …",
+    "options": [
+      "How a continuous stream of vocalisations breaks down into words.",
+      "How words form sentences.",
+      "How words are built up from phonemes."
+    ],
+    "correct": [0],
+    "explanation": "Speech is continuous; segmentation is the task of finding word boundaries in that stream."
+  },
+  {
+    "id": 28,
+    "type": "mcq",
+    "topic": "Transition Probability",
+    "prompt": "Transition probability is a key concept in Bayesian approaches to word segmentation. This is defined as …",
+    "options": [
+      "The probability that a given syllable will follow another syllable.",
+      "The probability that one word will transition into another.",
+      "The probability that a given syllable will occur in a sentence."
+    ],
+    "correct": [0],
+    "explanation": "Transition probability measures how likely one syllable is to follow another; dips signal word boundaries."
+  },
+  {
+    "id": 29,
+    "type": "mcq",
+    "topic": "Bayesian Perception",
+    "prompt": "In Bayesian approaches to perception, principles like the Gestalt principles function as …",
+    "options": ["Likelihoods", "Priors", "Posterior probabilities"],
+    "correct": [1],
+    "explanation": "Gestalt principles encode prior expectations about how the world is structured."
+  },
+  {
+    "id": 30,
+    "type": "mcq",
+    "topic": "Cognitive Development",
+    "prompt": "Object permanence is defined as the understanding that objects continue to exist when they are not being perceived.",
+    "options": ["False", "True"],
+    "correct": [1],
+    "explanation": "True — object permanence is exactly the understanding that unperceived objects still exist."
+  },
+  {
+    "id": 31,
+    "type": "mcq",
+    "topic": "Levels of Analysis",
+    "prompt": "According to Fodor and Pylyshyn, neural network models should be located at which of Marr's three levels?",
+    "options": ["Implementational", "Computational", "Algorithmic"],
+    "correct": [0],
+    "explanation": "Fodor and Pylyshyn argued that connectionist/neural-network models describe at most the implementation of a classical symbolic architecture, placing them at Marr's implementational level. (Official paper marked B 'Computational', which is incorrect.)"
+  },
+  {
+    "id": 32,
+    "type": "mcq",
+    "topic": "Emotion and the Brain",
+    "prompt": "The patient S.M. who suffered damage to the amygdala showed deficits in experiencing and identifying which of the following emotions?",
+    "options": ["Anger", "Fear", "Disgust"],
+    "correct": [1],
+    "explanation": "S.M.'s bilateral amygdala damage produced selective deficits in fear."
+  },
+  {
+    "id": 33,
+    "type": "mcq",
+    "topic": "Neurochemistry of Emotion",
+    "prompt": "Rats whose dopamine levels have been deliberately suppressed are less aggressive than controls and also less skilled in identifying anger from facial expressions.",
+    "options": ["False", "True"],
+    "correct": [1],
+    "explanation": "True — dopamine modulates aggression, and lowering dopamine is associated both with reduced aggression and with impaired recognition of anger from facial expressions."
+  },
+  {
+    "id": 34,
+    "type": "mcq",
+    "topic": "Consciousness",
+    "prompt": "Which of the following best describes a state that is access-conscious in Block's sense?",
+    "options": [
+      "It is characterised by its experiential and sensational properties.",
+      "It is available for use in reasoning.",
+      "Both A and B."
+    ],
+    "correct": [1],
+    "explanation": "Access consciousness is defined by availability for reasoning, reporting, and control of behaviour (not by phenomenal feel)."
+  },
+  {
+    "id": 35,
+    "type": "mcq",
+    "topic": "Hard Problem",
+    "prompt": "Which of the following is an example of the hard problem of consciousness?",
+    "options": [
+      "Explaining how an organism can consciously discriminate different types of stimulus.",
+      "Explaining the information-processing underlying conscious perception.",
+      "None of A through C.",
+      "Explaining the difference between being awake and being asleep."
+    ],
+    "correct": [2],
+    "explanation": "The hard problem is explaining why there is subjective experience at all. Options A, B and D are all 'easy' problems (information-processing / functional questions), so none is an example of the hard problem. (Official paper marked B, which is an easy problem.)"
+  },
+  {
+    "id": 36,
+    "type": "mcq",
+    "topic": "Global Workspace Theory",
+    "prompt": "The global workspace theory is based on an analysis of the functions of consciousness.",
+    "options": ["True", "False"],
+    "correct": [1],
+    "explanation": "Kept as the official key (False). Note: this is debatable — Baars' global workspace is often presented as a functional account of consciousness, so depending on lecture framing 'True' is defensible."
+  },
+  {
+    "id": 37,
+    "type": "mcq",
+    "topic": "Neuroimaging Trade-offs",
+    "prompt": "Which of the following is true regarding the techniques of fMRI and EEG?",
+    "options": [
+      "EEG has both high spatial resolution and high temporal resolution.",
+      "fMRI has high spatial resolution but low temporal resolution.",
+      "fMRI has both high spatial resolution and high temporal resolution.",
+      "EEG has high spatial resolution but low temporal resolution."
+    ],
+    "correct": [1],
+    "explanation": "fMRI offers high spatial but poor temporal resolution; EEG is the reverse."
+  },
+  {
+    "id": 38,
+    "type": "mcq",
+    "topic": "Models of Emotion",
+    "prompt": "In the simplest and most popular model of emotion, each emotion is located within a two-dimensional space with the two dimensions being …",
+    "options": [
+      "happiness and valence.",
+      "valence and arousal.",
+      "anxiety and arousal.",
+      "happiness and anxiety."
+    ],
+    "correct": [1],
+    "explanation": "The circumplex model places emotions on valence (pleasant–unpleasant) and arousal (activation) axes."
+  },
+  {
+    "id": 39,
+    "type": "mcq",
+    "topic": "Semantics vs Syntax",
+    "prompt": "What is the difference between the semantics and the syntax of a language? [...] refers to the interpretation (meaning) of the symbols a language contains; [...] refers to the rules for combining symbols in a language.",
+    "options": ["Semantics; Syntax", "Syntax; Semantics", "Grammar; Semantics", "Semantics; Grammar"],
+    "correct": [0],
+    "explanation": "Semantics concerns meaning/interpretation; syntax concerns the rules for combining symbols."
+  },
+  {
+    "id": 40,
+    "type": "mcq",
+    "topic": "Eye Movements",
+    "prompt": "Saccadic eye movements allow the eye to track objects moving continuously.",
+    "options": ["False", "True"],
+    "correct": [0],
+    "explanation": "False — saccades are rapid jumps between fixation points; smooth pursuit tracks continuously moving objects."
+  },
+  {
+    "id": 41,
+    "type": "mcq",
+    "topic": "Prisoner's Dilemma",
+    "prompt": "In standard analysis, the rational strategy in a prisoner's dilemma is …",
+    "options": [
+      "To defect, but only if the other player cooperates.",
+      "To cooperate, whatever the other player does.",
+      "To defect, whatever the other player does.",
+      "To cooperate, but only if the other player cooperates."
+    ],
+    "correct": [2],
+    "explanation": "Defection is the dominant strategy: it yields a better payoff regardless of the opponent's choice."
+  },
+  {
+    "id": 42,
+    "type": "mcq",
+    "topic": "fMRI Connectivity",
+    "prompt": "fMRI serves best as a tool to track …",
+    "options": [
+      "Functional connectivity",
+      "Effective connectivity",
+      "Anatomical connectivity",
+      "All of the above"
+    ],
+    "correct": [0],
+    "explanation": "fMRI measures correlated activity between regions, so it best tracks functional connectivity. Anatomical (structural) connectivity is measured with diffusion imaging (DTI). (Official paper marked C 'Anatomical', which is incorrect.)"
+  },
+  {
+    "id": 43,
+    "type": "mcq",
+    "topic": "Relative vs Absolute Judgement",
+    "prompt": "According to Miller, why are people better at making relative judgements than absolute judgements?",
+    "options": [
+      "Because making absolute judgements requires more attention.",
+      "Because absolute judgements require hierarchical information-processing.",
+      "Because the information channels for making absolute judgements have lower capacity.",
+      "Because making relative judgements requires less channel capacity."
+    ],
+    "correct": [3],
+    "explanation": "Relative judgements demand less channel capacity, so they are less constrained by the limits Miller describes."
+  },
+  {
+    "id": 44,
+    "type": "mcq",
+    "topic": "Dichotic Listening",
+    "prompt": "In Broadbent's dichotic listening experiments, what best explains the fact that people performed best when they reported the stimuli ear by ear?",
+    "options": [
+      "Their auditory systems break the task into sub-tasks.",
+      "People use different transformational rules for information they get from different ears.",
+      "The selective filter makes people focus on one string of information at a time."
+    ],
+    "correct": [2],
+    "explanation": "Broadbent's filter model holds that attention selects one channel at a time, so ear-by-ear report aligns with the filter."
+  }
+]
