@@ -1,0 +1,507 @@
+[
+  {
+    "id": 1,
+    "type": "mcq",
+    "topic": "Behaviourism vs Cognitive Science",
+    "prompt": "Why is behaviorism largely incompatible with the basic assumptions of cognitive science?",
+    "options": [
+      "Behaviorists study non-psychological observable phenomena and measurable behavior, while cognitive science is the study of cognition and mind.",
+      "Cognitive scientists are not interested in behavior.",
+      "Behaviorism is not scientific.",
+      "Behaviorists study non-psychological observable phenomena and measurable behavior, while cognitive science is the study of association and reinforcement learning."
+    ],
+    "correct": [0],
+    "explanation": "Behaviorism restricts itself to observable, measurable behavior; cognitive science studies cognition and mind."
+  },
+  {
+    "id": 2,
+    "type": "mcq",
+    "topic": "Classical Conditioning",
+    "prompt": "How does classical conditioning work in the learning process?",
+    "options": [
+      "The organism strengthens the association between unconditioned stimulus and unconditioned response.",
+      "The organism strengthens the association between conditioned stimulus and unconditioned response.",
+      "The organism strengthens the association between unconditioned stimulus and conditioned stimulus.",
+      "The organism strengthens the association between conditioned stimulus and conditioned response."
+    ],
+    "correct": [1],
+    "explanation": "The previously neutral conditioned stimulus comes to elicit the unconditioned response."
+  },
+  {
+    "id": 3,
+    "type": "mcq",
+    "topic": "Attention",
+    "prompt": "When you read in a noisy coffee shop, you focus on your reading and are not distracted by the conversations around you. This is an example of?",
+    "options": [
+      "Selective attention.",
+      "Chunking information.",
+      "Hierarchical organization.",
+      "Spatial learning."
+    ],
+    "correct": [0],
+    "explanation": "Selective attention filters out irrelevant stimuli to focus on a task."
+  },
+  {
+    "id": 4,
+    "type": "mcq",
+    "topic": "Latent Learning",
+    "prompt": "What is the key feature of the maze experiments in Tolman and Honzik (1930)?",
+    "options": [
+      "Rats learn to run the maze by response learning.",
+      "Reinforcement is the best way for rats to learn to run the maze.",
+      "Rats learn the layout of the maze only when they are rewarded.",
+      "Rats can learn the layout of the maze without any direct reinforcement."
+    ],
+    "correct": [3],
+    "explanation": "Tolman and Honzik showed latent learning: rats form a cognitive map of the maze without direct reinforcement."
+  },
+  {
+    "id": 5,
+    "type": "mcq",
+    "topic": "History of Cognitive Science",
+    "prompt": "Which key idea in the development of cognitive science is attributable to Alan Turing?",
+    "options": [
+      "Information processing is fundamentally algorithmic.",
+      "Not all behavior can be explained through conditioning.",
+      "The idea of hierarchically organized behavior provides a clue for how the mind might process information.",
+      "The idea of syntax provides a clue for how the mind might process information."
+    ],
+    "correct": [0],
+    "explanation": "Turing framed information processing as algorithmic symbol manipulation."
+  },
+  {
+    "id": 6,
+    "type": "mcq",
+    "topic": "Channel Capacity",
+    "prompt": "An information channel with a channel capacity of n bits can discriminate how many pieces of information?",
+    "options": [
+      "2n pieces of information (so that a channel with a capacity of 3 bits can discriminate 6 items).",
+      "n² pieces of information (so that a channel with a capacity of 3 bits can discriminate 9 items).",
+      "2ⁿ pieces of information (so that a channel with a capacity of 3 bits can discriminate 8 items).",
+      "Not specified."
+    ],
+    "correct": [2],
+    "explanation": "n bits encode 2ⁿ distinct states, so 3 bits discriminate 8 items."
+  },
+  {
+    "id": 7,
+    "type": "mcq",
+    "topic": "SHRDLU",
+    "prompt": "In Terry Winograd's SHRDLU, linguistic understanding is achieved through which of the following?",
+    "options": [
+      "Algorithmic procedures.",
+      "Conversational chatterbots.",
+      "Phrase structure trees.",
+      "Not specified."
+    ],
+    "correct": [0],
+    "explanation": "SHRDLU achieves understanding through algorithmic procedures operating in its blocks micro-world."
+  },
+  {
+    "id": 8,
+    "type": "mcq",
+    "topic": "Marr's Theory of Vision",
+    "prompt": "In Marr's theory, the 3D sketch ________.",
+    "options": [
+      "contains information about what objects are for.",
+      "is viewer-centered.",
+      "represents objects independently of the viewer's perspective.",
+      "is computed in the primary visual cortex."
+    ],
+    "correct": [1],
+    "explanation": "Per the marked key, the 3D sketch is viewer-centered."
+  },
+  {
+    "id": 9,
+    "type": "mcq",
+    "topic": "Shape vs Function",
+    "prompt": "According to Marr, Elizabeth Warrington's work with neuropsychological patients showed that the visual system processes information about objects' shape independently of information about their function.",
+    "options": ["True", "False"],
+    "correct": [0],
+    "explanation": "True — Warrington's patients dissociated shape processing from object function."
+  },
+  {
+    "id": 10,
+    "type": "mcq",
+    "topic": "ELIZA",
+    "prompt": "The chatbot program ELIZA was designed to ________.",
+    "options": [
+      "simulate conversational exchanges between psychotherapists and their patients.",
+      "illustrate how a computer program can analyze the syntactic structure or the meaning of a sentence.",
+      "prove that people are able to distinguish between computers and real people whom they communicate with.",
+      "show that computer programs are incapable of anything that resembled linguistic understanding."
+    ],
+    "correct": [0],
+    "explanation": "ELIZA (Weizenbaum) simulated a Rogerian psychotherapist's conversational exchanges."
+  },
+  {
+    "id": 11,
+    "type": "mcq",
+    "topic": "Levels of Analysis",
+    "prompt": "Detailed studies of neurobiology and neuroanatomy are most relevant at ________.",
+    "options": [
+      "the computational level.",
+      "the algorithmic level.",
+      "the implementational level.",
+      "Not specified."
+    ],
+    "correct": [2],
+    "explanation": "Neurobiology and neuroanatomy describe the physical realization — Marr's implementational level."
+  },
+  {
+    "id": 12,
+    "type": "mcq",
+    "topic": "Multiple Realisability",
+    "prompt": "Cognitive scientists who hold that mental capacities are multiply realizable tend to think that we can understand those capacities without looking at the details of how the brain works.",
+    "options": ["True", "False"],
+    "correct": [0],
+    "explanation": "True — multiple realisability motivates studying function abstracted from neural implementation."
+  },
+  {
+    "id": 13,
+    "type": "mcq",
+    "topic": "Visual Processing",
+    "prompt": "Visual information about the distal environment is processed contra-laterally, so that information from the left side of space is processed in the right hemisphere.",
+    "options": ["True", "False"],
+    "correct": [0],
+    "explanation": "True — the left visual field projects to the right hemisphere."
+  },
+  {
+    "id": 14,
+    "type": "mcq",
+    "topic": "Neural Network Learning",
+    "prompt": "Neural networks learn by adjusting the weights of individual units to reduce overall error.",
+    "options": ["True", "False"],
+    "correct": [0],
+    "explanation": "True — learning adjusts connection weights to minimize error."
+  },
+  {
+    "id": 15,
+    "type": "mcq",
+    "topic": "Neuroimaging",
+    "prompt": "Which technology measures the BOLD signal?",
+    "options": ["EEG.", "fMRI.", "PET.", "ECG."],
+    "correct": [1],
+    "explanation": "fMRI measures the Blood-Oxygen-Level-Dependent signal."
+  },
+  {
+    "id": 16,
+    "type": "mcq",
+    "topic": "Physical Symbol Systems",
+    "prompt": "According to Newell and Simon, human minds are fundamentally different from computers.",
+    "options": ["True", "False"],
+    "correct": [1],
+    "explanation": "False — Newell and Simon hold that minds and computers are both physical symbol systems."
+  },
+  {
+    "id": 17,
+    "type": "mcq",
+    "topic": "Turing Machines",
+    "prompt": "A universal Turing machine is a paradigm example of a physical symbol system.",
+    "options": ["True", "False"],
+    "correct": [0],
+    "explanation": "True — a universal Turing machine is a canonical physical symbol system."
+  },
+  {
+    "id": 18,
+    "type": "mcq",
+    "topic": "Formal Systems",
+    "prompt": "The syntax of a formal system is given by ________.",
+    "options": [
+      "the basic symbols of the formal system and the rules for manipulating them.",
+      "the interpretation of the basic symbols.",
+      "heuristic search rules through the system's state-space.",
+      "Not specified."
+    ],
+    "correct": [0],
+    "explanation": "Syntax is the basic symbols plus the rules for manipulating them; semantics is the interpretation."
+  },
+  {
+    "id": 19,
+    "type": "mcq",
+    "topic": "Means-End Analysis",
+    "prompt": "What is the principal advantage of using means-end analysis to search the search-space?",
+    "options": [
+      "It does not need an initial state to find the solution state in the search-space.",
+      "It does not require an exhaustive search of every branch in the search tree.",
+      "It can solve a goal-directed problem such as the traveling salesman problem.",
+      "It can employ a huge number of permissible transformations."
+    ],
+    "correct": [1],
+    "explanation": "Means-end analysis reduces differences toward the goal, avoiding exhaustive search of every branch."
+  },
+  {
+    "id": 20,
+    "type": "mcq",
+    "topic": "Neuron Structure",
+    "prompt": "A biological neuron has ________.",
+    "options": [
+      "one axon and one dendrite.",
+      "many axons and a single dendrite.",
+      "a single axon and many dendrites.",
+      "many axons and many dendrites."
+    ],
+    "correct": [2],
+    "explanation": "One axon carries output; many dendrites receive inputs."
+  },
+  {
+    "id": 21,
+    "type": "mcq",
+    "topic": "Activation Functions",
+    "prompt": "All activation functions in artificial neural networks are linear.",
+    "options": ["True", "False"],
+    "correct": [1],
+    "explanation": "False — nonlinear activation functions are essential for networks to compute nonlinear mappings."
+  },
+  {
+    "id": 22,
+    "type": "mcq",
+    "topic": "Learning Rules",
+    "prompt": "'Neurons that wire together, fire together' is a description of which type of learning?",
+    "options": [
+      "Hebbian learning.",
+      "Perceptron convergence.",
+      "Backpropagation of error.",
+      "Not specified."
+    ],
+    "correct": [0],
+    "explanation": "Hebbian learning strengthens connections between co-active neurons."
+  },
+  {
+    "id": 23,
+    "type": "mcq",
+    "topic": "Connectionism",
+    "prompt": "How does an artificial neural network store information?",
+    "options": [
+      "In language-like physical symbol structures.",
+      "In its learning algorithm.",
+      "In the pattern of weights holding across individual units.",
+      "In the output units."
+    ],
+    "correct": [2],
+    "explanation": "Knowledge is distributed across the pattern of connection weights."
+  },
+  {
+    "id": 24,
+    "type": "mcq",
+    "topic": "EEG",
+    "prompt": "Electroencephalograms (EEGs) allow experimenters to study event-related potentials.",
+    "options": ["True", "False"],
+    "correct": [0],
+    "explanation": "True — EEG is the standard technique for measuring event-related potentials (ERPs)."
+  },
+  {
+    "id": 25,
+    "type": "mcq",
+    "topic": "Single-Neuron Recording",
+    "prompt": "Single neuron recording is a useful technique for studying brain connectivity.",
+    "options": ["True", "False"],
+    "correct": [1],
+    "explanation": "False — single-neuron recording probes individual cells, not large-scale connectivity."
+  },
+  {
+    "id": 26,
+    "type": "mcq",
+    "topic": "Brain Waves",
+    "prompt": "Activity in the beta wave is characteristic of ________.",
+    "options": [
+      "deep, unconscious sleep.",
+      "normal waking consciousness.",
+      "active exchange of information between cortical and other regions.",
+      "Not specified."
+    ],
+    "correct": [1],
+    "explanation": "Beta waves characterize normal alert waking consciousness."
+  },
+  {
+    "id": 27,
+    "type": "mcq",
+    "topic": "EEG Method",
+    "prompt": "How does EEG collect the electrical activity of large populations of neurons?",
+    "options": [
+      "By placing a microelectrode into the brain.",
+      "By attaching electrodes to the skull to receive electrical signals.",
+      "By collecting the magnetic field signal and converting it into current via a tube placed above the skull.",
+      "Not specified."
+    ],
+    "correct": [1],
+    "explanation": "EEG records electrical signals through electrodes attached to the scalp/skull."
+  },
+  {
+    "id": 28,
+    "type": "mcq",
+    "topic": "Bayesian Belief",
+    "prompt": "For Bayesians, a belief is ________.",
+    "options": [
+      "a truth value.",
+      "a probability assignment.",
+      "a sentence in the language of thought.",
+      "Not specified."
+    ],
+    "correct": [1],
+    "explanation": "Bayesians treat beliefs as degrees of confidence — probability assignments."
+  },
+  {
+    "id": 29,
+    "type": "mcq",
+    "topic": "Probability",
+    "prompt": "The probability of a conjunction, p(A & B), where A and B are independent of each other, is calculated as ________.",
+    "options": [
+      "p(A) + p(B).",
+      "p(A)/p(B).",
+      "p(A) × p(B).",
+      "Not specified."
+    ],
+    "correct": [2],
+    "explanation": "For independent events the joint probability is the product."
+  },
+  {
+    "id": 30,
+    "type": "mcq",
+    "topic": "Bayesian Inference",
+    "prompt": "In order to apply Bayes's Rule to discover how probable a hypothesis is relative to the given evidence p(H/E), we start with p(E/H). This is called ________.",
+    "options": [
+      "the prior probability.",
+      "the likelihood.",
+      "the posterior probability.",
+      "Not specified."
+    ],
+    "correct": [1],
+    "explanation": "p(E|H) is the likelihood — probability of the evidence assuming the hypothesis."
+  },
+  {
+    "id": 31,
+    "type": "mcq",
+    "topic": "Bayesian Perception",
+    "prompt": "In Bayesian approaches to perception, principles like the Gestalt principles function as ________.",
+    "options": [
+      "priors.",
+      "likelihoods.",
+      "posterior probabilities.",
+      "Not specified."
+    ],
+    "correct": [0],
+    "explanation": "Gestalt principles encode prior expectations about how the world is structured."
+  },
+  {
+    "id": 32,
+    "type": "mcq",
+    "topic": "Word Segmentation",
+    "prompt": "The problem of word segmentation is the problem of learning ________.",
+    "options": [
+      "how words are built up from phonemes.",
+      "how words form sentences.",
+      "how a continuous stream of vocalizations breaks down into words.",
+      "Not specified."
+    ],
+    "correct": [2],
+    "explanation": "Speech is continuous; segmentation finds word boundaries in that stream."
+  },
+  {
+    "id": 33,
+    "type": "mcq",
+    "topic": "Transition Probability",
+    "prompt": "Transition probability is a key concept in Bayesian approaches to word segmentation. This is defined as ________.",
+    "options": [
+      "the probability that a given syllable will occur in a sentence.",
+      "the probability that a given syllable will follow another syllable.",
+      "the probability that one word will transition into another.",
+      "Not specified."
+    ],
+    "correct": [1],
+    "explanation": "Transition probability measures how likely one syllable follows another; dips signal boundaries."
+  },
+  {
+    "id": 34,
+    "type": "mcq",
+    "topic": "Poverty of the Stimulus",
+    "prompt": "Chomsky's poverty-of-stimulus arguments stand for a form of ________ about language.",
+    "options": [
+      "innatism.",
+      "behaviorism.",
+      "constructivism.",
+      "Not specified."
+    ],
+    "correct": [0],
+    "explanation": "Poverty of the stimulus supports innatism — innate grammatical structure."
+  },
+  {
+    "id": 35,
+    "type": "mcq",
+    "topic": "Hard Problem",
+    "prompt": "Which of the following is an example of the hard problem of consciousness?",
+    "options": [
+      "Explaining how an organism can consciously discriminate different types of stimuli.",
+      "Explaining the difference between being awake and being asleep.",
+      "Explaining the information-processing underlying conscious perception.",
+      "None of the above."
+    ],
+    "correct": [3],
+    "explanation": "The hard problem is explaining why there is subjective experience at all; the others are 'easy' problems."
+  },
+  {
+    "id": 36,
+    "type": "mcq",
+    "topic": "Double Dissociation",
+    "prompt": "Suppose we have two disorders, X and Y, which impair brain functions, A and B, in particular ways. What would we observe if two functions are double dissociation?",
+    "options": [
+      "Function A and B are impaired in both of the disorders.",
+      "Only function A is impaired in either of the disorders.",
+      "Function A is impaired under disorder X, while function B is impaired under disorder Y.",
+      "Either of function A or B is impaired under disorder Y."
+    ],
+    "correct": [2],
+    "explanation": "Double dissociation: A impaired (B spared) under X, and B impaired (A spared) under Y."
+  },
+  {
+    "id": 37,
+    "type": "mcq",
+    "topic": "Easy Problems",
+    "prompt": "Which of the following is not an example of the easy problem of consciousness?",
+    "options": [
+      "Access consciousness.",
+      "The feel of particular experiences.",
+      "How consciousness can make a difference to cognition.",
+      "Both A and C."
+    ],
+    "correct": [1],
+    "explanation": "The subjective feel of experience is the hard problem, not an easy (functional) problem."
+  },
+  {
+    "id": 38,
+    "type": "mcq",
+    "topic": "Dynamical Systems",
+    "prompt": "Which of the following is an example of a dynamical system?",
+    "options": [
+      "A dripping tap.",
+      "A Turing machine.",
+      "The solar system.",
+      "All of the above."
+    ],
+    "correct": [3],
+    "explanation": "All evolve over time according to state-dependent rules, so all are dynamical systems."
+  },
+  {
+    "id": 39,
+    "type": "mcq",
+    "topic": "Basins of Attraction",
+    "prompt": "Which types of dynamical system have multiple basins of attraction?",
+    "options": [
+      "Linear dynamical systems.",
+      "Nonlinear dynamical systems.",
+      "All dynamical systems.",
+      "Not specified."
+    ],
+    "correct": [1],
+    "explanation": "Multiple basins of attraction are a hallmark of nonlinear dynamical systems."
+  },
+  {
+    "id": 40,
+    "type": "mcq",
+    "topic": "Dynamical Cognition",
+    "prompt": "Dynamical systems theorists hold that the mind-environment complex is a system whose behavior evolves as a function of a small number of variables.",
+    "options": ["True", "False"],
+    "correct": [0],
+    "explanation": "True — dynamicists model the mind-environment system with a low-dimensional set of variables."
+  }
+]

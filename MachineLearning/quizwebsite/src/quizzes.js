@@ -11,6 +11,7 @@ import l09 from "../data/lectures/09_ensembles.json";
 import l10 from "../data/lectures/10_neural_networks.json";
 import l11 from "../data/lectures/11_xai_lime.json";
 import cogsci from "../data/lectures/cogsci_intro.json";
+import cogsci2 from "../data/lectures/cogsci_test2.json";
 
 export const QUIZZES = [
   {
@@ -99,10 +100,17 @@ export const QUIZZES = [
   },
   {
     id: "cogsci",
-    title: "Cognitive Science — Past Exam",
-    subtitle: "Behaviourism, Marr, symbol systems, attention, Bayesian cognition, consciousness (Q1–44).",
+    title: "Cognitive Science — Test 1",
+    subtitle: "Behaviourism, Marr, symbol systems, attention, Bayesian cognition, consciousness (Q1–50).",
     group: "Cognitive Science",
     questions: cogsci,
+  },
+  {
+    id: "cogsci2",
+    title: "Cognitive Science — Test 2",
+    subtitle: "Conditioning, latent learning, Marr, connectionism, Bayesian cognition, dynamical systems (Q1–40).",
+    group: "Cognitive Science",
+    questions: cogsci2,
   },
 ];
 

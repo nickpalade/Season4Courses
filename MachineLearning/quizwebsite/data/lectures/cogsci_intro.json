@@ -11,7 +11,7 @@
       "Behaviourists study non-psychological observable phenomena and measurable behaviour, while cognitive science is the study of association and reinforcement learning."
     ],
     "correct": [1],
-    "explanation": "Behaviourism restricts itself to observable, measurable behaviour and rejects appeals to internal mental states; cognitive science is precisely the study of cognition and mind."
+    "explanation": "Behaviourism restricts itself to observable, measurable behaviour; cognitive science is the study of cognition and mind."
   },
   {
     "id": 2,
@@ -25,7 +25,7 @@
       "Classical conditioning works through agent-initiated behaviour, while operant conditioning works through reflexive behaviour."
     ],
     "correct": [0],
-    "explanation": "Classical conditioning pairs stimuli to produce reflexive responses; operant conditioning shapes agent-initiated behaviour through its consequences."
+    "explanation": "Classical conditioning produces reflexive responses; operant conditioning shapes agent-initiated behaviour through consequences."
   },
   {
     "id": 3,
@@ -39,7 +39,7 @@
       "neutral; conditioned"
     ],
     "correct": [0],
-    "explanation": "Before conditioning the bell elicits no relevant response (neutral); food naturally elicits salivation without learning (unconditioned)."
+    "explanation": "The bell elicits no relevant response (neutral); food naturally elicits salivation (unconditioned)."
   },
   {
     "id": 4,
@@ -53,7 +53,7 @@
       "The idea of syntax provides a clue for how the mind might process information."
     ],
     "correct": [0],
-    "explanation": "Turing's work on computability framed information processing as algorithmic symbol manipulation."
+    "explanation": "Turing framed information processing as algorithmic symbol manipulation."
   },
   {
     "id": 5,
@@ -62,7 +62,7 @@
     "prompt": "In his theory of information, Claude Shannon uses which concept to measure information?",
     "options": ["A byte", "A bit", "A chunk", "An informaton"],
     "correct": [1],
-    "explanation": "Shannon measures information in bits, the amount needed to resolve a choice between two equally likely alternatives."
+    "explanation": "Shannon measures information in bits."
   },
   {
     "id": 6,
@@ -75,7 +75,7 @@
       "Each independently of what happens at other levels"
     ],
     "correct": [1],
-    "explanation": "Marr's representations are built sequentially, each stage taking the previous representation as input."
+    "explanation": "Marr's representations are built sequentially, each stage taking the previous as input."
   },
   {
     "id": 7,
@@ -88,7 +88,7 @@
       "both necessary and sufficient for"
     ],
     "correct": [2],
-    "explanation": "The physical symbol system hypothesis (Newell & Simon) holds that being a physical symbol system is both necessary AND sufficient for general intelligent action. (Official paper marked B, which is incorrect.)"
+    "explanation": "Newell & Simon: being a physical symbol system is both necessary and sufficient for general intelligent action."
   },
   {
     "id": 8,
@@ -101,7 +101,7 @@
       "applying brute-force algorithms."
     ],
     "correct": [0],
-    "explanation": "Newell and Simon model problem-solving as search through a problem space for a goal state."
+    "explanation": "They model problem-solving as search through a problem space for a goal state."
   },
   {
     "id": 9,
@@ -110,7 +110,7 @@
     "prompt": "Terry Winograd's SHRDLU operates in a micro-world and so does not have to deal with the semantic aspects of language.",
     "options": ["True", "False"],
     "correct": [1],
-    "explanation": "False — SHRDLU still had to interpret meaning within its blocks micro-world; the micro-world limits scope, not semantics."
+    "explanation": "False — SHRDLU still interprets meaning within its blocks micro-world."
   },
   {
     "id": 10,
@@ -123,7 +123,7 @@
       "four dimensions (the three spatial dimensions, plus time)."
     ],
     "correct": [1],
-    "explanation": "The state space has one dimension per independent variable that can vary in the system."
+    "explanation": "One dimension per independent variable that can vary in the system."
   },
   {
     "id": 11,
@@ -132,7 +132,7 @@
     "prompt": "If cognitive processes are multiply realisable then that suggests that they are … processes.",
     "options": ["Implementational", "Analog", "Digital", "Functional"],
     "correct": [3],
-    "explanation": "Multiple realisability — the same cognitive process being realisable in different physical substrates — is the classic argument for functionalism, so it suggests cognitive processes are functional. (Official paper marked C 'Digital', which is incorrect.)"
+    "explanation": "Multiple realisability is the classic argument for functionalism."
   },
   {
     "id": 12,
@@ -141,7 +141,7 @@
     "prompt": "The cerebral cortex is part of the …",
     "options": ["Limbic system", "Hindbrain", "Midbrain", "Forebrain"],
     "correct": [3],
-    "explanation": "The cerebral cortex (telencephalon) is part of the forebrain. (Official paper marked B 'Hindbrain', which is incorrect.)"
+    "explanation": "The cerebral cortex is part of the forebrain."
   },
   {
     "id": 13,
@@ -155,7 +155,7 @@
       "Many axons and many dendrites."
     ],
     "correct": [1],
-    "explanation": "A neuron typically has one axon carrying output and many dendrites receiving inputs."
+    "explanation": "One axon carries output; many dendrites receive inputs."
   },
   {
     "id": 14,
@@ -164,7 +164,7 @@
     "prompt": "In symbolising the sentence 'John has hit the ball' as the string of symbols 'NP1 + Aux + V + NP2', which aspect of the sentence has been revealed?",
     "options": ["Its deep structure", "Its meaning", "Its surface structure", "Its pragmatic structure"],
     "correct": [2],
-    "explanation": "The linear grammatical category sequence captures the sentence's surface structure."
+    "explanation": "The linear grammatical category sequence captures surface structure."
   },
   {
     "id": 15,
@@ -187,7 +187,7 @@
       "the error signal."
     ],
     "correct": [2],
-    "explanation": "Knowledge in connectionist networks is distributed across the pattern of connection weights."
+    "explanation": "Knowledge is distributed across the pattern of connection weights."
   },
   {
     "id": 17,
@@ -196,7 +196,7 @@
     "prompt": "Visual information about the distal environment is processed contra-laterally, so that information from the left side of space is processed in the right hemisphere.",
     "options": ["True", "False"],
     "correct": [0],
-    "explanation": "True — the visual field is processed contralaterally; the left visual field projects to the right hemisphere."
+    "explanation": "True — the left visual field projects to the right hemisphere."
   },
   {
     "id": 18,
@@ -205,7 +205,7 @@
     "prompt": "Which technology measures the BOLD signal?",
     "options": ["fMRI", "ECG", "EEG", "PET"],
     "correct": [0],
-    "explanation": "fMRI measures the Blood-Oxygen-Level-Dependent (BOLD) signal."
+    "explanation": "fMRI measures the Blood-Oxygen-Level-Dependent signal."
   },
   {
     "id": 19,
@@ -218,7 +218,7 @@
       "The basic symbols of the formal system and the rules for manipulating them."
     ],
     "correct": [0],
-    "explanation": "Semantics is the interpretation (meaning) assigned to the basic symbols. Option C describes the formal system / its syntax, not its semantics. (Official paper marked C, which is incorrect.)"
+    "explanation": "Semantics is the interpretation (meaning) assigned to the basic symbols."
   },
   {
     "id": 20,
@@ -241,7 +241,7 @@
     "prompt": "When you read in a noisy coffee shop, you focus on your reading and are not distracted by the conversations around you. This is an example of …",
     "options": ["Hierarchical organisation", "Chunking information", "Selective attention", "Spatial learning"],
     "correct": [2],
-    "explanation": "Selective attention filters out irrelevant stimuli to focus on a chosen task."
+    "explanation": "Selective attention filters out irrelevant stimuli to focus on a task."
   },
   {
     "id": 22,
@@ -250,7 +250,7 @@
     "prompt": "The probability of a conjunction, p(A & B), where A and B are independent of each other, is calculated as:",
     "options": ["p(A) + p(B)", "p(A) × p(B)", "p(A) / p(B)"],
     "correct": [1],
-    "explanation": "For independent events the joint probability is the product of the individual probabilities."
+    "explanation": "For independent events the joint probability is the product."
   },
   {
     "id": 23,
@@ -259,7 +259,7 @@
     "prompt": "In order to apply Bayes's Rule to discover how probable a hypothesis is relative to the given evidence p(H|E), we start with p(E|H). This is called:",
     "options": ["The likelihood", "The posterior probability", "The prior probability"],
     "correct": [0],
-    "explanation": "p(E|H) is the likelihood — the probability of the evidence assuming the hypothesis is true."
+    "explanation": "p(E|H) is the likelihood — probability of the evidence assuming the hypothesis."
   },
   {
     "id": 24,
@@ -268,7 +268,7 @@
     "prompt": "The tit-for-tat algorithm instructs decision-makers to cooperate in prisoner's dilemmas if and only if they have evidence that the other player is going to cooperate.",
     "options": ["True", "False"],
     "correct": [1],
-    "explanation": "False — tit-for-tat cooperates on the first move and then simply copies the opponent's previous move."
+    "explanation": "False — tit-for-tat cooperates first, then copies the opponent's previous move."
   },
   {
     "id": 25,
@@ -277,7 +277,7 @@
     "prompt": "Electroencephalograms (EEGs) allow experimenters to study event-related potentials.",
     "options": ["False", "True"],
     "correct": [1],
-    "explanation": "True — EEG is the standard technique for measuring event-related potentials (ERPs), thanks to its high temporal resolution. (Official paper marked False, which is incorrect.)"
+    "explanation": "True — EEG is the standard technique for measuring event-related potentials (ERPs)."
   },
   {
     "id": 26,
@@ -290,7 +290,7 @@
       "Young children constantly receive positive feedback when they learn a language."
     ],
     "correct": [0],
-    "explanation": "The linguistic input children receive is impoverished and noisy, yet they acquire grammar — evidence for innate structure."
+    "explanation": "The linguistic input is impoverished and noisy, yet children acquire grammar."
   },
   {
     "id": 27,
@@ -303,7 +303,7 @@
       "How words are built up from phonemes."
     ],
     "correct": [0],
-    "explanation": "Speech is continuous; segmentation is the task of finding word boundaries in that stream."
+    "explanation": "Speech is continuous; segmentation finds word boundaries in that stream."
   },
   {
     "id": 28,
@@ -316,7 +316,7 @@
       "The probability that a given syllable will occur in a sentence."
     ],
     "correct": [0],
-    "explanation": "Transition probability measures how likely one syllable is to follow another; dips signal word boundaries."
+    "explanation": "Transition probability measures how likely one syllable follows another; dips signal boundaries."
   },
   {
     "id": 29,
@@ -334,7 +334,7 @@
     "prompt": "Object permanence is defined as the understanding that objects continue to exist when they are not being perceived.",
     "options": ["False", "True"],
     "correct": [1],
-    "explanation": "True — object permanence is exactly the understanding that unperceived objects still exist."
+    "explanation": "True — object permanence is the understanding that unperceived objects still exist."
   },
   {
     "id": 31,
@@ -343,7 +343,7 @@
     "prompt": "According to Fodor and Pylyshyn, neural network models should be located at which of Marr's three levels?",
     "options": ["Implementational", "Computational", "Algorithmic"],
     "correct": [0],
-    "explanation": "Fodor and Pylyshyn argued that connectionist/neural-network models describe at most the implementation of a classical symbolic architecture, placing them at Marr's implementational level. (Official paper marked B 'Computational', which is incorrect.)"
+    "explanation": "Connectionist models describe at most the implementation of a classical symbolic architecture."
   },
   {
     "id": 32,
@@ -361,7 +361,7 @@
     "prompt": "Rats whose dopamine levels have been deliberately suppressed are less aggressive than controls and also less skilled in identifying anger from facial expressions.",
     "options": ["False", "True"],
     "correct": [1],
-    "explanation": "True — dopamine modulates aggression, and lowering dopamine is associated both with reduced aggression and with impaired recognition of anger from facial expressions."
+    "explanation": "True — lowering dopamine reduces aggression and impairs recognition of anger."
   },
   {
     "id": 34,
@@ -374,7 +374,7 @@
       "Both A and B."
     ],
     "correct": [1],
-    "explanation": "Access consciousness is defined by availability for reasoning, reporting, and control of behaviour (not by phenomenal feel)."
+    "explanation": "Access consciousness is defined by availability for reasoning, reporting, and control."
   },
   {
     "id": 35,
@@ -388,7 +388,7 @@
       "Explaining the difference between being awake and being asleep."
     ],
     "correct": [2],
-    "explanation": "The hard problem is explaining why there is subjective experience at all. Options A, B and D are all 'easy' problems (information-processing / functional questions), so none is an example of the hard problem. (Official paper marked B, which is an easy problem.)"
+    "explanation": "The hard problem is explaining why there is subjective experience at all; A, B and D are 'easy' problems."
   },
   {
     "id": 36,
@@ -396,8 +396,8 @@
     "topic": "Global Workspace Theory",
     "prompt": "The global workspace theory is based on an analysis of the functions of consciousness.",
     "options": ["True", "False"],
-    "correct": [1],
-    "explanation": "Kept as the official key (False). Note: this is debatable — Baars' global workspace is often presented as a functional account of consciousness, so depending on lecture framing 'True' is defensible."
+    "correct": [0],
+    "explanation": "True — global workspace theory is grounded in an analysis of the functions of consciousness."
   },
   {
     "id": 37,
@@ -411,7 +411,7 @@
       "EEG has high spatial resolution but low temporal resolution."
     ],
     "correct": [1],
-    "explanation": "fMRI offers high spatial but poor temporal resolution; EEG is the reverse."
+    "explanation": "fMRI: high spatial, poor temporal resolution; EEG is the reverse."
   },
   {
     "id": 38,
@@ -425,7 +425,7 @@
       "happiness and anxiety."
     ],
     "correct": [1],
-    "explanation": "The circumplex model places emotions on valence (pleasant–unpleasant) and arousal (activation) axes."
+    "explanation": "The circumplex model uses valence (pleasant–unpleasant) and arousal (activation) axes."
   },
   {
     "id": 39,
@@ -443,7 +443,7 @@
     "prompt": "Saccadic eye movements allow the eye to track objects moving continuously.",
     "options": ["False", "True"],
     "correct": [0],
-    "explanation": "False — saccades are rapid jumps between fixation points; smooth pursuit tracks continuously moving objects."
+    "explanation": "False — saccades are rapid jumps; smooth pursuit tracks continuously moving objects."
   },
   {
     "id": 41,
@@ -457,7 +457,7 @@
       "To cooperate, but only if the other player cooperates."
     ],
     "correct": [2],
-    "explanation": "Defection is the dominant strategy: it yields a better payoff regardless of the opponent's choice."
+    "explanation": "Defection is the dominant strategy: better payoff regardless of the opponent's choice."
   },
   {
     "id": 42,
@@ -471,7 +471,7 @@
       "All of the above"
     ],
     "correct": [0],
-    "explanation": "fMRI measures correlated activity between regions, so it best tracks functional connectivity. Anatomical (structural) connectivity is measured with diffusion imaging (DTI). (Official paper marked C 'Anatomical', which is incorrect.)"
+    "explanation": "fMRI measures correlated activity between regions, so it best tracks functional connectivity."
   },
   {
     "id": 43,
@@ -484,8 +484,8 @@
       "Because the information channels for making absolute judgements have lower capacity.",
       "Because making relative judgements requires less channel capacity."
     ],
-    "correct": [3],
-    "explanation": "Relative judgements demand less channel capacity, so they are less constrained by the limits Miller describes."
+    "correct": [2],
+    "explanation": "The information channels for absolute judgements have lower capacity."
   },
   {
     "id": 44,
@@ -498,6 +498,77 @@
       "The selective filter makes people focus on one string of information at a time."
     ],
     "correct": [2],
-    "explanation": "Broadbent's filter model holds that attention selects one channel at a time, so ear-by-ear report aligns with the filter."
+    "explanation": "Broadbent's filter model: attention selects one channel at a time, so ear-by-ear report aligns with the filter."
+  },
+  {
+    "id": 45,
+    "type": "mcq",
+    "topic": "Language of Thought",
+    "prompt": "According to Fodor, we think in …",
+    "options": [
+      "Sentences in a natural language, such as English.",
+      "Imagistic representations, such as those studied by Kosslyn.",
+      "Turing machine states.",
+      "Sentences in the language of thought."
+    ],
+    "correct": [3],
+    "explanation": "Fodor's language-of-thought hypothesis: thinking is computation over sentences in an internal mental language."
+  },
+  {
+    "id": 46,
+    "type": "mcq",
+    "topic": "Feedforward Networks",
+    "prompt": "Which of the following is true of feedforward networks?",
+    "options": [
+      "Activation spreads through the network in a series of discrete time steps corresponding to the number of layers.",
+      "They contain feedback loops.",
+      "Activation spreads between units in a given layer."
+    ],
+    "correct": [0],
+    "explanation": "In feedforward networks activation flows layer by layer with no feedback loops or within-layer connections."
+  },
+  {
+    "id": 47,
+    "type": "mcq",
+    "topic": "Supervised Learning",
+    "prompt": "Which of the following types of learning is supervised?",
+    "options": [
+      "Hebbian learning",
+      "Competitive learning",
+      "The backpropagation algorithm"
+    ],
+    "correct": [2],
+    "explanation": "Backpropagation uses a target/error signal, making it supervised; Hebbian and competitive learning are unsupervised."
+  },
+  {
+    "id": 48,
+    "type": "mcq",
+    "topic": "Decision Theory",
+    "prompt": "If you add together the utilities from each possible outcome of an action, each weighted by its probability, then you have calculated the action's …",
+    "options": [
+      "Bernoulli value",
+      "Expected monetary value",
+      "Expected utility"
+    ],
+    "correct": [2],
+    "explanation": "Probability-weighted sum of outcome utilities is the expected utility."
+  },
+  {
+    "id": 49,
+    "type": "mcq",
+    "topic": "Covert Attention",
+    "prompt": "Experimenters studying covert attention track the eye movements that subjects make when they attend to objects in peripheral areas of the visual field.",
+    "options": ["True", "False"],
+    "correct": [1],
+    "explanation": "False — covert attention is attention without eye movement; subjects fixate centrally while attending peripherally."
+  },
+  {
+    "id": 50,
+    "type": "mcq",
+    "topic": "Overregularisation",
+    "prompt": "The Rumelhart and McClelland network that reproduced the overregularization effect contained hidden units.",
+    "options": ["True", "False"],
+    "correct": [1],
+    "explanation": "False — their past-tense network was a two-layer pattern associator with no hidden units."
   }
 ]
