@@ -1,0 +1,517 @@
+[
+  {
+    "id": 1,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Benefits of RL",
+    "prompt": "What is NOT a benefit of reinforcement learning?",
+    "options": [
+      "Stable learning",
+      "Outperform human solutions",
+      "Solve tasks you can't demonstrate",
+      "Autonomous learning"
+    ],
+    "correct": [0],
+    "explanation": "RL is notoriously unstable (the 'deadly triad': bootstrapping + function approximation + off-policy). The other three are genuine benefits."
+  },
+  {
+    "id": 2,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Bandits — UCB vs ε-greedy",
+    "prompt": "What is an important difference between UCB and ε-greedy policies?",
+    "options": [
+      "UCB incorporates uncertainty information and may therefore more gradually transition from exploitation to exploration.",
+      "ε-greedy incorporates uncertainty information and may therefore more gradually transition from exploitation to exploration.",
+      "ε-greedy incorporates uncertainty information and may therefore more gradually transition from exploration to exploitation.",
+      "UCB incorporates uncertainty information and may therefore more gradually transition from exploration to exploitation."
+    ],
+    "correct": [3],
+    "explanation": "UCB adds an uncertainty bonus that shrinks with visits, so exploration tapers smoothly from exploration toward exploitation. ε-greedy explores at a fixed random rate, ignoring uncertainty."
+  },
+  {
+    "id": 3,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Bandits — optimistic initialization",
+    "prompt": "You have a bandit problem and decide to always act greedily w.r.t. the current value estimates. What is the best way to initialize your value estimates?",
+    "options": [
+      "It does not matter how you set the initial estimates.",
+      "You want your initial estimates much higher (at least 20 times) than the highest possible reward.",
+      "You want your initial estimates slightly above the highest possible reward.",
+      "You want your initial estimates below the lowest possible reward."
+    ],
+    "correct": [2],
+    "explanation": "Optimistic initialization: every untried action looks attractive, forcing exploration even under a greedy policy. '20× higher' wastes time being disappointed; below the lowest reward kills exploration."
+  },
+  {
+    "id": 4,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "Objective of RL",
+    "prompt": "What is the objective of reinforcement learning?",
+    "options": [
+      "To find the highest possible reward in the environment",
+      "To find the best decision in every possible state",
+      "To find the ideal recursive value function",
+      "To find the shortest path from the start state to the end state"
+    ],
+    "correct": [1],
+    "explanation": "The goal is an optimal policy — the best action in every state. Not a single max reward, not just a value function, and a shortest path is only a special case."
+  },
+  {
+    "id": 5,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "MDP mappings",
+    "prompt": "What are the correct mappings in the definition of a Markov Decision Process?",
+    "options": [
+      "The policy function computes a → s' and the Transition function s → a'",
+      "The policy function computes s → a and the Transition function s,a → s'",
+      "The policy function computes a → s' and the value function r → s",
+      "The policy function computes s → a and the value function s → r"
+    ],
+    "correct": [1],
+    "explanation": "Policy maps states to actions (s → a); transition maps state+action to the next state (s,a → s')."
+  },
+  {
+    "id": 6,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "Discount factor",
+    "prompt": "What is true about the discount parameter γ?",
+    "options": [
+      "It should be between 0 and 1. Making it smaller will make the agent weigh future rewards less.",
+      "It should be between 0 and 1. Making it larger will make the agent weigh future rewards less.",
+      "It should be between -1 and 1. Making it smaller will make the agent weigh future rewards less.",
+      "It should be between -1 and 1. Making it larger will make the agent weigh future rewards less."
+    ],
+    "correct": [0],
+    "explanation": "γ ∈ [0,1]; a smaller γ shrinks the weight on future rewards because γ^k decays faster."
+  },
+  {
+    "id": 7,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Optimal value vs policy",
+    "prompt": "Which expression is correct?",
+    "options": [
+      "There is only one optimal policy, but there may be multiple optimal value functions.",
+      "There is only one optimal value function and only one optimal policy.",
+      "There are multiple optimal value functions and multiple optimal policies.",
+      "There is only one optimal value function, but there may be multiple optimal policies."
+    ],
+    "correct": [3],
+    "explanation": "v* is unique; ties in action values allow several optimal policies to share that one optimal value function."
+  },
+  {
+    "id": 8,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "Dynamic Programming",
+    "prompt": "What is correct about tabular Dynamic Programming?",
+    "options": [
+      "Dynamic Programming finds a global solution, but is not guaranteed to converge to the optimal solution.",
+      "Dynamic Programming finds a global solution, and is guaranteed to converge to the optimal solution.",
+      "Dynamic Programming finds a local solution, but is not guaranteed to converge to the optimal solution.",
+      "Dynamic Programming finds a local solution, and is guaranteed to converge to the optimal solution."
+    ],
+    "correct": [1],
+    "explanation": "With a full model and tabular states, DP provably converges to the global optimum."
+  },
+  {
+    "id": 9,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "Bellman equation",
+    "prompt": "The Bellman equation",
+    "options": [
+      "Is a recursive formula describing how values at different states are related",
+      "Is a recursive formula describing how rewards at different states are related",
+      "Is an iterative formula describing how rewards at different states are related",
+      "Is an iterative formula describing how values at different states are related"
+    ],
+    "correct": [0],
+    "explanation": "It relates a state's value to the values of its successor states — a recursion over values, not rewards."
+  },
+  {
+    "id": 10,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Curse of dimensionality",
+    "prompt": "The curse of dimensionality describes",
+    "options": [
+      "The fact that the dimensionality of the state vector scales exponentially in the number of unique states.",
+      "The fact that the number of unique states scales polynomial in the number of variables in a state.",
+      "The fact that the number of unique states scales exponentially in the number of variables in a state.",
+      "The fact that the dimensionality of the state vector scales polynomial in the number of unique states."
+    ],
+    "correct": [2],
+    "explanation": "Each added state variable multiplies the number of unique states — exponential growth in the number of variables."
+  },
+  {
+    "id": 11,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Monte Carlo vs DP",
+    "prompt": "What is the main advantage of Monte Carlo methods compared with Dynamic Programming methods?",
+    "options": [
+      "Monte Carlo methods can be used to learn action value",
+      "Monte Carlo methods perform bootstrapping",
+      "Monte Carlo methods can learn without complete knowledge about environment",
+      "Monte Carlo methods can be used in continuous settings"
+    ],
+    "correct": [2],
+    "explanation": "MC learns from sampled experience without a model; DP needs the full transition/reward model. (MC does NOT bootstrap — that's the opposite.)"
+  },
+  {
+    "id": 12,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "First-visit Monte Carlo",
+    "prompt": "When learning state values using a first-visit Monte Carlo method, what is used to update the current estimate of the value of a state?",
+    "options": [
+      "An estimated value of the next visited state",
+      "The cumulative future discounted reward",
+      "The immediate reward",
+      "The estimated value of the action taken in that state"
+    ],
+    "correct": [1],
+    "explanation": "The return G_t from that state onward — no bootstrapping."
+  },
+  {
+    "id": 13,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "MC for action values",
+    "prompt": "How are first-visit Monte Carlo methods adapted from state values to action values?",
+    "options": [
+      "Only average over the best action in each state",
+      "Convert state values to action values after each episode",
+      "Average over state-action pairs instead of states",
+      "Try every action in each state"
+    ],
+    "correct": [2],
+    "explanation": "Estimate Q by averaging the returns following each (s,a) pair."
+  },
+  {
+    "id": 14,
+    "type": "mcq",
+    "difficulty": "hard",
+    "topic": "SARSA update",
+    "prompt": "What is the correct update equation for SARSA?",
+    "options": [
+      "Q(st,at) ← Q(st,at) + α[Rt+1 + γ Σ_a π(a|st+1) Q(st+1,a) − Q(st,at)]",
+      "Q(st,at) ← Q(st,at) + α[Rt+1 + γ Q(st+1,at+1) − Q(st,at)]",
+      "Q(st,at) ← Q(st,at) + α[Gt − Q(st,at)]",
+      "Q(st,at) ← Q(st,at) + α[Rt+1 + γ max_a Q(st+1,a) − Q(st,at)]"
+    ],
+    "correct": [1],
+    "explanation": "On-policy: SARSA uses the action a_{t+1} actually taken next. (max → Q-learning; Σπ → Expected SARSA; Gt → Monte Carlo.)"
+  },
+  {
+    "id": 15,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Exploring starts",
+    "prompt": "What is the best description of exploring starts?",
+    "options": [
+      "Ensure exploration by using optimistic initialization of action values",
+      "Let each episode start at random state-action pair",
+      "Explore multiple actions for each state in each episode",
+      "Ensure exploration by using an ε-greedy policy at the beginning of each episode"
+    ],
+    "correct": [1],
+    "explanation": "Starting each episode at a random (s,a) pair guarantees every pair has nonzero probability of being visited."
+  },
+  {
+    "id": 16,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Importance sampling",
+    "prompt": "What problem is solved by using importance sampling in off-policy methods?",
+    "options": [
+      "The behaviour policy can become identical to the target policy during learning.",
+      "The probability of an action occurring can be different in the behaviour policy and target policy.",
+      "The learned target policy can become too greedy",
+      "Many state-action pairs remain unvisited during learning."
+    ],
+    "correct": [1],
+    "explanation": "Importance sampling reweights returns by the ratio of target-to-behaviour action probabilities to correct that mismatch."
+  },
+  {
+    "id": 17,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Double learning",
+    "prompt": "What problem does double learning solve?",
+    "options": [
+      "Approximation errors",
+      "Coverage",
+      "Slow convergence",
+      "Maximization bias"
+    ],
+    "correct": [3],
+    "explanation": "Using one estimator to both select and evaluate the max overestimates values; two estimators decouple selection from evaluation."
+  },
+  {
+    "id": 18,
+    "type": "mcq",
+    "difficulty": "hard",
+    "topic": "Psychology — stimulus traces",
+    "prompt": "What is the analogy of stimulus traces (from psychological learning theory) in computational reinforcement learning?",
+    "options": [
+      "State generalisation",
+      "Partial observability",
+      "N-step methods",
+      "Off-policy learning"
+    ],
+    "correct": [2],
+    "explanation": "Stimulus / eligibility traces spread credit back over recent steps, like n-step / TD(λ) updates."
+  },
+  {
+    "id": 19,
+    "type": "mcq",
+    "difficulty": "hard",
+    "topic": "Rescorla-Wagner — extinction",
+    "prompt": "How does the Rescorla-Wagner model explain extinction (for a state with value estimate V and obtained reward r)?",
+    "options": [
+      "r < 0, V=0 and therefore (r−V)<0",
+      "r > 0, V=0 and therefore (r−V)>0",
+      "r = 0, V>0 and therefore (r−V)<0",
+      "r = 0, V<0 and therefore (r−V)>0"
+    ],
+    "correct": [2],
+    "explanation": "Reward stops (r=0) while a positive expectation remains (V>0); the negative prediction error drives V down."
+  },
+  {
+    "id": 20,
+    "type": "mcq",
+    "difficulty": "hard",
+    "topic": "Dopamine response",
+    "prompt": "We add a new predictor (a light) before an expected reward (food) and measure dopaminergic neurons. What will we observe?",
+    "options": [
+      "A response peak shortly before the reward",
+      "A response peak shortly before the predictor",
+      "A response peak shortly after the predictor",
+      "A response peak shortly after the reward"
+    ],
+    "correct": [2],
+    "explanation": "Once learned, the reward-prediction-error signal shifts from the reward to the earliest reliable predictor."
+  },
+  {
+    "id": 21,
+    "type": "mcq",
+    "difficulty": "hard",
+    "topic": "Prioritized sweeping",
+    "prompt": "Give the correct expression to compute the priority in prioritized sweeping for Q-learning.",
+    "options": [
+      "|r + γ max_a' Q(s',a')|",
+      "r + γ max_a' Q(s',a') − Q(s,a)",
+      "|r + γ max_a' Q(s',a') − Q(s,a)|",
+      "r + γ max_a' Q(s',a')"
+    ],
+    "correct": [2],
+    "explanation": "Absolute TD error: its magnitude decides update priority, so the sign is removed and the −Q(s,a) baseline kept."
+  },
+  {
+    "id": 22,
+    "type": "mcq",
+    "difficulty": "hard",
+    "topic": "DP vs Q-learning",
+    "prompt": "Which expression is correct?",
+    "options": [
+      "Dynamic programming uses expected updates, Q-learning uses sample updates. Q-learning requires a distributional model.",
+      "Dynamic programming uses sample updates, Q-learning uses expected updates. Q-learning requires a distributional model.",
+      "Dynamic programming uses expected updates, Q-learning uses sample updates. Dynamic programming requires a distributional model.",
+      "Dynamic programming uses sample updates, Q-learning uses expected updates. Dynamic programming requires a distributional model."
+    ],
+    "correct": [2],
+    "explanation": "DP sweeps the full distribution (needs the model); Q-learning updates from single sampled transitions."
+  },
+  {
+    "id": 23,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "Model-based RL",
+    "prompt": "Model-based Reinforcement Learning uses a model of",
+    "options": [
+      "The Value function",
+      "The State function",
+      "The Discount Function",
+      "The Transition Function"
+    ],
+    "correct": [3],
+    "explanation": "The model predicts next states/rewards — i.e. the transition (and reward) function."
+  },
+  {
+    "id": 24,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Tabular dynamics model",
+    "prompt": "What is the correct expression to estimate a tabular dynamics model p(s'|s,a) from observed counts n?",
+    "options": [
+      "p(s'|s,a) = n(s,a,s') / n(s,a)",
+      "p(s'|s,a) = n(a,s') / n(s,a)",
+      "p(s'|s,a) = n(s',a) / n(s')",
+      "p(s'|s,a) = n(s,a) / n(s,a,s')"
+    ],
+    "correct": [0],
+    "explanation": "The fraction of (s,a) visits that landed in s'."
+  },
+  {
+    "id": 25,
+    "type": "mcq",
+    "difficulty": "hard",
+    "topic": "Value iteration backup",
+    "prompt": "Regarding the back-up over the policy and the dynamics, how would you classify the value-iteration back-up?",
+    "options": [
+      "On-policy, expected over the dynamics.",
+      "On-policy, sample over the dynamics.",
+      "Off-policy, sample over the dynamics.",
+      "Off-policy, expected over the dynamics."
+    ],
+    "correct": [3],
+    "explanation": "Uses max over actions (off-policy / greedy) and sums over the full transition distribution (expected)."
+  },
+  {
+    "id": 26,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "Breadth-first search",
+    "prompt": "What is a downside of breadth-first search?",
+    "options": [
+      "It will never find the optimal solution",
+      "It cannot be applied to stochastic domains",
+      "It does not consider the cost of every edge",
+      "It only considers the problem breadth - not the depth"
+    ],
+    "correct": [2],
+    "explanation": "BFS treats all edges equally, so it is not cost-optimal on weighted graphs."
+  },
+  {
+    "id": 27,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Sample-based search",
+    "prompt": "What is a benefit of sample-based search over classic/heuristic search?",
+    "options": [
+      "In problems with many actions we don't need to visit all of them at the root state",
+      "In the limit of infinite compute we get guaranteed convergence to the optimal solution",
+      "In stochastic problems we don't require access to an analytic transition model",
+      "In larger problems we don't suffer from the curse of dimensionality"
+    ],
+    "correct": [2],
+    "explanation": "A generative (sampling) model suffices; no explicit probability distribution is needed."
+  },
+  {
+    "id": 28,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "MCTS phases",
+    "prompt": "What is the correct order of the four phases of Monte Carlo Tree Search (MCTS)?",
+    "options": [
+      "Selection, Expansion, Back-up, Simulation",
+      "Selection, Expansion, Simulation, Back-up",
+      "Selection, Simulation, Expansion, Back-up",
+      "Selection, Simulation, Back-up, Expansion"
+    ],
+    "correct": [1],
+    "explanation": "Descend the tree, add a node, roll out, then propagate the result."
+  },
+  {
+    "id": 29,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "UCT uncertainty",
+    "prompt": "In a UCT tree search, how does the uncertainty estimate of a state-action value scale with the number of visits n(s,a)?",
+    "options": [
+      "∼ n(s,a)",
+      "∼ 1/√n(s,a)",
+      "∼ 1/n(s,a)",
+      "∼ √n(s,a)"
+    ],
+    "correct": [1],
+    "explanation": "Exploration bonus ∝ √(ln N / n(s,a)), so it shrinks as 1/√n."
+  },
+  {
+    "id": 30,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Policy gradient statements",
+    "prompt": "(S1) Policy gradient methods directly learn a parameterized policy, while action-value methods learn action values from which a policy is derived. (S2) Policy gradient methods enable the selection of actions with arbitrary probabilities. Which is correct?",
+    "options": [
+      "Only S2 is correct",
+      "Both S1 and S2 are incorrect",
+      "Both S1 and S2 are correct",
+      "Only S1 is correct"
+    ],
+    "correct": [2],
+    "explanation": "Both statements are true descriptions of policy-gradient methods."
+  },
+  {
+    "id": 31,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "Actor-critic",
+    "prompt": "What is the most correct name for a reinforcement learning method that learns both a policy function and a value function?",
+    "options": [
+      "The REINFORCE method.",
+      "A double learning method.",
+      "An actor-critic method.",
+      "A model-based method."
+    ],
+    "correct": [2],
+    "explanation": "Actor = policy, critic = value function."
+  },
+  {
+    "id": 32,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "Stochastic gradient descent",
+    "prompt": "How can stochastic gradient descent be best described?",
+    "options": [
+      "A second-order minimization algorithm.",
+      "Try a step in a random direction, but return to the original position if the error increased.",
+      "Iteratively eliminate the error for each encountered example.",
+      "Make small steps in the direction of negative gradient."
+    ],
+    "correct": [3],
+    "explanation": "Per-sample (stochastic) gradient steps; a first-order method."
+  },
+  {
+    "id": 33,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "AlphaGo",
+    "prompt": "AlphaGo is one of the main successful applications of RL. What kind of neural networks did it include?",
+    "options": [
+      "A value network",
+      "Neither a policy network nor a value network",
+      "A policy network and a value network",
+      "A policy network"
+    ],
+    "correct": [2],
+    "explanation": "Policy net for move priors, value net for position evaluation, combined with MCTS."
+  },
+  {
+    "id": 34,
+    "type": "open",
+    "difficulty": "hard",
+    "topic": "Calculation — Q-learning update",
+    "prompt": "An agent makes a transition with reward r=10. The current estimate at the taken state-action is q(s,a)=6, and several next-action estimates are shown in the graph. The agent uses Q-learning with learning rate α=0.2 and discount γ=0.75. What is the new q(s,a) after one update? (Read the largest next-action value M off the figure.)",
+    "options": [],
+    "correct": [],
+    "explanation": "Q-learning: q(s,a) ← q(s,a) + α[r + γ·max_a' q(s',a') − q(s,a)] = 6 + 0.2[10 + 0.75·M − 6] = 6 + 0.2[4 + 0.75·M]. Plug in the largest next-action value M from the figure. Worked example with M = 8: 6 + 0.2[10 + 6 − 6] = 6 + 0.2·10 = 8.0."
+  },
+  {
+    "id": 35,
+    "type": "open",
+    "difficulty": "hard",
+    "topic": "Calculation — optimal q*(s,a)",
+    "prompt": "A subpart of an MDP shows white circles (states) and dark circles (actions). All transition probabilities, rewards, and ground-truth optimal q* for the bottom actions are given. Returns are NOT discounted (γ=1). What is q*(s,a) for the action node at the top of the figure?",
+    "options": [],
+    "correct": [],
+    "explanation": "q*(s,a) = Σ_s' p(s'|s,a)·[r(s,a,s') + max_a' q*(s',a')]. For each possible next state s', take (reward to reach it + the best q* available there), multiply by its transition probability p(s'|s,a), and sum over all s'. Read p, r, and the bottom-row q* values off the figure, then compute the probability-weighted sum."
+  }
+]

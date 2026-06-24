@@ -12,6 +12,19 @@ import l10 from "../data/lectures/10_neural_networks.json";
 import l11 from "../data/lectures/11_xai_lime.json";
 import cogsci from "../data/lectures/cogsci_intro.json";
 import cogsci2 from "../data/lectures/cogsci_test2.json";
+import rlPast from "../data/lectures/rl_past.json";
+import rl01 from "../data/lectures/rl_01_foundations.json";
+import rl02 from "../data/lectures/rl_02_bandits.json";
+import rl03 from "../data/lectures/rl_03_mdp.json";
+import rl04 from "../data/lectures/rl_04_value_functions.json";
+import rl05 from "../data/lectures/rl_05_dynamic_programming.json";
+import rl06 from "../data/lectures/rl_06_monte_carlo.json";
+import rl07 from "../data/lectures/rl_07_td_learning.json";
+import rl08 from "../data/lectures/rl_08_offpolicy.json";
+import rl09 from "../data/lectures/rl_09_psych_neuro.json";
+import rl10 from "../data/lectures/rl_10_model_based.json";
+import rl11 from "../data/lectures/rl_11_search_planning.json";
+import rl12 from "../data/lectures/rl_12_policy_approx.json";
 
 export const QUIZZES = [
   {
@@ -111,6 +124,97 @@ export const QUIZZES = [
     subtitle: "Conditioning, latent learning, Marr, connectionism, Bayesian cognition, dynamical systems (Q1–40).",
     group: "Cognitive Science",
     questions: cogsci2,
+  },
+  {
+    id: "rl_past",
+    title: "RL — Practice Exam",
+    subtitle: "Full 35-question practice exam spanning every RL topic (incl. two calculations).",
+    group: "Reinforcement Learning",
+    questions: rlPast,
+  },
+  {
+    id: "rl01",
+    title: "RL 1 — Foundations",
+    subtitle: "What RL is, ML families, benefits vs the deadly triad, AlphaGo.",
+    group: "Reinforcement Learning",
+    questions: rl01,
+  },
+  {
+    id: "rl02",
+    title: "RL 2 — Multi-armed Bandits",
+    subtitle: "Exploration vs exploitation, ε-greedy, UCB, optimistic initialization.",
+    group: "Reinforcement Learning",
+    questions: rl02,
+  },
+  {
+    id: "rl03",
+    title: "RL 3 — Markov Decision Processes",
+    subtitle: "States, actions, policy/transition mappings, return, discounting γ.",
+    group: "Reinforcement Learning",
+    questions: rl03,
+  },
+  {
+    id: "rl04",
+    title: "RL 4 — Value Functions & Optimality",
+    subtitle: "v(s) vs q(s,a), Bellman equation, optimal value vs policy, curse of dimensionality.",
+    group: "Reinforcement Learning",
+    questions: rl04,
+  },
+  {
+    id: "rl05",
+    title: "RL 5 — Dynamic Programming",
+    subtitle: "Policy/value iteration, expected updates, convergence guarantees.",
+    group: "Reinforcement Learning",
+    questions: rl05,
+  },
+  {
+    id: "rl06",
+    title: "RL 6 — Monte Carlo Methods",
+    subtitle: "Learning from returns, first-visit MC, no bootstrapping, exploring starts.",
+    group: "Reinforcement Learning",
+    questions: rl06,
+  },
+  {
+    id: "rl07",
+    title: "RL 7 — Temporal-Difference Control",
+    subtitle: "SARSA, Q-learning, Expected SARSA, on-policy vs off-policy, TD error.",
+    group: "Reinforcement Learning",
+    questions: rl07,
+  },
+  {
+    id: "rl08",
+    title: "RL 8 — Off-policy & Importance Sampling",
+    subtitle: "Target vs behaviour policies, IS ratio, maximization bias, double learning.",
+    group: "Reinforcement Learning",
+    questions: rl08,
+  },
+  {
+    id: "rl09",
+    title: "RL 9 — Psychology & Neuroscience",
+    subtitle: "Rescorla-Wagner, prediction error, dopamine, stimulus traces, blocking.",
+    group: "Reinforcement Learning",
+    questions: rl09,
+  },
+  {
+    id: "rl10",
+    title: "RL 10 — Model-based RL",
+    subtitle: "Transition models from counts, prioritized sweeping, backup axes, Dyna.",
+    group: "Reinforcement Learning",
+    questions: rl10,
+  },
+  {
+    id: "rl11",
+    title: "RL 11 — Search & Sample-based Planning",
+    subtitle: "BFS, sample-based search, MCTS phases, UCT uncertainty.",
+    group: "Reinforcement Learning",
+    questions: rl11,
+  },
+  {
+    id: "rl12",
+    title: "RL 12 — Policy-based Methods & Approximation",
+    subtitle: "Policy gradients, actor-critic, SGD, function approximation, AlphaGo.",
+    group: "Reinforcement Learning",
+    questions: rl12,
   },
 ];
 

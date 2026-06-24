@@ -1,0 +1,123 @@
+[
+  {
+    "id": 1,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "Bandit setup",
+    "prompt": "What makes the multi-armed bandit the simplest setting for studying RL?",
+    "options": [
+      "It is a single decision with no state transitions or future steps",
+      "It has one state but a very large set of actions",
+      "It removes reward feedback to isolate pure exploration",
+      "It fixes the best arm in advance so only timing matters"
+    ],
+    "correct": [0],
+    "explanation": "A bandit is RL stripped to one repeated decision: pick an arm, get a reward — no states, no future to plan for. Rewards are central (not removed) and the best arm is unknown, which is why exploration is needed."
+  },
+  {
+    "id": 2,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "Exploration vs exploitation",
+    "prompt": "In a bandit, 'exploitation' means:",
+    "options": [
+      "Choosing the arm with the current best estimated value",
+      "Choosing a less-tried arm to reduce its uncertainty",
+      "Choosing each arm in turn to keep estimates fresh",
+      "Choosing an arm at random to avoid getting stuck"
+    ],
+    "correct": [0],
+    "explanation": "Exploitation uses current knowledge to take the best-looking arm. Reducing uncertainty on a rare arm, round-robin sampling, and random picks are all forms of exploration, not exploitation."
+  },
+  {
+    "id": 3,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "UCB vs epsilon-greedy",
+    "prompt": "What is the key difference between UCB and ε-greedy action selection?",
+    "options": [
+      "UCB uses an uncertainty bonus, so exploration tapers off as estimates firm up",
+      "ε-greedy uses an uncertainty bonus, so exploration tapers off over time",
+      "UCB explores at a fixed rate ε set before learning starts",
+      "ε-greedy widens its exploration as visit counts grow"
+    ],
+    "correct": [0],
+    "explanation": "UCB's bonus is large for rarely-tried arms and shrinks with visits, so it transitions smoothly from exploration to exploitation. ε-greedy explores at a fixed rate regardless of what it has learned. The other options swap these behaviours."
+  },
+  {
+    "id": 4,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Optimistic initialization",
+    "prompt": "You will act purely greedily on a bandit. How should you set the initial action-value estimates to still get exploration?",
+    "options": [
+      "Slightly above the highest possible reward",
+      "Far above the highest possible reward (e.g. 20×)",
+      "At the midpoint between the lowest and highest reward",
+      "Slightly below the lowest possible reward"
+    ],
+    "correct": [0],
+    "explanation": "Just above the max reward makes every untried arm look attractive, so a greedy agent is disappointed into trying them all. Far above only prolongs the disappointment, the midpoint under-explores high arms, and below the minimum kills exploration."
+  },
+  {
+    "id": 5,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "UCB bonus behaviour",
+    "prompt": "In UCB(a) = Q(a) + c·√(ln t / n(a)), what happens to the bonus for arm a as it is pulled more often?",
+    "options": [
+      "It shrinks toward zero as n(a) grows in the denominator",
+      "It grows steadily as the total step count t increases",
+      "It stays fixed because the constant c controls its size",
+      "It oscillates as ln t and n(a) trade off each step"
+    ],
+    "correct": [0],
+    "explanation": "n(a) is under the root in the denominator, so the bonus → 0 and selection is driven by Q(a). The slow-growing ln t cannot keep the bonus large, c only scales it, and it decreases monotonically rather than oscillating."
+  },
+  {
+    "id": 6,
+    "type": "mcq",
+    "difficulty": "hard",
+    "topic": "Why optimistic init explores",
+    "prompt": "Why does optimistic initialisation cause exploration even under a strictly greedy policy?",
+    "options": [
+      "Every untried arm overestimates its value, so greedy keeps trying new ones",
+      "It temporarily raises the random exploration rate ε",
+      "It enlarges an explicit uncertainty bonus on unseen arms",
+      "It directly lowers the stored value of the current best arm"
+    ],
+    "correct": [0],
+    "explanation": "Because all estimates start too high, whichever arm greedy picks is revised downward, making another untried arm the new best — forcing greedy through all of them. There is no randomness (ε-greedy) or explicit bonus (UCB) involved."
+  },
+  {
+    "id": 7,
+    "type": "mcq",
+    "difficulty": "hard",
+    "topic": "Limitations of epsilon-greedy",
+    "prompt": "A long-running ε-greedy agent with fixed ε keeps occasionally pulling clearly inferior arms. Why?",
+    "options": [
+      "It keeps exploring at a fixed rate even after it is confident",
+      "It stops exploring entirely once one arm pulls ahead",
+      "It lowers ε automatically as its estimates converge",
+      "It explores in proportion to each arm's uncertainty"
+    ],
+    "correct": [0],
+    "explanation": "With constant ε, a fixed fraction of pulls stays uniformly random even when the agent is sure, so it wastes pulls on known-bad arms. It does not stop, decay ε, or weight by uncertainty (that last is UCB's mechanism)."
+  },
+  {
+    "id": 8,
+    "type": "multi",
+    "difficulty": "medium",
+    "topic": "Exploration strategies",
+    "prompt": "Which of these are legitimate ways to encourage exploration in a bandit?",
+    "options": [
+      "Add an uncertainty bonus to each estimate (UCB)",
+      "Pick a random arm with small probability (ε-greedy)",
+      "Initialise estimates optimistically above the max reward",
+      "Always select the arm with the current highest estimate",
+      "Set the learning rate to zero so estimates never change"
+    ],
+    "correct": [0, 1, 2],
+    "explanation": "UCB bonuses, ε-randomness, and optimistic initialisation all drive exploration. Always taking the top estimate is pure exploitation, and a zero learning rate prevents learning entirely."
+  }
+]

@@ -2,5387 +2,1501 @@ window.RMAI_QUESTIONS = [
   {
     "id": "L1-Q1",
     "source": "L1 Slides",
-    "topic": "Scientific thinking - biases",
-    "question": "[EASY] According to the slides, what is confirmation bias?",
+    "topic": "Confirmation bias in practice",
+    "question": "[MID] Dr. Vos believes her new tutoring chatbot improves grades. While reviewing logs, she carefully reads every transcript where students improved, but skims past sessions where grades dropped, assuming those students 'didn't use it properly'. Which cognitive trap best describes this?",
     "options": [
-      [
-        "A",
-        "The tendency to seek information that confirms your existing beliefs"
-      ],
-      [
-        "B",
-        "The tendency to remember only recent events"
-      ],
-      [
-        "C",
-        "The tendency to avoid making decisions"
-      ],
-      [
-        "D",
-        "The tendency to trust only personal experience"
-      ]
+      ["A", "Availability heuristic - the vivid improvement stories dominate her recall"],
+      ["B", "Confirmation bias - she weights evidence according to her prior belief"],
+      ["C", "Sampling bias - the transcripts she reviews are a non-random subset"],
+      ["D", "Hindsight bias - the improvements look predictable once she has read them"]
     ],
-    "answer": "A",
-    "note": "Confirmation bias is one of the cognitive biases discussed in the scientific thinking section."
+    "answer": "B",
+    "note": "The subset she reads is non-random, but the selection is driven by her belief - that motivated weighting is confirmation bias. Sampling bias refers to unrepresentativeness arising at data collection, not belief-driven reading; availability would require her judging frequency by recall ease, and hindsight bias is about feeling outcomes were foreseeable.",
+    "anchor": "Research Methods AI — L1 Slides"
   },
   {
     "id": "L1-Q2",
     "source": "L1 Slides",
-    "topic": "Scientific thinking - heuristics",
-    "question": "[EASY] What is the availability heuristic?",
+    "topic": "Availability heuristic",
+    "question": "[MID] After two widely reported incidents of AI chatbots giving dangerous medical advice, a policy student estimates that 'most' chatbot health answers are harmful, even though audits show error rates below 3%. Which heuristic best explains the overestimate?",
     "options": [
-      [
-        "A",
-        "A mental shortcut based on how readily examples come to mind"
-      ],
-      [
-        "B",
-        "The ability to access information in a database"
-      ],
-      [
-        "C",
-        "A strategy for managing time effectively"
-      ],
-      [
-        "D",
-        "A technique for improving memory retention"
-      ]
+      ["A", "Availability heuristic - the memorable incidents come to mind easily"],
+      ["B", "Anchoring - the first incident set a reference point for the estimate"],
+      ["C", "Confirmation bias - the student already distrusted chatbot advice"],
+      ["D", "Representativeness - the incidents fit the stereotype of dangerous AI"]
     ],
     "answer": "A",
-    "note": "The availability heuristic is exemplified by the 'R' problem, where people judge frequency based on ease of recall."
+    "note": "Frequency is being judged by how easily examples come to mind - the defining mechanism of availability. Representativeness would involve judging category membership by similarity, anchoring requires a numeric starting value being adjusted from, and nothing in the scenario says the student held a prior belief.",
+    "anchor": "Research Methods AI — L1 Slides"
   },
   {
     "id": "L1-Q3",
     "source": "L1 Slides",
-    "topic": "Scientific thinking - representativeness",
-    "question": "[EASY] What does the representativeness heuristic describe?",
+    "topic": "Representativeness and base rates",
+    "question": "[HARD] Kim is quiet, loves logic puzzles, and codes on weekends. Asked whether Kim is more likely (a) a professional AI researcher or (b) a schoolteacher, most people pick (a) - yet there are vastly more schoolteachers than AI researchers. What error are they making?",
     "options": [
-      [
-        "A",
-        "Judging how likely something belongs to a category based on how similar it is to typical examples"
-      ],
-      [
-        "B",
-        "The ability to create accurate models of reality"
-      ],
-      [
-        "C",
-        "The skill of representing data in graphs"
-      ],
-      [
-        "D",
-        "A method for sampling populations randomly"
-      ]
+      ["A", "Availability heuristic - AI researchers are more salient in the media"],
+      ["B", "Anchoring - the description anchors judgment on the first profession listed"],
+      ["C", "Representativeness heuristic - similarity to a stereotype overrides base rates"],
+      ["D", "Confirmation bias - people seek traits that confirm the researcher label"]
     ],
-    "answer": "A",
-    "note": "The representativeness heuristic is demonstrated by the Arthur personality problem in the slides."
+    "answer": "C",
+    "note": "The judgment is driven by how well Kim's description matches the stereotype of an AI researcher while ignoring how rare that profession is - the classic representativeness error. Media salience (availability) could contribute, but the question describes matching a personality sketch to a category, which is representativeness territory; the slides' Arthur problem has exactly this structure.",
+    "anchor": "Research Methods AI — L1 Slides"
   },
   {
     "id": "L1-Q4",
     "source": "L1 Slides",
-    "topic": "Scientific thinking - avoiding bias",
-    "question": "[EASY] According to the slides, what is the first principle of scientific thinking?",
+    "topic": "First principle of science",
+    "question": "[EASY] Feynman's dictum, quoted in the lecture as the first principle of scientific thinking, states that:",
     "options": [
-      [
-        "A",
-        "You must not fool yourself—and you are the easiest person to fool"
-      ],
-      [
-        "B",
-        "Always trust your intuition in research"
-      ],
-      [
-        "C",
-        "Gather as much data as possible before analyzing"
-      ],
-      [
-        "D",
-        "Never change your hypothesis once stated"
-      ]
+      ["A", "Extraordinary claims require extraordinary evidence"],
+      ["B", "A theory that explains everything explains nothing"],
+      ["C", "You must not fool yourself - and you are the easiest person to fool"],
+      ["D", "All models are wrong, but some are useful"]
     ],
-    "answer": "A",
-    "note": "This foundational principle emphasizes awareness of self-deception in scientific endeavors."
+    "answer": "C",
+    "note": "All four are famous scientific aphorisms (Sagan, Popper-style, Feynman, Box), but the lecture's first principle is Feynman's warning about self-deception: methods exist to protect you from your own cognition.",
+    "anchor": "Research Methods AI — L1 Slides"
   },
   {
     "id": "L1-Q5",
     "source": "L1 Slides",
-    "topic": "Empirical cycle - Observation",
-    "question": "[EASY] What is the starting point of the observation phase in the empirical cycle?",
+    "topic": "Empirical cycle - phase order",
+    "question": "[EASY] Place the empirical cycle in its correct order:",
     "options": [
-      [
-        "A",
-        "A question, obstacle, idea, problem, or unexpected event"
-      ],
-      [
-        "B",
-        "A formal hypothesis statement"
-      ],
-      [
-        "C",
-        "Statistical analysis of previous data"
-      ],
-      [
-        "D",
-        "A literature review"
-      ]
+      ["A", "Observation → Induction → Deduction → Testing → Evaluation"],
+      ["B", "Observation → Deduction → Induction → Testing → Evaluation"],
+      ["C", "Observation → Induction → Testing → Deduction → Evaluation"],
+      ["D", "Observation → Deduction → Testing → Induction → Evaluation"]
     ],
     "answer": "A",
-    "note": "The observation phase initiates from real-world curiosities and puzzles."
+    "note": "From specific cases you generalize to a hypothesis (induction), then derive a concrete testable prediction from it (deduction), then test and evaluate. The most common confusion is swapping induction and deduction: induction goes specific→general, deduction goes general→specific.",
+    "anchor": "Research Methods AI — L1 Slides"
   },
   {
     "id": "L1-Q6",
     "source": "L1 Slides",
-    "topic": "Empirical cycle - Induction",
-    "question": "[EASY] In the induction phase, what is a 'leap of faith'?",
+    "topic": "Empirical cycle - induction",
+    "question": "[MID] A support team notices that several customers who waited more than five minutes in the chatbot queue later cancelled their subscriptions. From this they form the general claim: 'long waiting times drive churn'. In the empirical cycle, forming this claim is:",
     "options": [
-      [
-        "A",
-        "Moving from specific observations to a general rule or theory"
-      ],
-      [
-        "B",
-        "Accepting results without statistical testing"
-      ],
-      [
-        "C",
-        "Trusting only what you can directly observe"
-      ],
-      [
-        "D",
-        "Making predictions without evidence"
-      ]
+      ["A", "Observation - the team noticed a recurring pattern in the data"],
+      ["B", "Deduction - they inferred the cause of churn from the cases"],
+      ["C", "Induction - they generalized from specific cases to a hypothesis"],
+      ["D", "Evaluation - they interpreted the cancellations as supporting evidence"]
     ],
-    "answer": "A",
-    "note": "Induction involves developing general rules from specific instances, which carries uncertainty."
+    "answer": "C",
+    "note": "Noticing the cases is observation, but the question asks about the next step: moving from particular instances to a general claim, which is induction. Deduction would run the other way - deriving a specific prediction from the general claim. Evaluation only happens after a test has produced results.",
+    "anchor": "Research Methods AI — L1 Slides"
   },
   {
     "id": "L1-Q7",
     "source": "L1 Slides",
-    "topic": "Empirical cycle - Deduction",
-    "question": "[EASY] What does the deduction phase involve?",
+    "topic": "Empirical cycle - deduction",
+    "question": "[MID] Continuing the churn example: the team reasons, 'If long waits drive churn, then cutting average wait time below two minutes should reduce cancellations next quarter.' Which phase of the empirical cycle is this?",
     "options": [
-      [
-        "A",
-        "Inferring a testable hypothesis with specific predictions from a general rule"
-      ],
-      [
-        "B",
-        "Collecting data from a large population"
-      ],
-      [
-        "C",
-        "Analyzing statistical significance"
-      ],
-      [
-        "D",
-        "Publishing research findings"
-      ]
+      ["A", "Induction - extending the wait-churn link to a new quarter"],
+      ["B", "Deduction - deriving a specific testable prediction from the hypothesis"],
+      ["C", "Testing - stating what the data will show under the hypothesis"],
+      ["D", "Evaluation - assessing whether the hypothesis survived the evidence"]
     ],
-    "answer": "A",
-    "note": "Deduction applies general theories to make specific, falsifiable predictions."
+    "answer": "B",
+    "note": "They start from the general hypothesis and derive a concrete, falsifiable prediction - general to specific is deduction. It only becomes testing once data is actually collected, and evaluation once result and prediction are compared. Induction would be building the general claim, which already happened.",
+    "anchor": "Research Methods AI — L1 Slides"
   },
   {
     "id": "L1-Q8",
     "source": "L1 Slides",
-    "topic": "Empirical cycle - Testing",
-    "question": "[EASY] What are the three main components of the testing phase?",
+    "topic": "Confounding variables",
+    "question": "[MID] A wellness app reports: 'Users who enable our night-mode screen filter sleep 40 minutes longer.' A skeptic replies that people who enable night mode are probably people who already care about sleep hygiene. In the skeptic's critique, 'caring about sleep hygiene' plays the role of:",
     "options": [
-      [
-        "A",
-        "Conduct a study, collect data, and analyze data"
-      ],
-      [
-        "B",
-        "Review literature, design experiment, publish results"
-      ],
-      [
-        "C",
-        "Form hypothesis, recruit participants, measure outcomes"
-      ],
-      [
-        "D",
-        "State prediction, randomize subjects, calculate p-values"
-      ]
+      ["A", "A confounding variable, offering an alternative explanation for the link"],
+      ["B", "A reverse cause, with longer sleep leading users to enable the filter"],
+      ["C", "A sampling bias, making filter users unrepresentative of all users"],
+      ["D", "A moderator variable, strengthening the filter's effect on sleep"]
     ],
     "answer": "A",
-    "note": "The testing phase requires conducting research, gathering evidence, and interpreting findings."
+    "note": "Sleep-hygiene motivation plausibly drives both filter adoption and longer sleep - a third variable correlated with cause and effect, i.e., a confound threatening internal validity. Reverse causation is a different critique (the outcome causing the exposure), sampling bias concerns generalization rather than the causal link, and a moderator changes the size of a real effect rather than explaining it away.",
+    "anchor": "Research Methods AI — L1 Slides"
   },
   {
     "id": "L1-Q9",
     "source": "L1 Slides",
-    "topic": "Empirical cycle - Evaluation",
-    "question": "[EASY] In the evaluation phase, what does confirmation or falsification refer to?",
+    "topic": "External validity and sampling",
+    "question": "[MID] A lab study at a technical university concludes that 'people quickly learn to distrust over-confident AI assistants', based on 60 computer science undergraduates. The strongest threat to this conclusion as stated is:",
     "options": [
-      [
-        "A",
-        "Whether the theory/general rule is supported or contradicted by the test results"
-      ],
-      [
-        "B",
-        "Whether the sample size was large enough"
-      ],
-      [
-        "C",
-        "Whether participants completed the study"
-      ],
-      [
-        "D",
-        "Whether the methodology was novel"
-      ]
+      ["A", "Sampling bias - the conclusion targets 'people' but the sample is narrow"],
+      ["B", "A confound - prior AI experience varied within the participant group"],
+      ["C", "Low statistical power - 60 participants is too few to detect the effect"],
+      ["D", "Demand characteristics - participants guessed the study's hypothesis"]
     ],
     "answer": "A",
-    "note": "Evaluation assesses whether evidence supports or refutes the hypothesis."
+    "note": "The conclusion generalizes to 'people', yet CS undergraduates differ systematically (age, tech fluency, AI familiarity) from that population - an external validity problem rooted in the sample. The effect was detected, so power is not the issue; within-group variation in experience is noise rather than a confound between conditions; demand characteristics are speculative here, while the sample-population mismatch is built into the design.",
+    "anchor": "Research Methods AI — L1 Slides"
   },
   {
     "id": "L1-Q10",
     "source": "L1 Slides",
-    "topic": "Empirical cycle - phases",
-    "question": "[EASY] According to the slides, is there always a sharp distinction between phases of the empirical cycle?",
+    "topic": "Internal vs external validity trade-off",
+    "question": "[HARD] Study A tests an AI study-planner in a controlled lab with scripted tasks and random assignment. Study B observes thousands of real students using the same planner however they like in daily life. Which statement about validity is most accurate?",
     "options": [
-      [
-        "A",
-        "No, the distinction can be filled in differently depending on the nature of research"
-      ],
-      [
-        "B",
-        "Yes, every phase must be clearly separated from the others"
-      ],
-      [
-        "C",
-        "Only for quantitative research"
-      ],
-      [
-        "D",
-        "Only for experimental designs"
-      ]
+      ["A", "Study A ranks higher on internal validity, Study B on external validity"],
+      ["B", "Study B ranks higher on both, since real behavior at scale beats artificial tasks"],
+      ["C", "Study A ranks higher on both, since control removes error of every kind"],
+      ["D", "Study B ranks higher on internal validity, Study A on external validity"]
     ],
     "answer": "A",
-    "note": "The slides note that the empirical cycle is flexible and can vary by research type."
+    "note": "Control plus random assignment isolates cause and effect (internal validity) at the price of artificiality; naturalistic observation reflects the real world (external validity) but is full of self-selection and confounds. Sample size buys precision, not internal validity - thousands of confounded observations are still confounded.",
+    "anchor": "Research Methods AI — L1 Slides"
   },
   {
     "id": "L1-Q11",
     "source": "L1 Slides",
-    "topic": "Validity - forms",
-    "question": "[EASY] What are the two main forms of validity discussed in the slides?",
+    "topic": "Correlational vs experimental design",
+    "question": "[HARD] A streaming service compares eye-strain complaints between users who chose dark mode and users who chose light mode, finding fewer complaints among dark-mode users. Why can't they conclude dark mode reduces eye strain?",
     "options": [
-      [
-        "A",
-        "External validity and internal validity"
-      ],
-      [
-        "B",
-        "Reliability and validity"
-      ],
-      [
-        "C",
-        "Construct validity and statistical validity"
-      ],
-      [
-        "D",
-        "Concurrent validity and predictive validity"
-      ]
+      ["A", "Complaints are self-reported, so the dependent variable is invalid"],
+      ["B", "Reverse causation is likely - strained users would switch to dark mode"],
+      ["C", "Users self-selected into modes, so the groups may differ in many ways"],
+      ["D", "Without a no-preference control group, mode effects cannot be compared"]
     ],
-    "answer": "A",
-    "note": "External and internal validity are the primary validity types covered in this lecture."
+    "answer": "C",
+    "note": "Nothing was manipulated: users chose their own mode, so dark-mode users may differ in age, device, usage hours, or eye sensitivity - uncontrolled confounds. Note the reverse-causation story actually predicts the opposite pattern (strained users flocking to dark mode would raise complaints there). Self-report DVs are imperfect but usable; the fatal flaw is the missing random assignment, not a missing third group.",
+    "anchor": "Research Methods AI — L1 Slides"
   },
   {
     "id": "L1-Q12",
     "source": "L1 Slides",
-    "topic": "Validity - external",
-    "question": "[EASY] What is external validity concerned with?",
+    "topic": "Identifying IV and DV",
+    "question": "[EASY] A researcher randomly assigns students to receive feedback from an AI tutor either as plain text or as annotated diagrams, then measures their quiz scores. The independent and dependent variables are:",
     "options": [
-      [
-        "A",
-        "Whether findings generalize to other settings, samples, and over time"
-      ],
-      [
-        "B",
-        "Whether the study measures what it claims to measure"
-      ],
-      [
-        "C",
-        "Whether the sample is truly random"
-      ],
-      [
-        "D",
-        "Whether statistical tests are appropriate"
-      ]
+      ["A", "IV: quiz score; DV: feedback format"],
+      ["B", "IV: feedback format; DV: quiz score"],
+      ["C", "IV: random assignment; DV: quiz score"],
+      ["D", "IV: feedback format; DV: learning ability"]
     ],
-    "answer": "A",
-    "note": "External validity asks whether results apply beyond the specific study context."
+    "answer": "B",
+    "note": "The IV is what is manipulated (text vs diagram feedback); the DV is the measured outcome (quiz score). Random assignment is a procedure, not a variable, and 'learning ability' is an unmeasured construct - the study measures quiz scores.",
+    "anchor": "Research Methods AI — L1 Slides"
   },
   {
     "id": "L1-Q13",
     "source": "L1 Slides",
-    "topic": "Validity - internal",
-    "question": "[EASY] What is internal validity mainly concerned with?",
+    "topic": "Within-subjects design and order effects",
+    "question": "[MID] To compare two keyboard layouts, every participant types a passage on layout X first and then the same passage on layout Y. Typing on Y is faster. What is the most serious problem?",
     "options": [
-      [
-        "A",
-        "Whether the causal story is correct or if there are confounds or alternative explanations"
-      ],
-      [
-        "B",
-        "Whether the results can be replicated"
-      ],
-      [
-        "C",
-        "Whether the sample is representative"
-      ],
-      [
-        "D",
-        "Whether the statistical analysis is correct"
-      ]
+      ["A", "Practice effects - typing the passage during X improves performance on Y"],
+      ["B", "Fatigue effects - performance degrades over the course of the session"],
+      ["C", "Individual differences - typing skill varies between participants"],
+      ["D", "Regression to the mean - extreme first attempts drift toward average"]
     ],
     "answer": "A",
-    "note": "Internal validity focuses on establishing a trustworthy causal relationship."
+    "note": "Everyone did X first, so practice on the identical passage is fully confounded with layout - and it predicts exactly the observed advantage for Y. Fatigue is also an order effect but predicts Y being slower, not faster. Individual differences are what within-subjects designs control by design, and regression to the mean applies to selected extreme scores, not this setup. Counterbalancing order is the fix.",
+    "anchor": "Research Methods AI — L1 Slides"
   },
   {
     "id": "L1-Q14",
     "source": "L1 Slides",
-    "topic": "Validity - confounding variables",
-    "question": "[EASY] What is a confounding variable?",
+    "topic": "Between-subjects advantages",
+    "question": "[EASY] Compared to a within-subjects design, the main advantage of a between-subjects design is that it:",
     "options": [
-      [
-        "A",
-        "A third variable that influences both the predictor and outcome, creating spurious correlation"
-      ],
-      [
-        "B",
-        "A variable that is difficult to measure accurately"
-      ],
-      [
-        "C",
-        "Any variable that shows a correlation with the outcome"
-      ],
-      [
-        "D",
-        "A variable used to control for bias"
-      ]
+      ["A", "Needs fewer participants to reach the same statistical power"],
+      ["B", "Controls for stable individual differences between participants"],
+      ["C", "Prevents carryover between conditions, since each person sees only one"],
+      ["D", "Produces a more representative sample of the target population"]
     ],
-    "answer": "A",
-    "note": "The ice cream and shark attacks example illustrates how temperature confounds the relationship."
+    "answer": "C",
+    "note": "One condition per person means nothing learned or felt in one condition can contaminate another. The first two options describe within-subjects advantages (fewer participants, individual differences controlled), and representativeness depends on sampling, not on the assignment design.",
+    "anchor": "Research Methods AI — L1 Slides"
   },
   {
     "id": "L1-Q15",
     "source": "L1 Slides",
-    "topic": "Sampling - types",
-    "question": "[EASY] What are the two most well-known sampling methods according to the slides?",
+    "topic": "Purpose of random assignment",
+    "question": "[EASY] Why does random assignment strengthen causal claims in an experiment?",
     "options": [
-      [
-        "A",
-        "Simple random sampling and convenience sampling"
-      ],
-      [
-        "B",
-        "Stratified sampling and cluster sampling"
-      ],
-      [
-        "C",
-        "Systematic sampling and quota sampling"
-      ],
-      [
-        "D",
-        "Purposive sampling and snowball sampling"
-      ]
+      ["A", "It makes the sample representative of the wider population"],
+      ["B", "It equalizes groups, in expectation, on known and unknown variables"],
+      ["C", "It guarantees the two groups have identical scores at baseline"],
+      ["D", "It reduces measurement error in the dependent variable"]
     ],
-    "answer": "A",
-    "note": "Simple random sampling and convenience sampling are presented as the primary methods."
+    "answer": "B",
+    "note": "Randomization balances confounds in expectation - including variables nobody thought to measure - so condition differences can be attributed to the manipulation. It does not guarantee identical groups in any single experiment (chance imbalance remains), and it has nothing to do with sample representativeness or measurement precision.",
+    "anchor": "Research Methods AI — L1 Slides"
   },
   {
     "id": "L1-Q16",
     "source": "L1 Slides",
-    "topic": "Sampling - random vs convenience",
-    "question": "[EASY] Which sampling method is preferred for generalizing results?",
+    "topic": "Clever Hans logic in modern AI",
+    "question": "[HARD] A deep-learning model 'diagnoses' pneumonia from chest X-rays with stellar accuracy - until someone discovers it is reading hospital-specific scanner tags burned into the image corners, because one hospital in the training data treated sicker patients. Methodologically, this is best described as:",
     "options": [
-      [
-        "A",
-        "Simple random sampling, though not always feasible"
-      ],
-      [
-        "B",
-        "Convenience sampling, as it is easier to conduct"
-      ],
-      [
-        "C",
-        "Simple random sampling is not actually preferred"
-      ],
-      [
-        "D",
-        "Either method produces equivalent results"
-      ]
+      ["A", "Overfitting - the model memorized noise specific to its training images"],
+      ["B", "A Clever Hans effect - performance rests on an uncontrolled correlated cue"],
+      ["C", "Data leakage - test-set information contaminated the training process"],
+      ["D", "Sampling bias - one hospital was overrepresented in the training data"]
     ],
-    "answer": "A",
-    "note": "Simple random sampling is more likely to generalize, but practical constraints often require convenience sampling."
+    "answer": "B",
+    "note": "Like the horse that 'did arithmetic' by reading its questioner's posture, the model exploits a real, systematic cue (scanner tag ↔ patient severity) instead of the intended signal. It is not overfitting - the pattern is genuine and generalizes within these hospitals; it is not leakage - no test information entered training; the cue is a confound in the data-generating process. The remedy is the same as with Hans: design tests that rule out alternative explanations.",
+    "anchor": "Research Methods AI — L1 Slides"
   },
   {
     "id": "L1-Q17",
     "source": "L1 Slides",
-    "topic": "Study design - correlational vs experimental",
-    "question": "[EASY] What is the key difference between correlational and experimental studies?",
+    "topic": "GenAI use policy",
+    "question": "[EASY] A student uses a GenAI assistant to draft the related-work section of a research report. Under the course policy on GenAI in research, what is required?",
     "options": [
-      [
-        "A",
-        "Correlational measures relationships; experimental manipulates variables and assigns subjects to conditions"
-      ],
-      [
-        "B",
-        "Experimental studies use larger samples"
-      ],
-      [
-        "C",
-        "Correlational studies test causal relationships"
-      ],
-      [
-        "D",
-        "Experimental studies only measure observable behavior"
-      ]
-    ],
-    "answer": "A",
-    "note": "This distinction is fundamental to research methodology covered in the slides."
-  },
-  {
-    "id": "L1-Q18",
-    "source": "L1 Slides",
-    "topic": "Variable manipulation",
-    "question": "[EASY] What does manipulating variables mean?",
-    "options": [
-      [
-        "A",
-        "Intentionally changing one factor in a system to test effects on another"
-      ],
-      [
-        "B",
-        "Falsifying data to support your hypothesis"
-      ],
-      [
-        "C",
-        "Controlling for confounding variables"
-      ],
-      [
-        "D",
-        "Randomly assigning participants to groups"
-      ]
-    ],
-    "answer": "A",
-    "note": "Manipulation involves deliberate changes to examine causal effects."
-  },
-  {
-    "id": "L1-Q19",
-    "source": "L1 Slides",
-    "topic": "Assignment to conditions - within subjects",
-    "question": "[EASY] In a within-subjects design, what do subjects experience?",
-    "options": [
-      [
-        "A",
-        "All conditions, with repeated measures"
-      ],
-      [
-        "B",
-        "Only one condition throughout the study"
-      ],
-      [
-        "C",
-        "Random selection of conditions"
-      ],
-      [
-        "D",
-        "Different conditions based on preference"
-      ]
-    ],
-    "answer": "A",
-    "note": "Within-subjects designs expose each participant to all experimental conditions."
-  },
-  {
-    "id": "L1-Q20",
-    "source": "L1 Slides",
-    "topic": "Assignment to conditions - between subjects",
-    "question": "[EASY] In a between-subjects design, what is the key feature?",
-    "options": [
-      [
-        "A",
-        "Subjects are assigned to one condition, avoiding contamination from other conditions"
-      ],
-      [
-        "B",
-        "Subjects experience all conditions in sequence"
-      ],
-      [
-        "C",
-        "Subjects are matched on key characteristics"
-      ],
-      [
-        "D",
-        "Subjects self-select their condition"
-      ]
-    ],
-    "answer": "A",
-    "note": "Between-subjects designs separate participants into distinct groups."
-  },
-  {
-    "id": "L1-Q21",
-    "source": "L1 Slides",
-    "topic": "Within-subjects design - advantages",
-    "question": "[MID] Why might within-subjects designs require fewer subjects than between-subjects designs?",
-    "options": [
-      [
-        "A",
-        "Each subject provides data on all conditions, so fewer participants are needed"
-      ],
-      [
-        "B",
-        "Within-subjects designs are always more efficient"
-      ],
-      [
-        "C",
-        "Random assignment is not needed"
-      ],
-      [
-        "D",
-        "Confounding variables are eliminated automatically"
-      ]
-    ],
-    "answer": "A",
-    "note": "Within-subjects designs increase statistical power by using each participant as their own control."
-  },
-  {
-    "id": "L1-Q22",
-    "source": "L1 Slides",
-    "topic": "Within-subjects design - order effects",
-    "question": "[MID] What are potential issues with within-subjects designs?",
-    "options": [
-      [
-        "A",
-        "Order effects (training, fatigue) and possible contamination between conditions"
-      ],
-      [
-        "B",
-        "Loss of statistical power"
-      ],
-      [
-        "C",
-        "Inability to establish causation"
-      ],
-      [
-        "D",
-        "Always requiring larger sample sizes"
-      ]
-    ],
-    "answer": "A",
-    "note": "The slides mention that counterbalancing can mitigate order effects in within-subjects designs."
-  },
-  {
-    "id": "L1-Q23",
-    "source": "L1 Slides",
-    "topic": "Between-subjects design - advantages",
-    "question": "[MID] What is a primary advantage of between-subjects designs?",
-    "options": [
-      [
-        "A",
-        "No contamination from other conditions, as each subject experiences only one condition"
-      ],
-      [
-        "B",
-        "Requires fewer participants overall"
-      ],
-      [
-        "C",
-        "Eliminates all confounding variables"
-      ],
-      [
-        "D",
-        "Produces larger effect sizes automatically"
-      ]
-    ],
-    "answer": "A",
-    "note": "Between-subjects designs avoid order effects and condition contamination."
-  },
-  {
-    "id": "L1-Q24",
-    "source": "L1 Slides",
-    "topic": "Random assignment - purpose",
-    "question": "[MID] Why is random assignment to conditions important in between-subjects designs?",
-    "options": [
-      [
-        "A",
-        "It helps eliminate pre-existing differences between groups"
-      ],
-      [
-        "B",
-        "It ensures larger sample sizes"
-      ],
-      [
-        "C",
-        "It guarantees statistical significance"
-      ],
-      [
-        "D",
-        "It simplifies data analysis"
-      ]
-    ],
-    "answer": "A",
-    "note": "Random assignment is a solution mentioned in the slides for reducing bias in between-subjects studies."
-  },
-  {
-    "id": "L1-Q25",
-    "source": "L1 Slides",
-    "topic": "Confounding variables - ice cream example",
-    "question": "[MID] In the ice cream and shark attacks example, what role does temperature play?",
-    "options": [
-      [
-        "A",
-        "It is a confounding variable that influences both ice cream sales and shark attacks"
-      ],
-      [
-        "B",
-        "It directly causes an increase in shark attacks"
-      ],
-      [
-        "C",
-        "It is the dependent variable being measured"
-      ],
-      [
-        "D",
-        "It is randomly distributed across conditions"
-      ]
-    ],
-    "answer": "A",
-    "note": "Temperature serves as a common cause explaining the apparent correlation."
-  },
-  {
-    "id": "L1-Q26",
-    "source": "L1 Slides",
-    "topic": "Sampling biases - AI assistant study",
-    "question": "[MID] In the AI assistant workload example, why might random sampling still produce biased results?",
-    "options": [
-      [
-        "A",
-        "Some employees might be less available or willing to respond than others, introducing selection bias"
-      ],
-      [
-        "B",
-        "Random sampling is inherently biased"
-      ],
-      [
-        "C",
-        "The survey method is invalid"
-      ],
-      [
-        "D",
-        "Sample size was too small"
-      ]
-    ],
-    "answer": "A",
-    "note": "The slides illustrate that even random sampling can be affected by response bias."
-  },
-  {
-    "id": "L1-Q27",
-    "source": "L1 Slides",
-    "topic": "Empirical cycle - flexibility",
-    "question": "[MID] How can the empirical cycle phases differ across research types?",
-    "options": [
-      [
-        "A",
-        "The distinction between phases can be blurred or reordered depending on the research question and methodology"
-      ],
-      [
-        "B",
-        "All research must follow the phases in strict order"
-      ],
-      [
-        "C",
-        "Qualitative and quantitative research have completely different cycles"
-      ],
-      [
-        "D",
-        "The cycle always begins with deduction"
-      ]
-    ],
-    "answer": "A",
-    "note": "The slides emphasize that the empirical cycle is adaptable to different research contexts."
-  },
-  {
-    "id": "L1-Q28",
-    "source": "L1 Slides",
-    "topic": "Scientific thinking - avoiding heuristics",
-    "question": "[MID] According to the slides, how can scientists avoid being misled by cognitive biases and heuristics?",
-    "options": [
-      [
-        "A",
-        "By thinking like a scientist and actively avoiding confirmation bias, availability bias, and representativeness bias"
-      ],
-      [
-        "B",
-        "By collecting very large datasets"
-      ],
-      [
-        "C",
-        "By avoiding any human decision-making"
-      ],
-      [
-        "D",
-        "By conducting only qualitative research"
-      ]
-    ],
-    "answer": "A",
-    "note": "Scientific thinking is presented as a deliberate practice to counteract cognitive shortcuts."
-  },
-  {
-    "id": "L1-Q29",
-    "source": "L1 Slides",
-    "topic": "genAI in research - disclosure",
-    "question": "[MID] What is the stance of this course regarding generative AI in assignments?",
-    "options": [
-      [
-        "A",
-        "GenAI is only allowed for checking spelling, grammar, and stylistic aspects; detailed disclosure of use is required"
-      ],
-      [
-        "B",
-        "GenAI can be used freely without restrictions"
-      ],
-      [
-        "C",
-        "GenAI is prohibited entirely"
-      ],
-      [
-        "D",
-        "GenAI use is encouraged for all research tasks"
-      ]
-    ],
-    "answer": "A",
-    "note": "The slides specify strict limitations on AI use with mandatory transparency in the course."
-  },
-  {
-    "id": "L1-Q30",
-    "source": "L1 Slides",
-    "topic": "Observation phase - sources",
-    "question": "[HARD] Why does the observation phase base ideas on personal experience, imagination, or previous research?",
-    "options": [
-      [
-        "A",
-        "These are natural sources of curiosity and novel research directions, though they may introduce bias"
-      ],
-      [
-        "B",
-        "To ensure research is always objective"
-      ],
-      [
-        "C",
-        "Because empirical observation is insufficient"
-      ],
-      [
-        "D",
-        "To avoid using existing knowledge"
-      ]
-    ],
-    "answer": "A",
-    "note": "Personal and imaginative sources provide research motivation but must be validated empirically."
-  },
-  {
-    "id": "L1-Q31",
-    "source": "L1 Slides",
-    "topic": "Confounding - common response model",
-    "question": "[HARD] What is meant by 'common response' as an explanation model for confounding?",
-    "options": [
-      [
-        "A",
-        "A third variable influences both variables being correlated, explaining their relationship"
-      ],
-      [
-        "B",
-        "Participants give similar responses across conditions"
-      ],
-      [
-        "C",
-        "The dependent variable causes changes in the independent variable"
-      ],
-      [
-        "D",
-        "Experimental error creates a spurious correlation"
-      ]
-    ],
-    "answer": "A",
-    "note": "Common response explains why two variables correlate without one causing the other."
-  },
-  {
-    "id": "L1-Q32",
-    "source": "L1 Slides",
-    "topic": "Clever Hans - ruling out alternatives",
-    "question": "[HARD] What does the Clever Hans example illustrate about validity?",
-    "options": [
-      [
-        "A",
-        "Even well-controlled studies can miss alternative explanations; researchers must actively rule out confounds"
-      ],
-      [
-        "B",
-        "Animals cannot be reliable research subjects"
-      ],
-      [
-        "C",
-        "Historical studies are always flawed"
-      ],
-      [
-        "D",
-        "Observational data is inferior to experimental data"
-      ]
-    ],
-    "answer": "A",
-    "note": "Clever Hans demonstrates the importance of systematically eliminating alternative explanations."
-  },
-  {
-    "id": "L1-Q33",
-    "source": "L1 Slides",
-    "topic": "Validity and research design trade-offs",
-    "question": "[HARD] How do internal and external validity sometimes create tension in research design?",
-    "options": [
-      [
-        "A",
-        "Tightly controlled experiments maximize internal validity but may reduce generalizability (external validity)"
-      ],
-      [
-        "B",
-        "They always support each other equally"
-      ],
-      [
-        "C",
-        "External validity is more important than internal validity"
-      ],
-      [
-        "D",
-        "Researchers must choose one and ignore the other"
-      ]
-    ],
-    "answer": "A",
-    "note": "Research design involves balancing rigor against real-world applicability."
-  },
-  {
-    "id": "L1-Q34",
-    "source": "L1 Slides",
-    "topic": "Scientific thinking - self-awareness",
-    "question": "[HARD] Why does the lecture emphasize that 'you are the easiest person to fool' in the context of scientific research?",
-    "options": [
-      [
-        "A",
-        "Scientists must be aware of unconscious biases and motivations that can distort interpretation of results"
-      ],
-      [
-        "B",
-        "Everyone is equally prone to being fooled"
-      ],
-      [
-        "C",
-        "Scientists are inherently dishonest"
-      ],
-      [
-        "D",
-        "This principle applies only to beginners"
-      ]
-    ],
-    "answer": "A",
-    "note": "Self-deception is a central threat to validity that requires active vigilance and structured methods."
-  },
-  {
-    "id": "L3-Q1",
-    "source": "L3 Slides",
-    "topic": "Data Science Tasks",
-    "question": "[EASY] What are the two main examples of data science tasks given in the slides?",
-    "options": [
-      [
-        "A",
-        "Inferential statistics (testing hypotheses) and machine learning (classification)"
-      ],
-      [
-        "B",
-        "Linear regression and logistic regression"
-      ],
-      [
-        "C",
-        "Data visualization and data cleaning"
-      ],
-      [
-        "D",
-        "Sampling and hypothesis testing"
-      ]
-    ],
-    "answer": "A",
-    "note": "The slides explicitly compare hypothesis testing (ice cream and shark attacks) with classification (sheep detection in photos) as two common data science tasks.",
-    "anchor": "Research Methods AI — L3 Slides"
-  },
-  {
-    "id": "L3-Q2",
-    "source": "L3 Slides",
-    "topic": "Variable Definition",
-    "question": "[EASY] What is a variable in data analysis?",
-    "options": [
-      [
-        "A",
-        "A method of statistical testing"
-      ],
-      [
-        "B",
-        "A general term for something that can have a value, often a column in data"
-      ],
-      [
-        "C",
-        "A type of probability distribution"
-      ],
-      [
-        "D",
-        "A component of a logistic model"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slides define a variable as 'a general term for something that can have a value' and give examples like age, blood pressure, and diagnosis as columns in data.",
-    "anchor": "Research Methods AI — L3 Slides"
-  },
-  {
-    "id": "L3-Q3",
-    "source": "L3 Slides",
-    "topic": "Random Variables",
-    "question": "[EASY] Which characteristic defines a random variable?",
-    "options": [
-      [
-        "A",
-        "It must always be positive"
-      ],
-      [
-        "B",
-        "It can take on values with some probability and depends on a random process"
-      ],
-      [
-        "C",
-        "It is only used in classification tasks"
-      ],
-      [
-        "D",
-        "It must follow a uniform distribution"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slides state that random variables can 'take on values which can be measured', have a probability distribution, and 'depend on some random process'.",
-    "anchor": "Research Methods AI — L3 Slides"
-  },
-  {
-    "id": "L3-Q4",
-    "source": "L3 Slides",
-    "topic": "Measurement Levels",
-    "question": "[EASY] How many main types of measurement levels are there?",
-    "options": [
-      [
-        "A",
-        "Two: categorical and numerical"
-      ],
-      [
-        "B",
-        "Three: nominal, ordinal, and interval"
-      ],
-      [
-        "C",
-        "Four: nominal, ordinal, interval, and ratio"
-      ],
-      [
-        "D",
-        "Five: discrete, continuous, nominal, ordinal, and ratio"
-      ]
+      ["A", "Verifying the output is correct, after which disclosure is unnecessary"],
+      ["B", "Using GenAI only for editing language, never for drafting content"],
+      ["C", "Disclosing the use transparently while remaining responsible for correctness"],
+      ["D", "Obtaining the instructor's written approval before each use"]
     ],
     "answer": "C",
-    "note": "The slides explicitly show four measurement levels: nominal and ordinal (categorical), and interval and ratio (numerical).",
-    "anchor": "Research Methods AI — L3 Slides"
-  },
-  {
-    "id": "L3-Q5",
-    "source": "L3 Slides",
-    "topic": "Nominal Variables",
-    "question": "[EASY] Which of the following is an example of a nominal variable?",
-    "options": [
-      [
-        "A",
-        "Temperature (Celsius or Fahrenheit)"
-      ],
-      [
-        "B",
-        "Disease status (healthy/mild/severe)"
-      ],
-      [
-        "C",
-        "Favourite colour (blue/yellow/red)"
-      ],
-      [
-        "D",
-        "Distance in kilometers"
-      ]
-    ],
-    "answer": "C",
-    "note": "The slides define nominal variables as groups with examples including 'Favourite colour (blue/yellow/red/)' and 'Does the chatbot use emojis? (no/yes)'.",
-    "anchor": "Research Methods AI — L3 Slides"
-  },
-  {
-    "id": "L3-Q6",
-    "source": "L3 Slides",
-    "topic": "Ordinal Variables",
-    "question": "[EASY] What distinguishes an ordinal variable from a nominal variable?",
-    "options": [
-      [
-        "A",
-        "Ordinal variables can be multiplied and divided"
-      ],
-      [
-        "B",
-        "Ordinal variables can be 'bigger' or 'smaller' than each other"
-      ],
-      [
-        "C",
-        "Ordinal variables must be continuous"
-      ],
-      [
-        "D",
-        "Ordinal variables have a meaningful zero"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slides state that ordinal variables 'can be bigger (>) or smaller (<)' and give disease status (healthy/mild/severe) as an example.",
-    "anchor": "Research Methods AI — L3 Slides"
-  },
-  {
-    "id": "L3-Q7",
-    "source": "L3 Slides",
-    "topic": "Interval Variables",
-    "question": "[EASY] What is a key characteristic of interval variables?",
-    "options": [
-      [
-        "A",
-        "They have a meaningful zero point"
-      ],
-      [
-        "B",
-        "They are categorical in nature"
-      ],
-      [
-        "C",
-        "They lack a meaningful zero, like temperature"
-      ],
-      [
-        "D",
-        "They cannot be added or subtracted"
-      ]
-    ],
-    "answer": "C",
-    "note": "The slides define interval variables as 'numerical (a number), but without a meaningful 0', with temperature and IQ test results as examples.",
-    "anchor": "Research Methods AI — L3 Slides"
-  },
-  {
-    "id": "L3-Q8",
-    "source": "L3 Slides",
-    "topic": "Ratio Variables",
-    "question": "[EASY] Which operation can be performed on ratio variables but not on interval variables?",
-    "options": [
-      [
-        "A",
-        "Addition only"
-      ],
-      [
-        "B",
-        "Subtraction only"
-      ],
-      [
-        "C",
-        "Multiplication and division"
-      ],
-      [
-        "D",
-        "Comparison (greater or less than)"
-      ]
-    ],
-    "answer": "C",
-    "note": "The slides state that ratio variables are 'numerical (a number), with a meaningful 0' and can be multiplied (*) or divided (/), unlike interval variables.",
-    "anchor": "Research Methods AI — L3 Slides"
-  },
-  {
-    "id": "L3-Q9",
-    "source": "L3 Slides",
-    "topic": "Discrete vs Continuous",
-    "question": "[EASY] What is the difference between discrete and continuous variables?",
-    "options": [
-      [
-        "A",
-        "Discrete variables have categorical values, continuous are numerical"
-      ],
-      [
-        "B",
-        "Discrete have limited outcomes, continuous have infinite possible outcomes"
-      ],
-      [
-        "C",
-        "Continuous variables must follow a normal distribution"
-      ],
-      [
-        "D",
-        "Discrete variables can only be integers"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slides explain discrete as 'a limited number of possible outcomes (number of words)' and continuous as 'an infinite number of possible outcomes (latency)'.",
-    "anchor": "Research Methods AI — L3 Slides"
-  },
-  {
-    "id": "L3-Q10",
-    "source": "L3 Slides",
-    "topic": "Probability Distributions",
-    "question": "[EASY] What is a probability mass function (pmf)?",
-    "options": [
-      [
-        "A",
-        "A line over an interval showing probability for a range of values"
-      ],
-      [
-        "B",
-        "Vertical lines at each possible value showing probability"
-      ],
-      [
-        "C",
-        "A distribution used only for continuous variables"
-      ],
-      [
-        "D",
-        "A method for testing hypotheses"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slides define pmf as 'vertical lines at each possible value' with 'the height of the line shows the probability' and sums to 1.",
-    "anchor": "Research Methods AI — L3 Slides"
-  },
-  {
-    "id": "L3-Q11",
-    "source": "L3 Slides",
-    "topic": "Probability Distributions",
-    "question": "[EASY] What is a probability density function (pdf)?",
-    "options": [
-      [
-        "A",
-        "A series of vertical lines at discrete values"
-      ],
-      [
-        "B",
-        "A line over an interval with area under the line showing probability"
-      ],
-      [
-        "C",
-        "A distribution that only applies to categorical data"
-      ],
-      [
-        "D",
-        "A method for converting variables to different scales"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slides define pdf as 'line over an interval (can be infinite)' where 'the area under the line shows the probability for a range of values (sums up to 1)'.",
-    "anchor": "Research Methods AI — L3 Slides"
-  },
-  {
-    "id": "L3-Q12",
-    "source": "L3 Slides",
-    "topic": "Data Simulation Purposes",
-    "question": "[EASY] Which of the following is NOT listed as a reason for simulating data?",
-    "options": [
-      [
-        "A",
-        "Evaluate or compare methods"
-      ],
-      [
-        "B",
-        "Test an analysis plan (fake pilot data)"
-      ],
-      [
-        "C",
-        "Education and illustration purposes"
-      ],
-      [
-        "D",
-        "Replace real experimental data entirely"
-      ]
-    ],
-    "answer": "D",
-    "note": "The slides list reasons for simulation as evaluating methods, testing analysis plans, education/illustration, and humorously 'commit fraud (please don't)'—not replacing real data.",
-    "anchor": "Research Methods AI — L3 Slides"
-  },
-  {
-    "id": "L3-Q13",
-    "source": "L3 Slides",
-    "topic": "R Programming",
-    "question": "[MID] What does the rnorm() function in R do?",
-    "options": [
-      [
-        "A",
-        "Removes null values from a distribution"
-      ],
-      [
-        "B",
-        "Draws random values from a Gaussian/normal distribution"
-      ],
-      [
-        "C",
-        "Normalizes data to have mean 0 and sd 1"
-      ],
-      [
-        "D",
-        "Creates a normal-looking plot of the data"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slides show 'Gaussian/normal distribution - rnorm' and demonstrate latency being simulated with 'rnorm(n, mean = 2, sd = 0.6)'.",
-    "anchor": "Research Methods AI — L3 Slides"
-  },
-  {
-    "id": "L3-Q14",
-    "source": "L3 Slides",
-    "topic": "R Sampling Functions",
-    "question": "[MID] The sample() function with replace = TRUE allows what?",
-    "options": [
-      [
-        "A",
-        "Drawing without replacement (each value used once)"
-      ],
-      [
-        "B",
-        "Drawing with replacement (values can be drawn multiple times)"
-      ],
-      [
-        "C",
-        "Creating a uniform distribution automatically"
-      ],
-      [
-        "D",
-        "Replacing missing data with estimated values"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slides show sample(30:200, size = 10, replace = TRUE) to draw response lengths with replacement from the 30-200 range.",
-    "anchor": "Research Methods AI — L3 Slides"
-  },
-  {
-    "id": "L3-Q15",
-    "source": "L3 Slides",
-    "topic": "Linear Models",
-    "question": "[MID] What is the general form of the linear equation shown in the slides?",
-    "options": [
-      [
-        "A",
-        "y = b0 + b1*x1 + error"
-      ],
-      [
-        "B",
-        "y = slope * x"
-      ],
-      [
-        "C",
-        "y = b0 + b1*x1 + b2*x2 + error"
-      ],
-      [
-        "D",
-        "y = mean + variance"
-      ]
-    ],
-    "answer": "C",
-    "note": "The slides show the linear equation form 'y = b0 + b1*x1 + b2*x2 + error' used for modeling relationships like frustration depending on latency and great_question.",
-    "anchor": "Research Methods AI — L3 Slides"
-  },
-  {
-    "id": "L3-Q16",
-    "source": "L3 Slides",
-    "topic": "Linear Model Construction",
-    "question": "[MID] In the final linear model for frustration, what does the intercept (-2) represent?",
-    "options": [
-      [
-        "A",
-        "The slope of the latency effect"
-      ],
-      [
-        "B",
-        "The baseline frustration when all predictors are zero"
-      ],
-      [
-        "C",
-        "The variance explained by the model"
-      ],
-      [
-        "D",
-        "The number of observations in the dataset"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slides show the model 'frustration = -2 + 3 * latency + ...' where -2 is the intercept (b0), representing baseline when other variables are zero.",
-    "anchor": "Research Methods AI — L3 Slides"
-  },
-  {
-    "id": "L3-Q17",
-    "source": "L3 Slides",
-    "topic": "Categorical Predictors",
-    "question": "[MID] How are categorical variables like 'emojis' encoded in a linear model?",
-    "options": [
-      [
-        "A",
-        "As text strings directly in the equation"
-      ],
-      [
-        "B",
-        "Using dummy coding where 'yes' = 1 and 'no' = 0"
-      ],
-      [
-        "C",
-        "By calculating a mean value for each category"
-      ],
-      [
-        "D",
-        "They cannot be used in linear models"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slides show emojis[1:5] == 'yes' produces TRUE/FALSE, then multiplied by coefficient to encode as (emoji == 'yes') * 2 in the final model.",
-    "anchor": "Research Methods AI — L3 Slides"
-  },
-  {
-    "id": "L3-Q18",
-    "source": "L3 Slides",
-    "topic": "Frustration Data Simulation",
-    "question": "[MID] In the chatbot dataset example, which variables had the strongest relationship with frustration based on the scatter plots?",
-    "options": [
-      [
-        "A",
-        "Great_question and response_length"
-      ],
-      [
-        "B",
-        "Latency and great_question"
-      ],
-      [
-        "C",
-        "Emojis and response_length"
-      ],
-      [
-        "D",
-        "All variables had equal relationships"
-      ]
-    ],
-    "answer": "B",
-    "note": "The scatter plots show latency and great_question have clear linear/discrete patterns with frustration, while response_length shows weaker relationship.",
-    "anchor": "Research Methods AI — L3 Slides"
-  },
-  {
-    "id": "L3-Q19",
-    "source": "L3 Slides",
-    "topic": "Data Transformation",
-    "question": "[MID] What transformation was applied to create a more realistic frustration variable?",
-    "options": [
-      [
-        "A",
-        "Taking the square root of the original values"
-      ],
-      [
-        "B",
-        "Using pmin() to set minimum and pmax() to set maximum bounds"
-      ],
-      [
-        "C",
-        "Applying a log transformation"
-      ],
-      [
-        "D",
-        "Rounding to the nearest integer"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slides show frustration <- pmin(frustration, 10) and pmax(frustration, 0) to bound values between 0-10, then rounded using round().",
-    "anchor": "Research Methods AI — L3 Slides"
-  },
-  {
-    "id": "L3-Q20",
-    "source": "L3 Slides",
-    "topic": "Power Transformation",
-    "question": "[MID] How does squaring (x_sq <- x^2) affect the distribution of a variable?",
-    "options": [
-      [
-        "A",
-        "Makes it more normally distributed"
-      ],
-      [
-        "B",
-        "Makes it more positively skewed"
-      ],
-      [
-        "C",
-        "Changes the scale but preserves the shape"
-      ],
-      [
-        "D",
-        "Removes all outliers"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slides show x_sq <- x^2 creates a more skewed distribution compared to the original normal-like distribution.",
-    "anchor": "Research Methods AI — L3 Slides"
-  },
-  {
-    "id": "L3-Q21",
-    "source": "L3 Slides",
-    "topic": "Binary Outcomes",
-    "question": "[MID] For a binary outcome like 'Are you frustrated? (yes/no)', what threshold was used to convert frustration scores?",
-    "options": [
-      [
-        "A",
-        "Frustration > 3"
-      ],
-      [
-        "B",
-        "Frustration > 5"
-      ],
-      [
-        "C",
-        "Frustration > 7"
-      ],
-      [
-        "D",
-        "Frustration > 10"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slides show 'fruste_binary <- frustration > 5' to create a binary variable with TRUE for frustrated (>5) and FALSE otherwise.",
-    "anchor": "Research Methods AI — L3 Slides"
-  },
-  {
-    "id": "L3-Q22",
-    "source": "L3 Slides",
-    "topic": "Logistic Model Basics",
-    "question": "[HARD] What is the key difference between a linear model and a logistic model for binary outcomes?",
-    "options": [
-      [
-        "A",
-        "Linear models use noise, logistic models do not"
-      ],
-      [
-        "B",
-        "Linear models predict outcomes directly; logistic models predict probability of an outcome"
-      ],
-      [
-        "C",
-        "Logistic models cannot use more than one predictor"
-      ],
-      [
-        "D",
-        "Linear models only work with continuous variables"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slides state 'Instead of modelling y directly, for a binary outcome we can model its probability' using the logistic link function.",
-    "anchor": "Research Methods AI — L3 Slides"
-  },
-  {
-    "id": "L3-Q23",
-    "source": "L3 Slides",
-    "topic": "Logistic Function",
-    "question": "[HARD] What is the logistic function's mathematical form as shown in the slides?",
-    "options": [
-      [
-        "A",
-        "π = 1 / (1 + exp(-b0 - b1*x1 - b2*x2))"
-      ],
-      [
-        "B",
-        "π = b0 + b1*x1 + b2*x2"
-      ],
-      [
-        "C",
-        "π = exp(b0 + b1*x1 + b2*x2)"
-      ],
-      [
-        "D",
-        "π = log(b0 + b1*x1 + b2*x2)"
-      ]
-    ],
-    "answer": "A",
-    "note": "The slides show the logistic function π = 1 / (1 + exp(-[linear predictor])) which constrains output to [0,1].",
-    "anchor": "Research Methods AI — L3 Slides"
-  },
-  {
-    "id": "L3-Q24",
-    "source": "L3 Slides",
-    "topic": "Log-Odds",
-    "question": "[HARD] What is the log-odds form of the logistic model?",
-    "options": [
-      [
-        "A",
-        "log(π/(1-π)) = b0 + b1*x1 + b2*x2"
-      ],
-      [
-        "B",
-        "π = log(b0 + b1*x1 + b2*x2)"
-      ],
-      [
-        "C",
-        "log(π) = b0 + b1*x1 + b2*x2"
-      ],
-      [
-        "D",
-        "log(π - (1-π)) = b0 + b1*x1 + b2*x2"
-      ]
-    ],
-    "answer": "A",
-    "note": "The slides show the logistic model rewritten as 'log(π/(1-π)) = b0 + b1*x1 + b2*x2', which is a linear model for log-odds.",
-    "anchor": "Research Methods AI — L3 Slides"
-  },
-  {
-    "id": "L3-Q25",
-    "source": "L3 Slides",
-    "topic": "Logistic Regression in R",
-    "question": "[HARD] In the R code for logistic regression shown, what does exp(-lin_pred) do?",
-    "options": [
-      [
-        "A",
-        "Calculates the linear predictor"
-      ],
-      [
-        "B",
-        "Exponentiates the negative linear predictor for use in the logistic function"
-      ],
-      [
-        "C",
-        "Applies a log transformation"
-      ],
-      [
-        "D",
-        "Normalizes the probabilities"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slides show 'lin_pred <- -6.5 + 3 * latency + 0.1 * great_question - 0.01 * response_length + 2 * (emojis == 'yes')' then 'frust_prob <- 1/(1 + exp(-lin_pred))'.",
-    "anchor": "Research Methods AI — L3 Slides"
-  },
-  {
-    "id": "L3-Q26",
-    "source": "L3 Slides",
-    "topic": "Intercept Effects in Logistic Models",
-    "question": "[HARD] How does changing the intercept from -6.5 to -5.5 affect the predicted probabilities?",
-    "options": [
-      [
-        "A",
-        "Shifts the entire probability distribution to higher values"
-      ],
-      [
-        "B",
-        "Increases the range of predicted probabilities"
-      ],
-      [
-        "C",
-        "Changes the sign of the effect"
-      ],
-      [
-        "D",
-        "No effect on probabilities"
-      ]
-    ],
-    "answer": "A",
-    "note": "The slides show that 'a higher intercept gives higher probabilities', demonstrated by comparing models with intercepts -6.5 vs -5.5.",
-    "anchor": "Research Methods AI — L3 Slides"
-  },
-  {
-    "id": "L3-Q27",
-    "source": "L3 Slides",
-    "topic": "Range of Linear Predictors",
-    "question": "[HARD] What determines how extreme the predicted probabilities are in a logistic model?",
-    "options": [
-      [
-        "A",
-        "The intercept value only"
-      ],
-      [
-        "B",
-        "The magnitude of regression coefficients"
-      ],
-      [
-        "C",
-        "The range (min-max) of the linear predictor"
-      ],
-      [
-        "D",
-        "The number of observations in the data"
-      ]
-    ],
-    "answer": "C",
-    "note": "The slides state 'How extreme the probabilities are depends on the range of the linear predictor' and show different probability distributions with different coefficient ranges.",
-    "anchor": "Research Methods AI — L3 Slides"
-  },
-  {
-    "id": "L3-Q28",
-    "source": "L3 Slides",
-    "topic": "Simulation with Logistic Models",
-    "question": "[HARD] To convert the logistic model probabilities to binary outcomes (yes/no), what sampling approach is used?",
-    "options": [
-      [
-        "A",
-        "Use a fixed threshold of 0.5"
-      ],
-      [
-        "B",
-        "Round the probabilities to nearest integer"
-      ],
-      [
-        "C",
-        "Sample from a Bernoulli distribution using the probabilities"
-      ],
-      [
-        "D",
-        "Always choose the outcome with highest probability"
-      ]
-    ],
-    "answer": "C",
-    "note": "The slides show using sample() with size=1, replace=TRUE, prob=(1-frust_prob, frust_prob) to draw binary outcomes from probabilities.",
-    "anchor": "Research Methods AI — L3 Slides"
-  },
-  {
-    "id": "L3-Q29",
-    "source": "L3 Slides",
-    "topic": "Data Simulation Workflow",
-    "question": "[HARD] According to the slides, what is recommended as the first step when simulating data?",
-    "options": [
-      [
-        "A",
-        "Immediately add complex relationships and interactions"
-      ],
-      [
-        "B",
-        "Start simple with separate variables, then add relationships"
-      ],
-      [
-        "C",
-        "Use the most realistic distribution first"
-      ],
-      [
-        "D",
-        "Include all transformations from the beginning"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slides provide practical advice: 'start simple, with a separate variables', 'then try to add relationships', 'and make the values more realistic'.",
-    "anchor": "Research Methods AI — L3 Slides"
-  },
-  {
-    "id": "L3-Q30",
-    "source": "L3 Slides",
-    "topic": "R Distributions",
-    "question": "[HARD] What does rpois(n, lambda = 5) do, and when would it be used?",
-    "options": [
-      [
-        "A",
-        "Draws from normal distribution; used for continuous variables"
-      ],
-      [
-        "B",
-        "Draws from Poisson distribution for count data"
-      ],
-      [
-        "C",
-        "Draws from uniform distribution; used for binary outcomes"
-      ],
-      [
-        "D",
-        "Draws from exponential distribution; used for time-to-event data"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slides list 'Poisson for count data - rpois' as a distribution function for sampling from different distributions in R.",
-    "anchor": "Research Methods AI — L3 Slides"
-  },
-  {
-    "id": "L3-Q31",
-    "source": "L3 Slides",
-    "topic": "Comparison of Distributions",
-    "question": "[HARD] How does a discrete uniform distribution differ from a continuous uniform distribution in terms of output?",
-    "options": [
-      [
-        "A",
-        "Discrete produces only integers; continuous produces decimal values"
-      ],
-      [
-        "B",
-        "They produce identical outputs"
-      ],
-      [
-        "C",
-        "Continuous produces only positive values"
-      ],
-      [
-        "D",
-        "Discrete uses a mass function; continuous uses a density function"
-      ]
-    ],
-    "answer": "A",
-    "note": "The slides show sample(0:10, size = 10, replace = TRUE) producing integers vs runif(10, min = 0, max = 10) producing decimals like 2.898747, 8.065412, etc.",
-    "anchor": "Research Methods AI — L3 Slides"
-  },
-  {
-    "id": "L3-Q32",
-    "source": "L3 Slides",
-    "topic": "Noise in Simulations",
-    "question": "[HARD] In the frustration simulation, what does the 'noise' variable represent?",
-    "options": [
-      [
-        "A",
-        "Random error added to make relationships more realistic and imperfect"
-      ],
-      [
-        "B",
-        "Outliers that should be removed"
-      ],
-      [
-        "C",
-        "Measurement error from the chatbot system"
-      ],
-      [
-        "D",
-        "Correlation between variables"
-      ]
-    ],
-    "answer": "A",
-    "note": "The slides show 'noise <- rnorm(n, 0, 2)' and explain this can be viewed as 'unexplained variation', 'error', or the model's 'residuals'.",
-    "anchor": "Research Methods AI — L3 Slides"
-  },
-  {
-    "id": "L3-Q33",
-    "source": "L3 Slides",
-    "topic": "Assignment Simulation Guidance",
-    "question": "[HARD] For the assignment, which approach is recommended for simulating data?",
-    "options": [
-      [
-        "A",
-        "Simulate raw unprocessed responses and all conversational data"
-      ],
-      [
-        "B",
-        "Simulate only the processed data needed for your statistical test or classifier"
-      ],
-      [
-        "C",
-        "Simulate both raw and processed data simultaneously"
-      ],
-      [
-        "D",
-        "Use only real data without any simulation"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slides advise 'You can simulate the raw data... but it is probably easier to simulate only what you need for your test/classifier'.",
-    "anchor": "Research Methods AI — L3 Slides"
-  },
-  {
-    "id": "L3-Q34",
-    "source": "L3 Slides",
-    "topic": "Research Questions and Simulation",
-    "question": "[HARD] What is the final criterion for successful data simulation according to the slides?",
-    "options": [
-      [
-        "A",
-        "The simulated data must match real data distribution exactly"
-      ],
-      [
-        "B",
-        "The simulated data must be used to test a valid research question with a statistical test or classifier"
-      ],
-      [
-        "C",
-        "All variables must follow a normal distribution"
-      ],
-      [
-        "D",
-        "The simulation must use all possible R distribution functions"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slides emphasize 'Make sure your research question can be answered with something like a statistical test or classifier'—the research question should be answerable with the simulated data.",
-    "anchor": "Research Methods AI — L3 Slides"
-  },
-  {
-    "id": "L4-Q1",
-    "source": "L4 Slides",
-    "topic": "Data Analysis Overview",
-    "question": "[EASY] Which of the following is NOT covered in today's data analysis lecture?",
-    "options": [
-      [
-        "A",
-        "Data integration, cleaning, and preprocessing"
-      ],
-      [
-        "B",
-        "Exploratory analysis"
-      ],
-      [
-        "C",
-        "Confirmatory analysis (estimation and testing)"
-      ],
-      [
-        "D",
-        "Prediction (mostly classification)"
-      ]
-    ],
-    "answer": "A",
-    "note": "The slide explicitly lists what is NOT for today: data integration, cleaning, preprocessing; also not qualitative data analysis, text mining, deep learning, LLMs.",
-    "anchor": "Research Methods AI — L4 Slides"
-  },
-  {
-    "id": "L4-Q2",
-    "source": "L4 Slides",
-    "topic": "Exploratory Analysis Definition",
-    "question": "[EASY] In exploratory data analysis, we look at patterns in the data without doing what?",
-    "options": [
-      [
-        "A",
-        "Creating visualizations"
-      ],
-      [
-        "B",
-        "Calculating distributions"
-      ],
-      [
-        "C",
-        "Modeling or testing"
-      ],
-      [
-        "D",
-        "Examining relationships"
-      ]
-    ],
-    "answer": "C",
-    "note": "The slide states: 'In exploratory data analysis, we look at patterns in the data, without modeling or testing them.'",
-    "anchor": "Research Methods AI — L4 Slides"
-  },
-  {
-    "id": "L4-Q3",
-    "source": "L4 Slides",
-    "topic": "Chatbot Dataset Variables",
-    "question": "[EASY] In the chatbot dataset example, what does the 'Frustration' variable measure?",
-    "options": [
-      [
-        "A",
-        "Whether emojis were used in responses"
-      ],
-      [
-        "B",
-        "The number of words in responses"
-      ],
-      [
-        "C",
-        "How frustrated the user feels on a 0-10 scale"
-      ],
-      [
-        "D",
-        "The total time to respond in seconds"
-      ]
-    ],
-    "answer": "C",
-    "note": "The slide defines Frustration as 'how frustrated the user feels (0-10)'.",
-    "anchor": "Research Methods AI — L4 Slides"
-  },
-  {
-    "id": "L4-Q4",
-    "source": "L4 Slides",
-    "topic": "Categorical Variable Descriptive Statistics",
-    "question": "[EASY] Which statistic is the most common value in a dataset?",
-    "options": [
-      [
-        "A",
-        "Mean"
-      ],
-      [
-        "B",
-        "Median"
-      ],
-      [
-        "C",
-        "Mode"
-      ],
-      [
-        "D",
-        "Variance"
-      ]
-    ],
-    "answer": "C",
-    "note": "The slide states: 'The mode is the most common value.'",
-    "anchor": "Research Methods AI — L4 Slides"
-  },
-  {
-    "id": "L4-Q5",
-    "source": "L4 Slides",
-    "topic": "Quartiles and IQR",
-    "question": "[EASY] Quartiles divide data into how many equal parts?",
-    "options": [
-      [
-        "A",
-        "Two parts (50% each)"
-      ],
-      [
-        "B",
-        "Three parts (33% each)"
-      ],
-      [
-        "C",
-        "Four parts (25% each)"
-      ],
-      [
-        "D",
-        "Five parts (20% each)"
-      ]
-    ],
-    "answer": "C",
-    "note": "The slide explains: 'Quartiles divide the data points into four equal parts (the 25% of values each).'",
-    "anchor": "Research Methods AI — L4 Slides"
-  },
-  {
-    "id": "L4-Q6",
-    "source": "L4 Slides",
-    "topic": "Box Plot Components",
-    "question": "[EASY] What does the box in a boxplot represent?",
-    "options": [
-      [
-        "A",
-        "The minimum and maximum values"
-      ],
-      [
-        "B",
-        "The range from Q1 to Q3 (the interquartile range)"
-      ],
-      [
-        "C",
-        "The mean and standard deviation"
-      ],
-      [
-        "D",
-        "All individual data points"
-      ]
-    ],
-    "answer": "B",
-    "note": "A boxplot shows the quartile values; the box itself spans from Q1 (25th percentile) to Q3 (75th percentile).",
-    "anchor": "Research Methods AI — L4 Slides"
-  },
-  {
-    "id": "L4-Q7",
-    "source": "L4 Slides",
-    "topic": "Variance and Standard Deviation",
-    "question": "[EASY] Standard deviation (s) is the square root of which statistic?",
-    "options": [
-      [
-        "A",
-        "The mean"
-      ],
-      [
-        "B",
-        "The variance (s²)"
-      ],
-      [
-        "C",
-        "The interquartile range"
-      ],
-      [
-        "D",
-        "The median"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slide shows the formula: 's = sqrt(s²)', indicating standard deviation is the square root of variance.",
-    "anchor": "Research Methods AI — L4 Slides"
-  },
-  {
-    "id": "L4-Q8",
-    "source": "L4 Slides",
-    "topic": "Histogram Use",
-    "question": "[EASY] A histogram gives a better idea of what aspect of a numerical variable's distribution?",
-    "options": [
-      [
-        "A",
-        "The exact median value"
-      ],
-      [
-        "B",
-        "The shape of the distribution"
-      ],
-      [
-        "C",
-        "The number of outliers"
-      ],
-      [
-        "D",
-        "The mode only"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slide states: 'A histogram gives a better idea of the shape of a distribution.'",
-    "anchor": "Research Methods AI — L4 Slides"
-  },
-  {
-    "id": "L4-Q9",
-    "source": "L4 Slides",
-    "topic": "Cross-Tabulation",
-    "question": "[EASY] When comparing two categorical variables descriptively, statisticians typically make a(n) ___?",
-    "options": [
-      [
-        "A",
-        "scatter plot"
-      ],
-      [
-        "B",
-        "histogram"
-      ],
-      [
-        "C",
-        "cross-table"
-      ],
-      [
-        "D",
-        "correlation matrix"
-      ]
-    ],
-    "answer": "C",
-    "note": "The slide states: 'As descriptive statistics, for two categorical variables we usually make a cross-table.'",
-    "anchor": "Research Methods AI — L4 Slides"
-  },
-  {
-    "id": "L4-Q10",
-    "source": "L4 Slides",
-    "topic": "Spearman Correlation",
-    "question": "[EASY] Why is Spearman correlation more robust than Pearson correlation?",
-    "options": [
-      [
-        "A",
-        "It uses the actual values instead of ranks"
-      ],
-      [
-        "B",
-        "It uses ranks instead of actual values"
-      ],
-      [
-        "C",
-        "It only works with categorical variables"
-      ],
-      [
-        "D",
-        "It has a larger sample size requirement"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slide explains: 'The Spearman correlation uses the ranks instead of the actual values, which makes it more robust.'",
-    "anchor": "Research Methods AI — L4 Slides"
-  },
-  {
-    "id": "L4-Q11",
-    "source": "L4 Slides",
-    "topic": "Dimension Reduction",
-    "question": "[EASY] Which is an example of a linear dimension reduction method?",
-    "options": [
-      [
-        "A",
-        "t-SNE"
-      ],
-      [
-        "B",
-        "UMAP"
-      ],
-      [
-        "C",
-        "Principal Component Analysis (PCA)"
-      ],
-      [
-        "D",
-        "k-means clustering"
-      ]
-    ],
-    "answer": "C",
-    "note": "The slide lists 'Linear example: principal component analysis (PCA)' as a dimension reduction method.",
-    "anchor": "Research Methods AI — L4 Slides"
-  },
-  {
-    "id": "L4-Q12",
-    "source": "L4 Slides",
-    "topic": "Clustering Definition",
-    "question": "[EASY] What is clustering also known as in machine learning terminology?",
-    "options": [
-      [
-        "A",
-        "Supervised classification"
-      ],
-      [
-        "B",
-        "Unsupervised classification"
-      ],
-      [
-        "C",
-        "Dimensionality reduction"
-      ],
-      [
-        "D",
-        "Feature extraction"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slide states: 'Clustering (a.k.a. unsupervised classification)' is an alternative way to find structure in datasets.",
-    "anchor": "Research Methods AI — L4 Slides"
-  },
-  {
-    "id": "L4-Q13",
-    "source": "L4 Slides",
-    "topic": "Grouped Descriptive Statistics",
-    "question": "[MID] If we calculate descriptive statistics split by frustration (with and without emojis), what comparison are we making?",
-    "options": [
-      [
-        "A",
-        "Categorical vs. categorical"
-      ],
-      [
-        "B",
-        "Categorical vs. numerical"
-      ],
-      [
-        "C",
-        "Numerical vs. numerical"
-      ],
-      [
-        "D",
-        "Bivariate vs. multivariate"
-      ]
-    ],
-    "answer": "B",
-    "note": "Grouping by 'emojis' (categorical) and examining statistics of 'frustration' (numerical) is a categorical vs. numerical analysis.",
-    "anchor": "Research Methods AI — L4 Slides"
-  },
-  {
-    "id": "L4-Q14",
-    "source": "L4 Slides",
-    "topic": "Linear Model Interpretation",
-    "question": "[MID] In the linear model y = -2 + 3·x_d + 1·x_gc - 0.1·x_rl + 2·I(x_em='yes') + ε, what does the coefficient 3 on x_d represent?",
-    "options": [
-      [
-        "A",
-        "The intercept of the model"
-      ],
-      [
-        "B",
-        "The change in y for each unit increase in x_d (latency)"
-      ],
-      [
-        "C",
-        "The probability of the outcome"
-      ],
-      [
-        "D",
-        "The effect of emoji usage on frustration"
-      ]
-    ],
-    "answer": "B",
-    "note": "The coefficient 3 on latency (x_d) means for each unit increase in latency, frustration increases by 3 units.",
-    "anchor": "Research Methods AI — L4 Slides"
-  },
-  {
-    "id": "L4-Q15",
-    "source": "L4 Slides",
-    "topic": "Pearson Correlation Meaning",
-    "question": "[MID] In the context of the chatbot data, what does a negative Pearson correlation between latency and response length suggest?",
-    "options": [
-      [
-        "A",
-        "As latency increases, response length tends to increase"
-      ],
-      [
-        "B",
-        "As latency increases, response length tends to decrease"
-      ],
-      [
-        "C",
-        "There is no relationship between the variables"
-      ],
-      [
-        "D",
-        "The relationship is nonlinear"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slide shows a negative correlation value (-0.06438707), indicating an inverse relationship.",
-    "anchor": "Research Methods AI — L4 Slides"
-  },
-  {
-    "id": "L4-Q16",
-    "source": "L4 Slides",
-    "topic": "Covariance and Correlation",
-    "question": "[MID] How is Pearson correlation related to covariance?",
-    "options": [
-      [
-        "A",
-        "Correlation is the covariance divided by the product of standard deviations"
-      ],
-      [
-        "B",
-        "Covariance is correlation squared"
-      ],
-      [
-        "C",
-        "Correlation is the square root of covariance"
-      ],
-      [
-        "D",
-        "They are the same measure"
-      ]
-    ],
-    "answer": "A",
-    "note": "The slide shows the formula: r_x,y = cov_xy / (s_x · s_y), showing correlation normalizes covariance by standard deviations.",
-    "anchor": "Research Methods AI — L4 Slides"
-  },
-  {
-    "id": "L4-Q17",
-    "source": "L4 Slides",
-    "topic": "Scatter Plot with Third Variable",
-    "question": "[MID] When adding a third variable (emoji usage) to a scatter plot of latency vs. frustration using color, what type of visualization are we creating?",
-    "options": [
-      [
-        "A",
-        "A categorical variable plot"
-      ],
-      [
-        "B",
-        "A 3D scatter plot"
-      ],
-      [
-        "C",
-        "A colored scatter plot showing two numerical relationships with a categorical grouping"
-      ],
-      [
-        "D",
-        "A correlation matrix"
-      ]
-    ],
-    "answer": "C",
-    "note": "Using color (pch=16, col=emoji_cols) in a scatter plot creates a 2D visualization with a third categorical dimension encoded in color.",
-    "anchor": "Research Methods AI — L4 Slides"
-  },
-  {
-    "id": "L4-Q18",
-    "source": "L4 Slides",
-    "topic": "p-value Definition",
-    "question": "[MID] According to the slide, what does a p-value represent?",
-    "options": [
-      [
-        "A",
-        "The probability that the null hypothesis is true"
-      ],
-      [
-        "B",
-        "The probability of finding this test statistic (or more extreme) if the null hypothesis is true"
-      ],
-      [
-        "C",
-        "The probability that the alternative hypothesis is true"
-      ],
-      [
-        "D",
-        "The effect size of the relationship"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slide defines p-value as 'the probability of finding this test statistic, or a more extreme one, if the null-hypothesis is true.'",
-    "anchor": "Research Methods AI — L4 Slides"
-  },
-  {
-    "id": "L4-Q19",
-    "source": "L4 Slides",
-    "topic": "Type I Error",
-    "question": "[MID] In hypothesis testing, what is a Type I error?",
-    "options": [
-      [
-        "A",
-        "Failing to reject a null hypothesis that is not true"
-      ],
-      [
-        "B",
-        "Rejecting the null hypothesis while it is true"
-      ],
-      [
-        "C",
-        "Accepting the alternative hypothesis when it is false"
-      ],
-      [
-        "D",
-        "Making a correct statistical decision"
-      ]
-    ],
-    "answer": "B",
-    "note": "The 'Errors' slide defines Type I error as 'Rejecting the null-hypothesis while it is true. We conclude there's an effect, but that's not true.'",
-    "anchor": "Research Methods AI — L4 Slides"
-  },
-  {
-    "id": "L4-Q20",
-    "source": "L4 Slides",
-    "topic": "Frequentist vs. Subjective Probability",
-    "question": "[MID] Which statistical approach uses prior and posterior probabilities to update beliefs?",
-    "options": [
-      [
-        "A",
-        "Frequentist statistics"
-      ],
-      [
-        "B",
-        "Subjective (Bayesian) statistics"
-      ],
-      [
-        "C",
-        "Descriptive statistics"
-      ],
-      [
-        "D",
-        "Inferential statistics"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slide on 'Subjective probability in statistics' states: 'Uses prior and posterior probabilities: updating beliefs.'",
-    "anchor": "Research Methods AI — L4 Slides"
-  },
-  {
-    "id": "L4-Q21",
-    "source": "L4 Slides",
-    "topic": "Frequentist Hypothesis Testing Steps",
-    "question": "[MID] In frequentist testing, what is the first step according to the lecture?",
-    "options": [
-      [
-        "A",
-        "Look at the data and calculate a statistic"
-      ],
-      [
-        "B",
-        "Assume nothing going on (H₀)"
-      ],
-      [
-        "C",
-        "Set the significance threshold"
-      ],
-      [
-        "D",
-        "Collect a larger sample"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slide outlines: 'Assume nothing going on (H₀)' is the first step in the idea of frequentist testing.",
-    "anchor": "Research Methods AI — L4 Slides"
-  },
-  {
-    "id": "L4-Q22",
-    "source": "L4 Slides",
-    "topic": "Confidence Interval Interpretation",
-    "question": "[MID] What does a 95% confidence interval NOT tell us?",
-    "options": [
-      [
-        "A",
-        "A range of plausible values for the parameter"
-      ],
-      [
-        "B",
-        "That there is a 95% probability the true parameter lies in the interval"
-      ],
-      [
-        "C",
-        "The range constructed by our estimation procedure"
-      ],
-      [
-        "D",
-        "Uncertainty in our estimate"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slide asks 'Which number is not included in any of these intervals?' and discusses what confidence intervals mean, distinguishing from subjective probability statements.",
-    "anchor": "Research Methods AI — L4 Slides"
-  },
-  {
-    "id": "L4-Q23",
-    "source": "L4 Slides",
-    "topic": "Chi-Squared Test Application",
-    "question": "[MID] The chi-squared test with a p-value of 0.0004741 is used to test the association between which two variables?",
-    "options": [
-      [
-        "A",
-        "Latency and response length"
-      ],
-      [
-        "B",
-        "Emoji usage and frustration"
-      ],
-      [
-        "C",
-        "Frustration (binary) and emoji usage"
-      ],
-      [
-        "D",
-        "All continuous variables"
-      ]
-    ],
-    "answer": "C",
-    "note": "The slide shows chi-squared test on 'fruit_binary' and 'emojis', testing association between two categorical variables.",
-    "anchor": "Research Methods AI — L4 Slides"
-  },
-  {
-    "id": "L4-Q24",
-    "source": "L4 Slides",
-    "topic": "Logistic Regression Use",
-    "question": "[MID] When the outcome variable is binary (yes/no), which regression model is more appropriate than ordinary least squares?",
-    "options": [
-      [
-        "A",
-        "Linear regression"
-      ],
-      [
-        "B",
-        "Ridge regression"
-      ],
-      [
-        "C",
-        "Logistic regression"
-      ],
-      [
-        "D",
-        "Polynomial regression"
-      ]
-    ],
-    "answer": "C",
-    "note": "The slide shows logistic regression (glm with family='binomial') being used for fruit_binary outcome prediction.",
-    "anchor": "Research Methods AI — L4 Slides"
-  },
-  {
-    "id": "L4-Q25",
-    "source": "L4 Slides",
-    "topic": "Outlier Detection in Box Plots",
-    "question": "[MID] According to the slide, when are values considered outliers in a boxplot?",
-    "options": [
-      [
-        "A",
-        "Any value beyond the median"
-      ],
-      [
-        "B",
-        "Values more than 1.5 times the IQR outside the box"
-      ],
-      [
-        "C",
-        "Any value above the third quartile"
-      ],
-      [
-        "D",
-        "Values beyond the maximum of the data"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slide notes: 'unless we have outliers (> 1.5 times IQR outside of the box)' in reference to boxplot whiskers.",
-    "anchor": "Research Methods AI — L4 Slides"
-  },
-  {
-    "id": "L4-Q26",
-    "source": "L4 Slides",
-    "topic": "OLS Linear Model Output Interpretation",
-    "question": "[HARD] In the linear regression output, the p-value for the latency coefficient is 2.2e-16. What does this tell us in context?",
-    "options": [
-      [
-        "A",
-        "Latency has no effect on frustration"
-      ],
-      [
-        "B",
-        "The effect of latency on frustration is likely not due to random chance; there is strong evidence against the null hypothesis"
-      ],
-      [
-        "C",
-        "We should reject the alternative hypothesis"
-      ],
-      [
-        "D",
-        "The relationship is nonlinear"
-      ]
-    ],
-    "answer": "B",
-    "note": "A p-value of 2.2e-16 is far below the typical threshold (α=0.05), providing very strong evidence that latency has a statistically significant effect.",
-    "anchor": "Research Methods AI — L4 Slides"
-  },
-  {
-    "id": "L4-Q27",
-    "source": "L4 Slides",
-    "topic": "Adjusted R-squared",
-    "question": "[HARD] What is the practical implication of an Adjusted R-squared of 0.5817 in the linear model?",
-    "options": [
-      [
-        "A",
-        "The model explains approximately 58% of the variance in frustration, accounting for the number of predictors"
-      ],
-      [
-        "B",
-        "The model is overfitting the data"
-      ],
-      [
-        "C",
-        "The model explains 42% of unexplained variance"
-      ],
-      [
-        "D",
-        "All variables are statistically significant"
-      ]
-    ],
-    "answer": "A",
-    "note": "Adjusted R-squared of 0.5817 indicates the model accounts for about 58% of variance, adjusted for the number of predictors used.",
-    "anchor": "Research Methods AI — L4 Slides"
-  },
-  {
-    "id": "L4-Q28",
-    "source": "L4 Slides",
-    "topic": "k-NN Overfitting",
-    "question": "[HARD] Why does the k-NN model with k=2 (fewer neighbors) appear to overfit compared to k=14?",
-    "options": [
-      [
-        "A",
-        "Because it uses more training data"
-      ],
-      [
-        "B",
-        "Because a smaller k creates a more complex classification boundary that fits training noise"
-      ],
-      [
-        "C",
-        "Because it has a simpler decision boundary"
-      ],
-      [
-        "D",
-        "Because it uses fewer features"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slide shows that with k=2, accuracy is higher on training data but lower on test data, and notes 'models on the left (with a smaller number of neighbours) are more complex.'",
-    "anchor": "Research Methods AI — L4 Slides"
-  },
-  {
-    "id": "L4-Q29",
-    "source": "L4 Slides",
-    "topic": "Random Forest vs. Logistic Regression",
-    "question": "[HARD] Comparing random forest (OOB error 17.33%) to logistic regression on the same binary outcome, what advantage does random forest potentially offer?",
-    "options": [
-      [
-        "A",
-        "Better interpretability of coefficients"
-      ],
-      [
-        "B",
-        "Ability to capture nonlinear relationships and interactions without explicit specification"
-      ],
-      [
-        "C",
-        "Faster computation time"
-      ],
-      [
-        "D",
-        "Automatic handling of missing data"
-      ]
-    ],
-    "answer": "B",
-    "note": "Random forests can model complex nonlinear patterns and interactions automatically, whereas logistic regression is restricted to linear decision boundaries.",
-    "anchor": "Research Methods AI — L4 Slides"
-  },
-  {
-    "id": "L4-Q30",
-    "source": "L4 Slides",
-    "topic": "Prediction Models as Black Boxes",
-    "question": "[HARD] The slide notes that random forest, neural net, and k-NN are 'black box' models. What does this primarily mean?",
-    "options": [
-      [
-        "A",
-        "They cannot make accurate predictions"
-      ],
-      [
-        "B",
-        "It is hard to explain why a specific prediction was made, even if the prediction is accurate"
-      ],
-      [
-        "C",
-        "They require black background displays to visualize"
-      ],
-      [
-        "D",
-        "They only work with binary outcomes"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slide states: 'These examples are more black box: it is hard to say why a prediction is made' – emphasizing lack of interpretability.",
-    "anchor": "Research Methods AI — L4 Slides"
-  },
-  {
-    "id": "L4-Q31",
-    "source": "L4 Slides",
-    "topic": "Exploration Validity Concern",
-    "question": "[HARD] What is the primary danger of performing exploratory and confirmatory analysis on the same dataset?",
-    "options": [
-      [
-        "A",
-        "The dataset becomes corrupted"
-      ],
-      [
-        "B",
-        "You may spot patterns that are actually random noise, then test them on the same data (spurious correlations)"
-      ],
-      [
-        "C",
-        "The statistical power decreases"
-      ],
-      [
-        "D",
-        "You cannot use visualizations"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slide warns: 'What is the danger of doing exploratory and confirmatory analysis on the same data?' and references spurious correlations.",
-    "anchor": "Research Methods AI — L4 Slides"
-  },
-  {
-    "id": "L4-Q32",
-    "source": "L4 Slides",
-    "topic": "Neural Network Implementation",
-    "question": "[HARD] Based on the neural network output with a 3-5-1 architecture, what does this network structure represent?",
-    "options": [
-      [
-        "A",
-        "3 hidden layers with 5 neurons each"
-      ],
-      [
-        "B",
-        "3 input features, 5 hidden neurons, 1 output neuron"
-      ],
-      [
-        "C",
-        "5 input features, 3 hidden neurons, 1 output"
-      ],
-      [
-        "D",
-        "3 output classes with 5 training iterations"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slide shows a '3-5-1 network with 26 weights', indicating 3 inputs (features), 5 hidden layer neurons, and 1 output (binary prediction).",
-    "anchor": "Research Methods AI — L4 Slides"
-  },
-  {
-    "id": "L4-Q33",
-    "source": "L4 Slides",
-    "topic": "Confusion Matrix and Accuracy",
-    "question": "[HARD] From the confusion matrix (predicted yes/no vs. actual yes/no), how would you calculate the overall accuracy?",
-    "options": [
-      [
-        "A",
-        "True positives / (True positives + False positives)"
-      ],
-      [
-        "B",
-        "(True positives + True negatives) / Total cases"
-      ],
-      [
-        "C",
-        "False positives / Total cases"
-      ],
-      [
-        "D",
-        "True positives / True positives + True negatives)"
-      ]
-    ],
-    "answer": "B",
-    "note": "Accuracy is the proportion of correct predictions (both true positives and true negatives) out of all cases.",
-    "anchor": "Research Methods AI — L4 Slides"
-  },
-  {
-    "id": "L4-Q34",
-    "source": "L4 Slides",
-    "topic": "Statistical Inference Concept",
-    "question": "[HARD] Why is the concept of statistical inference necessary in research?",
-    "options": [
-      [
-        "A",
-        "Because we always have perfect knowledge of the population"
-      ],
-      [
-        "B",
-        "Because we collect samples from a population and want to make statements about the population based on sample data"
-      ],
-      [
-        "C",
-        "Because descriptive statistics are insufficient"
-      ],
-      [
-        "D",
-        "Because p-values are always greater than 0.05"
-      ]
-    ],
-    "answer": "B",
-    "note": "The diagram shows sampling from a population and using statistical inference to make conclusions about the population from the sample.",
-    "anchor": "Research Methods AI — L4 Slides"
-  },
-  {
-    "id": "L5-Q1",
-    "source": "L5 Slides",
-    "topic": "Open Data",
-    "question": "[EASY] Historically, what has been the primary form of scientific output?",
-    "options": [
-      [
-        "A",
-        "Manuscripts"
-      ],
-      [
-        "B",
-        "Raw datasets"
-      ],
-      [
-        "C",
-        "Code repositories"
-      ],
-      [
-        "D",
-        "Online lectures"
-      ]
-    ],
-    "answer": "A",
-    "note": "The slide states historically scientific output = manuscripts."
-  },
-  {
-    "id": "L5-Q2",
-    "source": "L5 Slides",
-    "topic": "Open Data",
-    "question": "[EASY] According to Nature journal policy, what must authors do regarding materials, data, code, and protocols?",
-    "options": [
-      [
-        "A",
-        "Submit them with a fee"
-      ],
-      [
-        "B",
-        "Make them promptly available to readers without undue qualifications"
-      ],
-      [
-        "C",
-        "Keep them confidential until patent approval"
-      ],
-      [
-        "D",
-        "Share only summarized versions"
-      ]
-    ],
-    "answer": "B",
-    "note": "Nature's condition explicitly requires materials, data, code, and protocols to be promptly available to readers without undue qualifications."
-  },
-  {
-    "id": "L5-Q3",
-    "source": "L5 Slides",
-    "topic": "Open Data",
-    "question": "[EASY] What is one of the two key benefits of making data openly available, according to the lecture?",
-    "options": [
-      [
-        "A",
-        "Maximizing journal subscription fees"
-      ],
-      [
-        "B",
-        "To evaluate scientific contributions and enable reusability by other researchers"
-      ],
-      [
-        "C",
-        "To prevent competitors from using the data"
-      ],
-      [
-        "D",
-        "To satisfy government funding mandates only"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slide lists evaluating scientific contributions and reusability by other researchers as valuable aspects of open data."
-  },
-  {
-    "id": "L5-Q4",
-    "source": "L5 Slides",
-    "topic": "Open Data",
-    "question": "[MID] What does the Wicherts et al. (2006) study reveal about data sharing practices?",
-    "options": [
-      [
-        "A",
-        "Only 10% of authors share data upon request"
-      ],
-      [
-        "B",
-        "27% of authors do not share data upon request"
-      ],
-      [
-        "C",
-        "All authors comply with journal data-sharing policies"
-      ],
-      [
-        "D",
-        "Data sharing rates have remained constant since 2006"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slide cites Wicherts et al. (2006) showing 27% of authors do not share data upon request."
-  },
-  {
-    "id": "L5-Q5",
-    "source": "L5 Slides",
-    "topic": "Open Data",
-    "question": "[MID] According to Vanpaemel et al. (2015), what percentage of researchers refuse to share data?",
-    "options": [
-      [
-        "A",
-        "15%"
-      ],
-      [
-        "B",
-        "27%"
-      ],
-      [
-        "C",
-        "38%"
-      ],
-      [
-        "D",
-        "52%"
-      ]
-    ],
-    "answer": "C",
-    "note": "The slide states Vanpaemel et al. (2015) found 38% of authors do not share data upon request."
-  },
-  {
-    "id": "L5-Q6",
-    "source": "L5 Slides",
-    "topic": "Open Data",
-    "question": "[EASY] Which AI conference mentioned in the lecture has a reproducibility checklist?",
-    "options": [
-      [
-        "A",
-        "NeurIPS"
-      ],
-      [
-        "B",
-        "AAAI"
-      ],
-      [
-        "C",
-        "ICML"
-      ],
-      [
-        "D",
-        "ICCV"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slide mentions AAAI's reproducibility checklist requirement."
-  },
-  {
-    "id": "L5-Q7",
-    "source": "L5 Slides",
-    "topic": "Open Data",
-    "question": "[EASY] What does the AAAI reproducibility checklist require regarding novel datasets?",
-    "options": [
-      [
-        "A",
-        "Registration with a central authority"
-      ],
-      [
-        "B",
-        "Inclusion in a data appendix"
-      ],
-      [
-        "C",
-        "Patent protection filing"
-      ],
-      [
-        "D",
-        "Author certification only"
-      ]
-    ],
-    "answer": "B",
-    "note": "AAAI requires all novel datasets introduced in a paper to be included in a data appendix."
-  },
-  {
-    "id": "L5-Q8",
-    "source": "L5 Slides",
-    "topic": "Open Data",
-    "question": "[EASY] Which of the following is NOT listed as a reason for not sharing data?",
-    "options": [
-      [
-        "A",
-        "Data was lost"
-      ],
-      [
-        "B",
-        "Computer crash"
-      ],
-      [
-        "C",
-        "Collaborator left"
-      ],
-      [
-        "D",
-        "Too much peer pressure"
-      ]
-    ],
-    "answer": "D",
-    "note": "The slide lists lost data, computer crash, collaborator departure, privacy rules, no time, only when getting something in return, and lack of interest as reasons."
-  },
-  {
-    "id": "L5-Q9",
-    "source": "L5 Slides",
-    "topic": "Open Data",
-    "question": "[MID] What copyright-related issue can prevent data sharing, according to the lecture?",
-    "options": [
-      [
-        "A",
-        "Authors cannot afford licensing fees"
-      ],
-      [
-        "B",
-        "Certain materials like questionnaires cannot be shared due to legal restrictions"
-      ],
-      [
-        "C",
-        "All copyrighted materials must be destroyed"
-      ],
-      [
-        "D",
-        "Open data violates intellectual property law"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slide states that some materials (e.g., certain questionnaires) cannot be shared due to copyright and legal issues."
-  },
-  {
-    "id": "L5-Q10",
-    "source": "L5 Slides",
-    "topic": "Open Data",
-    "question": "[MID] How does proprietary research within companies differ from academic open data requirements?",
-    "options": [
-      [
-        "A",
-        "Companies are exempt from all data regulations"
-      ],
-      [
-        "B",
-        "Companies share proprietary data or code, conflicting with open data principles"
-      ],
-      [
-        "C",
-        "Companies are required to open-source all research"
-      ],
-      [
-        "D",
-        "There is no difference in practice"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slide notes that proprietary data or code in company research presents a conflict with open data principles."
-  },
-  {
-    "id": "L5-Q11",
-    "source": "L5 Slides",
-    "topic": "Reproducibility",
-    "question": "[EASY] What is reproducibility defined as in the lecture?",
-    "options": [
-      [
-        "A",
-        "Using identical samples in two studies"
-      ],
-      [
-        "B",
-        "The possibility to obtain the same results as the originators of specific scientific findings"
-      ],
-      [
-        "C",
-        "Verifying all calculations by hand"
-      ],
-      [
-        "D",
-        "Publishing results without revision"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slide provides this definition: reproducibility is the possibility to obtain the same results as originators of specific findings."
-  },
-  {
-    "id": "L5-Q12",
-    "source": "L5 Slides",
-    "topic": "Reproducibility",
-    "question": "[EASY] Is reproducibility described as a well-defined term across all scientific fields?",
-    "options": [
-      [
-        "A",
-        "Yes, consistently defined everywhere"
-      ],
-      [
-        "B",
-        "No, it is an umbrella term used inconsistently across fields"
-      ],
-      [
-        "C",
-        "Only in computer science"
-      ],
-      [
-        "D",
-        "Not applicable to empirical research"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slide states reproducibility is used inconsistently across fields, making it an umbrella term."
-  },
-  {
-    "id": "L5-Q13",
-    "source": "L5 Slides",
-    "topic": "Computational Reproducibility",
-    "question": "[EASY] What is the definition of computational reproducibility?",
-    "options": [
-      [
-        "A",
-        "Running any computer program twice"
-      ],
-      [
-        "B",
-        "The possibility to obtain the same results and support for claims using the same data and analytical procedures"
-      ],
-      [
-        "C",
-        "Purchasing identical hardware"
-      ],
-      [
-        "D",
-        "Verifying code syntax only"
-      ]
-    ],
-    "answer": "B",
-    "note": "Computational reproducibility is defined as obtaining same results using same data and analytical procedures."
-  },
-  {
-    "id": "L5-Q14",
-    "source": "L5 Slides",
-    "topic": "Computational Reproducibility",
-    "question": "[MID] In the Ioannidis et al. (2009) genetics study, what was the largest category of computational reproducibility outcome?",
-    "options": [
-      [
-        "A",
-        "Can reproduce in principle"
-      ],
-      [
-        "B",
-        "Cannot reproduce"
-      ],
-      [
-        "C",
-        "Can reproduce from processed data with discrepancies"
-      ],
-      [
-        "D",
-        "Can reproduce partially with discrepancies"
-      ]
-    ],
-    "answer": "B",
-    "note": "The pie chart shows the largest segment is 'Cannot reproduce' in the genetics study."
-  },
-  {
-    "id": "L5-Q15",
-    "source": "L5 Slides",
-    "topic": "Computational Reproducibility",
-    "question": "[MID] According to the Miske et al. (2026) study on social/behavioral sciences, what percentage of reproduction attempts were classified as 'not reproduced'?",
-    "options": [
-      [
-        "A",
-        "Approximately 25%"
-      ],
-      [
-        "B",
-        "Approximately 50%"
-      ],
-      [
-        "C",
-        "Approximately 75%"
-      ],
-      [
-        "D",
-        "Approximately 90%"
-      ]
-    ],
-    "answer": "C",
-    "note": "The bar chart for Miske et al. shows roughly 75% were not reproduced across most social science fields."
-  },
-  {
-    "id": "L5-Q16",
-    "source": "L5 Slides",
-    "topic": "Computational Reproducibility",
-    "question": "[HARD] What example does the lecture provide to show how to assess reproducibility even without data?",
-    "options": [
-      [
-        "A",
-        "Request raw data directly from authors"
-      ],
-      [
-        "B",
-        "Recalculate p-values from test statistics and degrees of freedom (statcheck.io example)"
-      ],
-      [
-        "C",
-        "Assume all studies are reproducible"
-      ],
-      [
-        "D",
-        "Conduct a new independent study"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slide mentions Bakker & Wicherts (2011) and Nuijten et al. (2016) using statcheck.io to assess p-value consistency."
-  },
-  {
-    "id": "L5-Q17",
-    "source": "L5 Slides",
-    "topic": "Computational Reproducibility",
-    "question": "[EASY] According to the lecture, what are common causes of computational reproducibility errors?",
-    "options": [
-      [
-        "A",
-        "Only intentional fraud"
-      ],
-      [
-        "B",
-        "Copy-pasting, manual rounding, review-revision cycles, inadvertent omissions, questionable practices, fraud, or no seed specification"
-      ],
-      [
-        "C",
-        "Exclusively hardware failures"
-      ],
-      [
-        "D",
-        "Author carelessness only"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slide lists multiple sources of errors including copy-pasting, rounding, review cycles, omissions, practices, fraud, and no seed specification."
-  },
-  {
-    "id": "L5-Q18",
-    "source": "L5 Slides",
-    "topic": "Computational Reproducibility",
-    "question": "[MID] What are three proposed solutions to improve computational reproducibility?",
-    "options": [
-      [
-        "A",
-        "Co-pilot, reproducibility checks, literate programming tools"
-      ],
-      [
-        "B",
-        "Increase journal fees, require more author signatures"
-      ],
-      [
-        "C",
-        "Eliminate all computational research"
-      ],
-      [
-        "D",
-        "Only allow hand calculations"
-      ]
-    ],
-    "answer": "A",
-    "note": "The slide suggests co-pilots, reproducibility checks by journals/reviewers, and literate programming tools (Jupyter, Rmarkdown, Quarto)."
-  },
-  {
-    "id": "L5-Q19",
-    "source": "L5 Slides",
-    "topic": "Replication",
-    "question": "[EASY] What is the definition of replication according to the U.S. National Science Foundation?",
-    "options": [
-      [
-        "A",
-        "Copying entire papers"
-      ],
-      [
-        "B",
-        "The ability to duplicate results using same procedures but new data"
-      ],
-      [
-        "C",
-        "Using the same dataset twice"
-      ],
-      [
-        "D",
-        "Creating identical experiments"
-      ]
-    ],
-    "answer": "B",
-    "note": "NSF defines replication as duplicating results using same procedures but collecting new data."
-  },
-  {
-    "id": "L5-Q20",
-    "source": "L5 Slides",
-    "topic": "Replication",
-    "question": "[EASY] How rare are targeted replication studies in psychology?",
-    "options": [
-      [
-        "A",
-        "Common, about 20%"
-      ],
-      [
-        "B",
-        "Rare, approximately 0.2-1.07%"
-      ],
-      [
-        "C",
-        "Never performed"
-      ],
-      [
-        "D",
-        "Required by all journals"
-      ]
-    ],
-    "answer": "B",
-    "note": "Clarke et al. (2026) and Makel et al. (2012) show 0.2-1.07% in psychology."
-  },
-  {
-    "id": "L5-Q21",
-    "source": "L5 Slides",
-    "topic": "Replication",
-    "question": "[EASY] What is the replication rate in Software Engineering according to da Silva et al. (2012)?",
-    "options": [
-      [
-        "A",
-        "Less than 0.01%"
-      ],
-      [
-        "B",
-        "Approximately 1%"
-      ],
-      [
-        "C",
-        "Around 10%"
-      ],
-      [
-        "D",
-        "Over 50%"
-      ]
-    ],
-    "answer": "A",
-    "note": "The slide shows less than 0.01% replication studies in Software Engineering."
-  },
-  {
-    "id": "L5-Q22",
-    "source": "L5 Slides",
-    "topic": "Replication",
-    "question": "[MID] Why do replication studies tend to have a bad reputation?",
-    "options": [
-      [
-        "A",
-        "They are too expensive"
-      ],
-      [
-        "B",
-        "If successful: nothing new; if unsuccessful: what went wrong?, and personal attacks"
-      ],
-      [
-        "C",
-        "They lack novelty and rigor"
-      ],
-      [
-        "D",
-        "Journals refuse to publish them"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slide notes replication studies have poor reputation because success yields nothing new and failure invites criticism and attacks."
-  },
-  {
-    "id": "L5-Q23",
-    "source": "L5 Slides",
-    "topic": "Replication",
-    "question": "[MID] What practical barriers to replication are mentioned in the lecture?",
-    "options": [
-      [
-        "A",
-        "Only lack of interest"
-      ],
-      [
-        "B",
-        "High costs, insufficient resources (computing, time, money), and unavailable information"
-      ],
-      [
-        "C",
-        "Author refusal to cooperate"
-      ],
-      [
-        "D",
-        "Lack of statistical knowledge"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slide cites insufficient resources and unavailable information as practical barriers to replication."
-  },
-  {
-    "id": "L5-Q24",
-    "source": "L5 Slides",
-    "topic": "Replication",
-    "question": "[HARD] What can be inferred from the Schoenfeld & Ioannidis (2013) nutritional epidemiology study?",
-    "options": [
-      [
-        "A",
-        "All nutritional studies are fraudulent"
-      ],
-      [
-        "B",
-        "Different studies show contradictory results on whether foods cause or prevent cancer"
-      ],
-      [
-        "C",
-        "Only red meat is harmful"
-      ],
-      [
-        "D",
-        "Nutrition science is fully settled"
-      ]
-    ],
-    "answer": "B",
-    "note": "The Vox figure titled 'Everything we eat both causes and prevents cancer' illustrates conflicting findings across studies."
-  },
-  {
-    "id": "L5-Q25",
-    "source": "L5 Slides",
-    "topic": "Replication",
-    "question": "[HARD] In the Open Science Collaboration psychology replication (2015), what proportion of replicated effect sizes matched the original?",
-    "options": [
-      [
-        "A",
-        "Nearly 100%"
-      ],
-      [
-        "B",
-        "About 75%"
-      ],
-      [
-        "C",
-        "Less than 50%"
-      ],
-      [
-        "D",
-        "All studies failed to replicate"
-      ]
-    ],
-    "answer": "C",
-    "note": "The scatter plot shows most replicated effect sizes fell below the original effect size, indicating less than 50% match."
-  },
-  {
-    "id": "L5-Q26",
-    "source": "L5 Slides",
-    "topic": "Replication Crisis",
-    "question": "[EASY] What percentage of researchers surveyed in 2016 believe there is a significant replication crisis?",
-    "options": [
-      [
-        "A",
-        "3%"
-      ],
-      [
-        "B",
-        "7%"
-      ],
-      [
-        "C",
-        "52%"
-      ],
-      [
-        "D",
-        "90%"
-      ]
-    ],
-    "answer": "C",
-    "note": "The pie chart shows 52% of 1,576 researchers surveyed agreed there is a significant crisis."
-  },
-  {
-    "id": "L5-Q27",
-    "source": "L5 Slides",
-    "topic": "Replication Solutions",
-    "question": "[EASY] What are suggested solutions to address low replication success rates?",
-    "options": [
-      [
-        "A",
-        "Ignore failed replications"
-      ],
-      [
-        "B",
-        "Incentives, training, reporting standards, and peer-review standards"
-      ],
-      [
-        "C",
-        "Eliminate computational research"
-      ],
-      [
-        "D",
-        "Only publish positive results"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slide lists incentives, training, reporting standards, and peer-review standards as solutions."
-  },
-  {
-    "id": "L5-Q28",
-    "source": "L5 Slides",
-    "topic": "Reproducibility in CS/AI",
-    "question": "[EASY] Why is the term reproducibility used as an umbrella in CS/AI?",
-    "options": [
-      [
-        "A",
-        "It is more concise"
-      ],
-      [
-        "B",
-        "Delineation between computational reproducibility and replication might not be clear"
-      ],
-      [
-        "C",
-        "Journals prefer umbrella terms"
-      ],
-      [
-        "D",
-        "It has a universal definition"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slide explains the umbrella term is used because the distinction is unclear in CS/AI contexts."
-  },
-  {
-    "id": "L5-Q29",
-    "source": "L5 Slides",
-    "topic": "Reproducibility in CS/AI",
-    "question": "[MID] According to Gundersen & Kjensmo (2018), what fraction of AI variables are documented for reproducibility?",
-    "options": [
-      [
-        "A",
-        "All of them"
-      ],
-      [
-        "B",
-        "About one-third to one-half"
-      ],
-      [
-        "C",
-        "Almost none"
-      ],
-      [
-        "D",
-        "Between a fifth and a third"
-      ]
-    ],
-    "answer": "D",
-    "note": "The slide states 'between a fifth and a third of the variables required for reproducibility are documented.'"
-  },
-  {
-    "id": "L5-Q30",
-    "source": "L5 Slides",
-    "topic": "Reproducibility in CS/AI",
-    "question": "[HARD] What does Simko (in prep) reveal about public repository links in Computer Science?",
-    "options": [
-      [
-        "A",
-        "All links are active and accessible"
-      ],
-      [
-        "B",
-        "One third of links were broken or private"
-      ],
-      [
-        "C",
-        "No researchers use public repositories"
-      ],
-      [
-        "D",
-        "GitHub links never expire"
-      ]
-    ],
-    "answer": "B",
-    "note": "Simko's work shows one third of links to public repositories were broken or private."
-  },
-  {
-    "id": "L5-Q31",
-    "source": "L5 Slides",
-    "topic": "Reproducibility in CS/AI",
-    "question": "[HARD] What is a key challenge in CS/AI reproducibility related to data splitting?",
-    "options": [
-      [
-        "A",
-        "Splitting is always transparent"
-      ],
-      [
-        "B",
-        "Confounds like using entire dataset for preprocessing before splitting can lead to information leakage"
-      ],
-      [
-        "C",
-        "Data splitting is not important"
-      ],
-      [
-        "D",
-        "Researchers always report their splits clearly"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slide shows that preprocessing before splitting causes information from validation/test sets to leak into training."
-  },
-  {
-    "id": "L5-Q32",
-    "source": "L5 Slides",
-    "topic": "Publication Process",
-    "question": "[EASY] What are two main types of journals to avoid, according to the publication process slide?",
-    "options": [
-      [
-        "A",
-        "Open access and non-peer reviewed"
-      ],
-      [
-        "B",
-        "Predatory journals and paper mills"
-      ],
-      [
-        "C",
-        "High-impact and low-impact"
-      ],
-      [
-        "D",
-        "Online and print journals"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slide warns against predatory journals (fast, no quality control, fees) and paper mills (plagiarism, fabrication)."
-  },
-  {
-    "id": "L5-Q33",
-    "source": "L5 Slides",
-    "topic": "Publication Process",
-    "question": "[MID] What are the three types of peer review mentioned in the lecture?",
-    "options": [
-      [
-        "A",
-        "Fast, slow, and medium"
-      ],
-      [
-        "B",
-        "Single-blind, double-blind, and no blinding"
-      ],
-      [
-        "C",
-        "Internal, external, and anonymous"
-      ],
-      [
-        "D",
-        "Formal, informal, and emergency"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slide lists single-blind (reviewers anonymous), double-blind (both anonymous), and no blinding as peer review types."
-  },
-  {
-    "id": "L5-Q34",
-    "source": "L5 Slides",
-    "topic": "Publication Process",
-    "question": "[HARD] What bias can result from editors and reviewers preferring studies with significant or positive results?",
-    "options": [
-      [
-        "A",
-        "Confirmation bias"
-      ],
-      [
-        "B",
-        "Publication bias and the file-drawer effect"
-      ],
-      [
-        "C",
-        "Sampling bias"
-      ],
-      [
-        "D",
-        "Selection bias only"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slide explains that outcome-driven decisions lead to publication bias and file-drawer effect (storing negative results)."
+    "note": "The policy couples transparency with accountability: disclose the tool and own the result, including its hallucination and bias risks. Verification alone does not replace disclosure, and the policy works through openness rather than per-use approvals or a drafting/editing distinction.",
+    "anchor": "Research Methods AI — L1 Slides"
   },
   {
     "id": "W2-Q1",
     "source": "Week 2 Slides",
-    "topic": "Why Data Collection Matters",
-    "question": "[EASY] According to the lecture, data is especially important in the context of which field?",
+    "topic": "Features vs targets",
+    "question": "[EASY] A team builds a model to predict which students will drop out of an online course, using click counts, forum posts, and login frequency. In this setup, 'dropout' is the:",
     "options": [
-      [
-        "A",
-        "Machine Learning"
-      ],
-      [
-        "B",
-        "Artificial Intelligence"
-      ],
-      [
-        "C",
-        "Both Machine Learning and AI"
-      ],
-      [
-        "D",
-        "Only statistical analysis"
-      ]
+      ["A", "Feature, since it describes each student's behavior"],
+      ["B", "Target, since it is the outcome being predicted"],
+      ["C", "Unit of analysis, since students are observed over time"],
+      ["D", "Predictor, since it correlates with the other variables"]
     ],
     "answer": "B",
-    "note": "The slide explicitly states 'Data is important, in research broadly but especially in the context of AI'",
+    "note": "Features (clicks, posts, logins) are the inputs; the target is what the model predicts - dropout. The unit of analysis is the student, and 'predictor' is a synonym for feature, which dropout is not in this design.",
     "anchor": "Research Methods AI — Week 2 Slides"
   },
   {
     "id": "W2-Q2",
     "source": "Week 2 Slides",
-    "topic": "Variables Definition",
-    "question": "[EASY] In research, what term describes predictor variables used to make predictions?",
+    "topic": "Exhaustive and mutually exclusive categories",
+    "question": "[MID] A survey asks for age group: '18-25', '25-35', '35-50'. A 25-year-old hesitates between the first two boxes, and a 60-year-old finds no box at all. Which two requirements for categorical answers are violated?",
     "options": [
-      [
-        "A",
-        "Target variables"
-      ],
-      [
-        "B",
-        "Features (X)"
-      ],
-      [
-        "C",
-        "Labels"
-      ],
-      [
-        "D",
-        "Dependent variables"
-      ]
+      ["A", "Exhaustiveness by the 25-year-old; mutual exclusivity by the 60-year-old"],
+      ["B", "Mutual exclusivity by the 25-year-old; exhaustiveness by the 60-year-old"],
+      ["C", "Mutual exclusivity in both cases, since the boundaries are ill-defined"],
+      ["D", "Validity by the 25-year-old; reliability by the 60-year-old"]
     ],
     "answer": "B",
-    "note": "The slide defines Features (X) as predictor variables",
+    "note": "Fitting two boxes at once (the boundary 25 appears in two categories) breaks mutual exclusivity; fitting no box (nothing above 50) breaks exhaustiveness. The two failures are easy to swap under exam pressure - anchor them as: overlap = exclusivity, gap = exhaustiveness.",
     "anchor": "Research Methods AI — Week 2 Slides"
   },
   {
     "id": "W2-Q3",
     "source": "Week 2 Slides",
-    "topic": "Variables Definition",
-    "question": "[EASY] What is the term for the variable that represents what we want to predict or are interested in?",
+    "topic": "Quantitative vs qualitative variables",
+    "question": "[EASY] In a dataset about voice assistants, which variable is qualitative (categorical)?",
     "options": [
-      [
-        "A",
-        "Feature"
-      ],
-      [
-        "B",
-        "Predictor"
-      ],
-      [
-        "C",
-        "Target / Label (Y)"
-      ],
-      [
-        "D",
-        "Independent variable"
-      ]
+      ["A", "Number of daily voice commands per user"],
+      ["B", "Response latency measured in milliseconds"],
+      ["C", "User satisfaction rated on a 0-100 slider"],
+      ["D", "Assistant brand (Alexa / Siri / Google)"]
     ],
-    "answer": "C",
-    "note": "The slide explicitly states 'Target / Label (Y): What we want to predict / interest'",
+    "answer": "D",
+    "note": "Brand is a label without numeric meaning. The satisfaction slider is the tempting one - satisfaction feels subjective - but a 0-100 score is still a numeric (quantitative) variable; subjective does not mean categorical.",
     "anchor": "Research Methods AI — Week 2 Slides"
   },
   {
     "id": "W2-Q4",
     "source": "Week 2 Slides",
-    "topic": "Data Measurement Types",
-    "question": "[EASY] Which type of data allows arithmetic operations and includes both continuous and discrete values?",
+    "topic": "Choosing a collection method",
+    "question": "[MID] A researcher suspects participants will under-report how stressed a debugging task makes them, because admitting stress feels embarrassing. Which data collection method most directly sidesteps this problem?",
     "options": [
-      [
-        "A",
-        "Qualitative data"
-      ],
-      [
-        "B",
-        "Categorical data"
-      ],
-      [
-        "C",
-        "Quantitative / numerical data"
-      ],
-      [
-        "D",
-        "Ordinal data"
-      ]
+      ["A", "An anonymous questionnaire administered right after the task"],
+      ["B", "A semi-structured interview that builds rapport before asking"],
+      ["C", "Heart-rate and skin-conductance recording during the task"],
+      ["D", "Video coding of facial expressions and posture during the task"]
     ],
     "answer": "C",
-    "note": "The slide defines 'Quantitative / numerical data: numerical values, including both continuous and discrete, allowing arithmetic operations'",
+    "note": "Physiological signals are largely outside conscious control, so they bypass self-presentation entirely. Anonymity and rapport reduce but do not remove the motive to under-report (people also manage their self-image), and facial expressions can be deliberately masked - observable behavior is still performable in a way heart rate is not.",
     "anchor": "Research Methods AI — Week 2 Slides"
   },
   {
     "id": "W2-Q5",
     "source": "Week 2 Slides",
-    "topic": "Data Measurement Types",
-    "question": "[EASY] Qualitative or categorical data consists of what types of values?",
+    "topic": "Classifying an observation study",
+    "question": "[MID] To study how people really use laptops in cafés, a researcher sits at a corner table posing as a customer and discreetly codes behavior on a tablet. This observation is best described as:",
     "options": [
-      [
-        "A",
-        "Numbers and decimals"
-      ],
-      [
-        "B",
-        "Labels and ranks"
-      ],
-      [
-        "C",
-        "Time series values"
-      ],
-      [
-        "D",
-        "Probability scores"
-      ]
+      ["A", "Naturalistic and concealed"],
+      ["B", "Naturalistic and overt"],
+      ["C", "Contrived and concealed"],
+      ["D", "Contrived and overt"]
     ],
-    "answer": "B",
-    "note": "The slide defines 'Qualitative / Categorical data: Labels and ranks'",
+    "answer": "A",
+    "note": "The café situation is spontaneous and unmanipulated (naturalistic - the researcher staged nothing, only her own cover), and the observed people don't know they are being studied (concealed). It would become contrived if she, say, planted a malfunctioning laptop to watch reactions.",
     "anchor": "Research Methods AI — Week 2 Slides"
   },
   {
     "id": "W2-Q6",
     "source": "Week 2 Slides",
-    "topic": "Variable Requirements",
-    "question": "[EASY] What principle requires variables to fully cover what is being measured?",
+    "topic": "Contrived observation",
+    "question": "[EASY] What makes an observation 'contrived' rather than naturalistic?",
     "options": [
-      [
-        "A",
-        "Mutual exclusivity"
-      ],
-      [
-        "B",
-        "Exhaustiveness"
-      ],
-      [
-        "C",
-        "Validity"
-      ],
-      [
-        "D",
-        "Reliability"
-      ]
+      ["A", "The observer keeps their identity hidden from those observed"],
+      ["B", "The researcher stages the situation rather than awaiting a spontaneous one"],
+      ["C", "The behavior is coded with a predefined, structured scheme"],
+      ["D", "The observation happens in a public rather than private setting"]
     ],
     "answer": "B",
-    "note": "The slide lists 'Exhaustive: Fully covers what is being measured' as a main principle",
+    "note": "Contrived = the situation itself is engineered (a staged 'broken' kiosk, a planted request for help). Concealment is a separate dimension - either type can be hidden or open - and how systematically you code behavior says nothing about whether the situation was staged.",
     "anchor": "Research Methods AI — Week 2 Slides"
   },
   {
     "id": "W2-Q7",
     "source": "Week 2 Slides",
-    "topic": "Variable Requirements",
-    "question": "[EASY] What principle requires variables to avoid overlap in meaning or boundaries?",
+    "topic": "Reactivity and concealment",
+    "question": "[MID] Warehouse workers move noticeably faster during the week a clipboard-carrying observer walks the floor, then return to normal pace afterwards. Concealing the observation would have prevented which problem?",
     "options": [
-      [
-        "A",
-        "Exhaustiveness"
-      ],
-      [
-        "B",
-        "Comprehensiveness"
-      ],
-      [
-        "C",
-        "Mutually exclusive"
-      ],
-      [
-        "D",
-        "Independence"
-      ]
+      ["A", "Social desirability bias distorting the workers' behavior records"],
+      ["B", "Observer expectancy - the observer coding what they expect to see"],
+      ["C", "Reactivity - people changing behavior because they know they are watched"],
+      ["D", "Acquiescence - workers complying with the observer's implicit wishes"]
     ],
     "answer": "C",
-    "note": "The slide lists 'Mutually exclusive: Avoid overlap in meaning or boundaries' as a main principle",
+    "note": "Behavior changed because observation was visible - reactivity. Social desirability and acquiescence are response biases in self-report (questionnaires, interviews), not in being watched; observer expectancy is a bias in the observer's coding, which concealment from workers would not touch. Concealment trades reactivity away against an ethical cost: people are studied without knowing.",
     "anchor": "Research Methods AI — Week 2 Slides"
   },
   {
     "id": "W2-Q8",
     "source": "Week 2 Slides",
-    "topic": "Structured Data",
-    "question": "[EASY] In the Star Wars character example, variables are organized in what type of data structure?",
+    "topic": "Archival data trade-offs",
+    "question": "[MID] A student trains a triage model on ten-year-old hospital admission records because collecting new data is too slow. Which statement best captures the core trade-off of archival data?",
     "options": [
-      [
-        "A",
-        "Unstructured data"
-      ],
-      [
-        "B",
-        "Text data"
-      ],
-      [
-        "C",
-        "Structured or tabular data"
-      ],
-      [
-        "D",
-        "Graph data"
-      ]
+      ["A", "It is collected without researcher involvement, so it is relatively bias-free"],
+      ["B", "It avoids consent issues, since the records already exist independently"],
+      ["C", "It saves collection cost, but its limitations and quirks are inherited unseen"],
+      ["D", "It suits exploratory analysis but cannot support confirmatory testing"]
     ],
     "answer": "C",
-    "note": "The slide shows a table with Name, Height, Mass, Hair Color, Skin Color, Eye Color, representing structured/tabular data",
+    "note": "Archives are cheap and instant, but you had no control over how they were made: definitions drift, clinical practice changes over a decade, and recording biases get baked into the model. Researcher absence does not make data unbiased, existing data still raises consent and privacy questions, and archival data can absolutely be used confirmatorily.",
     "anchor": "Research Methods AI — Week 2 Slides"
   },
   {
     "id": "W2-Q9",
     "source": "Week 2 Slides",
-    "topic": "Unstructured Data",
-    "question": "[EASY] According to the lecture, unstructured data refers to data where what is unclear?",
+    "topic": "Recognizing response formats",
+    "question": "[EASY] 'The chatbot understood my questions: Strongly disagree / Disagree / Neutral / Agree / Strongly agree.' This item is an example of:",
     "options": [
-      [
-        "A",
-        "How to clean the data"
-      ],
-      [
-        "B",
-        "How components relate to each other"
-      ],
-      [
-        "C",
-        "The format of storage"
-      ],
-      [
-        "D",
-        "The size of the dataset"
-      ]
+      ["A", "A semantic differential scale"],
+      ["B", "A Likert-type rating scale"],
+      ["C", "A visual analogue scale"],
+      ["D", "A forced-choice ranking item"]
     ],
     "answer": "B",
-    "note": "The slide defines unstructured data as 'Data that does not have a clear structure on how components relate to each other'",
+    "note": "Symmetric agree-disagree options around a neutral midpoint define the Likert format. A semantic differential anchors two opposite adjectives (e.g., 'useless ... useful'), a visual analogue scale is a continuous line, and forced-choice ranking asks respondents to order alternatives.",
     "anchor": "Research Methods AI — Week 2 Slides"
   },
   {
     "id": "W2-Q10",
     "source": "Week 2 Slides",
-    "topic": "Unstructured Data Growth",
-    "question": "[EASY] Approximately what percentage of corporate data growth is unstructured, according to Goodwin 2019?",
+    "topic": "Interview types",
+    "question": "[EASY] An interviewer works from a fixed list of core questions but freely asks follow-ups whenever an answer is interesting. This interview is:",
     "options": [
-      [
-        "A",
-        "40-50%"
-      ],
-      [
-        "B",
-        "60-70%"
-      ],
-      [
-        "C",
-        "80-90%"
-      ],
-      [
-        "D",
-        "95-100%"
-      ]
+      ["A", "Structured, since the core questions are fixed in advance"],
+      ["B", "Semi-structured, combining a fixed guide with free follow-ups"],
+      ["C", "Unstructured, since the conversation can go anywhere"],
+      ["D", "Standardized, since every participant hears the same core list"]
     ],
-    "answer": "C",
-    "note": "The slide notes 'Increasingly relevant, around 80-90% of growth in corporate data (Goodwin 2019)'",
+    "answer": "B",
+    "note": "The fixed list pulls toward 'structured' and the freedom pulls toward 'unstructured' - the combination of both is precisely what defines semi-structured interviewing: comparability from the guide, flexibility from the follow-ups.",
     "anchor": "Research Methods AI — Week 2 Slides"
   },
   {
     "id": "W2-Q11",
     "source": "Week 2 Slides",
-    "topic": "Questionnaire Definition",
-    "question": "[EASY] A questionnaire is described as what kind of instrument?",
+    "topic": "Social desirability bias",
+    "question": "[MID] In a face-to-face survey, 95% of respondents claim they 'always read terms of service before clicking accept'. Telemetry from the same product shows almost nobody scrolls past the first paragraph. The gap is best explained by:",
     "options": [
-      [
-        "A",
-        "A data collection method"
-      ],
-      [
-        "B",
-        "A research methodology"
-      ],
-      [
-        "C",
-        "A structured set of questions designed to obtain responses from participants"
-      ],
-      [
-        "D",
-        "A statistical analysis tool"
-      ]
+      ["A", "Acquiescence bias - respondents tend to agree with whatever is asked"],
+      ["B", "Recall error - people genuinely misremember their own habits"],
+      ["C", "Social desirability bias - respondents answer so as to appear conscientious"],
+      ["D", "Sampling bias - survey takers differ from the telemetry population"]
     ],
     "answer": "C",
-    "note": "The slide defines questionnaire as 'Instruments consisting of a structured set of questions designed to obtain responses from participants'",
+    "note": "The distortion runs systematically in the flattering direction and is amplified by the face-to-face setting - the fingerprint of social desirability. Pure recall error would scatter in both directions rather than land 95% on the virtuous side; acquiescence would require agree-format items regardless of content; and a sampling story would need the surveyed users to actually be diligent readers, which telemetry contradicts.",
     "anchor": "Research Methods AI — Week 2 Slides"
   },
   {
     "id": "W2-Q12",
     "source": "Week 2 Slides",
-    "topic": "Survey Definition",
-    "question": "[EASY] Surveys are methods to collect data from what and generalize to what?",
+    "topic": "Detecting acquiescence bias",
+    "question": "[HARD] A participant answers 'Agree' to both 'I find the app easy to use' and, later, 'I find the app difficult to use'. What does this pattern suggest, and which questionnaire design feature caught it?",
     "options": [
-      [
-        "A",
-        "Individuals and populations"
-      ],
-      [
-        "B",
-        "A sample and generalize to a population"
-      ],
-      [
-        "C",
-        "Experiments and observations"
-      ],
-      [
-        "D",
-        "Questions and answers"
-      ]
+      ["A", "Social desirability bias, caught by administering the survey anonymously"],
+      ["B", "Central tendency bias, caught by offering a neutral midpoint option"],
+      ["C", "Acquiescence bias, caught by including reverse-worded items"],
+      ["D", "Honest ambivalence, caught by repeating the question in both directions"]
     ],
-    "answer": "B",
-    "note": "The slide defines surveys as 'Methods to collect data from a sample and generalize to a population'",
+    "answer": "C",
+    "note": "Agreeing with two logically opposite statements is the signature of yea-saying, and reverse-keyed items exist precisely to expose it. Social desirability would push answers toward flattering content, not blanket agreement; central tendency would produce strings of 'Neutral'; genuine ambivalence is conceivable but contradictory agreement across reversed items is the standard operational indicator of acquiescence.",
     "anchor": "Research Methods AI — Week 2 Slides"
   },
   {
     "id": "W2-Q13",
     "source": "Week 2 Slides",
-    "topic": "Data Collection Sources",
-    "question": "[EASY] Which of the following is NOT listed as a common data source for collection?",
+    "topic": "Crowdworking quality control",
+    "question": "[MID] A lab pays crowdworkers to label 50,000 tweets as 'sarcastic' or 'not sarcastic'. Some workers click through as fast as possible. Which countermeasure most directly identifies the careless workers?",
     "options": [
-      [
-        "A",
-        "Self-report"
-      ],
-      [
-        "B",
-        "Behavioral observation"
-      ],
-      [
-        "C",
-        "Physiological / sensor data"
-      ],
-      [
-        "D",
-        "Market reports"
-      ]
+      ["A", "Collecting more labels per tweet and taking the majority vote"],
+      ["B", "Inserting gold-standard items with known answers as attention checks"],
+      ["C", "Raising the payment per label to motivate careful work"],
+      ["D", "Splitting the work into shorter batches to reduce fatigue"]
     ],
-    "answer": "D",
-    "note": "The slide lists 'Self-report, Behavioral observation, Physiological / sensor data, Archival data' as common sources. Market reports are not mentioned.",
+    "answer": "B",
+    "note": "Attention checks identify which workers are careless, so their labels can be excluded or down-weighted. Majority vote merely dilutes bad labels without finding their source - and fails when speeders are numerous; pay raises and shorter batches may help motivation but identify no one. The verb in the question - 'identifies' - is what separates the options.",
     "anchor": "Research Methods AI — Week 2 Slides"
   },
   {
     "id": "W2-Q14",
     "source": "Week 2 Slides",
-    "topic": "Self-Report Collection",
-    "question": "[EASY] Self-report data is collected using which three methods?",
+    "topic": "Annotation aggregation",
+    "question": "[HARD] Five annotators label a comment: three say 'toxic', two say 'fine'. Reliability scores show the two dissenters agree with expert gold labels 95% of the time, the other three around 60%. Majority vote says 'toxic'. What does weighted voting most plausibly conclude?",
     "options": [
-      [
-        "A",
-        "Observations, surveys, and tests"
-      ],
-      [
-        "B",
-        "Questionnaires, surveys, and interviews"
-      ],
-      [
-        "C",
-        "Experiments, questionnaires, and behavioral measures"
-      ],
-      [
-        "D",
-        "Interviews, tests, and archival records"
-      ]
+      ["A", "'Toxic' - weighting refines confidence but cannot overturn a majority"],
+      ["B", "'Toxic' - the 60% annotators are above chance, so their votes stand"],
+      ["C", "'Fine' - two high-reliability votes outweigh three low-reliability ones"],
+      ["D", "'Fine' - annotators below 70% reliability are excluded before voting"]
     ],
-    "answer": "B",
-    "note": "The slide lists 'Questionnaires, Surveys, Interviews' under collected using methods",
+    "answer": "C",
+    "note": "Weighted voting multiplies each vote by annotator reliability: 2 × 0.95 = 1.90 beats 3 × 0.60 = 1.80. The whole point is that it CAN overturn a raw majority - majority vote treats expert and careless annotators identically. No standard exclusion threshold at 70% exists; weighting, not exclusion, is the mechanism asked about.",
     "anchor": "Research Methods AI — Week 2 Slides"
   },
   {
     "id": "W2-Q15",
     "source": "Week 2 Slides",
-    "topic": "Self-Report Constructs",
-    "question": "[EASY] According to the lecture, self-report data is used to measure which of the following?",
+    "topic": "SMART research goals",
+    "question": "[MID] A draft proposal states its goal as: 'Make our recommendation model better.' Judged against the SMART criteria, the two most glaring failures are:",
     "options": [
-      [
-        "A",
-        "Physical movements and gestures"
-      ],
-      [
-        "B",
-        "Heart rate and brainwaves"
-      ],
-      [
-        "C",
-        "Attitudes, beliefs, emotions, and judgments"
-      ],
-      [
-        "D",
-        "Video recordings and behavioral footage"
-      ]
+      ["A", "Specific and Measurable"],
+      ["B", "Measurable and Achievable"],
+      ["C", "Achievable and Time-bound"],
+      ["D", "Specific and Relevant"]
     ],
-    "answer": "C",
-    "note": "The slide shows self-report is used to measure 'Attitudes, Beliefs, Emotions, Judgments'",
+    "answer": "A",
+    "note": "'Better' names no metric (not Measurable) and no defined aspect of improvement (not Specific). Nothing suggests the goal is unrealistic (Achievable) or off-mission (Relevant) - those criteria can't even be evaluated until the goal is specific and measurable. A SMART rewrite: 'Raise top-10 precision from 0.62 to 0.70 on the holdout set by the end of Q3.'",
     "anchor": "Research Methods AI — Week 2 Slides"
   },
   {
     "id": "W2-Q16",
     "source": "Week 2 Slides",
-    "topic": "Interview Types",
-    "question": "[MID] Which type of interview allows researchers to follow a continuum from fixed questions to completely open conversation?",
+    "topic": "Structured vs unstructured data",
+    "question": "[MID] A dataset has one row per tweet with columns: tweet text, like count, retweet count, posting hour. Which description is most precise?",
     "options": [
-      [
-        "A",
-        "Quantitative interviews"
-      ],
-      [
-        "B",
-        "Structured interviews with three types: structured, semi-structured, and unstructured"
-      ],
-      [
-        "C",
-        "Closed-ended interviews"
-      ],
-      [
-        "D",
-        "Survey interviews"
-      ]
+      ["A", "Structured data, since every value sits in a defined table column"],
+      ["B", "Unstructured data, since free text is the substantive content"],
+      ["C", "A structured table containing an unstructured free-text field"],
+      ["D", "Semi-structured data, since it mixes numeric and text types"]
     ],
-    "answer": "B",
-    "note": "The slide describes interviews varying 'along a continuum: Structured (fixed questions, similar to questionnaire), Semi-structured (guided but flexible), Unstructured (open, conversational)'",
+    "answer": "C",
+    "note": "Tabular storage does not make content structured: counts and hour are analysis-ready, but the raw text needs NLP-style processing first - so the precise description is a hybrid. 'Semi-structured' is a real term but refers to tagged, self-describing formats like JSON or XML, not to a table that happens to mix types.",
     "anchor": "Research Methods AI — Week 2 Slides"
   },
   {
     "id": "W2-Q17",
     "source": "Week 2 Slides",
-    "topic": "Interview Data Type",
-    "question": "[MID] The lecture notes that interviews are 'often qualitative, but can be quantitative in what scenario?",
+    "topic": "Combining collection methods",
+    "question": "[HARD] You must study user frustration with a voice assistant. Colleagues propose four designs. Which is methodologically strongest?",
     "options": [
-      [
-        "A",
-        "When using only open-ended questions"
-      ],
-      [
-        "B",
-        "When responses are measured in structured formats"
-      ],
-      [
-        "C",
-        "When conducted in a laboratory"
-      ],
-      [
-        "D",
-        "When interviews are unstructured"
-      ]
+      ["A", "Interaction logs only - repeated commands and abandonment are objective"],
+      ["B", "Questionnaires only - frustration is subjective, so ask those who feel it"],
+      ["C", "Skin-conductance sensors only - arousal is objective and reflects inner state"],
+      ["D", "Logs and questionnaires combined - each covers the other's blind spot"]
     ],
-    "answer": "B",
-    "note": "The slide states 'Often qualitative, but can be quantitative in structured formats'",
+    "answer": "D",
+    "note": "Every single method has a principled defense, which is exactly the trap: logs cannot distinguish frustration from confusion or distraction, self-report invites bias, and physiological arousal is ambiguous (excitement and frustration look alike on a sensor). Converging evidence from methods with complementary weaknesses - triangulation - beats any single channel.",
     "anchor": "Research Methods AI — Week 2 Slides"
   },
   {
-    "id": "W2-Q18",
-    "source": "Week 2 Slides",
-    "topic": "Response Format Types",
-    "question": "[MID] Open-ended questions are characterized by all of the following EXCEPT:",
+    "id": "L3-Q1",
+    "source": "L3 Slides",
+    "topic": "Measurement levels - interval",
+    "question": "[EASY] Room temperature in degrees Celsius is measured at which level?",
     "options": [
-      [
-        "A",
-        "Not leading"
-      ],
-      [
-        "B",
-        "Wealth of information"
-      ],
-      [
-        "C",
-        "Easy to quantify immediately"
-      ],
-      [
-        "D",
-        "Coding and analyzing required"
-      ]
+      ["A", "Ordinal - temperatures can be ranked from cold to hot"],
+      ["B", "Interval - the gaps are equal but the zero point is arbitrary"],
+      ["C", "Ratio - degrees have equal spacing and a zero exists on the scale"],
+      ["D", "Continuous - temperature can take any decimal value"]
+    ],
+    "answer": "B",
+    "note": "Celsius has equal gaps but 0 °C is an arbitrary convention (water's freezing point), not 'no temperature' - so 20 °C is not 'twice as hot' as 10 °C. A zero appearing on the scale is not the same as a true zero meaning absence of the quantity. 'Continuous' describes the variable's value set, not its measurement level.",
+    "anchor": "Research Methods AI — L3 Slides"
+  },
+  {
+    "id": "L3-Q2",
+    "source": "L3 Slides",
+    "topic": "Measurement levels - ordinal",
+    "question": "[MID] An app stores customer satisfaction as 1-5 stars. A data scientist averages the stars, treating the gap from 1 to 2 as equal to the gap from 4 to 5. What assumption is silently being made?",
+    "options": [
+      ["A", "That the stars are interval-level, when they are strictly only ordinal"],
+      ["B", "That the stars are ratio-level, when they are strictly only interval"],
+      ["C", "That the stars are ordinal-level, when they are strictly only nominal"],
+      ["D", "No assumption - averaging is valid for any ordered numeric scale"]
+    ],
+    "answer": "A",
+    "note": "Star ratings guarantee order but not equal psychological spacing: the jump from 4 to 5 may mean something quite different from 1 to 2. Computing a mean assumes equal intervals - an interval-level operation applied to ordinal data. This is extremely common practice, but it is an assumption, and the exam question is whether you notice making it.",
+    "anchor": "Research Methods AI — L3 Slides"
+  },
+  {
+    "id": "L3-Q3",
+    "source": "L3 Slides",
+    "topic": "Measurement levels - ratio",
+    "question": "[EASY] Response time in milliseconds is ratio-level data because:",
+    "options": [
+      ["A", "It can be ranked unambiguously from fastest to slowest"],
+      ["B", "It has equal intervals plus a true zero, making ratios meaningful"],
+      ["C", "It has equal intervals between every pair of adjacent values"],
+      ["D", "It is recorded by an instrument rather than reported by a person"]
+    ],
+    "answer": "B",
+    "note": "The true zero (no time elapsed) is what upgrades interval to ratio and licenses statements like '400 ms is twice 200 ms'. Equal intervals alone describe interval level, ranking alone describes ordinal, and who or what does the measuring is irrelevant to the level.",
+    "anchor": "Research Methods AI — L3 Slides"
+  },
+  {
+    "id": "L3-Q4",
+    "source": "L3 Slides",
+    "topic": "Random variables",
+    "question": "[EASY] In simulation terms, what is a random variable?",
+    "options": [
+      ["A", "A variable whose value is drawn from a probability distribution"],
+      ["B", "A variable whose value differs from participant to participant"],
+      ["C", "A variable measured with some unavoidable random error"],
+      ["D", "A variable chosen at random from the available columns"]
+    ],
+    "answer": "A",
+    "note": "The defining property is generation by a distribution (normal, Poisson, uniform...). Merely varying across participants or containing measurement error does not make a variable 'random' in the probabilistic sense - the distribution is what you specify when simulating.",
+    "anchor": "Research Methods AI — L3 Slides"
+  },
+  {
+    "id": "L3-Q5",
+    "source": "L3 Slides",
+    "topic": "Discrete vs continuous distributions",
+    "question": "[MID] 'Number of support tickets a helpdesk receives per day' versus 'time in seconds until the first ticket arrives'. Which pairing of distribution type and probability function is correct?",
+    "options": [
+      ["A", "Tickets: continuous with a PDF; waiting time: discrete with a PMF"],
+      ["B", "Tickets: discrete with a PMF; waiting time: continuous with a PDF"],
+      ["C", "Tickets: discrete with a PDF; waiting time: continuous with a PMF"],
+      ["D", "Both are discrete with PMFs, since both are measured per day"]
+    ],
+    "answer": "B",
+    "note": "Counts take separate integer values - discrete, probability mass function. Time can take any value in a range - continuous, probability density function. Watch the letter swap in the distractors: mass (PMF) goes with discrete, density (PDF) with continuous, never crosswise.",
+    "anchor": "Research Methods AI — L3 Slides"
+  },
+  {
+    "id": "L3-Q6",
+    "source": "L3 Slides",
+    "topic": "Simulating normal data in R",
+    "question": "[EASY] Which R call simulates 100 IQ scores from a normal distribution with mean 100 and standard deviation 15?",
+    "options": [
+      ["A", "rnorm(100, 100, 15)"],
+      ["B", "rnorm(15, 100, 100)"],
+      ["C", "rnorm(100, 15, 100)"],
+      ["D", "dnorm(100, 100, 15)"]
+    ],
+    "answer": "A",
+    "note": "Argument order is n, mean, sd: 100 draws, mean 100, sd 15. Option B draws only 15 values; option C sets mean 15 and sd 100; option D uses dnorm, which evaluates the density function rather than generating random draws - the r prefix is what simulates.",
+    "anchor": "Research Methods AI — L3 Slides"
+  },
+  {
+    "id": "L3-Q7",
+    "source": "L3 Slides",
+    "topic": "Choosing the right R distribution",
+    "question": "[MID] You want to simulate 'number of emails each employee receives per hour' - non-negative whole counts, occasional busy spikes. Which R function fits most naturally?",
+    "options": [
+      ["A", "rnorm, since counts approximate a normal distribution at large means"],
+      ["B", "rpois, since the Poisson distribution models event counts per interval"],
+      ["C", "runif, since each possible email count should be equally likely"],
+      ["D", "rbinom, since each email either arrives in the hour or does not"]
+    ],
+    "answer": "B",
+    "note": "Poisson is the canonical model for counts of events in a fixed window: integer, non-negative, right-skewed. The rnorm claim is true asymptotically but rnorm still produces negative and fractional 'emails'; rbinom needs a fixed number of trials, which emails do not have; uniform counts contradict the described spikes.",
+    "anchor": "Research Methods AI — L3 Slides"
+  },
+  {
+    "id": "L3-Q8",
+    "source": "L3 Slides",
+    "topic": "Random assignment in R",
+    "question": "[MID] To randomly assign 60 simulated participants to the conditions 'AI' or 'human', which R call does the job directly?",
+    "options": [
+      ["A", "sample(c(\"AI\", \"human\"), 60, replace = TRUE)"],
+      ["B", "sample(60, c(\"AI\", \"human\"), replace = TRUE)"],
+      ["C", "rep(c(\"AI\", \"human\"), each = 30)"],
+      ["D", "sample(c(\"AI\", \"human\"), 60, replace = FALSE)"]
+    ],
+    "answer": "A",
+    "note": "sample(x, size, replace = TRUE) draws 60 labels from the two conditions. Option B has the arguments in the wrong order; option C produces 30 of each but in a fixed deterministic block - balanced, yet not random; option D fails because sampling 60 items from a set of 2 without replacement is impossible.",
+    "anchor": "Research Methods AI — L3 Slides"
+  },
+  {
+    "id": "L3-Q9",
+    "source": "L3 Slides",
+    "topic": "Computing from a linear model",
+    "question": "[MID] You simulate exam grades as y = 2 + 0.5*hours_studied + ε. Ignoring the noise term, what grade does the model predict for a student who studies 10 hours?",
+    "options": [
+      ["A", "5"],
+      ["B", "7"],
+      ["C", "12"],
+      ["D", "25"]
+    ],
+    "answer": "B",
+    "note": "2 + 0.5 × 10 = 7. The wrong options are each a typical slip: 5 forgets the intercept (0.5 × 10), 12 adds hours directly to the intercept (2 + 10), and 25 multiplies the whole bracket by hours ((2 + 0.5) × 10).",
+    "anchor": "Research Methods AI — L3 Slides"
+  },
+  {
+    "id": "L3-Q10",
+    "source": "L3 Slides",
+    "topic": "Interpreting slope coefficients",
+    "question": "[EASY] In the simulation y = b0 + b1*x + ε, the coefficient b1 represents:",
+    "options": [
+      ["A", "The expected value of y when x equals zero"],
+      ["B", "The change in y for each one-unit increase in x"],
+      ["C", "The correlation between the variables x and y"],
+      ["D", "The share of variance in y explained by x"]
+    ],
+    "answer": "B",
+    "note": "b1 is the slope - the effect built into the simulated world. The value at x = 0 is the intercept b0; correlation and variance explained (R²) are standardized summaries of fit, related to but distinct from the raw slope.",
+    "anchor": "Research Methods AI — L3 Slides"
+  },
+  {
+    "id": "L3-Q11",
+    "source": "L3 Slides",
+    "topic": "Role of the noise term",
+    "question": "[MID] A student simulates data as y = 3 + 2*x exactly, with no ε term, and the regression 'recovers' the coefficients perfectly every run. Why is adding ε essential for a meaningful simulation?",
+    "options": [
+      ["A", "Without ε the estimated coefficients are biased away from 3 and 2"],
+      ["B", "Without ε the predictors become correlated with the outcome"],
+      ["C", "Noise makes the test realistic: can analysis find signal despite scatter?"],
+      ["D", "Noise increases the statistical power of the simulated experiment"]
     ],
     "answer": "C",
-    "note": "The slide lists open-ended question benefits as 'Not leading, Wealth of information, Coding and analyzing' — implying analysis is needed, not immediate quantification",
-    "anchor": "Research Methods AI — Week 2 Slides"
+    "note": "Deterministic data makes recovery trivial and tells you nothing about your pipeline. Real measurements always contain unexplained variability; the simulation must mimic that to test anything. Without ε the coefficients are recovered exactly (not biased), predictors being correlated with the outcome is the point of a model, and noise lowers power rather than raising it.",
+    "anchor": "Research Methods AI — L3 Slides"
   },
   {
-    "id": "W2-Q19",
-    "source": "Week 2 Slides",
-    "topic": "Rating Scales",
-    "question": "[MID] Rating scales are advantageous because they are easy to use and process, and offer choices like:",
+    "id": "L3-Q12",
+    "source": "L3 Slides",
+    "topic": "Dummy coding",
+    "question": "[HARD] You want 'operating system' (Windows / macOS / Linux) as a predictor in a linear model. How should it be dummy coded?",
     "options": [
-      [
-        "A",
-        "4 or 6 scales"
-      ],
-      [
-        "B",
-        "3, 5, or 7 scales"
-      ],
-      [
-        "C",
-        "Binary yes/no scales"
-      ],
-      [
-        "D",
-        "Open-ended responses"
-      ]
+      ["A", "Three 0/1 columns, one per category, so no information is lost"],
+      ["B", "Two 0/1 columns, with the omitted category serving as the baseline"],
+      ["C", "One column coded 0/1/2, keeping the model compact"],
+      ["D", "Two 0/1 columns, dropping the rarest category from the data"]
     ],
     "answer": "B",
-    "note": "The slide states rating scales offer 'Choice of scale (4, 5, 7, . . .)' with an example showing a 5-point scale",
-    "anchor": "Research Methods AI — Week 2 Slides"
+    "note": "k categories need k-1 dummies; the omitted category is not lost - it becomes the reference level absorbed by the intercept (both dummies 0 = Linux, say). Three columns are redundant with the intercept, 0/1/2 coding falsely imposes an ordered, equally spaced effect, and nothing gets dropped from the data - only from the coding.",
+    "anchor": "Research Methods AI — L3 Slides"
   },
   {
-    "id": "W2-Q20",
-    "source": "Week 2 Slides",
-    "topic": "Behavioral Observation",
-    "question": "[MID] Behavioral observation can be divided into two main categories based on what dimension?",
+    "id": "L3-Q13",
+    "source": "L3 Slides",
+    "topic": "Why simulate at all",
+    "question": "[MID] Before collecting real data, a PhD student simulates her entire study - generating data with effects she chooses, then running her planned analysis on it. The key methodological payoff is that simulation:",
     "options": [
-      [
-        "A",
-        "Qualitative vs. quantitative"
-      ],
-      [
-        "B",
-        "Direct vs. indirect"
-      ],
-      [
-        "C",
-        "Setting (naturalistic vs. contrived) and concealment"
-      ],
-      [
-        "D",
-        "Video vs. in-person"
-      ]
+      ["A", "Lets her verify the analysis recovers effects whose true values she set"],
+      ["B", "Lets her estimate the effect she will later find in the real data"],
+      ["C", "Demonstrates external validity before any participant is recruited"],
+      ["D", "Provides a backup dataset in case real data collection fails"]
+    ],
+    "answer": "A",
+    "note": "Simulation provides ground truth - something real data never offers. If the pipeline cannot recover effects she planted herself, it cannot be trusted on real data. It does not predict what the real effect will be (she chose the simulated one), says nothing about generalizability, and simulated data can never substitute for real evidence.",
+    "anchor": "Research Methods AI — L3 Slides"
+  },
+  {
+    "id": "L3-Q14",
+    "source": "L3 Slides",
+    "topic": "Bounding simulated values",
+    "question": "[MID] A simulation of ages with rnorm(500, 35, 20) produces some negative ages and a 112-year-old. Which R expression clamps every value into the range 18 to 90?",
+    "options": [
+      ["A", "pmax(18, pmin(90, ages))"],
+      ["B", "pmin(18, pmax(90, ages))"],
+      ["C", "ifelse(ages < 18, 18, 90)"],
+      ["D", "pmax(90, pmin(18, ages))"]
+    ],
+    "answer": "A",
+    "note": "Work inside-out: pmin(90, ages) caps the top, then pmax(18, ...) lifts the floor. Option B reversed returns 18 for everything (pmax(90,...) ≥ 90, then pmin with 18 gives 18); option D similarly collapses to 90; the ifelse maps every age of 18 or above to exactly 90, destroying the data.",
+    "anchor": "Research Methods AI — L3 Slides"
+  },
+  {
+    "id": "L3-Q15",
+    "source": "L3 Slides",
+    "topic": "Thresholding to binary outcomes",
+    "question": "[EASY] A simulated continuous 'frustration score' must become a binary variable 'rage-quit (1) vs continued (0)', using 7 as the clinical cutoff. The appropriate transformation is:",
+    "options": [
+      ["A", "Standardize the scores to z-scores around the cutoff"],
+      ["B", "Apply the threshold: scores above 7 become 1, the rest 0"],
+      ["C", "Replace each score with its rank within the sample"],
+      ["D", "Rescale the scores linearly into the interval 0 to 1"]
+    ],
+    "answer": "B",
+    "note": "A cutoff dichotomizes: above 7 → 1, otherwise 0. Z-scores, ranks, and 0-1 rescaling all remain continuous - they transform the scale but never produce a binary variable. (The probabilistic alternative - converting scores to probabilities and sampling 0/1 - also exists in the simulation workflow, but the stated cutoff rule is thresholding.)",
+    "anchor": "Research Methods AI — L3 Slides"
+  },
+  {
+    "id": "L3-Q16",
+    "source": "L3 Slides",
+    "topic": "Why the logistic function",
+    "question": "[EASY] In logistic regression, what job does the logistic function perform?",
+    "options": [
+      ["A", "It maps predicted probabilities onto the log-odds scale"],
+      ["B", "It linearizes the relationship between the predictors"],
+      ["C", "It maps the linear predictor into (0, 1) so output reads as probability"],
+      ["D", "It standardizes the predictors to a common scale"]
     ],
     "answer": "C",
-    "note": "The slide states behavioral observation is 'Divided by: Setting, Concealment'",
-    "anchor": "Research Methods AI — Week 2 Slides"
+    "note": "The linear part b0 + b1*x ranges over all real numbers; the logistic (sigmoid) squashes it into (0,1). Watch the direction in the first option - it is exactly reversed: the logit (log-odds) maps probabilities to the real line, the logistic maps back. The model is linear in log-odds: log(p/(1-p)) = b0 + b1*x.",
+    "anchor": "Research Methods AI — L3 Slides"
   },
   {
-    "id": "W2-Q21",
-    "source": "Week 2 Slides",
-    "topic": "Observation Setting",
-    "question": "[MID] What is the key difference between naturalistic and contrived observational settings?",
+    "id": "L3-Q17",
+    "source": "L3 Slides",
+    "topic": "Intercept in logistic simulation",
+    "question": "[HARD] You simulate click-through with a logistic model and decide the baseline click rate is too high. Lowering the intercept b0 while keeping the slopes fixed does what?",
     "options": [
-      [
-        "A",
-        "Naturalistic uses questionnaires; contrived uses interviews"
-      ],
-      [
-        "B",
-        "Naturalistic is behavior as it occurs naturally; contrived is in artificial settings like labs"
-      ],
-      [
-        "C",
-        "Naturalistic requires concealment; contrived is unconcealed"
-      ],
-      [
-        "D",
-        "Naturalistic measures physiology; contrived measures behavior"
-      ]
+      ["A", "Shrinks each predictor's effect on the odds toward zero"],
+      ["B", "Lowers the predicted click probability at every predictor value"],
+      ["C", "Steepens the probability curve around its midpoint"],
+      ["D", "Lowers the probability only for cases near the baseline"]
     ],
     "answer": "B",
-    "note": "The slide defines 'Naturalistic: Behavior as it occurs naturally in real life; Contrived: behavior in an artificial setting (Lab experiment, Field experiment)'",
-    "anchor": "Research Methods AI — Week 2 Slides"
+    "note": "The intercept sets the baseline log-odds; decreasing it slides the whole sigmoid down, so every predicted probability drops - not just cases near baseline. The slopes, which control effect sizes and the curve's steepness, are untouched.",
+    "anchor": "Research Methods AI — L3 Slides"
   },
   {
-    "id": "W2-Q22",
-    "source": "Week 2 Slides",
-    "topic": "Observation Concealment",
-    "question": "[MID] When observation is unconcealed, what is a potential consequence for data quality?",
+    "id": "L4-Q1",
+    "source": "L4 Slides",
+    "topic": "Exploratory vs confirmatory analysis",
+    "question": "[EASY] What is the essential difference between exploratory and confirmatory data analysis?",
     "options": [
-      [
-        "A",
-        "Increased accuracy and honesty"
-      ],
-      [
-        "B",
-        "Reactivity (behavior change) because participants are aware of observation"
-      ],
-      [
-        "C",
-        "Better data privacy"
-      ],
-      [
-        "D",
-        "Easier annotation and analysis"
-      ]
+      ["A", "Exploratory searches for patterns; confirmatory tests pre-specified hypotheses"],
+      ["B", "Exploratory uses visualizations; confirmatory uses numerical statistics"],
+      ["C", "Exploratory suits small samples; confirmatory requires large ones"],
+      ["D", "Exploratory describes single variables; confirmatory relates multiple ones"]
+    ],
+    "answer": "A",
+    "note": "The distinction is about when the hypothesis is fixed, not about tools or sample size - confirmatory work uses plots too, and exploration happens on huge datasets. Testing a pattern on the same data that suggested it blurs the line and inflates false positives.",
+    "anchor": "Research Methods AI — L4 Slides"
+  },
+  {
+    "id": "L4-Q2",
+    "source": "L4 Slides",
+    "topic": "Mean vs median under skew",
+    "question": "[MID] In a survey of app users' yearly incomes, a handful of millionaires drag the mean to €95,000 while the typical user earns around €38,000. Which statistic best represents the typical user?",
+    "options": [
+      ["A", "The mean, since it uses the information in every data point"],
+      ["B", "The median, since it is robust to the extreme high values"],
+      ["C", "The mode, since 'typical' means the most frequently observed income"],
+      ["D", "The trimmed range, since it excludes the millionaires directly"]
     ],
     "answer": "B",
-    "note": "The slide notes unconcealed observation leads to 'Reactivity (behavior change)' as participants are aware of observation",
-    "anchor": "Research Methods AI — Week 2 Slides"
+    "note": "Skew splits mean and median apart, and the median - the middle person - ignores how extreme the extremes are. The mean's efficiency argument is a true property pointing to the wrong conclusion under skew. The mode is unstable for near-continuous data like income (every value may be unique), and 'trimmed range' conflates two different tools.",
+    "anchor": "Research Methods AI — L4 Slides"
   },
   {
-    "id": "W2-Q23",
-    "source": "Week 2 Slides",
-    "topic": "Concealment Solutions",
-    "question": "[MID] Which of the following is mentioned as a solution to address ethical concerns while conducting observation?",
+    "id": "L4-Q3",
+    "source": "L4 Slides",
+    "topic": "Cross-tabulation",
+    "question": "[EASY] A researcher wants a first descriptive look at the relationship between subscription tier (free / premium) and churn (stayed / left). The natural exploratory tool is:",
     "options": [
-      [
-        "A",
-        "Recording all activities without consent"
-      ],
-      [
-        "B",
-        "Partial concealment, knowledgeable informants, and unobtrusive measures"
-      ],
-      [
-        "C",
-        "Always conducting observation in lab settings"
-      ],
-      [
-        "D",
-        "Using only questionnaires instead of observation"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slide lists solutions: 'Partial concealment, Knowledgeable informants, Unobtrusive measures'",
-    "anchor": "Research Methods AI — Week 2 Slides"
-  },
-  {
-    "id": "W2-Q24",
-    "source": "Week 2 Slides",
-    "topic": "Physiological Data",
-    "question": "[MID] Which measurement is specifically noted as a neuroscience measurement condition in the lecture?",
-    "options": [
-      [
-        "A",
-        "Heart rate and blushing"
-      ],
-      [
-        "B",
-        "Wearable devices"
-      ],
-      [
-        "C",
-        "EEG and fMRI"
-      ],
-      [
-        "D",
-        "Smartphone sensors"
-      ]
+      ["A", "A chi-squared test on the two variables"],
+      ["B", "A Pearson correlation between tier and churn"],
+      ["C", "A cross-tabulation of counts for each combination"],
+      ["D", "A scatter plot of tier against churn status"]
     ],
     "answer": "C",
-    "note": "The slide lists specific measurement conditions for neuroscience: 'EEG, fMRI'",
-    "anchor": "Research Methods AI — Week 2 Slides"
+    "note": "Two categorical variables, first look → a contingency table of counts. The chi-squared test is the confirmatory follow-up to the cross-tab, not the exploratory first step the question asks for; Pearson correlation and scatter plots presume numeric variables and would render two binary variables as four overlapping points.",
+    "anchor": "Research Methods AI — L4 Slides"
   },
   {
-    "id": "W2-Q25",
-    "source": "Week 2 Slides",
-    "topic": "Social Desirability Bias",
-    "question": "[MID] According to the PLOS ONE article cited, social desirability bias refers to what phenomenon?",
+    "id": "L4-Q4",
+    "source": "L4 Slides",
+    "topic": "Correlation is not causation",
+    "question": "[MID] A fitness platform finds r = 0.6 between owning a smartwatch and weekly exercise minutes, and marketing drafts the headline 'Smartwatches make people exercise'. The most fundamental objection is:",
     "options": [
-      [
-        "A",
-        "People being honest about their flaws"
-      ],
-      [
-        "B",
-        "People viewing others as biased but not themselves"
-      ],
-      [
-        "C",
-        "People designing experiments to match their predictions"
-      ],
-      [
-        "D",
-        "People favoring quantitative over qualitative data"
-      ]
+      ["A", "An r of 0.6 is too weak to support any practical claim"],
+      ["B", "Active people may buy smartwatches, or a third variable drives both"],
+      ["C", "The platform's users are not representative of the population"],
+      ["D", "Correlation cannot be computed between binary and continuous variables"]
     ],
     "answer": "B",
-    "note": "The slide cites research: 'People view others but not themselves as biased by preexisting beliefs and social stigmas'",
-    "anchor": "Research Methods AI — Week 2 Slides"
+    "note": "A correlation is symmetric and silent on direction and third variables: reverse causation and confounding (income, health interest) fit r = 0.6 just as well as the headline does. r = 0.6 is actually substantial; representativeness is a real but secondary concern about generalizing, not about the causal verb 'make'; and binary-continuous correlations are perfectly computable (point-biserial).",
+    "anchor": "Research Methods AI — L4 Slides"
   },
   {
-    "id": "W2-Q26",
-    "source": "Week 2 Slides",
-    "topic": "Acquiescence Bias",
-    "question": "[MID] Acquiescence bias in survey responses is characterized by what tendency?",
+    "id": "L4-Q5",
+    "source": "L4 Slides",
+    "topic": "What a p-value is (and is not)",
+    "question": "[HARD] A study comparing two interface designs reports p = 0.03. Which interpretation is correct?",
     "options": [
-      [
-        "A",
-        "Always disagreeing with statements"
-      ],
-      [
-        "B",
-        "Tendency to be pleasant and agree, which LLMs trained on us have acquired"
-      ],
-      [
-        "C",
-        "Refusing to answer questions"
-      ],
-      [
-        "D",
-        "Providing random responses"
-      ]
-    ],
-    "answer": "B",
-    "note": "The slide notes LLMs 'have acquiescence bias (Braun 2025)' and describes humans having 'such a tendency to be pleasant and agree'",
-    "anchor": "Research Methods AI — Week 2 Slides"
-  },
-  {
-    "id": "W2-Q27",
-    "source": "Week 2 Slides",
-    "topic": "Response Bias Solutions",
-    "question": "[HARD] Which combination of strategies would best address both social desirability bias AND acquiescence bias?",
-    "options": [
-      [
-        "A",
-        "Using only open-ended questions"
-      ],
-      [
-        "B",
-        "Increasing survey length"
-      ],
-      [
-        "C",
-        "Anonymity, indirect questioning, AND reversing scale/polarity/control questions"
-      ],
-      [
-        "D",
-        "Using only physiological data"
-      ]
+      ["A", "There is a 3% probability that the null hypothesis is true"],
+      ["B", "There is a 97% probability that the alternative hypothesis is true"],
+      ["C", "Data at least this extreme would occur 3% of the time if H0 were true"],
+      ["D", "Repeating the study would yield a significant result 97% of the time"]
     ],
     "answer": "C",
-    "note": "Solutions mentioned: For social desirability: 'Anonymity and confidentiality, Indirect Questioning, Self-administration'; For acquiescence: 'reversing scale / polarity / control questions, Neutral language'",
-    "anchor": "Research Methods AI — Week 2 Slides"
+    "note": "The p-value conditions on H0 and asks how surprising the data are. It is not the probability of any hypothesis (those readings reverse the conditional), and it is not a replication probability - the chance a repeat study comes out significant depends on the unknown true effect and power, not on 1 minus p.",
+    "anchor": "Research Methods AI — L4 Slides"
   },
   {
-    "id": "W2-Q28",
-    "source": "Week 2 Slides",
-    "topic": "Crowdworking Quality",
-    "question": "[HARD] What is the primary risk of using crowdworking for data annotation, and why is it concerning?",
+    "id": "L4-Q6",
+    "source": "L4 Slides",
+    "topic": "Type I error in context",
+    "question": "[MID] A pharma team tests a drug that, in reality, does nothing. Their trial nevertheless yields p = 0.01 and they declare the drug effective. This outcome is:",
     "options": [
-      [
-        "A",
-        "Too many expert annotators leading to inconsistency"
-      ],
-      [
-        "B",
-        "Low quality labels from careless or random responses, reducing dataset reliability"
-      ],
-      [
-        "C",
-        "Crowdworkers are too expensive"
-      ],
-      [
-        "D",
-        "Crowdworkers refuse to annotate behavioral data"
-      ]
+      ["A", "A Type II error - the trial detected an effect that is not there"],
+      ["B", "A Type I error - a true null hypothesis was rejected"],
+      ["C", "A correct rejection - the decision followed the p < 0.05 rule"],
+      ["D", "A power failure - the trial was too small to test the drug fairly"]
     ],
     "answer": "B",
-    "note": "The slide lists 'Low quality labels / annotation: careless or random responses, reducing dataset reliability' as a primary risk",
-    "anchor": "Research Methods AI — Week 2 Slides"
+    "note": "The null ('no effect') was true and got rejected: false positive, Type I. The Type II option deliberately pairs the wrong label with the right description - read labels and descriptions together. Following the p < 0.05 rule correctly does not make the conclusion true: with α = 0.05, about 1 in 20 truly null effects passes anyway.",
+    "anchor": "Research Methods AI — L4 Slides"
   },
   {
-    "id": "W2-Q29",
-    "source": "Week 2 Slides",
-    "topic": "Crowdworking Annotation Aggregation",
-    "question": "[HARD] When multiple crowdworkers annotate the same item, which aggregation method is best suited for categorical labels like object detection?",
+    "id": "L4-Q7",
+    "source": "L4 Slides",
+    "topic": "Type II error in context",
+    "question": "[MID] An AI-tutoring intervention genuinely improves grades, but a study with 12 participants finds p = 0.20 and concludes 'no effect'. The study most likely committed:",
     "options": [
-      [
-        "A",
-        "Mean score averaging"
-      ],
-      [
-        "B",
-        "Weighted voting based on individual crowdworker reliability"
-      ],
-      [
-        "C",
-        "Majority vote"
-      ],
-      [
-        "D",
-        "Median of all ratings"
-      ]
+      ["A", "A Type I error, since the conclusion contradicts the truth"],
+      ["B", "No error, since p above 0.05 establishes the absence of an effect"],
+      ["C", "A Type II error, since a real effect went undetected"],
+      ["D", "A sampling error, since 12 participants cannot be representative"]
     ],
     "answer": "C",
-    "note": "The slide states majority vote is 'Well suited for categorical labels (e.g., Object detection, sentiment analysis)' because it takes the label selected by most annotators",
-    "anchor": "Research Methods AI — Week 2 Slides"
+    "note": "A real effect was missed: false negative, Type II - the expected outcome when tiny samples meet modest effects, because power is low. Type I is the mirror image (rejecting a true null). And p > 0.05 never establishes absence: failing to find evidence is not finding evidence of absence. Representativeness is about external validity, a different axis entirely.",
+    "anchor": "Research Methods AI — L4 Slides"
   },
   {
-    "id": "W2-Q30",
-    "source": "Week 2 Slides",
-    "topic": "Annotation Aggregation Methods",
-    "question": "[HARD] Which aggregation method allows incorporating annotator expertise and confidence, and is best for continuous scores?",
+    "id": "L4-Q8",
+    "source": "L4 Slides",
+    "topic": "Confidence intervals",
+    "question": "[HARD] A 95% confidence interval for the effect of dark mode on reading speed is [2, 14] words per minute. The best reading of this interval is:",
     "options": [
-      [
-        "A",
-        "Majority vote"
-      ],
-      [
-        "B",
-        "Simple mean score"
-      ],
-      [
-        "C",
-        "Confidence Weighted voting"
-      ],
-      [
-        "D",
-        "Random selection"
-      ]
+      ["A", "95% of users gained between 2 and 14 words per minute"],
+      ["B", "The true effect lies in [2, 14] with 95% probability"],
+      ["C", "The procedure generating such intervals captures the truth in 95% of studies"],
+      ["D", "A replication would find an effect inside [2, 14] 95% of the time"]
     ],
     "answer": "C",
-    "note": "The slide describes 'Confidence Weighted voting: Weight each annotator by reliability or past performance; can incorporate annotator expertise and confidence; reduce the influence of low-quality annotators'",
-    "anchor": "Research Methods AI — Week 2 Slides"
+    "note": "Frequentist logic: the truth is fixed, the interval is random - 95% describes the long-run capture rate of the procedure, not the probability for this one interval (that Bayesian-sounding reading is the most seductive wrong option). It says nothing about individual users' spread or about where replications will land. Practically: values inside are plausible, and since 0 is excluded, the effect is significant.",
+    "anchor": "Research Methods AI — L4 Slides"
   },
   {
-    "id": "W2-Q31",
-    "source": "Week 2 Slides",
-    "topic": "SMART Research Proposals",
-    "question": "[HARD] According to the SMART framework, a research proposal must demonstrate 'Measurable' by meeting what criterion?",
+    "id": "L4-Q9",
+    "source": "L4 Slides",
+    "topic": "Frequentist vs Bayesian",
+    "question": "[MID] Two analysts study the same A/B test. Ana computes the probability of data this extreme under the null hypothesis. Boris starts from a prior belief about the effect and updates it into a posterior. Their approaches are, respectively:",
     "options": [
-      [
-        "A",
-        "Having a narrow research field"
-      ],
-      [
-        "B",
-        "Being time-bound"
-      ],
-      [
-        "C",
-        "Having appropriate metrics defined for implementation"
-      ],
-      [
-        "D",
-        "Being feasible with available resources"
-      ]
+      ["A", "Bayesian and frequentist"],
+      ["B", "Confirmatory and exploratory"],
+      ["C", "Frequentist and Bayesian"],
+      ["D", "Inferential and descriptive"]
     ],
     "answer": "C",
-    "note": "The slide defines 'Measurable: are appropriate metrics defined for implementation?'",
-    "anchor": "Research Methods AI — Week 2 Slides"
+    "note": "P-values and long-run frequencies are frequentist; priors updated into posteriors are Bayesian - the frequentist never assigns probability to a hypothesis, the Bayesian does. Both analysts are doing confirmatory, inferential statistics; those labels describe a different distinction.",
+    "anchor": "Research Methods AI — L4 Slides"
   },
   {
-    "id": "W2-Q32",
-    "source": "Week 2 Slides",
-    "topic": "Unstructured Data in Tables",
-    "question": "[HARD] Why might categorizing programming languages as 'Easy', 'Fast', and 'Popular' be problematic from a variable design perspective?",
+    "id": "L4-Q10",
+    "source": "L4 Slides",
+    "topic": "What OLS optimizes",
+    "question": "[MID] Ordinary least squares (OLS) regression chooses the line that minimizes:",
     "options": [
-      [
-        "A",
-        "These categories are quantitative rather than qualitative"
-      ],
-      [
-        "B",
-        "They violate both exhaustiveness (overlap between categories) and mutual exclusivity (not all languages fit neatly)"
-      ],
-      [
-        "C",
-        "Programming languages cannot be measured at all"
-      ],
-      [
-        "D",
-        "This is the correct way to categorize them"
-      ]
+      ["A", "The sum of absolute vertical distances to the data points"],
+      ["B", "The sum of squared vertical distances to the data points"],
+      ["C", "The sum of squared perpendicular distances to the line"],
+      ["D", "The largest single vertical distance to any data point"]
     ],
     "answer": "B",
-    "note": "The slide shows this as a 'Bad' example that violates the principles of exhaustiveness and mutual exclusivity, as languages could fit multiple categories",
-    "anchor": "Research Methods AI — Week 2 Slides"
+    "note": "OLS minimizes squared vertical residuals - 'least squares' is literal. The distractors are real alternative criteria (least absolute deviations, total least squares, minimax), which is why each sounds legitimate; they define different estimators, not OLS.",
+    "anchor": "Research Methods AI — L4 Slides"
   },
   {
-    "id": "W2-Q33",
-    "source": "Week 2 Slides",
-    "topic": "SMART Proposal Evaluation",
-    "question": "[HARD] Why is the proposal 'We will solve climate change by building many nuclear reactors in The Netherlands' marked as inadequate despite being ambitious?",
+    "id": "L4-Q11",
+    "source": "L4 Slides",
+    "topic": "Reading regression output",
+    "question": "[MID] Predicting exam score from hours_studied, the model output shows: coefficient = 3.2, p = 0.001. The correct interpretation is:",
     "options": [
-      [
-        "A",
-        "It is too specific"
-      ],
-      [
-        "B",
-        "It lacks measurable outcomes, is not time-bound, and doesn't answer a clear research question"
-      ],
-      [
-        "C",
-        "Nuclear power is not viable"
-      ],
-      [
-        "D",
-        "The Netherlands is too small"
-      ]
+      ["A", "Each extra study hour causes a 3.2-point gain in every student"],
+      ["B", "Each extra study hour predicts 3.2 more points; reliably non-zero"],
+      ["C", "Hours studied explains 3.2% of the variance in exam scores"],
+      ["D", "Scores rise by 3.2% for every additional hour of studying"]
     ],
     "answer": "B",
-    "note": "The slide marks it as 'in-work' (inadequate) because it lacks specific metrics, time-bound planning, and is a broad claim rather than a research question focused on measurable effects",
-    "anchor": "Research Methods AI — Week 2 Slides"
+    "note": "The coefficient is the predicted change in outcome per unit of predictor, and the small p says it differs reliably from zero. 'Causes... in every student' fails twice: causality needs random assignment, and a coefficient is an average association, not an individual law. Variance explained is R², and raw coefficients are in outcome units (points), not percentages.",
+    "anchor": "Research Methods AI — L4 Slides"
+  },
+  {
+    "id": "L4-Q12",
+    "source": "L4 Slides",
+    "topic": "Choosing the chi-squared test",
+    "question": "[MID] You want to test whether device type (iOS / Android) is associated with churning (yes / no) in 4,000 users. The standard test is:",
+    "options": [
+      ["A", "A chi-squared test on the 2×2 table of counts"],
+      ["B", "An independent-samples t-test comparing the two device groups"],
+      ["C", "A Pearson correlation between device type and churn"],
+      ["D", "A one-way ANOVA with device type as the factor"]
+    ],
+    "answer": "A",
+    "note": "Both variables are categorical, so the question is whether observed cell counts deviate from independence - chi-squared territory. The t-test and ANOVA need a continuous outcome (churn yes/no is not one), and Pearson correlation presumes numeric variables. (Logistic regression could also model this; among the listed options, chi-squared is the standard association test.)",
+    "anchor": "Research Methods AI — L4 Slides"
+  },
+  {
+    "id": "L4-Q13",
+    "source": "L4 Slides",
+    "topic": "When logistic regression applies",
+    "question": "[EASY] Logistic regression is the appropriate model when:",
+    "options": [
+      ["A", "The outcome variable is binary"],
+      ["B", "The predictor variables are categorical"],
+      ["C", "The outcome is a proportion between 0 and 1"],
+      ["D", "The relationship between variables is nonlinear"]
+    ],
+    "answer": "A",
+    "note": "The defining feature is the binary outcome, whose probability the model expresses through log-odds. Predictors may be numeric or categorical in any regression. The proportion option is the subtle trap: the model OUTPUTS probabilities in (0,1), but the observed outcome it models is 0-or-1. Nonlinearity alone calls for transformations or other models, not logistic regression specifically.",
+    "anchor": "Research Methods AI — L4 Slides"
+  },
+  {
+    "id": "L4-Q14",
+    "source": "L4 Slides",
+    "topic": "Confusion matrix arithmetic",
+    "question": "[MID] A churn classifier evaluated on 100 customers produces: 40 true positives, 10 false positives, 45 true negatives, 5 false negatives. Its accuracy is:",
+    "options": [
+      ["A", "80%"],
+      ["B", "85%"],
+      ["C", "89%"],
+      ["D", "95%"]
+    ],
+    "answer": "B",
+    "note": "Accuracy = (TP + TN) / total = (40 + 45) / 100 = 85%. The distractors are other real metrics computed from the same matrix: 80% is precision (40/50), 89% is recall (40/45), 95% mistakes 'correct minus FN' bookkeeping. Knowing WHICH formula is accuracy is the actual skill being tested.",
+    "anchor": "Research Methods AI — L4 Slides"
+  },
+  {
+    "id": "L4-Q15",
+    "source": "L4 Slides",
+    "topic": "Cost-sensitive evaluation",
+    "question": "[HARD] Two cancer-screening models: Model P rarely raises false alarms but misses 20% of real tumors; Model R flags some healthy patients but misses almost none. Given that a missed tumor is far costlier than a follow-up test, the initial screening step should use:",
+    "options": [
+      ["A", "Model P, since false alarms cause overtreatment and patient anxiety"],
+      ["B", "Model R, since minimizing false negatives matters most here"],
+      ["C", "Whichever model achieves the higher overall accuracy"],
+      ["D", "Whichever model achieves the better balance of precision and recall"]
+    ],
+    "answer": "B",
+    "note": "The stem stipulates the cost structure: FN ≫ FP, so recall dominates - missed tumors at the screening stage are unrecoverable, while false alarms get filtered by follow-up diagnostics. The overtreatment argument is a real concern in screening debates, but the question fixes the costs. Overall accuracy and a generic precision-recall 'balance' (e.g., F1) both ignore exactly this asymmetry.",
+    "anchor": "Research Methods AI — L4 Slides"
+  },
+  {
+    "id": "L4-Q16",
+    "source": "L4 Slides",
+    "topic": "Diagnosing overfitting",
+    "question": "[MID] A student's random forest scores 99% accuracy on the data it was trained on but only 61% on a properly held-out test set. The most likely diagnosis is:",
+    "options": [
+      ["A", "Data leakage - information from the test set reached training"],
+      ["B", "Class imbalance - accuracy is misleading when one class dominates"],
+      ["C", "Overfitting - the model memorized training noise that does not generalize"],
+      ["D", "Underfitting - the model is too simple for the underlying pattern"]
+    ],
+    "answer": "C",
+    "note": "A large train-test gap with high train accuracy is overfitting's signature. Note the direction: leakage produces the opposite pattern - suspiciously HIGH test scores that later collapse in production. Class imbalance distorts both scores similarly rather than creating a gap, and an underfit model would score poorly on the training data too.",
+    "anchor": "Research Methods AI — L4 Slides"
+  },
+  {
+    "id": "L4-Q17",
+    "source": "L4 Slides",
+    "topic": "Interpretability trade-off",
+    "question": "[HARD] A bank must give each rejected loan applicant the reasons for the decision, as regulators require. A deep neural network predicts defaults slightly better than logistic regression. The lecture's trade-off framework most supports:",
+    "options": [
+      ["A", "The network - predictive performance is the primary criterion for models"],
+      ["B", "The network, paired with post-hoc explanation tools for each rejection"],
+      ["C", "Logistic regression - its coefficients directly provide the required reasons"],
+      ["D", "Both in parallel - the network decides, the regression explains its choices"]
+    ],
+    "answer": "C",
+    "note": "When explanations are legally required per decision, a transparent model whose coefficients ARE the explanation beats a slightly more accurate black box. The post-hoc option is the serious rival (SHAP-style tools exist), but such explanations approximate the model rather than constitute its reasoning, which is contested ground for regulatory purposes - and option D is worse: the regression would 'explain' decisions the network actually made. The lecture's point: the right model depends on deployment context, not the leaderboard.",
+    "anchor": "Research Methods AI — L4 Slides"
+  },
+  {
+    "id": "L5-Q1",
+    "source": "L5 Slides",
+    "topic": "Computational reproducibility defined",
+    "question": "[EASY] A result is computationally reproducible when:",
+    "options": [
+      ["A", "A new study with new participants finds the same effect"],
+      ["B", "The original code runs on the original data without any errors"],
+      ["C", "Running the original code on the original data yields the same result"],
+      ["D", "An independent analysis of the same data reaches the same conclusion"]
+    ],
+    "answer": "C",
+    "note": "Same data + same code → same numbers. Running without errors is weaker - code can execute cleanly and produce different output (versions, seeds). Independent re-analysis with different methods is robustness, and new data is replication; both are valuable, neither is computational reproducibility.",
+    "anchor": "Research Methods AI — L5 Slides"
+  },
+  {
+    "id": "L5-Q2",
+    "source": "L5 Slides",
+    "topic": "Replication defined",
+    "question": "[EASY] Replication differs from reproducibility because replication requires:",
+    "options": [
+      ["A", "Re-running the original analysis scripts on the original dataset"],
+      ["B", "Re-analyzing the original dataset with different statistical methods"],
+      ["C", "Collecting new data with the same method and finding a consistent result"],
+      ["D", "Repeating the study with the same participants at a later time"]
+    ],
+    "answer": "C",
+    "note": "Replication tests whether the FINDING holds in fresh data - new sample, same method. Rerunning scripts is reproducibility, re-analyzing with new methods is a robustness check, and re-testing the same participants is a retest of the same sample, not an independent replication.",
+    "anchor": "Research Methods AI — L5 Slides"
+  },
+  {
+    "id": "L5-Q3",
+    "source": "L5 Slides",
+    "topic": "Diagnosing a reproducibility failure",
+    "question": "[MID] You download the exact data and analysis scripts from a published AI paper, run them, and get noticeably different numbers than the paper reports. The most plausible explanation is:",
+    "options": [
+      ["A", "The finding failed to replicate in your computational environment"],
+      ["B", "Different library versions, undocumented steps, or unseeded randomness"],
+      ["C", "The original result was a Type I error that your rerun corrected"],
+      ["D", "The original authors p-hacked the analysis to reach significance"]
+    ],
+    "answer": "B",
+    "note": "Same data, same code, different output points to the computational environment: package versions, manual steps never scripted, random seeds nobody fixed. 'Replicate' is the wrong word - no new data is involved (the first option misuses the term). Type I errors and p-hacking concern the inference, which a rerun of identical code cannot detect or correct; accusing before auditing your environment gets the order of suspects backwards.",
+    "anchor": "Research Methods AI — L5 Slides"
+  },
+  {
+    "id": "L5-Q4",
+    "source": "L5 Slides",
+    "topic": "Replication vs reproducibility in a scenario",
+    "question": "[MID] A famous finding claims priming people with money words makes them less helpful. A lab in another country repeats the full procedure with 500 new participants and finds nothing. This outcome is best described as:",
+    "options": [
+      ["A", "A reproducibility failure in the original computational pipeline"],
+      ["B", "A failed replication - new data and same method gave an inconsistent result"],
+      ["C", "A Type II error by the new lab's underpowered design"],
+      ["D", "Evidence that the original authors fabricated their data"]
+    ],
+    "answer": "B",
+    "note": "New sample, same method, effect gone - the definition of a failed replication. Reproducibility is about rerunning the original computation, which nobody did here. With 500 participants, power is high, making a Type II miss unlikely (the n is in the stem for exactly this reason). And failure to replicate suggests a false positive or fragile effect long before it suggests fraud.",
+    "anchor": "Research Methods AI — L5 Slides"
+  },
+  {
+    "id": "L5-Q5",
+    "source": "L5 Slides",
+    "topic": "The replication crisis",
+    "question": "[EASY] The 'replication crisis' refers to the discovery that:",
+    "options": [
+      ["A", "Most published code no longer runs on modern software"],
+      ["B", "A large share of published findings fail to replicate in new samples"],
+      ["C", "Journals systematically refuse to publish replication studies"],
+      ["D", "Fabricated data is widespread across the empirical sciences"]
+    ],
+    "answer": "B",
+    "note": "Large-scale projects, most prominently in psychology, found many celebrated effects shrink or vanish with fresh data. Journals' reluctance to publish replications and broken code are related ecosystem problems, but the crisis names the failing findings themselves; fraud explains only a small fraction - questionable research practices and publication bias do most of the damage.",
+    "anchor": "Research Methods AI — L5 Slides"
+  },
+  {
+    "id": "L5-Q6",
+    "source": "L5 Slides",
+    "topic": "Barriers to data sharing",
+    "question": "[MID] A medical AI group genuinely wants to share its dataset but ultimately doesn't. Which list contains the realistic barriers discussed in the lecture?",
+    "options": [
+      ["A", "Patient privacy, preparation effort, fear of scooping, weak career incentives"],
+      ["B", "Patient privacy, journal prohibitions on sharing, lack of repository space"],
+      ["C", "Preparation effort, copyright on clinical data, mandatory deletion rules"],
+      ["D", "Fear of scooping, absence of open formats for medical records, cost of hosting"]
+    ],
+    "answer": "A",
+    "note": "The real obstacles are practical and incentive-based: privacy obligations, the unglamorous work of cleaning and documenting, competitive worries, and reward systems that count papers rather than datasets. The other lists each smuggle in a fake barrier: journals increasingly REQUIRE sharing, repositories and open formats exist, and there is no general deletion mandate blocking research sharing.",
+    "anchor": "Research Methods AI — L5 Slides"
+  },
+  {
+    "id": "L5-Q7",
+    "source": "L5 Slides",
+    "topic": "Reproducibility checklists",
+    "question": "[EASY] What is the purpose of a reproducibility checklist at submission time?",
+    "options": [
+      ["A", "To standardize what authors must report and share for verification"],
+      ["B", "To certify that the paper's findings will replicate in new data"],
+      ["C", "To score papers so reviewers can rank them by methodological rigor"],
+      ["D", "To replace code review by having authors self-attest correctness"]
+    ],
+    "answer": "A",
+    "note": "Checklists turn good intentions into concrete reporting requirements - code availability, data access, hyperparameters, compute. They make verification POSSIBLE; they cannot certify replication in advance, and they complement rather than replace review.",
+    "anchor": "Research Methods AI — L5 Slides"
+  },
+  {
+    "id": "L5-Q8",
+    "source": "L5 Slides",
+    "topic": "Data leakage",
+    "question": "[HARD] A team builds a skin-lesion classifier. Several patients contributed multiple photos, and the random split scattered photos of the same patient into both training and test sets. Test accuracy is 96%; on a new hospital's data it drops to 71%. The 96% was inflated primarily by:",
+    "options": [
+      ["A", "Overfitting - the model memorized noise in its training photos"],
+      ["B", "Data leakage - patient-level information straddled the train/test split"],
+      ["C", "Domain shift - the new hospital's imaging differs from the original's"],
+      ["D", "Label noise - dermatologists disagreed on the original diagnoses"]
+    ],
+    "answer": "B",
+    "note": "Photos of the same patient on both sides of the split mean the test set partly measures patient recognition, not lesion classification - leakage, fixed by splitting group-wise by patient. Domain shift is the strong rival: it surely contributes to the drop at the new hospital, but the stem describes a specific split flaw that inflated the 96% itself. Plain overfitting would have shown up as a low score on ANY honest test set, and label noise depresses rather than inflates measured accuracy.",
+    "anchor": "Research Methods AI — L5 Slides"
+  },
+  {
+    "id": "L5-Q9",
+    "source": "L5 Slides",
+    "topic": "Reproducibility gaps in CS/AI",
+    "question": "[MID] Surveys of AI papers find recurring reproducibility gaps. Which option lists the typical trio from the lecture?",
+    "options": [
+      ["A", "Missing documentation, no code repository link, data-split leakage confounds"],
+      ["B", "Missing documentation, excessive dataset sizes, proprietary hardware needs"],
+      ["C", "No code repository link, non-English documentation, deprecated frameworks"],
+      ["D", "Data-split leakage, unreported funding sources, single-blind reviewing"]
+    ],
+    "answer": "A",
+    "note": "The recurring trio: undocumented methods, unavailable code, and subtle evaluation flaws - especially leakage - that make reported numbers unverifiable or inflated. The distractor lists pad one genuine item with plausible-sounding issues (hardware, language, funding) that are not the lecture's reproducibility gaps.",
+    "anchor": "Research Methods AI — L5 Slides"
+  },
+  {
+    "id": "L5-Q10",
+    "source": "L5 Slides",
+    "topic": "Spotting a predatory journal",
+    "question": "[MID] A PhD student receives an email: 'Dear Esteemed Author, submit to the International Journal of Advanced AI Sciences - guaranteed peer review in 48 hours, decision in 3 days, only $950 processing fee.' The single strongest red flag is:",
+    "options": [
+      ["A", "The $950 article processing charge demanded from authors"],
+      ["B", "The unsolicited, flattering invitation sent by mass email"],
+      ["C", "The guaranteed 48-hour peer review with a decision in days"],
+      ["D", "The broad, grandiose journal title covering all of AI science"]
+    ],
+    "answer": "C",
+    "note": "Real peer review takes weeks to months; 'guaranteed' review in 48 hours signals review is not actually happening - the defining feature of predation (fees without real review). The other three are genuine yellow flags but each has innocent counterparts: legitimate open-access journals charge APCs, real journals send calls for papers, and broad titles exist among reputable venues.",
+    "anchor": "Research Methods AI — L5 Slides"
+  },
+  {
+    "id": "L5-Q11",
+    "source": "L5 Slides",
+    "topic": "Peer review types",
+    "question": "[EASY] In double-blind peer review:",
+    "options": [
+      ["A", "Reviewers see the authors' names, but authors never learn the reviewers'"],
+      ["B", "Neither authors nor reviewers learn each other's identities"],
+      ["C", "Reviews are published openly alongside the reviewers' names"],
+      ["D", "Two independent reviewers must agree before acceptance"]
+    ],
+    "answer": "B",
+    "note": "Double-blind hides identities in both directions, aiming to mute prestige and demographic bias. The first option describes single-blind, the third open review; the 'two reviewers' reading is a folk etymology of 'double' that has nothing to do with blinding.",
+    "anchor": "Research Methods AI — L5 Slides"
+  },
+  {
+    "id": "L5-Q12",
+    "source": "L5 Slides",
+    "topic": "Open review trade-offs",
+    "question": "[HARD] A conference switches to fully open review: reviews and reviewer names are published alongside papers. The most realistic trade-off to expect is:",
+    "options": [
+      ["A", "Higher accountability, but junior reviewers may soften criticism of powerful authors"],
+      ["B", "Higher review quality, but review volume drops as anonymity-seekers decline"],
+      ["C", "Lower prestige bias, but reviewers collude more easily once identified"],
+      ["D", "Faster reviewing, but the published reviews reveal unpublished ideas"]
+    ],
+    "answer": "A",
+    "note": "Visible names encourage careful, civil reviews (accountability) but expose critics - especially junior ones - to social risk when reviewing senior figures, which is the chilling effect the lecture flags. The other options pair a plausible benefit with a speculative or incoherent cost: open review does not particularly reduce prestige bias (identities become MORE visible) nor speed anything up.",
+    "anchor": "Research Methods AI — L5 Slides"
+  },
+  {
+    "id": "L5-Q13",
+    "source": "L5 Slides",
+    "topic": "Publication bias",
+    "question": "[MID] Twenty labs test whether a brain-training app boosts memory. Nineteen find nothing and shelve their results; one finds a positive effect and publishes. The published literature now suggests the app works. This distortion is called:",
+    "options": [
+      ["A", "p-hacking - flexible analysis pushed one study across the threshold"],
+      ["B", "Publication bias - null results vanish into the file drawer"],
+      ["C", "HARKing - the positive lab framed its result as predicted all along"],
+      ["D", "Citation bias - positive findings get cited more than null ones"]
+    ],
+    "answer": "B",
+    "note": "The distortion described operates at the publish/don't-publish step: nulls go unpublished, so readers see a censored record - the file-drawer problem. Nothing in the scenario says the one positive lab analyzed flexibly (p-hacking) or rewrote its hypothesis (HARKing); with twenty tests, one false positive is expected by chance alone. Citation bias is a further distortion downstream of publication.",
+    "anchor": "Research Methods AI — L5 Slides"
+  },
+  {
+    "id": "L5-Q14",
+    "source": "L5 Slides",
+    "topic": "Downstream cost of publication bias",
+    "question": "[HARD] A meta-analysis pools all published studies on an intervention and finds a solid average effect. Why can publication bias make even this synthesis misleading?",
+    "options": [
+      ["A", "Pooling studies of different designs invalidates the averaged estimate"],
+      ["B", "The pooled estimate inherits inflation if null studies never entered the pool"],
+      ["C", "Meta-analyses weight large studies too heavily, drowning out small nulls"],
+      ["D", "Averaging across labs compounds each study's individual Type I risk"]
+    ],
+    "answer": "B",
+    "note": "A meta-analysis is only as unbiased as its input: if the file drawer swallowed the nulls, the pool is censored and the precise-looking average estimates a biased quantity. Heterogeneity (option A) and weighting are real methodological debates but don't capture the publication-bias mechanism; large-study weighting actually mitigates bias, since big studies get published regardless of outcome.",
+    "anchor": "Research Methods AI — L5 Slides"
+  },
+  {
+    "id": "L5-Q15",
+    "source": "L5 Slides",
+    "topic": "Making your own work reproducible",
+    "question": "[MID] You are about to submit your first ML paper. Which package of actions does most for its computational reproducibility?",
+    "options": [
+      ["A", "Public code and data, pinned software versions, fixed seeds, scripted pipeline"],
+      ["B", "Public code and data, detailed methods section, results tables in the appendix"],
+      ["C", "Detailed methods section, code available on request, standard frameworks"],
+      ["D", "Public code, fixed seeds, plus a video walkthrough of the analysis steps"]
+    ],
+    "answer": "A",
+    "note": "Reproducibility is engineered: versioned code AND data, pinned environments, fixed seeds, and a fully scripted (no manual steps) pipeline. Prose descriptions and result tables describe outcomes without enabling regeneration; 'available on request' famously converges to unavailable; and a video of manual steps documents irreproducibility rather than fixing it.",
+    "anchor": "Research Methods AI — L5 Slides"
+  },
+  {
+    "id": "L5-Q16",
+    "source": "L5 Slides",
+    "topic": "Classifying verification claims",
+    "question": "[HARD] Four claims about a published study. Which one describes REPLICATION rather than reproducibility?",
+    "options": [
+      ["A", "'I reran their notebook on their data and obtained their Table 2 exactly.'"],
+      ["B", "'Their repository is offline, so nobody can rerun the analysis anymore.'"],
+      ["C", "'We recruited a fresh sample, followed their protocol, and saw the same effect.'"],
+      ["D", "'Their numbers change when the analysis runs on a newer pandas version.'"]
+    ],
+    "answer": "C",
+    "note": "Only the fresh-sample claim involves new data - that is replication. The other three all concern rerunning the original computation: successfully (A), impossibly (B), and fragilely (D) - reproducibility in its success, failure, and brittleness modes.",
+    "anchor": "Research Methods AI — L5 Slides"
   },
   {
     "id": "W6-Q1",
     "source": "Week 6 Slides",
-    "topic": "Belmont Framework Core Principles",
-    "question": "[EASY] According to the Belmont Framework, what are the three core ethical principles?",
+    "topic": "Belmont principles overview",
+    "question": "[EASY] The three core principles of the Belmont framework are:",
     "options": [
-      [
-        "A",
-        "Respect for Persons, Beneficence, Justice"
-      ],
-      [
-        "B",
-        "Honesty, Transparency, Accountability"
-      ],
-      [
-        "C",
-        "Consent, Confidentiality, Data Protection"
-      ],
-      [
-        "D",
-        "Risk Minimization, Benefit Maximization, Fairness"
-      ]
+      ["A", "Transparency, accountability, and fairness"],
+      ["B", "Respect for persons, beneficence, and justice"],
+      ["C", "Consent, confidentiality, and debriefing"],
+      ["D", "Autonomy, privacy, and non-maleficence"]
     ],
-    "answer": "A",
-    "note": "The Belmont Framework explicitly states three core principles: Respect for Persons, Beneficence, and Justice.",
+    "answer": "B",
+    "note": "Belmont's triad: respect for persons (autonomy/consent), beneficence (maximize benefit, minimize harm), justice (fair distribution of burdens and benefits). The distractors mix AI-governance vocabulary, procedural safeguards, and bioethics terms that overlap conceptually - consent, autonomy, and non-maleficence are components or cousins of the principles, not the named triad.",
     "anchor": "Research Methods AI — Week 6 Slides"
   },
   {
     "id": "W6-Q2",
     "source": "Week 6 Slides",
-    "topic": "Informed Consent Conditions",
-    "question": "[EASY] What are the three conditions required for informed consent?",
+    "topic": "Respect for persons",
+    "question": "[EASY] The principle of respect for persons most directly requires researchers to:",
     "options": [
-      [
-        "A",
-        "Information, Comprehension, Voluntariness"
-      ],
-      [
-        "B",
-        "Honesty, Trust, Transparency"
-      ],
-      [
-        "C",
-        "Privacy, Confidentiality, Security"
-      ],
-      [
-        "D",
-        "Disclosure, Review, Approval"
-      ]
+      ["A", "Obtain informed consent and protect those with reduced autonomy"],
+      ["B", "Weigh anticipated benefits against possible harms before starting"],
+      ["C", "Select participants so burdens and benefits are fairly distributed"],
+      ["D", "Debrief participants fully after any use of deception"]
     ],
     "answer": "A",
-    "note": "The slide on informed consent clearly lists three conditions: (1) Information—know what is being agreed to, (2) Comprehension—understood the information, (3) Voluntariness—free option for participation.",
+    "note": "Respect for persons = treating people as autonomous decision-makers (informed, voluntary consent) plus extra protection where autonomy is reduced. Risk-benefit weighing belongs to beneficence and fair selection to justice; debriefing is a specific procedure that serves respect but is not its core definition.",
     "anchor": "Research Methods AI — Week 6 Slides"
   },
   {
     "id": "W6-Q3",
     "source": "Week 6 Slides",
-    "topic": "Tuskegee Syphilis Experiment",
-    "question": "[EASY] In the Tuskegee Syphilis experiment (1932-1972), what was deliberately withheld from participants?",
+    "topic": "Justice in subject selection",
+    "question": "[HARD] A risky early-phase drug trial recruits exclusively from a low-income neighborhood by offering payments, while the resulting therapy will be priced for wealthy patients. Which Belmont principle is most directly violated?",
     "options": [
-      [
-        "A",
-        "Their diagnosis and access to treatment"
-      ],
-      [
-        "B",
-        "Information about the study duration"
-      ],
-      [
-        "C",
-        "Details about study procedures"
-      ],
-      [
-        "D",
-        "Compensation for participation"
-      ]
+      ["A", "Respect for persons - the payments may render consent less than voluntary"],
+      ["B", "Beneficence - the trial's risks plainly outweigh its expected benefits"],
+      ["C", "Justice - one group bears the burdens while another reaps the benefits"],
+      ["D", "All three equally - the design fails on every Belmont dimension"]
     ],
-    "answer": "A",
-    "note": "The slide explicitly states participants were 'not told their diagnosis' and 'treatment withheld' despite available cure.",
+    "answer": "C",
+    "note": "The defining feature of the scenario is the asymmetric DISTRIBUTION: burdens concentrated on the poor, benefits flowing to the wealthy - justice's exact subject matter. The undue-inducement worry (respect) is a legitimate secondary concern, which makes it the strong distractor; but payment per se doesn't invalidate consent, and nothing in the stem shows the trial's overall risk-benefit balance failing. 'Most directly' is doing the work.",
     "anchor": "Research Methods AI — Week 6 Slides"
   },
   {
     "id": "W6-Q4",
     "source": "Week 6 Slides",
-    "topic": "Principle 1: Respect for Persons",
-    "question": "[EASY] Which application of the Belmont principle 'Respect for Persons' is mentioned in the slides?",
+    "topic": "Beneficence and risk-benefit",
+    "question": "[MID] An ethics board reviews a study where participants are mildly deceived for 10 minutes, fully debriefed afterwards, and the results could substantially improve mental-health screening. Under beneficence, the board's core task is to:",
     "options": [
-      [
-        "A",
-        "Informed consent"
-      ],
-      [
-        "B",
-        "Risk-benefit assessment"
-      ],
-      [
-        "C",
-        "Fair subject selection"
-      ],
-      [
-        "D",
-        "Institutional review"
-      ]
+      ["A", "Reject the protocol, since deception negates autonomy regardless of debriefing"],
+      ["B", "Weigh expected benefits against risks and verify harms are minimized"],
+      ["C", "Approve the protocol, since the societal benefit plainly justifies mild deception"],
+      ["D", "Ask participants to judge the risks themselves through the consent form"]
     ],
-    "answer": "A",
-    "note": "The slide explicitly states: Principle 1 (Respect for Persons) applies to 'informed consent'.",
+    "answer": "B",
+    "note": "Beneficence is a balancing exercise: maximize expected benefit, minimize harm, and require residual risk to be justified by the gain - it neither bans all deception nor rubber-stamps important topics. The automatic-rejection stance is a real deontological position but answers a respect-for-persons question, not the beneficence question asked; and delegating the weighing to participants abdicates the board's distinct duty.",
     "anchor": "Research Methods AI — Week 6 Slides"
   },
   {
     "id": "W6-Q5",
     "source": "Week 6 Slides",
-    "topic": "Principle 2: Beneficence",
-    "question": "[EASY] What application corresponds to the Belmont principle 'Beneficence'?",
+    "topic": "Facebook emotional contagion - core failure",
+    "question": "[MID] In the 2014 Facebook emotional contagion study, news feeds of ~690,000 users were altered to study emotion. The study's central ethical failure was that:",
     "options": [
-      [
-        "A",
-        "Risk-benefit assessment"
-      ],
-      [
-        "B",
-        "Informed consent"
-      ],
-      [
-        "C",
-        "Fair subject selection"
-      ],
-      [
-        "D",
-        "Data minimization"
-      ]
+      ["A", "Users' emotions were manipulated without their informed consent"],
+      ["B", "The possible emotional harm was never weighed against the benefits"],
+      ["C", "The affected users were never debriefed after the experiment ended"],
+      ["D", "The blanket terms-of-service agreement was never shown to the users"]
     ],
     "answer": "A",
-    "note": "The slide on Principle 2 (Beneficence) states its application is 'risk-benefit assessment'.",
+    "note": "The central failure is consent: users never agreed to be subjects in an emotion-manipulation experiment, and a blanket ToS clause is not informed consent (note: the ToS WAS shown - the last option's premise is false; the problem is that ToS acceptance doesn't constitute consent to research). Unassessed harm and missing debriefing are genuine secondary failures the case also illustrates, but the lecture centers the consent violation.",
     "anchor": "Research Methods AI — Week 6 Slides"
   },
   {
     "id": "W6-Q6",
     "source": "Week 6 Slides",
-    "topic": "Principle 3: Justice",
-    "question": "[EASY] What application corresponds to the Belmont principle 'Justice'?",
+    "topic": "Facebook study - systemic lessons",
+    "question": "[MID] Beyond missing consent, the Facebook contagion case exposed which broader systemic problem for industry research?",
     "options": [
-      [
-        "A",
-        "Fair subject selection"
-      ],
-      [
-        "B",
-        "Informed consent"
-      ],
-      [
-        "C",
-        "Risk-benefit assessment"
-      ],
-      [
-        "D",
-        "Transparency"
-      ]
+      ["A", "Corporate user studies could proceed with little independent ethical review"],
+      ["B", "Academic journals lacked the expertise to evaluate industry methods"],
+      ["C", "Platform A/B testing was technically incapable of measuring emotion"],
+      ["D", "Industry researchers were unaware that consent rules applied to them"]
     ],
     "answer": "A",
-    "note": "The slide on Principle 3 (Justice) states its application is 'fair subject selection'.",
+    "note": "The systemic gap: experiments on hundreds of thousands of users passed through none of the independent review infrastructure (IRB-style) that university research must clear, and possible emotional harm was barely assessed. The study was published and methodologically capable; awareness wasn't the issue - the review STRUCTURE was missing.",
     "anchor": "Research Methods AI — Week 6 Slides"
   },
   {
     "id": "W6-Q7",
     "source": "Week 6 Slides",
-    "topic": "Meta/Facebook Emotional Contagion Study",
-    "question": "[EASY] In the Meta/Facebook (2014) emotional contagion study, what did users not know was happening to their news feed?",
+    "topic": "Historical abuses behind Belmont",
+    "question": "[MID] In the Tuskegee syphilis study, poor Black men were observed for decades, denied effective treatment after it existed, and misled about their condition. Which Belmont principles did it violate?",
     "options": [
-      [
-        "A",
-        "Their feed was being filtered to show more positive or negative content"
-      ],
-      [
-        "B",
-        "Their data was being sold to third parties"
-      ],
-      [
-        "C",
-        "Their location was being tracked"
-      ],
-      [
-        "D",
-        "Their posts were being analyzed by psychologists"
-      ]
+      ["A", "Justice above all - the harm came from targeting a vulnerable group"],
+      ["B", "Respect and beneficence, while selection fairness is a separate legal issue"],
+      ["C", "All three - deception, withheld treatment, and targeting a vulnerable group"],
+      ["D", "Beneficence above all - withholding treatment caused the concrete harm"]
     ],
-    "answer": "A",
-    "note": "The slide describes the design: 'Users were randomly assigned to more positive or more negative content' and 'Their posts were then analyzed for emotional tone'—but users were not informed.",
+    "answer": "C",
+    "note": "Tuskegee fails on every dimension: deception destroyed informed consent (respect), withholding penicillin caused direct harm (beneficence), and burdens fell on a marginalized group (justice). The single-principle options each name a real violation - that's what makes them tempting - but the case is taught precisely as the total failure that motivated the Belmont Report.",
     "anchor": "Research Methods AI — Week 6 Slides"
   },
   {
     "id": "W6-Q8",
     "source": "Week 6 Slides",
-    "topic": "GDPR Personal Data Protection",
-    "question": "[EASY] According to the slides, what is required for personal data processing in the EU under GDPR?",
+    "topic": "Scraping and Terms of Service",
+    "question": "[MID] A student scrapes a public web forum for an emotion-detection dataset. The posts are publicly visible, but the platform's Terms of Service forbid scraping, and users never imagined their posts becoming AI training data. The most accurate ethical assessment is:",
     "options": [
-      [
-        "A",
-        "A lawful basis such as consent, legitimate interest, or legal obligation"
-      ],
-      [
-        "B",
-        "Explicit approval from a government agency"
-      ],
-      [
-        "C",
-        "Prior notification to all affected individuals"
-      ],
-      [
-        "D",
-        "Payment of a data protection fee"
-      ]
+      ["A", "Acceptable - publicly posted content carries no expectation of privacy"],
+      ["B", "Problematic - public visibility is not consent, and the ToS adds a compliance issue"],
+      ["C", "Acceptable once usernames are stripped, since no one is identifiable"],
+      ["D", "Problematic solely because of the ToS - ethics follows the platform's rules"]
     ],
-    "answer": "A",
-    "note": "The GDPR slide states: 'Personal data is protected by law in EU' with 'lawful basis to process it (consent, legitimate interest, or legal obligation)'.",
+    "answer": "B",
+    "note": "Two distinct layers: 'public' does not equal 'consented to research use' (people post for an audience, not for dataset inclusion) - the ethical layer - and the ToS prohibition adds a separate compliance layer. Stripping usernames helps but post content often re-identifies people, and reducing ethics to ToS-compliance gets the relationship backwards: a permissive ToS wouldn't settle the consent question either.",
     "anchor": "Research Methods AI — Week 6 Slides"
   },
   {
     "id": "W6-Q9",
     "source": "Week 6 Slides",
-    "topic": "Anonymization vs. Pseudonymization",
-    "question": "[EASY] Under GDPR, why is pseudonymization considered still personal data?",
+    "topic": "GDPR data minimization",
+    "question": "[MID] A simple quiz app's signup form demands name, home address, precise GPS location, and contacts access - none needed for quizzing. Which GDPR principle does this most directly violate?",
     "options": [
-      [
-        "A",
-        "Because the key to identify individuals still exists and can be linked back"
-      ],
-      [
-        "B",
-        "Because it is illegal to pseudonymize any data"
-      ],
-      [
-        "C",
-        "Because individuals can always reverse pseudonymization themselves"
-      ],
-      [
-        "D",
-        "Because GDPR prohibits all data transformation methods"
-      ]
+      ["A", "Purpose limitation - data may only be used for its declared purpose"],
+      ["B", "Storage limitation - data may not be retained longer than necessary"],
+      ["C", "Data minimization - only data necessary for the purpose may be collected"],
+      ["D", "Lawfulness of processing - collection requires a valid legal basis"]
     ],
-    "answer": "A",
-    "note": "The slide explains: 'Pseudonymization: Identity is replaced, but key still exists' with example 'Sarah Connor → robotkiller123'. Still considered personal data because identity can be recovered.",
+    "answer": "C",
+    "note": "The violation happens at COLLECTION: gathering data the purpose doesn't need. Purpose limitation is the nearest neighbor but governs later USE of data beyond its declared purpose; storage limitation concerns retention time; lawful basis might also be questioned, but the stem's emphasis - 'none needed for quizzing' - is minimization's exact language.",
     "anchor": "Research Methods AI — Week 6 Slides"
   },
   {
     "id": "W6-Q10",
     "source": "Week 6 Slides",
-    "topic": "Ethical Review Boards",
-    "question": "[EASY] What is one reason mentioned in the slides why ethical review boards exist?",
+    "topic": "Anonymization vs pseudonymization",
+    "question": "[HARD] A hospital replaces patient names with random codes but keeps a secure key file linking codes back to identities for follow-up. Under GDPR, this data is:",
     "options": [
-      [
-        "A",
-        "Because individuals (including experienced researchers) often miss ethical problems"
-      ],
-      [
-        "B",
-        "To provide legal protection exclusively to the institution"
-      ],
-      [
-        "C",
-        "To replace institutional procedures entirely"
-      ],
-      [
-        "D",
-        "To approve all studies without exception"
-      ]
+      ["A", "Anonymized - identities are removed from the working dataset"],
+      ["B", "Pseudonymized - and therefore still personal data within GDPR's scope"],
+      ["C", "Pseudonymized - and therefore exempt from GDPR like anonymous data"],
+      ["D", "Anonymized for analysts without key access, pseudonymized for the rest"]
     ],
-    "answer": "A",
-    "note": "The slide states: 'Ethical review boards exist because individuals miss things. That includes experienced researchers.'",
+    "answer": "B",
+    "note": "As long as a key permits re-identification, the data is pseudonymized and remains fully inside GDPR - that is the regulation's explicit position. The two-step trap: first classify correctly (pseudonymized, not anonymized), then attach the right consequence (still regulated, not exempt). The 'depends on who holds the key' reading is intuitive but GDPR ties status to the data's re-identifiability, not the individual analyst's access.",
     "anchor": "Research Methods AI — Week 6 Slides"
   },
   {
     "id": "W6-Q11",
     "source": "Week 6 Slides",
-    "topic": "EU AI Act Risk Classification",
-    "question": "[EASY] According to the EU AI Act (2024), which use of AI is classified as 'unacceptable risk'?",
+    "topic": "Recognizing p-hacking",
+    "question": "[MID] A researcher's effect isn't significant, so they drop two 'outlier' participants, try three alternative outcome measures, and test subgroups until one combination yields p = 0.049, which they report as their finding. This practice is:",
     "options": [
-      [
-        "A",
-        "Social scoring, manipulative AI, and emotional inference"
-      ],
-      [
-        "B",
-        "Image classification and text analysis"
-      ],
-      [
-        "C",
-        "Customer service chatbots"
-      ],
-      [
-        "D",
-        "Educational recommendation systems"
-      ]
+      ["A", "Sensitivity analysis - probing whether results hold under analytic variations"],
+      ["B", "HARKing - presenting the surviving result as the original hypothesis"],
+      ["C", "p-hacking - searching the analysis space until significance appears"],
+      ["D", "Multiple-comparison correction - exploring tests before choosing one"]
     ],
-    "answer": "A",
-    "note": "The slide on EU AI Act lists unacceptable risk (prohibited) uses: social scoring, manipulative AI, emotional inference.",
+    "answer": "C",
+    "note": "Analysis decisions made after seeing the data, steered toward p < .05, are p-hacking: the reported test no longer carries its advertised error rate. Sensitivity analysis runs the same variations but reports ALL of them - transparency is the difference. HARKing is the sibling QRP about rewriting the hypothesis (not described here), and correction procedures ADJUST for multiple tests rather than hiding them.",
     "anchor": "Research Methods AI — Week 6 Slides"
   },
   {
     "id": "W6-Q12",
     "source": "Week 6 Slides",
-    "topic": "Belmont Principles Application",
-    "question": "[MID] A researcher designs a study where participants from low-income communities are disproportionately recruited. Which Belmont principle is most directly violated?",
+    "topic": "HARKing",
+    "question": "[HARD] After exploring a dataset, a team finds an unexpected correlation, then writes the paper as if predicting exactly that correlation had been the study's hypothesis from day one. This QRP is called:",
     "options": [
-      [
-        "A",
-        "Justice—because the burden of research is not equitably distributed"
-      ],
-      [
-        "B",
-        "Beneficence—because the study lacks immediate harm reduction"
-      ],
-      [
-        "C",
-        "Respect for Persons—because participants are not autonomous"
-      ],
-      [
-        "D",
-        "Informed consent—because participants are not told recruitment criteria"
-      ]
+      ["A", "p-hacking - the hypothesis was tuned until the data fit it"],
+      ["B", "HARKing - hypothesizing after the results are known"],
+      ["C", "Publication bias - only the successful prediction reached print"],
+      ["D", "Confirmation bias - they believed the pattern because they found it"]
     ],
-    "answer": "A",
-    "note": "Justice concerns equitable distribution of research benefits and burdens. Disproportionate recruitment of vulnerable populations without corresponding access to benefits violates fairness.",
+    "answer": "B",
+    "note": "Disguising exploration as confirmation - presenting a data-discovered pattern as an a-priori prediction - is HARKing. p-hacking manipulates the ANALYSIS to reach significance; HARKing manipulates the NARRATIVE around an honest analysis. Exploratory findings are legitimate when labeled as exploratory and confirmed on new data; the sin is the disguise.",
     "anchor": "Research Methods AI — Week 6 Slides"
   },
   {
     "id": "W6-Q13",
     "source": "Week 6 Slides",
-    "topic": "Risk-Benefit Assessment",
-    "question": "[MID] According to the slides, risk-benefit assessment under Beneficence must consider both which time horizons?",
+    "topic": "Honest visualization",
+    "question": "[EASY] A press release plots user growth from 10,000 to 10,300 with the y-axis starting at 9,950, making the bar appear to triple. The ethical problem is that:",
     "options": [
-      [
-        "A",
-        "Immediate and long-term effects"
-      ],
-      [
-        "B",
-        "Individual and societal effects"
-      ],
-      [
-        "C",
-        "Physical and psychological harms only"
-      ],
-      [
-        "D",
-        "Before and after data collection only"
-      ]
+      ["A", "The truncated axis visually exaggerates a negligible change"],
+      ["B", "The underlying growth numbers were fabricated for the chart"],
+      ["C", "Growth data should be shown as a line chart, never as bars"],
+      ["D", "The chart omits confidence intervals around the user counts"]
     ],
     "answer": "A",
-    "note": "The Beneficence slide states: 'What are the risks to participants?' and considers 'immediate and long-term effects'.",
+    "note": "Every number is true; the deception lives in the axis - a 3% change rendered as a 200% visual impression. That is the core of visualization ethics: axes, scales, and selections must not engineer impressions the data doesn't support. Chart-type conventions and missing uncertainty bands are style points, not the misleading mechanism here.",
     "anchor": "Research Methods AI — Week 6 Slides"
   },
   {
     "id": "W6-Q14",
     "source": "Week 6 Slides",
-    "topic": "Facebook Study Ethical Failures",
-    "question": "[MID] In the Facebook emotional contagion study, how did the absence of risk-benefit assessment specifically harm the study's ethics?",
+    "topic": "EU AI Act risk tiers",
+    "question": "[MID] Under the EU AI Act's risk-based approach, classify: (1) a government 'social scoring' system ranking citizens' trustworthiness; (2) an AI tool screening job applicants' CVs.",
     "options": [
-      [
-        "A",
-        "No systematic assessment was conducted before the study, and the effect on depressed users went unmonitored"
-      ],
-      [
-        "B",
-        "Participants were told about the risks but chose to ignore them"
-      ],
-      [
-        "C",
-        "The study included no data minimization measures"
-      ],
-      [
-        "D",
-        "The risk assessment was performed but deliberately hidden from participants"
-      ]
+      ["A", "Both are high risk, permitted under strict transparency requirements"],
+      ["B", "(1) is unacceptable risk and banned; (2) is high risk under strict requirements"],
+      ["C", "(1) is high risk; (2) is limited risk, needing only a disclosure label"],
+      ["D", "(1) is unacceptable risk and banned; (2) is limited risk with disclosure"]
     ],
-    "answer": "A",
-    "note": "The slide on Facebook's risk-benefit states: 'No systematic risk assessment was conducted beforehand' and notes concerns including 'Tracking effect of mood manipulation' and 'Effect on depressed users'.",
+    "answer": "B",
+    "note": "Social scoring by governments sits in the banned 'unacceptable' tier. Employment and hiring systems are a flagship 'high-risk' category - legal but subject to bias audits, documentation, human oversight, and transparency. The composite options work by getting one classification right: check BOTH before answering.",
     "anchor": "Research Methods AI — Week 6 Slides"
   },
   {
     "id": "W6-Q15",
     "source": "Week 6 Slides",
-    "topic": "Data Scraping Ethics",
-    "question": "[MID] Scenario 1 asks: You scraped 500,000 Reddit posts on hate speech and a reviewer requests the original dataset for reproducibility. How does this conflict with the platforms terms of service?",
+    "topic": "AI disclosure to users",
+    "question": "[MID] A company's customer-service chatbot is so fluent that most customers believe they are chatting with a human employee, and the company quietly enjoys this. Regarding disclosure, the defensible position is:",
     "options": [
-      [
-        "A",
-        "Reddit's ToS prohibits commercial use and the researchers must check before publishing"
-      ],
-      [
-        "B",
-        "Reproducibility always overrides platform ToS"
-      ],
-      [
-        "C",
-        "Anonymization automatically permits data release"
-      ],
-      [
-        "D",
-        "Public posts have no legal protection"
-      ]
+      ["A", "Disclose proactively that customers are interacting with an AI system"],
+      ["B", "Disclose in the website's terms of service, where the information is available"],
+      ["C", "Disclose whenever a customer directly asks whether the agent is human"],
+      ["D", "Disclosure is unneeded while service quality matches a human agent's"]
     ],
     "answer": "A",
-    "note": "The Reddit Collection slide shows Reddit's robots.txt explicitly states support for research but the ToS must be checked. The scenario reflects the real tension between reproducibility and ToS compliance.",
+    "note": "Transparency means people know they are talking to a machine at the point of interaction - the EU AI Act makes this an explicit obligation for human-facing AI. Burying the fact in ToS repeats the Facebook-consent fallacy (available is not informed), answer-only-if-asked exploits the deception by default, and good service quality answers a different question than honesty.",
     "anchor": "Research Methods AI — Week 6 Slides"
   },
   {
     "id": "W6-Q16",
     "source": "Week 6 Slides",
-    "topic": "Copyright and Training Data Ethics",
-    "question": "[MID] In Scenario 2, a model is trained on 10 million copyrighted images without permission yet reaches state-of-the-art performance. Why does the fact that it 'cannot retrieve the originals' not resolve the ethical issue?",
+    "topic": "Data reuse beyond original consent",
+    "question": "[HARD] In 2019, participants consented to share voice recordings 'for a study on regional accents'. In 2026, the lab wants to reuse those recordings to train a commercial voice-cloning model. Which assessment is correct?",
     "options": [
-      [
-        "A",
-        "Copyright is violated at the point of training, regardless of whether the model can reproduce the originals"
-      ],
-      [
-        "B",
-        "Inability to retrieve originals proves the model is stolen"
-      ],
-      [
-        "C",
-        "Copyright only applies to data that can be recovered"
-      ],
-      [
-        "D",
-        "Non-reproducibility prevents any ethical scrutiny"
-      ]
+      ["A", "Proceeding is fine - the data was lawfully collected and remains the lab's"],
+      ["B", "Proceeding requires removing names first, since voice data is then anonymous"],
+      ["C", "Proceeding exceeds the consented purpose - new consent or safeguards are needed"],
+      ["D", "Proceeding is covered by research exemptions for previously collected data"]
     ],
-    "answer": "A",
-    "note": "The scenario is based on Getty Images v. Stability AI—training on copyrighted data without permission is unethical regardless of non-reproducibility. The ethics violation occurs upstream.",
-    "anchor": "Research Methods AI — Week 6 Slides"
-  },
-  {
-    "id": "W6-Q17",
-    "source": "Week 6 Slides",
-    "topic": "Chatbot AI Disclosure and Consent",
-    "question": "[MID] In Scenario 3, a chatbot is deployed to all first-year students without disclosure that they are talking to AI, and it performs poorly on emotional issues. Which Belmont principle is most clearly violated?",
-    "options": [
-      [
-        "A",
-        "Respect for Persons—lack of informed consent about AI interaction"
-      ],
-      [
-        "B",
-        "Beneficence—the tool fails at its intended benefit"
-      ],
-      [
-        "C",
-        "Justice—unequal distribution of chatbot access"
-      ],
-      [
-        "D",
-        "All three equally"
-      ]
-    ],
-    "answer": "A",
-    "note": "The scenario states 'without telling them they are talking to AI' and 'disclosure reduces engagement'. This directly violates informed consent (Respect for Persons).",
-    "anchor": "Research Methods AI — Week 6 Slides"
-  },
-  {
-    "id": "W6-Q18",
-    "source": "Week 6 Slides",
-    "topic": "Data Reuse and Consent",
-    "question": "[MID] In Scenario 4, a colleague shares their dataset (with consent for the original study) for a new, related research question. Why might using the data anyway create an ethical problem?",
-    "options": [
-      [
-        "A",
-        "Original informed consent was specific to the original study; new consent or re-consent is needed"
-      ],
-      [
-        "B",
-        "Data can only be used once"
-      ],
-      [
-        "C",
-        "Anonymization permits unlimited reuse"
-      ],
-      [
-        "D",
-        "A colleague's permission overrides participant consent"
-      ]
-    ],
-    "answer": "A",
-    "note": "The scenario highlights the tension: participants consented to the original study, not the new research question. Ethical reuse requires either new consent or justification under original consent scope.",
-    "anchor": "Research Methods AI — Week 6 Slides"
-  },
-  {
-    "id": "W6-Q19",
-    "source": "Week 6 Slides",
-    "topic": "AI Ethics Application",
-    "question": "[MID] According to Belmont applied to AI, what does 'Respect for Persons' require in AI systems?",
-    "options": [
-      [
-        "A",
-        "Transparency, Explainability, and Right to contest decisions"
-      ],
-      [
-        "B",
-        "High accuracy on all datasets"
-      ],
-      [
-        "C",
-        "Removal of all personal data"
-      ],
-      [
-        "D",
-        "Prohibiting AI use entirely"
-      ]
-    ],
-    "answer": "A",
-    "note": "The 'Belmont applied to AI' slide lists under 'Respect for persons': Transparency, Explainability, Right to contest.",
-    "anchor": "Research Methods AI — Week 6 Slides"
-  },
-  {
-    "id": "W6-Q20",
-    "source": "Week 6 Slides",
-    "topic": "AI Ethics: Bias Audits and Justice",
-    "question": "[MID] Under the Belmont principle 'Justice' applied to AI, what two forms of equity are required?",
-    "options": [
-      [
-        "A",
-        "Bias audits and equitable access"
-      ],
-      [
-        "B",
-        "Equal accuracy and equal cost"
-      ],
-      [
-        "C",
-        "Universal deployment and uniform regulation"
-      ],
-      [
-        "D",
-        "Identical performance across all groups"
-      ]
-    ],
-    "answer": "A",
-    "note": "The 'Belmont applied to AI' slide lists under 'Justice': Bias audits, Equitable access.",
-    "anchor": "Research Methods AI — Week 6 Slides"
-  },
-  {
-    "id": "W6-Q21",
-    "source": "Week 6 Slides",
-    "topic": "Visualization and Reproducibility",
-    "question": "[MID] The slides show that misleading visualizations (e.g., truncated axes, 3D distortion) are a research ethics issue because they affect which aspect of the research process?",
-    "options": [
-      [
-        "A",
-        "Reproducibility and trust in science—figures must be reproducible just like data"
-      ],
-      [
-        "B",
-        "Only the presentation stage, not the research validity"
-      ],
-      [
-        "C",
-        "Data collection procedures"
-      ],
-      [
-        "D",
-        "Statistical power calculations"
-      ]
-    ],
-    "answer": "A",
-    "note": "The 'Presentation and Viz' section notes: 'A misleading figure is a misleading claim...figures also need to be reproducible!' This is a direct ethics issue under transparency and honesty.",
-    "anchor": "Research Methods AI — Week 6 Slides"
-  },
-  {
-    "id": "W6-Q22",
-    "source": "Week 6 Slides",
-    "topic": "QRPs (Questionable Research Practices)",
-    "question": "[HARD] The slides list three Questionable Research Practices (QRPs) related to analysis and reporting. Which of the following best describes why all three are ethically problematic?",
-    "options": [
-      [
-        "A",
-        "All three bias research results toward publication by selectively reporting favorable outcomes, violating research honesty and reproducibility"
-      ],
-      [
-        "B",
-        "All three improve statistical power"
-      ],
-      [
-        "C",
-        "All three are illegal under international law"
-      ],
-      [
-        "D",
-        "All three require explicit approval before use"
-      ]
-    ],
-    "answer": "A",
-    "note": "QRPs listed are: Selective reporting (which results go in the paper), P-hacking (testing until significance), HARKing (hypothesizing after results known). All allow researchers to bias outcomes toward publishability, undermining integrity.",
-    "anchor": "Research Methods AI — Week 6 Slides"
-  },
-  {
-    "id": "W6-Q23",
-    "source": "Week 6 Slides",
-    "topic": "Summary Checklist: Consent, Risk, Selection",
-    "question": "[HARD] The summary checklist proposes three universal questions: 'Was consent valid?', 'Were risks justified?', and 'Was subject selection fair?'. Which of the following best explains why these three together form a complete ethical review?",
-    "options": [
-      [
-        "A",
-        "They directly map to Belmont's three principles: Respect for Persons, Beneficence, and Justice"
-      ],
-      [
-        "B",
-        "They cover only procedural concerns, not substantive ethics"
-      ],
-      [
-        "C",
-        "They are specific to human subjects research and do not apply to AI"
-      ],
-      [
-        "D",
-        "They require no institutional oversight if all three are satisfied"
-      ]
-    ],
-    "answer": "A",
-    "note": "The checklist slide explicitly ties the three questions to the three Belmont principles, operationalizing them for practical review.",
-    "anchor": "Research Methods AI — Week 6 Slides"
-  },
-  {
-    "id": "W6-Q24",
-    "source": "Week 6 Slides",
-    "topic": "Data Labeling Workforce Ethics",
-    "question": "[HARD] The 'Where Things Go Wrong in AI Ethics' slide highlights that data labelers often work under poor conditions for low pay, and training data carries the biases of whoever collected it. How do these two issues together threaten the Justice principle?",
-    "options": [
-      [
-        "A",
-        "Poor labeler conditions create biased training data, which then perpetuates unfair outcomes in deployed models—violating equitable access and burden distribution"
-      ],
-      [
-        "B",
-        "Low pay directly reduces model accuracy"
-      ],
-      [
-        "C",
-        "Only the labeler working conditions matter; bias in data is separate"
-      ],
-      [
-        "D",
-        "AI models cannot be audited for bias regardless of training conditions"
-      ]
-    ],
-    "answer": "A",
-    "note": "The slide lists: 'Data labelers work under poor conditions for low pay' and 'Training data carries biases of whoever collected it'. Together, these create a justice failure: unfair working conditions produce biased systems affecting users unfairly.",
-    "anchor": "Research Methods AI — Week 6 Slides"
-  },
-  {
-    "id": "W6-Q25",
-    "source": "Week 6 Slides",
-    "topic": "Belmont vs. GDPR Framework",
-    "question": "[HARD] The slide 'Belmont and GDPR side by side' shows that while Belmont emphasizes 'Informed consent', GDPR permits data processing on broader 'lawful basis' grounds. What is the ethical implication of this difference for researcher practice?",
-    "options": [
-      [
-        "A",
-        "Researchers cannot assume GDPR compliance equals meeting Belmont's respect for persons; Belmont's consent standard is often stricter"
-      ],
-      [
-        "B",
-        "GDPR is ethically superior to Belmont"
-      ],
-      [
-        "C",
-        "Belmont applies only to non-EU research"
-      ],
-      [
-        "D",
-        "Lawful basis under GDPR automatically satisfies informed consent"
-      ]
-    ],
-    "answer": "A",
-    "note": "The side-by-side comparison shows: Belmont requires 'Informed consent' while GDPR allows 'Legal consent / lawful basis'. For human subjects research in EU, researchers must meet both: GDPR's legal requirement AND Belmont's ethical standard of true informed consent.",
-    "anchor": "Research Methods AI — Week 6 Slides"
-  },
-  {
-    "id": "W6-Q26",
-    "source": "Week 6 Slides",
-    "topic": "Anonymization True vs. GDPR Anonymization",
-    "question": "[HARD] The slide on GDPR states that 'Anonymization: Identity cannot be recovered' means GDPR no longer applies. However, true anonymization is extremely difficult. What is the practical ethical consequence?",
-    "options": [
-      [
-        "A",
-        "Most datasets claimed to be 'anonymized' retain enough information for re-identification, so GDPR protection is still required unless anonymization is truly irreversible"
-      ],
-      [
-        "B",
-        "Any anonymization effort automatically exempts data from GDPR"
-      ],
-      [
-        "C",
-        "Researchers can anonymize by simply removing names"
-      ],
-      [
-        "D",
-        "GDPR does not apply to any non-identifiable data"
-      ]
-    ],
-    "answer": "A",
-    "note": "The slide contrasts Pseudonymization (key exists, GDPR applies) with Anonymization (identity cannot be recovered, GDPR does not apply). In practice, de-identification through removal of obvious identifiers is insufficient; researchers must ensure true irreversibility.",
-    "anchor": "Research Methods AI — Week 6 Slides"
-  },
-  {
-    "id": "W6-Q27",
-    "source": "Week 6 Slides",
-    "topic": "Collection Stage Ethics: Consent and Scraping",
-    "question": "[HARD] The 'Per stage' slide identifies that Collection requires consideration of 'Consent and Scraping'. Why are these two together in tension for online research?",
-    "options": [
-      [
-        "A",
-        "Much online data is publicly available but scraping may violate ToS; researchers must choose between legal access and ethical platform norms"
-      ],
-      [
-        "B",
-        "Consent is impossible to obtain online"
-      ],
-      [
-        "C",
-        "Scraping always requires explicit legal permission"
-      ],
-      [
-        "D",
-        "Public data requires no ethical consideration"
-      ]
-    ],
-    "answer": "A",
-    "note": "Public posts can be scraped technically and are legally accessible, but platforms (Reddit, Twitter, etc.) restrict scraping in their ToS and may have ethical expectations around researcher conduct. The tension is between what is legally permissible vs. what platform norms and ethics require.",
-    "anchor": "Research Methods AI — Week 6 Slides"
-  },
-  {
-    "id": "W6-Q28",
-    "source": "Week 6 Slides",
-    "topic": "Storage Stage: GDPR Data Minimization",
-    "question": "[HARD] The 'Per stage' slide lists GDPR as a consideration for the Data Storage stage. What does GDPR's 'data minimization' principle require that goes beyond standard data security?",
-    "options": [
-      [
-        "A",
-        "Collect only what is necessary for the stated purpose, and delete it when purpose is fulfilled"
-      ],
-      [
-        "B",
-        "Encrypt all data immediately upon collection"
-      ],
-      [
-        "C",
-        "Store data exclusively on EU servers"
-      ],
-      [
-        "D",
-        "Maintain indefinite data retention for audit purposes"
-      ]
-    ],
-    "answer": "A",
-    "note": "GDPR data minimization (from the slide) requires: 'Collect only what is necessary' and 'Set retention periods based on need and purpose'. This is a proactive ethical choice, not just a security measure.",
-    "anchor": "Research Methods AI — Week 6 Slides"
-  },
-  {
-    "id": "W6-Q29",
-    "source": "Week 6 Slides",
-    "topic": "Analysis and Reporting: QRPs and Honesty",
-    "question": "[HARD] The slide on 'Analysis & QRPs' contrasts selective reporting, p-hacking, and HARKing. If a researcher runs multiple analyses and reports only the significant ones, what chain of ethical breaches occurs?",
-    "options": [
-      [
-        "A",
-        "First breach: violates reporting honesty (selective reporting). Second breach: inflates apparent replicability, causing downstream researchers to build on false foundations"
-      ],
-      [
-        "B",
-        "Only violates statistical assumptions, not research ethics"
-      ],
-      [
-        "C",
-        "Is permitted if the omitted analyses were not pre-registered"
-      ],
-      [
-        "D",
-        "Creates no ethical issue if results are later published separately"
-      ]
-    ],
-    "answer": "A",
-    "note": "Selective reporting directly violates transparency and honesty (Week 1 principle). By reporting only significant results, researchers bias the literature base, misleading future researchers and the field. This cascades through science.",
-    "anchor": "Research Methods AI — Week 6 Slides"
-  },
-  {
-    "id": "W6-Q30",
-    "source": "Week 6 Slides",
-    "topic": "EU AI Act: Risk-Based Regulation",
-    "question": "[HARD] The EU AI Act classifies AI systems into 'unacceptable risk' (prohibited) and 'high risk' (strict regulation). What is the underlying ethical logic of risk-based classification?",
-    "options": [
-      [
-        "A",
-        "Systems with higher potential for harm to fundamental rights face stricter safeguards; unacceptable risk systems are prohibited because mitigation is impossible"
-      ],
-      [
-        "B",
-        "All AI systems carry equal risk"
-      ],
-      [
-        "C",
-        "Risk classification is determined solely by accuracy metrics"
-      ],
-      [
-        "D",
-        "High-risk systems should be prohibited more strictly than unacceptable-risk ones"
-      ]
-    ],
-    "answer": "A",
-    "note": "The EU AI Act slide lists unacceptable risks (social scoring, manipulative AI, emotional inference) as prohibited because they inherently violate human autonomy. High-risk systems (hiring, education, credit) allow use with safeguards because risks can be mitigated. This reflects proportional regulation.",
-    "anchor": "Research Methods AI — Week 6 Slides"
-  },
-  {
-    "id": "W6-Q31",
-    "source": "Week 6 Slides",
-    "topic": "Data Labeling and Beneficence",
-    "question": "[HARD] The slide 'Where Things Go Wrong in AI Ethics' notes that 'Deployed models are hard to audit or contest' and 'Large models have real environmental cost'. How do these two concerns together threaten Beneficence in AI deployment?",
-    "options": [
-      [
-        "A",
-        "Models with high environmental cost but low auditability create a situation where risks cannot be assessed and harms cannot be corrected"
-      ],
-      [
-        "B",
-        "Environmental cost is not an ethics concern"
-      ],
-      [
-        "C",
-        "Auditability and environmental impact are independent issues"
-      ],
-      [
-        "D",
-        "Only auditability matters for Beneficence"
-      ]
-    ],
-    "answer": "A",
-    "note": "Beneficence requires risk-benefit assessment. If a model consumes massive resources but its harms cannot be detected or remedied (low auditability), risk cannot be properly weighed against benefit—violating the systematic evaluation Beneficence requires.",
-    "anchor": "Research Methods AI — Week 6 Slides"
-  },
-  {
-    "id": "W6-Q32",
-    "source": "Week 6 Slides",
-    "topic": "Facebook Study: Meta-Ethics of Surprise Experiments",
-    "question": "[HARD] The Facebook emotional contagion study raises a meta-ethical question: even if the study had sought consent beforehand, would running a large-scale mood manipulation experiment on unknowing participants (absent consent) be acceptable under the Belmont framework?",
-    "options": [
-      [
-        "A",
-        "No—regardless of post-hoc justification, the deliberate manipulation of emotional state without consent violates Respect for Persons, even if no physical harm occurs"
-      ],
-      [
-        "B",
-        "Yes, if the study had written ToS"
-      ],
-      [
-        "C",
-        "Only if the results were published"
-      ],
-      [
-        "D",
-        "Only if participants were later debriefed"
-      ]
-    ],
-    "answer": "A",
-    "note": "This scenario pushes beyond the Facebook case details to the fundamental principle: Respect for Persons requires that autonomous individuals control what happens to them. Even benign manipulation without consent violates this core principle. The harm of psychological studies is not just physical risk but autonomy violation.",
-    "anchor": "Research Methods AI — Week 6 Slides"
-  },
-  {
-    "id": "W6-Q33",
-    "source": "Week 6 Slides",
-    "topic": "Integration: Ethics Across Research Lifecycle",
-    "question": "[HARD] The lecture emphasizes that 'Ethics shows up at every stage' (Week 1-6). How does this cumulative model change the researcher's responsibility compared to viewing ethics as a single approval checkpoint (IRB review)?",
-    "options": [
-      [
-        "A",
-        "Researchers must embed ethical reasoning at collection, storage, analysis, and reporting stages; ethics is not a one-time gate but an ongoing responsibility woven through research"
-      ],
-      [
-        "B",
-        "IRB approval alone is sufficient for all stages"
-      ],
-      [
-        "C",
-        "Each stage can be managed independently without reference to others"
-      ],
-      [
-        "D",
-        "Ethics concerns only arise at the reporting stage"
-      ]
-    ],
-    "answer": "A",
-    "note": "The opening 'Ethics shows up at every stage' table maps honesty, consent, transparency, flexibility, accountability to Weeks 1-6. This reinforces that ethics is not a compliance box but an ongoing practice integrated into research design and execution at every step.",
+    "answer": "C",
+    "note": "Consent is purpose-bound, not a blank check: accent research and commercial voice cloning differ in purpose, beneficiary, and risk profile (cloning is far more invasive), so respect for persons and GDPR purpose limitation both demand renewed consent or equivalent safeguards. The anonymization route fails because a voice IS a biometric identifier - names are not the identifying part. Research exemptions are real but narrow, and a commercial cloning product is not covered research.",
     "anchor": "Research Methods AI — Week 6 Slides"
   }
 ];

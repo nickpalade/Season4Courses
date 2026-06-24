@@ -1,0 +1,123 @@
+[
+  {
+    "id": 1,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "Off-policy definition",
+    "prompt": "What does off-policy learning mean?",
+    "options": [
+      "Learn about a target policy using data from a different behaviour policy",
+      "Learn the value of exactly the policy currently being followed",
+      "Learn a policy directly without ever using a value function",
+      "Learn only from a complete model of the environment"
+    ],
+    "correct": [0],
+    "explanation": "Off-policy means the policy evaluated (target) differs from the one generating data (behaviour) — e.g. learn greedy while exploring. Learning the followed policy is on-policy; the other two describe policy-gradient and model-based ideas."
+  },
+  {
+    "id": 2,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "Double learning purpose",
+    "prompt": "What problem does double learning solve?",
+    "options": [
+      "Maximization bias",
+      "Slow convergence",
+      "Insufficient coverage",
+      "Approximation error"
+    ],
+    "correct": [0],
+    "explanation": "Using one noisy estimator to both pick and evaluate the max overestimates values — maximization bias. Double learning splits selection and evaluation across two estimators to remove it."
+  },
+  {
+    "id": 3,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Importance sampling",
+    "prompt": "What problem does importance sampling address in off-policy methods?",
+    "options": [
+      "An action's probability can differ between behaviour and target policies",
+      "The behaviour policy can drift to become identical to the target",
+      "The target policy can gradually become too greedy",
+      "Some state-action pairs are never visited at all"
+    ],
+    "correct": [0],
+    "explanation": "Data from a different policy biases returns toward the behaviour policy. Importance sampling reweights each return by the target/behaviour action-probability ratio to correct that mismatch."
+  },
+  {
+    "id": 4,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Importance sampling ratio",
+    "prompt": "What does the ratio ρ = π_target(a|s) / π_behaviour(a|s) do to a sampled return?",
+    "options": [
+      "Reweights it by how likely the target policy was to take that action",
+      "Replaces it with the maximum achievable return",
+      "Clips it into the range [0,1]",
+      "Adds an extra discount factor to it"
+    ],
+    "correct": [0],
+    "explanation": "ρ scales the return up when the target favours the taken action more than the behaviour policy, and down otherwise, giving an unbiased target-policy estimate. It is not a max, a clip, or an extra discount."
+  },
+  {
+    "id": 5,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Maximization bias mechanism",
+    "prompt": "Why does using one estimator to both select and evaluate the greedy action overestimate values?",
+    "options": [
+      "The max picks whichever action got lucky upward noise, and that value is reused",
+      "Averaging over actions cancels the noise and lowers the values",
+      "The discount factor scales every error below its true size",
+      "Exploration forces selection of the lowest-value action"
+    ],
+    "correct": [0],
+    "explanation": "The max tends to select whichever action got a lucky positive error, and the same estimator then trusts that inflated value — so noise is selected for and propagated. Two independent estimators decouple the lucky pick from its evaluation."
+  },
+  {
+    "id": 6,
+    "type": "mcq",
+    "difficulty": "hard",
+    "topic": "Double Q-learning",
+    "prompt": "In Double Q-learning, how are the two value tables used within a single update?",
+    "options": [
+      "One table selects the best next action; the other evaluates that action's value",
+      "Both tables independently take the max, then the two maxima are averaged",
+      "One acts as behaviour policy; the other as the target policy",
+      "The two tables alternate by episode but never interact in one update"
+    ],
+    "correct": [0],
+    "explanation": "One table gives argmax_a Q₁(s',a) and the other reads its value Q₂(s', argmax). Because selection and evaluation use independent estimators, lucky-noise selection no longer inflates the value — averaging two maxima would not fix that."
+  },
+  {
+    "id": 7,
+    "type": "mcq",
+    "difficulty": "hard",
+    "topic": "Variance of importance sampling",
+    "prompt": "A well-known drawback of ordinary per-trajectory importance sampling is that:",
+    "options": [
+      "Multiplying many per-step ratios over a long episode gives very high variance",
+      "It introduces large systematic bias into the target estimate",
+      "It requires a full distributional model of the environment",
+      "It only works when behaviour and target policies are identical"
+    ],
+    "correct": [0],
+    "explanation": "The product of per-step ratios across a long trajectory can explode or collapse, making the estimate very noisy — high variance, though still unbiased. It needs no model, and if the policies matched, importance sampling would be unnecessary."
+  },
+  {
+    "id": 8,
+    "type": "multi",
+    "difficulty": "medium",
+    "topic": "Off-policy concepts",
+    "prompt": "Which statements about off-policy learning are correct?",
+    "options": [
+      "The target and behaviour policies can differ",
+      "Importance sampling reweights returns by a target/behaviour ratio",
+      "Q-learning is an off-policy method",
+      "Double learning addresses maximization bias",
+      "Off-policy methods require a model of the environment"
+    ],
+    "correct": [0, 1, 2, 3],
+    "explanation": "Off-policy means differing target/behaviour policies, corrected by importance sampling; Q-learning is the canonical example; double learning fixes maximization bias. Off-policy learning is model-free."
+  }
+]

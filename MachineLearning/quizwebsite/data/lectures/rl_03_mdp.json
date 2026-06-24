@@ -1,0 +1,138 @@
+[
+  {
+    "id": 1,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "MDP mappings",
+    "prompt": "What are the correct input→output mappings in a Markov Decision Process?",
+    "options": [
+      "Policy maps s → a, transition maps s,a → s'",
+      "Policy maps a → s', transition maps s → a'",
+      "Policy maps s,a → s', transition maps s → a",
+      "Policy maps r → s, transition maps s → r"
+    ],
+    "correct": [0],
+    "explanation": "The policy π picks an action from a state (s → a); the transition function gives the next state from a state-action pair (s,a → s'). The other options scramble these roles."
+  },
+  {
+    "id": 2,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "Objective of RL",
+    "prompt": "Stated in MDP terms, the objective of reinforcement learning is to find:",
+    "options": [
+      "The best action in every state (an optimal policy)",
+      "The single largest reward in the environment",
+      "The shortest path from the start state to the goal",
+      "A value function for the current fixed policy"
+    ],
+    "correct": [0],
+    "explanation": "The goal is an optimal policy — a full state→action mapping maximising expected return. A single max reward, a shortest path (a special case), or merely evaluating a fixed policy are not the general objective."
+  },
+  {
+    "id": 3,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "Discount factor",
+    "prompt": "What is true about the discount parameter γ?",
+    "options": [
+      "γ is in [0,1]; making it smaller weighs future rewards less",
+      "γ is in [0,1]; making it larger weighs future rewards less",
+      "γ is in [-1,1]; making it smaller weighs future rewards less",
+      "γ is in [-1,1]; making it larger weighs future rewards less"
+    ],
+    "correct": [0],
+    "explanation": "γ lies in [0,1]; since step k is weighted by γ^k, a smaller γ decays the future faster, making the agent short-sighted. Negative discounts are not used."
+  },
+  {
+    "id": 4,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Markov property",
+    "prompt": "Which statement correctly captures the Markov property?",
+    "options": [
+      "The next state depends only on the current state and action",
+      "The next state depends on the full history of states and actions",
+      "The reward depends only on the next state that is reached",
+      "The policy depends only on the current time step"
+    ],
+    "correct": [0],
+    "explanation": "Markov means the present captures everything: future dynamics depend only on the current state-action, not the path taken to reach it. The other options require history or misstate what rewards and policies depend on."
+  },
+  {
+    "id": 5,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Return definition",
+    "prompt": "The return G_t = R_{t+1} + γ·R_{t+2} + γ²·R_{t+3} + … is:",
+    "options": [
+      "Total future reward from t, with later rewards discounted",
+      "Total past reward up to t, with earlier rewards discounted",
+      "The reward received at the single step t",
+      "The mean reward per step over the whole episode"
+    ],
+    "correct": [0],
+    "explanation": "G_t sums all rewards from t onward, each discounted by how far ahead it lies. It looks forward (not back), and it is a discounted sum, not an immediate or per-step-averaged reward."
+  },
+  {
+    "id": 6,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Role of discounting",
+    "prompt": "Beyond preferring sooner rewards, why is γ < 1 mathematically convenient in continuing tasks?",
+    "options": [
+      "It keeps the infinite-horizon sum of rewards finite",
+      "It guarantees every reward stays non-negative",
+      "It makes the optimal policy deterministic",
+      "It normalises all rewards into the range [0,1]"
+    ],
+    "correct": [0],
+    "explanation": "The geometric weighting γ^k makes an infinite return converge to a finite value. Discounting says nothing about reward sign, does not constrain the policy form, and does not rescale reward magnitudes."
+  },
+  {
+    "id": 7,
+    "type": "mcq",
+    "difficulty": "hard",
+    "topic": "Effect of horizon",
+    "prompt": "An agent with γ = 0.99 behaves very differently from one with γ = 0.1 in the same MDP. Why?",
+    "options": [
+      "High γ values distant rewards; low γ focuses on near-term reward",
+      "High γ values only the final reward; low γ only the first",
+      "Low γ values distant rewards more heavily than nearby ones",
+      "Both produce identical optimal policies because γ only rescales values"
+    ],
+    "correct": [0],
+    "explanation": "A high γ keeps γ^k large for many steps, so far-off rewards still count (far-sighted); a low γ collapses quickly, so it chases near-term reward. γ never inverts the near/far ordering and can change the optimal policy, not just rescale it."
+  },
+  {
+    "id": 8,
+    "type": "mcq",
+    "difficulty": "hard",
+    "topic": "Agent vs environment control",
+    "prompt": "In an MDP, which pairing correctly separates what the agent controls from what the environment controls?",
+    "options": [
+      "Agent sets the policy (s→a); environment sets transitions and rewards",
+      "Agent sets the transitions (s,a→s'); environment sets the policy",
+      "Agent sets both the policy and the transition function",
+      "Environment sets the policy; agent sets the rewards"
+    ],
+    "correct": [0],
+    "explanation": "The agent only chooses actions via its policy; the environment decides where actions lead and what they pay. The agent cannot alter the dynamics or set its own rewards, and it is not passive."
+  },
+  {
+    "id": 9,
+    "type": "multi",
+    "difficulty": "medium",
+    "topic": "MDP components",
+    "prompt": "Which of the following are formal components of a Markov Decision Process?",
+    "options": [
+      "A set of states S",
+      "A set of actions A",
+      "A transition function P(s'|s,a)",
+      "A reward function and a discount factor γ",
+      "A fixed exploration rate ε for action selection"
+    ],
+    "correct": [0, 1, 2, 3],
+    "explanation": "An MDP is the tuple (S, A, P, R, γ). ε is a property of a particular exploration strategy, not part of the MDP definition."
+  }
+]

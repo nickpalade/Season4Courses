@@ -1,5 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { scoreMulti } from "../scoring.js";
+import { IconBookmark, IconArrow, IconArrowRight } from "./icons.jsx";
+
+function formatElapsed(secs) {
+  const m = Math.floor(secs / 60);
+  const s = secs % 60;
+  return `${m}:${String(s).padStart(2, "0")}`;
+}
 
 export default function Quiz({
   pool,
@@ -10,15 +17,34 @@ export default function Quiz({
   onProgress,
   onFinish,
   onQuit,
+  confirm,
 }) {
   const [idx, setIdx] = useState(initialProgress?.idx || 0);
   const [answers, setAnswers] = useState(initialProgress?.answers || {});
   const [submitWarning, setSubmitWarning] = useState("");
   const [revealedQuestionId, setRevealedQuestionId] = useState(null);
+  const [now, setNow] = useState(Date.now());
+  const promptRef = useRef(null);
 
   useEffect(() => {
     onProgress?.({ idx, answers });
   }, [idx, answers, onProgress]);
+
+  // Tick a live clock so the elapsed timer updates each second.
+  useEffect(() => {
+    const t = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(t);
+  }, []);
+
+  // Move keyboard focus to the prompt when the question changes (a11y).
+  useEffect(() => {
+    promptRef.current?.focus();
+  }, [idx]);
+
+  const startedAt = initialProgress?.startedAt;
+  const elapsed = startedAt
+    ? Math.max(0, Math.floor((now - new Date(startedAt).getTime()) / 1000))
+    : 0;
 
   const q = pool[idx];
   if (!q) {
@@ -45,6 +71,39 @@ export default function Quiz({
   const isLast = idx + 1 === pool.length;
   const score = currentAnswer.score;
   const correctSet = new Set(q.correct);
+  const answeredCount = pool.filter((item) => answers[item.id]?.submitted).length;
+  const canReveal = mode !== "exam"; // exam mode = no spoilers
+
+  // Keyboard shortcuts: ← / → navigate, 1-9 pick an option, Enter submits or
+  // advances, F flags. Disabled while typing in the open-answer textarea.
+  useEffect(() => {
+    function onKey(e) {
+      const tag = e.target.tagName;
+      if (tag === "TEXTAREA" || tag === "INPUT") return;
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      const k = e.key;
+      if (k === "ArrowLeft") {
+        goTo(idx - 1);
+      } else if (k === "ArrowRight") {
+        goTo(idx + 1);
+      } else if (k === "Enter") {
+        // Let a focused button handle its own Enter (avoids double-action).
+        if (tag === "BUTTON") return;
+        e.preventDefault();
+        if (!submitted) submit();
+        else if (!isLast) goTo(idx + 1);
+        else finish();
+      } else if (k.toLowerCase() === "f") {
+        toggleFlag();
+      } else if (q.type !== "open" && /^[1-9]$/.test(k)) {
+        const i = Number(k) - 1;
+        if (i < q.options.length) toggleOpt(i);
+      }
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [idx, answers, submitted, q, isLast, mode]);
 
   function saveCurrent(patch) {
     setAnswers((cur) => ({
@@ -104,7 +163,37 @@ export default function Quiz({
   }
 
   function finish() {
+    const unanswered = pool.filter((item) => !answers[item.id]?.submitted).length;
+    if (unanswered > 0 && confirm) {
+      confirm(
+        {
+          title: "Finish now?",
+          message: `${unanswered} question${unanswered > 1 ? "s are" : " is"} unanswered and will score 0.`,
+          confirmLabel: "Finish anyway",
+          cancelLabel: "Keep going",
+          tone: "danger",
+        },
+        () => onFinish(answers, pool)
+      );
+      return;
+    }
     onFinish(answers, pool);
+  }
+
+  function quit() {
+    if (confirm) {
+      confirm(
+        {
+          title: "Save & exit?",
+          message: "Your progress is saved — resume anytime from the quiz home or library.",
+          confirmLabel: "Exit",
+          cancelLabel: "Stay",
+        },
+        onQuit
+      );
+      return;
+    }
+    onQuit();
   }
 
   function optClass(i) {
@@ -122,22 +211,57 @@ export default function Quiz({
 
   return (
     <section className="quiz-panel">
-      <div className="bar">
-        <div className="progress" style={{ width: `${((idx + 1) / pool.length) * 100}%` }} />
-      </div>
-      <div className="meta">
-        <span>Q {idx + 1} / {pool.length}</span>
-        <span>- {q.topic}</span>
-        {isMulti && <span className="pill">multiple answers</span>}
-        <button className="link" onClick={toggleFlag}>
-          {isFlagged ? "Unflag" : "Flag"}
-        </button>
-        <button className="link" onClick={onQuit}>Quit</button>
+      <div
+        className="bar"
+        role="progressbar"
+        aria-valuemin={0}
+        aria-valuemax={pool.length}
+        aria-valuenow={answeredCount}
+        aria-label={`${answeredCount} of ${pool.length} answered`}
+      >
+        <div
+          className="progress"
+          style={{ width: `${(answeredCount / pool.length) * 100}%` }}
+        />
       </div>
 
-      <h2 className="prompt">{q.prompt}</h2>
+      <div className="q-topline">
+        <span className="q-eyebrow">
+          Question {idx + 1} / {pool.length}
+          <span className="q-answered">· {answeredCount} answered</span>
+        </span>
+        <div className="q-topline-right">
+          <span className="q-timer" title="Time elapsed" aria-label={`Elapsed ${formatElapsed(elapsed)}`}>
+            {formatElapsed(elapsed)}
+          </span>
+          <button
+            className={"bookmark" + (isFlagged ? " on" : "")}
+            onClick={toggleFlag}
+            title={isFlagged ? "Remove bookmark (F)" : "Bookmark this question (F)"}
+            aria-pressed={isFlagged}
+          >
+            <IconBookmark size={22} filled={isFlagged} />
+          </button>
+          <button className="link q-exit" onClick={quit}>
+            Save &amp; exit
+          </button>
+        </div>
+      </div>
 
-      {q.type === "open" ? (
+      <div className="q-block">
+        <span className="q-points">1.0p</span>
+        <span className="q-index">{idx + 1}</span>
+        <div className="q-content">
+          <h2 className="prompt" tabIndex={-1} ref={promptRef}>{q.prompt}</h2>
+          <div className="q-tags">
+            <span className="q-topic">{q.topic}</span>
+            {q.difficulty && (
+              <span className={`pill diff-${q.difficulty}`}>{q.difficulty}</span>
+            )}
+            {isMulti && <span className="pill">multiple answers</span>}
+          </div>
+
+          {q.type === "open" ? (
         <textarea
           value={openText}
           onChange={(e) => saveCurrent({ text: e.target.value })}
@@ -158,15 +282,15 @@ export default function Quiz({
                 role={isMulti ? "checkbox" : "radio"}
                 aria-checked={picked}
               >
-                <span className="option-mark">{picked ? "✓" : String.fromCharCode(65 + i)}</span>
-                <span>{opt}</span>
+                <span className="option-mark" aria-hidden="true" />
+                <span className="option-text">{opt}</span>
               </button>
             );
           })}
         </div>
       )}
 
-      {submitWarning && <div className="warning">{submitWarning}</div>}
+      {submitWarning && <div className="warning" role="alert">{submitWarning}</div>}
 
       {revealed && !submitted && (
         <div className="feedback reveal-feedback">
@@ -210,7 +334,7 @@ export default function Quiz({
       )}
 
       {submitted && q.type !== "open" && mode === "practice" && (
-        <div className={"feedback " + (score === 1 ? "good" : score === 0 ? "bad" : "")}>
+        <div className={"feedback " + (score === 1 ? "good" : score === 0 ? "bad" : "")} role="status" aria-live="polite">
           <div className="label">
             {score === 1 ? "Correct" : score > 0 ? `Partial (${(score * 100).toFixed(0)}%)` : "Incorrect"}
           </div>
@@ -218,12 +342,16 @@ export default function Quiz({
         </div>
       )}
 
+          <div className="updated-note">Updated 3 weeks ago</div>
+        </div>
+      </div>
+
       <div className="actions split-actions">
         <button className="secondary-action" onClick={() => goTo(idx - 1)} disabled={isFirst}>
           Previous
         </button>
         <div className="right-actions">
-          {!submitted && (
+          {!submitted && canReveal && (
             <button
               className="secondary-action"
               onClick={() => setRevealedQuestionId(revealed ? null : q.id)}
@@ -244,6 +372,40 @@ export default function Quiz({
           )}
         </div>
       </div>
+
+      <nav className="q-nav" aria-label="Question navigator">
+        <div className="q-nav-scroll">
+          {pool.map((item, i) => {
+            const a = answers[item.id];
+            const isAnswered = Boolean(
+              a && (a.submitted || a.selected?.length || a.text)
+            );
+            const cls =
+              "q-nav-num" +
+              (i === idx ? " current" : "") +
+              (isAnswered ? " answered" : "") +
+              (flagged.has(item.id) ? " flagged" : "");
+            return (
+              <button
+                key={item.id}
+                className={cls}
+                onClick={() => goTo(i)}
+                title={`Go to question ${i + 1}`}
+              >
+                {i + 1}
+              </button>
+            );
+          })}
+        </div>
+        <div className="q-nav-arrows">
+          <button onClick={() => goTo(idx - 1)} disabled={isFirst} title="Previous">
+            <IconArrow size={20} />
+          </button>
+          <button onClick={() => goTo(idx + 1)} disabled={isLast} title="Next">
+            <IconArrowRight size={20} />
+          </button>
+        </div>
+      </nav>
     </section>
   );
 }

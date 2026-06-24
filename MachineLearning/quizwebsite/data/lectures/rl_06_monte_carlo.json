@@ -1,0 +1,138 @@
+[
+  {
+    "id": 1,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "MC vs DP advantage",
+    "prompt": "What is the main advantage of Monte Carlo methods over Dynamic Programming?",
+    "options": [
+      "They can learn without a model of the environment",
+      "They bootstrap from current value estimates",
+      "They always need fewer episodes to converge than DP",
+      "They apply only to continuous action spaces"
+    ],
+    "correct": [0],
+    "explanation": "MC learns purely from sampled episodes, needing no model — its key edge over DP. It does NOT bootstrap (the opposite), works in discrete settings, and gives no general sample-efficiency guarantee."
+  },
+  {
+    "id": 2,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "First-visit MC update",
+    "prompt": "In first-visit Monte Carlo, what updates the value estimate of a state?",
+    "options": [
+      "The cumulative future discounted reward (the return)",
+      "The estimated value of the next state visited",
+      "The single immediate reward at that state",
+      "The estimated value of the action chosen there"
+    ],
+    "correct": [0],
+    "explanation": "MC averages in the full return G_t from that state — no bootstrapping. Updating from the next state's estimate is a TD/bootstrap method, and the immediate reward alone ignores the future."
+  },
+  {
+    "id": 3,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "MC for action values",
+    "prompt": "How are first-visit MC methods adapted from state values to action values?",
+    "options": [
+      "Average returns over state-action pairs instead of over states",
+      "Convert state values to action values after each episode",
+      "Average only over the best action in each state",
+      "Try every action in every state on each episode"
+    ],
+    "correct": [0],
+    "explanation": "To estimate q(s,a), average the returns observed after each (s,a) pair rather than after each state. The other options either restrict the averaging or require impractical exhaustive trials."
+  },
+  {
+    "id": 4,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Bootstrapping contrast",
+    "prompt": "Which statement correctly contrasts Monte Carlo with bootstrapping methods?",
+    "options": [
+      "MC uses the real return; DP and TD build estimates on estimates",
+      "MC builds estimates on estimates; DP and TD use the real return",
+      "All three use the real return with no bootstrapping at all",
+      "MC and DP both bootstrap from the next state's value"
+    ],
+    "correct": [0],
+    "explanation": "MC is non-bootstrapping — it learns from the actual return. DP and TD bootstrap, building each estimate on other current estimates. This is why MC is unbiased but high-variance."
+  },
+  {
+    "id": 5,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Exploring starts",
+    "prompt": "What is the best description of 'exploring starts' in MC control?",
+    "options": [
+      "Each episode begins from a randomly chosen state-action pair",
+      "Each episode begins with one ε-greedy action, then goes greedy",
+      "Estimates begin optimistically above the maximum reward",
+      "Every action is tried from each state within one episode"
+    ],
+    "correct": [0],
+    "explanation": "Exploring starts guarantees every (s,a) has nonzero visit probability by starting episodes from random state-action pairs. ε-greedy starts and optimistic initialisation are different exploration tricks."
+  },
+  {
+    "id": 6,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Why complete episodes",
+    "prompt": "Why must standard Monte Carlo methods wait until an episode ends before updating?",
+    "options": [
+      "The return needs all rewards from t to the terminal state",
+      "The transition model must be re-estimated after each step",
+      "The discount factor becomes known only at the terminal state",
+      "The next state's estimate is required before any update"
+    ],
+    "correct": [0],
+    "explanation": "MC updates use the complete return, known only once the episode terminates. It estimates no model, γ is known throughout, and needing the next estimate first describes bootstrapping (TD), not MC."
+  },
+  {
+    "id": 7,
+    "type": "mcq",
+    "difficulty": "hard",
+    "topic": "Bias-variance",
+    "prompt": "How do Monte Carlo estimates compare with bootstrapped (TD) estimates?",
+    "options": [
+      "MC is unbiased but high-variance; TD is biased but lower-variance",
+      "MC is biased but low-variance; TD is unbiased but high-variance",
+      "Both MC and TD are unbiased and low-variance",
+      "Both MC and TD are biased and high-variance"
+    ],
+    "correct": [0],
+    "explanation": "MC averages real returns — unbiased but noisy, since a return depends on a long random trajectory. TD bootstraps, adding bias from current estimates but cutting variance via a one-step target."
+  },
+  {
+    "id": 8,
+    "type": "mcq",
+    "difficulty": "hard",
+    "topic": "Alternative to exploring starts",
+    "prompt": "Exploring starts is often impossible in real tasks. What is the usual alternative for ensuring exploration in MC control?",
+    "options": [
+      "Use a soft policy giving every action nonzero probability",
+      "Switch to full Dynamic Programming sweeps over the states",
+      "Initialise the transition counts to one everywhere",
+      "Restrict learning to first-visit returns only"
+    ],
+    "correct": [0],
+    "explanation": "When you cannot reset to arbitrary (s,a) pairs, a soft policy (e.g. ε-greedy) keeps every action possible, ensuring continued exploration. DP needs a model, count-smoothing is a model-learning trick, and first-vs-every-visit does not address exploration."
+  },
+  {
+    "id": 9,
+    "type": "multi",
+    "difficulty": "medium",
+    "topic": "Monte Carlo properties",
+    "prompt": "Which statements about Monte Carlo methods are correct?",
+    "options": [
+      "They learn from complete sampled episodes",
+      "They require no model of the environment",
+      "They update estimates using the observed return",
+      "They bootstrap from the value of the next state",
+      "They can update before an episode terminates"
+    ],
+    "correct": [0, 1, 2],
+    "explanation": "MC learns model-free from complete episodes using observed returns. It does not bootstrap and cannot update mid-episode, since the full return is required first."
+  }
+]

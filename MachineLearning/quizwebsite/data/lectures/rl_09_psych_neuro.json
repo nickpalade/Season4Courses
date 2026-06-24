@@ -1,0 +1,123 @@
+[
+  {
+    "id": 1,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "Rescorla-Wagner rule",
+    "prompt": "The Rescorla-Wagner model updates an association's strength V using which quantity?",
+    "options": [
+      "The prediction error (r − V)",
+      "The raw obtained reward r",
+      "The current association strength V",
+      "The product of reward and value (r·V)"
+    ],
+    "correct": [0],
+    "explanation": "ΔV = α(r − V): learning is driven by the gap between obtained and expected reward — a prediction error, like the TD error. Neither the reward nor the expectation alone captures surprise."
+  },
+  {
+    "id": 2,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "Stimulus traces analogy",
+    "prompt": "What is the computational RL analogue of stimulus (eligibility) traces from psychology?",
+    "options": [
+      "N-step methods",
+      "Off-policy learning",
+      "State generalisation",
+      "Partial observability"
+    ],
+    "correct": [0],
+    "explanation": "A stimulus trace keeps a fading memory of recent cues so a later reward can be credited back — exactly what n-step methods (and TD(λ)) do by spreading credit over recent steps."
+  },
+  {
+    "id": 3,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Extinction",
+    "prompt": "How does Rescorla-Wagner explain extinction for a cue with value V once the reward stops?",
+    "options": [
+      "r = 0, V > 0, so (r − V) < 0 and V is driven down",
+      "r > 0, V = 0, so (r − V) > 0 and V is driven up",
+      "r < 0, V = 0, so (r − V) < 0 and V is driven down",
+      "r = 0, V < 0, so (r − V) > 0 and V is driven up"
+    ],
+    "correct": [0],
+    "explanation": "The reward disappears (r = 0) but a positive expectation remains (V > 0), giving a negative prediction error that lowers V until the learned response fades."
+  },
+  {
+    "id": 4,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Dopamine prediction error",
+    "prompt": "Once a new cue reliably predicts a reward, when does the dopaminergic response peak?",
+    "options": [
+      "Shortly after the predictor (cue)",
+      "Shortly after the reward",
+      "Shortly before the predictor",
+      "Shortly before the reward"
+    ],
+    "correct": [0],
+    "explanation": "Once a cue reliably forecasts reward, the reward-prediction-error signal shifts from the reward to the earliest reliable predictor — a dopamine peak just after the cue. The reward itself is no longer surprising."
+  },
+  {
+    "id": 5,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Acquisition phase",
+    "prompt": "During acquisition (early learning) of a cue-reward link under Rescorla-Wagner, the prediction error is:",
+    "options": [
+      "Positive, because r > 0 while V is still low, so V rises",
+      "Negative, because V already exceeds r, so V falls",
+      "Zero, because r and V stay equal throughout",
+      "Positive then negative, oscillating on each trial"
+    ],
+    "correct": [0],
+    "explanation": "Early on the reward arrives (r > 0) but V is still small, so (r − V) > 0 and V grows toward r. The error shrinks to zero only once V has caught up, without oscillating."
+  },
+  {
+    "id": 6,
+    "type": "mcq",
+    "difficulty": "hard",
+    "topic": "Dopamine as TD error",
+    "prompt": "Phasic dopamine is best modelled by which RL quantity, and what does an expected-but-omitted reward produce?",
+    "options": [
+      "The TD error; omission causes a dip below baseline",
+      "The state value; omission causes a spike above baseline",
+      "The discount factor; omission has no measurable effect",
+      "The policy probability; omission causes a spike above baseline"
+    ],
+    "correct": [0],
+    "explanation": "Dopamine tracks the reward-prediction (TD) error: positive for surprising reward, and a dip below baseline when an expected reward fails to arrive (a negative error). It is not the value, discount, or policy probability."
+  },
+  {
+    "id": 7,
+    "type": "mcq",
+    "difficulty": "hard",
+    "topic": "Blocking",
+    "prompt": "In the blocking effect, a cue already predicting reward prevents learning about a second cue added alongside it. Why, under Rescorla-Wagner?",
+    "options": [
+      "The first cue already predicts r, so the new cue meets a near-zero prediction error",
+      "The new cue's prediction error is large but its learning rate is zero",
+      "The two cues compete and split the reward value equally",
+      "The new cue is learned first and overshadows the older one"
+    ],
+    "correct": [0],
+    "explanation": "Because the established cue already makes the reward well-predicted, (r − V) ≈ 0 when the new cue appears, leaving almost no error to drive learning about it. Learning is error-driven, not blocked by learning rates, splitting, or order."
+  },
+  {
+    "id": 8,
+    "type": "multi",
+    "difficulty": "medium",
+    "topic": "Psychology-RL links",
+    "prompt": "Which psychology-to-RL correspondences are correct?",
+    "options": [
+      "Prediction error (r − V) ↔ TD error",
+      "Stimulus / eligibility traces ↔ n-step methods",
+      "Dopamine response ↔ reward-prediction error signal",
+      "Extinction ↔ negative prediction error driving V down",
+      "Blocking ↔ a large positive prediction error for the new cue"
+    ],
+    "correct": [0, 1, 2, 3],
+    "explanation": "The first four are standard mappings. Blocking is the opposite of the last claim: the new cue meets a near-zero error, which is exactly why little is learned about it."
+  }
+]

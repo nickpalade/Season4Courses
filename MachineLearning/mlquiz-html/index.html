@@ -1,0 +1,1281 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Machine Learning Quiz Lab</title>
+    <style>
+:root {
+  --bg: #f6f7fb;
+  --surface: #ffffff;
+  --surface-2: #eef4f8;
+  --ink: #17202a;
+  --muted: #64707d;
+  --line: #dde4eb;
+  --blue: #22577a;
+  --blue-soft: #dbeaf2;
+  --green: #2f7d57;
+  --green-soft: #ddf1e6;
+  --amber: #a46413;
+  --amber-soft: #fff0cf;
+  --red: #b33a3a;
+  --red-soft: #f7dedc;
+  --shadow: 0 16px 42px rgba(23, 32, 42, 0.09);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  letter-spacing: 0;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 340px minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+.sidebar {
+  background: #101820;
+  color: #f7fbff;
+  padding: 28px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.brand-block h1,
+.topbar h2,
+.panel h2,
+.review-panel h2 {
+  margin: 0;
+}
+
+.brand-block h1 {
+  font-size: 32px;
+  line-height: 1.05;
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.sidebar .eyebrow,
+.bank-count {
+  color: #aeb9c5;
+}
+
+.bank-count {
+  margin: 10px 0 0;
+  font-size: 14px;
+}
+
+.panel,
+.quiz-card,
+.review-panel,
+.topbar,
+.progress-wrap {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.sidebar .panel {
+  background: #18232d;
+  border-color: #2a3a48;
+  padding: 18px;
+}
+
+.panel-head,
+.card-top,
+.card-footer,
+.topbar,
+.progress-meta,
+.answer-title,
+.summary-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.panel-head.compact {
+  margin-top: 16px;
+  color: #b9c4cf;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.panel h2 {
+  font-size: 16px;
+}
+
+.scope-toggle {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.scope-button {
+  min-height: 46px;
+  border: 1px solid #314354;
+  border-radius: 8px;
+  background: #111b24;
+  color: #d8e0e8;
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 900;
+}
+
+.scope-button.active {
+  border-color: #8ecae6;
+  background: #dbeaf2;
+  color: #123047;
+}
+
+.field,
+.search-field {
+  display: grid;
+  gap: 7px;
+  margin-top: 14px;
+}
+
+.field span,
+.search-field span {
+  color: #b9c4cf;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.field select,
+.search-field input {
+  width: 100%;
+  height: 42px;
+  border: 1px solid #314354;
+  border-radius: 8px;
+  background: #111b24;
+  color: #f7fbff;
+  padding: 0 12px;
+  outline: none;
+}
+
+.field select:focus,
+.search-field input:focus {
+  border-color: #8ecae6;
+}
+
+.switch-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+  color: #d8e0e8;
+  font-size: 14px;
+}
+
+.switch-row input {
+  width: 18px;
+  height: 18px;
+  accent-color: #74c69d;
+}
+
+.topic-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+  max-height: 300px;
+  overflow: auto;
+  padding-right: 4px;
+}
+
+.topic-chip {
+  border: 1px solid #314354;
+  border-radius: 999px;
+  background: #111b24;
+  color: #d8e0e8;
+  padding: 8px 10px;
+  font-size: 12px;
+}
+
+.topic-chip.active {
+  background: #dbeaf2;
+  color: #123047;
+  border-color: #dbeaf2;
+}
+
+.primary-action,
+.secondary-action,
+.text-control,
+.icon-button {
+  border: 0;
+  border-radius: 8px;
+  transition: transform 120ms ease, background 120ms ease, border-color 120ms ease;
+}
+
+.primary-action {
+  background: var(--green);
+  color: white;
+  font-weight: 800;
+  padding: 12px 16px;
+  min-height: 44px;
+}
+
+.sidebar .primary-action {
+  width: 100%;
+  margin-top: 18px;
+}
+
+.secondary-action {
+  background: var(--surface-2);
+  color: var(--ink);
+  font-weight: 700;
+  padding: 11px 14px;
+  border: 1px solid var(--line);
+}
+
+.text-control {
+  background: transparent;
+  color: inherit;
+  padding: 6px 8px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.icon-button {
+  width: 40px;
+  height: 40px;
+  background: var(--surface-2);
+  color: var(--blue);
+  font-size: 20px;
+  border: 1px solid var(--line);
+}
+
+.primary-action:hover,
+.secondary-action:hover,
+.icon-button:hover,
+.text-control:hover,
+.topic-chip:hover {
+  transform: translateY(-1px);
+}
+
+.workspace {
+  min-width: 0;
+  padding: 28px;
+  display: grid;
+  gap: 18px;
+  align-content: start;
+}
+
+.topbar {
+  padding: 18px 20px;
+}
+
+.topbar h2 {
+  font-size: 21px;
+}
+
+.stat-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(82px, 1fr));
+  gap: 10px;
+}
+
+.stat-strip div {
+  min-width: 82px;
+  background: var(--surface-2);
+  border-radius: 8px;
+  padding: 10px 12px;
+  text-align: right;
+}
+
+.stat-strip span {
+  display: block;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.stat-strip small {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.progress-wrap {
+  padding: 13px 16px;
+}
+
+.progress-meta {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
+  margin-bottom: 9px;
+}
+
+.progress-track {
+  height: 10px;
+  background: #e6ebf0;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+#progress-bar {
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--green), #4f8cc9);
+  transition: width 180ms ease;
+}
+
+.quiz-card {
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+
+.summary-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+
+.summary-head h2 {
+  margin: 0;
+  font-size: 26px;
+}
+
+.summary-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(120px, 1fr));
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.summary-stat {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.summary-stat strong {
+  display: block;
+  font-size: 28px;
+  line-height: 1;
+}
+
+.summary-stat span {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.summary-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.summary-columns h3 {
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+
+.topic-performance,
+.missed-list {
+  display: grid;
+  gap: 10px;
+}
+
+.topic-row,
+.missed-row {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  padding: 12px;
+}
+
+.topic-row-head,
+.missed-row-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-weight: 900;
+}
+
+.topic-row small,
+.missed-row small {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  line-height: 1.35;
+}
+
+.mini-track {
+  height: 8px;
+  margin-top: 10px;
+  border-radius: 999px;
+  background: #e6ebf0;
+  overflow: hidden;
+}
+
+.mini-track span {
+  display: block;
+  height: 100%;
+  background: var(--green);
+}
+
+.topic-pill {
+  display: inline-flex;
+  max-width: 100%;
+  align-items: center;
+  min-height: 34px;
+  border-radius: 999px;
+  background: var(--blue-soft);
+  color: var(--blue);
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.card-actions {
+  display: flex;
+  gap: 8px;
+}
+
+#question-text {
+  margin: 20px 0 8px;
+  font-size: 26px;
+  line-height: 1.22;
+  max-width: 960px;
+}
+
+.source-line {
+  min-height: 20px;
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.options {
+  display: grid;
+  gap: 10px;
+}
+
+.option-button {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+  min-height: 58px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+  padding: 10px 14px;
+  text-align: left;
+}
+
+.option-letter {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  color: var(--blue);
+  font-weight: 900;
+}
+
+.option-button.selected {
+  border-color: var(--blue);
+  background: #f1f8fc;
+}
+
+.option-button.correct {
+  border-color: var(--green);
+  background: var(--green-soft);
+}
+
+.option-button.incorrect {
+  border-color: var(--red);
+  background: var(--red-soft);
+}
+
+.answer-panel {
+  margin-top: 16px;
+  border: 1px solid #b7c9d7;
+  border-radius: 8px;
+  background: #f4f8fb;
+  padding: 16px;
+}
+
+.answer-panel.good {
+  border-color: #a8d7bd;
+  background: var(--green-soft);
+}
+
+.answer-panel.bad {
+  border-color: #e3aaa4;
+  background: var(--red-soft);
+}
+
+.answer-title strong {
+  color: var(--blue);
+}
+
+.answer-panel p {
+  margin: 8px 0 0;
+  color: #2c3b46;
+}
+
+.hidden {
+  display: none;
+}
+
+.card-footer {
+  margin-top: 20px;
+}
+
+.review-panel {
+  padding: 18px;
+}
+
+.review-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  color: var(--blue);
+}
+
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.review-item {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+  padding: 10px 8px;
+  min-height: 54px;
+  font-weight: 900;
+}
+
+.review-item small {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.review-item.current {
+  border-color: var(--blue);
+  background: var(--blue-soft);
+}
+
+.review-item.correct {
+  border-color: var(--green);
+}
+
+.review-item.incorrect {
+  border-color: var(--red);
+}
+
+.review-item.bookmarked::after {
+  content: " ☆";
+  color: var(--amber);
+}
+
+@media (max-width: 980px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: relative;
+    padding: 20px;
+  }
+
+  .workspace {
+    padding: 18px;
+  }
+
+  .topbar,
+  .card-footer,
+  .summary-head {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .stat-strip,
+  .summary-stats,
+  .summary-columns {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .summary-columns {
+    grid-template-columns: 1fr;
+  }
+
+  #question-text {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 560px) {
+  .stat-strip,
+  .summary-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .card-top {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .option-button {
+    grid-template-columns: 36px minmax(0, 1fr);
+    padding: 10px;
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Quiz setup">
+        <div class="brand-block">
+          <p class="eyebrow">Machine Learning</p>
+          <h1>Quiz Lab</h1>
+          <p class="bank-count"><span id="total-count">0</span> exam-style questions · MCQ · multi-select · open</p>
+        </div>
+        <section class="panel">
+          <h2>Question Scope</h2>
+          <div class="scope-toggle" role="group" aria-label="Question scope">
+            <button class="scope-button active" id="scope-all" type="button">Every question</button>
+            <button class="scope-button" id="scope-specific" type="button">Lecture specific</button>
+          </div>
+          <div class="topic-picker hidden" id="topic-picker">
+            <div class="panel-head compact">
+              <span>Choose one or more lectures</span>
+              <button class="text-control" id="clear-topics" type="button">Clear</button>
+            </div>
+            <div class="topic-list" id="topic-list"></div>
+          </div>
+          <label class="switch-row">
+            <input id="shuffle-toggle" type="checkbox" checked />
+            <span>Randomize question order</span>
+          </label>
+          <button class="primary-action" id="start-session" type="button">Start Session</button>
+        </section>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Active Session</p>
+            <h2 id="session-title">All lectures · Quiz mode</h2>
+          </div>
+          <div class="stat-strip" aria-label="Session statistics">
+            <div><span id="stat-score">0%</span><small>score</small></div>
+            <div><span id="stat-progress">0 / 0</span><small>answered</small></div>
+            <div><span id="stat-streak">0</span><small>streak</small></div>
+          </div>
+        </header>
+
+        <section class="progress-wrap" aria-label="Session progress">
+          <div class="progress-meta">
+            <span id="progress-label">Ready</span>
+            <span id="question-position">0 of 0</span>
+          </div>
+          <div class="progress-track"><div id="progress-bar"></div></div>
+        </section>
+
+        <section class="quiz-card" id="quiz-card" aria-live="polite">
+          <div class="card-top">
+            <div class="topic-pill" id="question-topic">Select a session</div>
+            <div class="card-actions">
+              <button class="icon-button" id="bookmark-button" type="button" title="Bookmark question" aria-label="Bookmark question">☆</button>
+              <button class="icon-button" id="reset-progress" type="button" title="Reset saved progress" aria-label="Reset saved progress">↺</button>
+            </div>
+          </div>
+
+          <h3 id="question-text">Choose lectures and press Start Session.</h3>
+          <p class="source-line" id="source-line"></p>
+          <div class="options" id="options-list"></div>
+          <button class="secondary-action hidden" id="submit-button" type="button">Submit Answer</button>
+
+          <div class="answer-panel hidden" id="answer-panel">
+            <div class="answer-title">
+              <span id="answer-result">Answer</span>
+              <strong id="answer-choice"></strong>
+            </div>
+            <p id="answer-note"></p>
+            <p id="answer-anchor"></p>
+          </div>
+
+          <div class="card-footer">
+            <button class="secondary-action" id="prev-button" type="button">← Previous</button>
+            <button class="secondary-action" id="reveal-button" type="button">Reveal Answer</button>
+            <button class="primary-action" id="next-button" type="button">Next →</button>
+          </div>
+        </section>
+
+        <section class="summary-card hidden" id="summary-card" aria-live="polite">
+          <div class="summary-head">
+            <div>
+              <p class="eyebrow">Session Complete</p>
+              <h2>Performance Summary</h2>
+            </div>
+            <button class="primary-action" id="new-session" type="button">New Session</button>
+          </div>
+          <div class="summary-stats" id="summary-stats"></div>
+          <div class="summary-columns">
+            <div>
+              <h3>Lectures to Review</h3>
+              <div class="topic-performance" id="topic-performance"></div>
+            </div>
+            <div>
+              <h3>Missed Questions</h3>
+              <div class="missed-list" id="missed-list"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="review-panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Review</p>
+              <h2>Question Navigator</h2>
+            </div>
+            <div class="review-controls">
+              <button class="text-control" id="review-all" type="button">All</button>
+              <button class="text-control" id="review-missed" type="button">Missed</button>
+              <button class="text-control" id="review-bookmarked" type="button">Bookmarked</button>
+            </div>
+          </div>
+          <div class="review-grid" id="review-grid"></div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+window.ML_QUESTIONS = [{"id":"EX-Q1","source":"Past Paper","domain":"Past Paper","topic":"Tasks","type":"multi","question":"While purchasing a new washing machine in an online store, you are recommended to buy connection pipes and detergents. This is an example of which of the following tasks?","options":[["A","Subgroup Discovery"],["B","Association rule mining"],["C","Descriptive clustering"],["D","Predictive clustering"],["E","Regression"]],"answer":["B"],"note":"Recommending complementary items = market-basket / association rule mining (e.g. {washing machine} -> {pipes, detergent}).","anchor":"Machine Learning — Past Paper"},{"id":"EX-Q2","source":"Past Paper","domain":"Past Paper","topic":"Model types","type":"multi","question":"Which statement(s) are true about grading models?","options":[["A","Linear regression is an example of a grading model."],["B","They create segments within the instance space."],["C","They have a fixed and a finite resolution."],["D","Tree-based models are examples of grading models."],["E","SVM is an example of grading models"]],"answer":["A","E"],"note":"Grading models output a score over the whole instance space (linear regression, SVM). Segmenting, finite resolution, and trees are *grouping* models.","anchor":"Machine Learning — Past Paper"},{"id":"EX-Q3","source":"Past Paper","domain":"Past Paper","topic":"Probabilistic models","type":"multi","question":"Which statement(s) are true about probabilistic models?","options":[["A","Likelihood ratio is the product of posterior odds and prior odds."],["B","Maximum a posteriori is used to face the overfitting problem"],["C","In a classification task, the prior probability refers to our prior knowledge about the value of features."],["D","It is preferred to use the likelihood ratio when it cannot be assumed that the prior distribution is uniform."],["E","Posterior odds is the product of likelihood ratio and prior odds."]],"answer":["B","E"],"note":"Bayes (odds form): posterior odds = likelihood ratio x prior odds. MAP adds prior -> acts as regularizer against overfitting. Prior refers to class, not feature, knowledge. Likelihood ratio is fine only when prior is uniform.","anchor":"Machine Learning — Past Paper"},{"id":"EX-Q4","source":"Past Paper","domain":"Past Paper","topic":"Validation","type":"multi","question":"Sometimes, separate training, test, and validation sets are used in cross-validation. What is/are the validation set(s) used for?","options":[["A","To evaluate the final model accuracy after all training and tuning is complete."],["B","For evaluation of the classifications made by the model using numerous performance metrics."],["C","For finetuning hyper-parameters on a separate set than the train/test"],["D","To monitor model performance during training and help select the best model."],["E","To make predictions during the inference phase"]],"answer":["C","D"],"note":"Validation set = hyperparameter tuning + model selection / monitoring. Final accuracy = test set.","anchor":"Machine Learning — Past Paper"},{"id":"EX-Q5","source":"Past Paper","domain":"Past Paper","topic":"Decision trees","type":"multi","question":"Which one(s) among the following is considered a property of decision trees?","options":[["A","They require extensive data preprocessing like feature scaling."],["B","They can be applied on both categorical and numerical data"],["C","It takes longer to train a decision tree model than to perform inference with it"],["D","The basic decision tree algorithm is highly resistant to overfitting."]],"answer":["B","C"],"note":"Trees: no scaling needed, work on mixed data, training (search splits) costs more than inference (traverse). Basic trees overfit heavily without pruning.","anchor":"Machine Learning — Past Paper"},{"id":"EX-Q6","source":"Past Paper","domain":"Past Paper","topic":"Multiclass","type":"multi","question":"Select the option(s) that are true about one-versus-one classifiers.","options":[["A","One model is trained per class, distinguishing between that class and all others."],["B","A separate binary classifier is trained for every possible pair of classes."],["C","The one-versus-one strategy can be applied in combination with binary classifiers like SVM."],["D","The training data is split so that each binary classifier only sees examples from two classes."]],"answer":["B","C","D"],"note":"OvO trains C(k,2) classifiers, one per pair. The first option describes one-versus-rest, not OvO.","anchor":"Machine Learning — Past Paper"},{"id":"EX-Q7","source":"Past Paper","domain":"Past Paper","topic":"Bias/Variance","type":"mcq","question":"A classifier learns a highly wiggly decision boundary that closely follows individual training points. Considering bias and variance, the classifier:","options":[["A","Has high bias and high variance"],["B","Has high bias and low variance"],["C","Has low bias and low variance"],["D","Has high variance and low bias"]],"answer":["D"],"note":"Wiggly boundary memorizes training data -> low bias, high variance (overfit).","anchor":"Machine Learning — Past Paper"},{"id":"EX-Q8","source":"Past Paper","domain":"Past Paper","topic":"Metrics","type":"multi","question":"Which one(s) of the following shows that the binary classifier clf1 outperforms clf2?","options":[["A","The R^2 of clf1 is higher than that of clf2."],["B","The area under the ROC curve of clf1 is lower than that of clf2."],["C","The RMSE of clf1 is lower than that of clf2."]],"answer":[],"note":"R^2 and RMSE are regression metrics, not classification. Lower AUC means worse, not better. None of these prove clf1 better.","anchor":"Machine Learning — Past Paper"},{"id":"EX-Q9","source":"Past Paper","domain":"Past Paper","topic":"Classifiers","type":"multi","question":"Dataset with one numerical feature, classes arranged as dots-plus cluster-dots. Which technique(s) can find a decision boundary that perfectly classifies it?","options":[["A","A decision tree"],["B","Expectation-maximization with two normal distributions (one per class)."],["C","A linear margin-maximizing classifier (like the SVM) in combination with a kernel."],["D","A linear regression model."]],"answer":["A","B","C"],"note":"Need non-linear boundary (two thresholds). Tree can split twice, EM mixture handles it, SVM+kernel maps to separable space. Plain linear regression cannot.","anchor":"Machine Learning — Past Paper"},{"id":"EX-Q10","source":"Past Paper","domain":"Past Paper","topic":"Linear models","type":"multi","question":"Which of the following is/are true for linear models?","options":[["A","They are stable and not affected by variations in data."],["B","Linear models are parametric."],["C","Linear models are prone to overfitting."]],"answer":["A","B"],"note":"Linear = parametric, low variance / stable. They underfit more than overfit (high bias).","anchor":"Machine Learning — Past Paper"},{"id":"EX-Q11","source":"Past Paper","domain":"Past Paper","topic":"SVM","type":"multi","question":"The effectiveness of an SVM classifier depends upon:","options":[["A","Selection of kernels"],["B","Soft margin complexity hyperparameter C"],["C","The model's ability to avoid regularization altogether."]],"answer":["A","B"],"note":"Kernel + C are the key knobs. SVM relies on regularization (margin maximization).","anchor":"Machine Learning — Past Paper"},{"id":"EX-Q12","source":"Past Paper","domain":"Past Paper","topic":"PCA","type":"multi","question":"What can principal components analysis (PCA) be used for?","options":[["A","Reducing the dimensionality of the data while preserving as much variance as possible."],["B","Finding the best clusters among data."],["C","Identifying the principal features used by a classification algorithm to perform a classification task."],["D","For feature selection among categorical and numerical features"]],"answer":["A"],"note":"PCA = unsupervised variance-preserving projection. Not clustering, not feature attribution, not for categorical features.","anchor":"Machine Learning — Past Paper"},{"id":"EX-Q13","source":"Past Paper","domain":"Past Paper","topic":"Ensembles","type":"multi","question":"Which of the following are NOT an example of an ensemble learning algorithm?","options":[["A","Random Forest"],["B","Adaboost"],["C","Gradient Boosting"],["D","Decision Trees"]],"answer":["D"],"note":"RF, Adaboost, GBM = ensembles. A single decision tree is a base learner, not an ensemble.","anchor":"Machine Learning — Past Paper"},{"id":"EX-Q14","source":"Past Paper","domain":"Past Paper","topic":"Statistics","type":"mcq","question":"Which one of the following is more probable for a right-skewed distribution?","options":[["A","Mode < Median < Mean"],["B","Mean = Median = Mode"],["C","Mode < Mean < Median"],["D","Mean < Median < Mode"]],"answer":["A"],"note":"Right-skew = long right tail pulls mean up: Mode < Median < Mean.","anchor":"Machine Learning — Past Paper"},{"id":"EX-Q15","source":"Past Paper","domain":"Past Paper","topic":"Ensembles","type":"mcq","question":"After training a linear classifier on a single feature you observe high error. Best strategy to reduce error without switching algorithm?","options":[["A","Stacking"],["B","Bagging"],["C","Boosting"],["D","Sub-space sampling"]],"answer":["C"],"note":"Linear = high bias. Boosting reduces bias by sequentially focusing on errors. Bagging mainly reduces variance.","anchor":"Machine Learning — Past Paper"},{"id":"EX-Q16","source":"Past Paper","domain":"Past Paper","topic":"Neural networks","type":"multi","question":"Neural Networks ____:","options":[["A","Are trained through an optimisation approach on a convex surface formed based on the loss function."],["B","Always output values between 0 and 1"],["C","Can be used for regression as well as classification"],["D","Can be used in an ensemble"]],"answer":["C","D"],"note":"NN loss surfaces are non-convex. Output depends on activation. NN do regression+classification and can be ensembled.","anchor":"Machine Learning — Past Paper"},{"id":"EX-Q17","source":"Past Paper","domain":"Past Paper","topic":"Neural networks","type":"mcq","question":"Which activation function is suitable for the last layer of a feedforward NN trained for multi-class classification?","options":[["A","Linear"],["B","Tanh"],["C","Softmax"],["D","Sigmoid"]],"answer":["C"],"note":"Softmax = normalized class probabilities summing to 1. Sigmoid is for binary / multi-label.","anchor":"Machine Learning — Past Paper"},{"id":"EX-Q18","source":"Past Paper","domain":"Past Paper","topic":"Stats tests","type":"mcq","question":"Which test can be used to compare the performance of multiple algorithms over multiple datasets?","options":[["A","Null hypothesis"],["B","Friedman test"],["C","T-test"],["D","Stratified cross-validation"]],"answer":["B"],"note":"Friedman = non-parametric test for k algorithms over N datasets. T-test is pairwise only.","anchor":"Machine Learning — Past Paper"},{"id":"EX-Q19","source":"Past Paper","domain":"Past Paper","topic":"Fairness","type":"multi","question":"A company designs an ML model to process CVs. Which statements are highly probable?","options":[["A","The model may inherit biases from historical data, leading to discrimination against certain groups."],["B","The model will always be completely neutral and objective."],["C","The use of the model can reduce human bias and result in fairer hiring decisions."],["D","The model will always make more accurate decisions than human recruiters."]],"answer":["A"],"note":"Models inherit data bias. 'Always neutral/fair/accurate' claims are false.","anchor":"Machine Learning — Past Paper"},{"id":"EX-Q20","source":"Past Paper","domain":"Past Paper","topic":"Curse of dimensionality","type":"open","question":"Explain what you know about the curse of dimensionality.","options":[],"answer":[],"note":"As feature dimensionality grows: (1) data becomes sparse — equidistant points in high-D space, (2) volume grows exponentially, needing exponentially more samples for the same density, (3) distance-based methods (kNN, clustering) lose meaning since all pairwise distances converge, (4) overfitting risk rises, (5) computational cost explodes. Mitigations: feature selection, PCA / dimensionality reduction, regularization.","anchor":"Machine Learning — Past Paper"},{"id":"EX-Q21","source":"Past Paper","domain":"Past Paper","topic":"Ensembles","type":"open","question":"Explain bagging and boosting. What is the difference in terms of bias and variance?","options":[],"answer":[],"note":"Bagging: train many base learners in parallel on bootstrap samples, average / vote. Reduces VARIANCE, leaves bias unchanged. Good for high-variance models (deep trees -> Random Forest). Boosting: train learners sequentially, each focusing on residuals / misclassified samples from prior round, weighted combination. Reduces BIAS (and some variance). Good with weak learners (stumps -> AdaBoost, GBM). Bagging = independent learners + averaging; Boosting = dependent learners + reweighting.","anchor":"Machine Learning — Past Paper"},{"id":"EX-Q22","source":"Past Paper","domain":"Past Paper","topic":"MAP vs MLE","type":"open","question":"Classification problem where one outcome is extremely uncommon. Prefer MAP or MLE? Why?","options":[],"answer":[],"note":"MAP. MLE relies purely on observed frequencies, so for a rare class it produces near-zero or zero probability estimates (data-driven only, no smoothing). MAP incorporates a prior, which acts as a regularizer / smoother — it pulls the estimate away from zero and reflects domain knowledge about the rare outcome. With sparse data MAP is more stable and avoids the zero-frequency problem.","anchor":"Machine Learning — Past Paper"},{"id":"EX-Q23","source":"Past Paper","domain":"Past Paper","topic":"xAI - LIME","type":"open","question":"23a) Is there any issue with the proposed LIME-like Algorithm 1? Explain.","options":[],"answer":[],"note":"Yes — line 6 calls K-Lasso(X, K) using X (the original dataset) as features, but the perturbation samples and labels live in Z. It should fit K-Lasso on Z (the perturbed neighborhood samples z'_i with their labels f(z_i) and similarity weights pi_x(z_i)). Also, similarity weighting pi_x is collected but never used to weight the regression. Result: the surrogate model is not local to x.","anchor":"Machine Learning — Past Paper"},{"id":"EX-Q24","source":"Past Paper","domain":"Past Paper","topic":"xAI - LIME","type":"open","question":"23b) What are two drawbacks of the original LIME algorithm?","options":[],"answer":[],"note":"(1) Instability — random sampling around x produces different explanations on different runs (low fidelity / reproducibility). (2) Local-only — explains a single prediction, no global view. Other valid drawbacks: choice of neighborhood / kernel width is heuristic and strongly affects output; surrogate complexity K is fixed manually; ignores feature correlations during perturbation.","anchor":"Machine Learning — Past Paper"},{"id":"EX-Q25","source":"Past Paper","domain":"Past Paper","topic":"xAI - LIME","type":"multi","question":"23c) Which of the following statements are valid:","options":[["A","Probing and LIME is part of the local explanations category in xAI"],["B","The LIME algorithm does not take into account the complexity of the black-box model."],["C","LIME is a model-specific method"],["D","LIME explanations are generated after the training of the black-box model"],["E","The LIME algorithm does not take into account the complexity of the surrogate model."]],"answer":["A","B","D"],"note":"LIME is local + model-AGNOSTIC + post-hoc. It ignores black-box complexity but DOES control surrogate complexity via K (sparsity).","anchor":"Machine Learning — Past Paper"},{"id":"EX-Q26","source":"Past Paper","domain":"Past Paper","topic":"Decision trees","type":"multi","question":"Decision tree for churn prediction has very low validation accuracy. Which options will potentially improve test accuracy?","options":[["A","Hyperparameter tuning."],["B","Normalising the numerical features."],["C","Collecting more labelled data for training."],["D","Reduced error pruning."]],"answer":["A","C","D"],"note":"Tuning depth/min-samples, more data, and pruning all help. Trees are scale-invariant — normalization has no effect.","anchor":"Machine Learning — Past Paper"},{"id":"EX-Q27","source":"Past Paper","domain":"Past Paper","topic":"Decision trees","type":"open","question":"25a) Is it a good idea to use the released _best_split code? If not, what is the issue?","options":[],"answer":[],"note":"No. The comparison is inverted: the code uses `if candidate_loss > best_so_far_loss` and updates the best. Since we want to MINIMIZE impurity, it should be `<`. As written, it picks the WORST split (highest impurity), not the best. Also `best_so_far_loss = 1` as init only works if impurity is bounded by 1 (Gini yes, entropy no — entropy can exceed 1).","anchor":"Machine Learning — Past Paper"},{"id":"EX-Q28","source":"Past Paper","domain":"Past Paper","topic":"Decision trees","type":"open","question":"25b) Main differences between entropy and sqrt(Gini)?","options":[],"answer":[],"note":"Entropy: -sum p_i log p_i, bounded by log(k), sensitive to balanced distributions, costlier (log). sqrt(Gini): square root of 1 - sum p_i^2, bounded by ~sqrt((k-1)/k), differentiable everywhere, cheaper to compute. sqrt(Gini) is a metric (satisfies triangle inequality) while entropy is not. In practice both rank splits similarly, but sqrt(Gini) is convex w.r.t. class proportions, yielding smoother splits; entropy tends to favor more balanced partitions more strongly.","anchor":"Machine Learning — Past Paper"},{"id":"L1-Q1","source":"L1 · ML Fundamentals","domain":"L1 · ML Fundamentals","topic":"Task Types","type":"multi","question":"Which of the following are considered predictive tasks in machine learning?","options":[["A","Classification"],["B","Regression"],["C","Descriptive clustering"],["D","Association rule mining"],["E","Subgroup discovery"]],"answer":["A","B"],"note":"Predictive tasks predict a target variable from features (classification for categorical targets, regression for numerical). Descriptive clustering, association rule mining, and subgroup discovery are descriptive tasks that don't predict a target.","anchor":"Machine Learning — L1 · ML Fundamentals"},{"id":"L1-Q2","source":"L1 · ML Fundamentals","domain":"L1 · ML Fundamentals","topic":"Supervised Learning","type":"mcq","question":"In supervised learning, what must be provided for each training example?","options":[["A","Only the features"],["B","Features and a target label"],["C","Only the target label"],["D","Nothing, the model learns independently"]],"answer":["B"],"note":"Supervised learning requires labeled instances—each training example must have both features (inputs) and the corresponding true target value (output) so the model can learn the relationship between them.","anchor":"Machine Learning — L1 · ML Fundamentals"},{"id":"L1-Q3","source":"L1 · ML Fundamentals","domain":"L1 · ML Fundamentals","topic":"Model Categorization","type":"multi","question":"Which statements correctly describe model categorizations discussed in the lecture?","options":[["A","Geometric models use distance and hyperplanes"],["B","Probabilistic models reduce uncertainty using probability distributions"],["C","Logical models are always more accurate than geometric models"],["D","Grouping models have infinite resolution in theory"]],"answer":["A","B"],"note":"Geometric and probabilistic models are correctly described. Logical models aren't always more accurate than geometric ones—it depends on the task. Grading models (not grouping models) have infinite resolution; grouping models have finite resolution.","anchor":"Machine Learning — L1 · ML Fundamentals"},{"id":"L1-Q4","source":"L1 · ML Fundamentals","domain":"L1 · ML Fundamentals","topic":"Features","type":"open","question":"Explain what a feature is in machine learning and provide an example.","options":[],"answer":[],"note":"A feature is a measurement or function that maps from an instance in the instance space to a feature value. For example, in weather prediction, features might be temperature, humidity, and wind speed. Features are the inputs that a model uses to make predictions about a target variable.","anchor":"Machine Learning — L1 · ML Fundamentals"},{"id":"L1-Q5","source":"L1 · ML Fundamentals","domain":"L1 · ML Fundamentals","topic":"Descriptive Tasks","type":"multi","question":"Which of the following are descriptive machine learning tasks?","options":[["A","Descriptive clustering"],["B","Association rule mining"],["C","Subgroup discovery"],["D","Regression"],["E","Predictive clustering"]],"answer":["A","B","C"],"note":"Descriptive tasks exploit underlying data structure without predicting a target. Descriptive clustering, association rule mining, and subgroup discovery all fall into this category. Regression and predictive clustering predict a target variable, so they are predictive, not descriptive.","anchor":"Machine Learning — L1 · ML Fundamentals"},{"id":"L1-Q6","source":"L1 · ML Fundamentals","domain":"L1 · ML Fundamentals","topic":"Model Phases","type":"mcq","question":"Which phase of model development is typically much slower and more computationally expensive?","options":[["A","Inference phase"],["B","Training phase"],["C","Feature extraction phase"],["D","Validation phase"]],"answer":["B"],"note":"Training is the process of creating a model from data, requiring optimization of model parameters and is much slower than inference. Inference—using a trained model on new data—is much faster.","anchor":"Machine Learning — L1 · ML Fundamentals"},{"id":"L1-Q7","source":"L1 · ML Fundamentals","domain":"L1 · ML Fundamentals","topic":"Model Intuitions","type":"multi","question":"Which of the following correctly pair model types with their main characteristics?","options":[["A","Geometric models use separating hyperplanes and distance metrics"],["B","Probabilistic models aim for reducing uncertainty through probability distributions"],["C","Logical models are defined using easily interpretable rules"],["D","All geometric models are also probabilistic models"]],"answer":["A","B","C"],"note":"The first three statements accurately describe the main intuitions behind these model types. Geometric, probabilistic, and logical models are distinct categories—not all geometric models are probabilistic.","anchor":"Machine Learning — L1 · ML Fundamentals"},{"id":"L1-Q8","source":"L1 · ML Fundamentals","domain":"L1 · ML Fundamentals","topic":"Unsupervised Learning","type":"open","question":"What is the main difference between supervised and unsupervised learning in terms of training data?","options":[],"answer":[],"note":"In supervised learning, training data includes labeled instances (inputs paired with true target values). In unsupervised learning, data points are unlabeled—there are no target values provided. The model must find patterns or structure in the data without guidance from labels.","anchor":"Machine Learning — L1 · ML Fundamentals"},{"id":"L1-Q9","source":"L1 · ML Fundamentals","domain":"L1 · ML Fundamentals","topic":"Applications vs Tasks","type":"mcq","question":"What is the correct relationship between applications and tasks in machine learning?","options":[["A","Applications and tasks are the same thing"],["B","Applications are general skills; tasks are specific instances of those skills"],["C","Tasks are general skills; applications are specific uses of those tasks"],["D","There is no meaningful relationship between applications and tasks"]],"answer":["C"],"note":"The lecture clarifies that browsing recommendations, detecting dogs, and other applications use underlying machine learning tasks (like classification). Tasks are general skills (classification, regression, clustering), while applications are specific uses of those tasks.","anchor":"Machine Learning — L1 · ML Fundamentals"},{"id":"L1-Q10","source":"L1 · ML Fundamentals","domain":"L1 · ML Fundamentals","topic":"Feature Engineering","type":"multi","question":"Which of the following are valid approaches to feature engineering mentioned in the lecture?","options":[["A","Feature construction from raw data"],["B","Discretization of numerical features"],["C","Feature transformation to project data into new spaces"],["D","Removing all numerical features"]],"answer":["A","B","C"],"note":"Feature construction, discretization, and feature transformation are all legitimate feature engineering techniques. Removing all numerical features is not a valid general strategy—the choice of features depends on the task and data characteristics.","anchor":"Machine Learning — L1 · ML Fundamentals"},{"id":"L1-Q11","source":"L1 · ML Fundamentals","domain":"L1 · ML Fundamentals","topic":"Instance Space","type":"mcq","question":"In geometric models, what does the instance space represent?","options":[["A","The set of training examples only"],["B","The set of all possible or describable instances, including those not in the training data"],["C","The set of features extracted from instances"],["D","The output space where predictions are made"]],"answer":["B"],"note":"The instance space is the complete set of all possible instances that could be described using the features, whether or not they appear in the training data. For example, a 2D Cartesian coordinate system represents an instance space for geometrical models.","anchor":"Machine Learning — L1 · ML Fundamentals"},{"id":"L1-Q12","source":"L1 · ML Fundamentals","domain":"L1 · ML Fundamentals","topic":"Grouping vs Grading Models","type":"multi","question":"Which statements accurately describe the differences between grouping and grading models?","options":[["A","Grouping models divide instance space into segments with fixed resolution"],["B","Grading models form a single global model over the instance space"],["C","Grading models have infinite resolution in theory when using Cartesian spaces"],["D","Grouping models can handle any instance type without limitation"]],"answer":["A","B","C"],"note":"Grouping and grading models differ fundamentally: grouping breaks space into segments (finite resolution), while grading creates a global model (infinite resolution in theory). However, grouping models cannot distinguish between instances beyond their segment resolution, so the last statement is false.","anchor":"Machine Learning — L1 · ML Fundamentals"},{"id":"L1-Q13","source":"L1 · ML Fundamentals","domain":"L1 · ML Fundamentals","topic":"ML Fundamentals","type":"open","question":"According to the lecture's lesson learned, what three key components must align for successful machine learning?","options":[],"answer":[],"note":"Machine learning requires using the right features to build the right models that achieve the right tasks. These three components—features, models, and tasks—must be properly aligned: appropriate features for the task, the right model architecture to use those features, and a well-defined machine learning task.","anchor":"Machine Learning — L1 · ML Fundamentals"},{"id":"L2-Q1","source":"L2 · Binary Classification","domain":"L2 · Binary Classification","topic":"Binary Classification Basics","type":"mcq","question":"What is a binary classifier?","options":[["A","A classifier that maps input instances to a finite set of two class labels"],["B","A classifier that only works with numerical data"],["C","A classifier that requires exactly two feature dimensions"],["D","A classifier that can only achieve 50% accuracy"]],"answer":["A"],"note":"A binary classifier is specifically a mapping from instance space to exactly two class labels (e.g., positive/negative, spam/ham, True/False), regardless of the number of features or data type.","anchor":"Machine Learning — L2 · Binary Classification"},{"id":"L2-Q2","source":"L2 · Binary Classification","domain":"L2 · Binary Classification","topic":"Confusion Matrix Elements","type":"multi","question":"Which of the following correctly describe elements in a binary classification confusion matrix?","options":[["A","True positives are instances correctly predicted as the positive class"],["B","False negatives occur when a positive instance is incorrectly predicted as negative"],["C","False positives are instances incorrectly predicted as the negative class"],["D","True negatives are instances where predictions match actual class labels"]],"answer":["A","B"],"note":"In a confusion matrix, TP are correct positive predictions, FN are missed positives (predicted negative but actually positive), and TN are correct negative predictions. FP are positive predictions on actual negatives.","anchor":"Machine Learning — L2 · Binary Classification"},{"id":"L2-Q3","source":"L2 · Binary Classification","domain":"L2 · Binary Classification","topic":"Accuracy and Error Rate","type":"mcq","question":"A classifier predicts correctly on 75 out of 100 test instances. What is its accuracy?","options":[["A","0.75 or 75%"],["B","0.25 or 25%"],["C","0.75 but expressed as error rate"],["D","Cannot be determined from this information"]],"answer":["A"],"note":"Accuracy is calculated as (TP + TN) / Total, which equals the number of correct predictions divided by total instances. With 75 correct out of 100, accuracy = 75/100 = 0.75.","anchor":"Machine Learning — L2 · Binary Classification"},{"id":"L2-Q4","source":"L2 · Binary Classification","domain":"L2 · Binary Classification","topic":"Performance Metrics","type":"multi","question":"Which metrics are based on actual positive instances?","options":[["A","Sensitivity (true positive rate / recall)"],["B","Precision"],["C","Specificity"],["D","False negative rate"]],"answer":["A","D"],"note":"Sensitivity/recall = TP/(TP+FN) uses actual positives. FNR = FN/(TP+FN) also uses actual positives. Precision = TP/(TP+FP) uses predicted positives. Specificity = TN/(TN+FP) uses actual negatives.","anchor":"Machine Learning — L2 · Binary Classification"},{"id":"L2-Q5","source":"L2 · Binary Classification","domain":"L2 · Binary Classification","topic":"Precision vs Recall","type":"mcq","question":"In spam email filtering, which metric answers the question 'Of the emails I marked as spam, how many were actually spam?'","options":[["A","Precision"],["B","Recall"],["C","Specificity"],["D","Sensitivity"]],"answer":["A"],"note":"Precision = TP/(TP+FP) answers 'of positive predictions, how many were correct?'. Recall/sensitivity answers 'of actual positives, how many did we find?'.","anchor":"Machine Learning — L2 · Binary Classification"},{"id":"L2-Q6","source":"L2 · Binary Classification","domain":"L2 · Binary Classification","topic":"Imbalanced Dataset Problem","type":"open","question":"Why is accuracy misleading for imbalanced datasets? Give a concrete example with numbers.","options":[],"answer":[],"note":"Accuracy can be misleadingly high with imbalanced data. Example: with 99 actual positives and 1 negative, a 'naive' classifier that predicts everything as positive achieves 99% accuracy despite being useless. It fails to capture minority class performance. Use precision, recall, F-measure, or ROC-AUC instead.","anchor":"Machine Learning — L2 · Binary Classification"},{"id":"L2-Q7","source":"L2 · Binary Classification","domain":"L2 · Binary Classification","topic":"ROC Curve Interpretation","type":"mcq","question":"What does a ROC curve plot?","options":[["A","True positive rate versus false positive rate at different classification thresholds"],["B","Accuracy versus precision at different thresholds"],["C","Sensitivity versus specificity at a fixed threshold"],["D","Training loss versus validation loss during model training"]],"answer":["A"],"note":"ROC (Receiver Operating Characteristic) curve shows TPR on the y-axis and FPR (1-specificity) on the x-axis, plotting performance across all possible classification thresholds.","anchor":"Machine Learning — L2 · Binary Classification"},{"id":"L2-Q8","source":"L2 · Binary Classification","domain":"L2 · Binary Classification","topic":"ROC Curve Characteristics","type":"multi","question":"Which statements about ROC curves are correct?","options":[["A","A random classifier produces a diagonal line from (0,0) to (1,1)"],["B","A perfect classifier touches the point (0,1) on the ROC curve"],["C","The area under the curve (AUC) ranges from 0.5 to 1.0 for reasonable classifiers"],["D","ROC curves are useful because they show performance across all possible thresholds"]],"answer":["A","B","C","D"],"note":"All statements are correct. Random classifier = diagonal. Perfect classifier = (0,1) where TPR=1 and FPR=0. AUC ranges 0.5-1.0. ROC's strength is showing threshold-independent performance via threshold variation.","anchor":"Machine Learning — L2 · Binary Classification"},{"id":"L2-Q9","source":"L2 · Binary Classification","domain":"L2 · Binary Classification","topic":"Scoring Classifiers","type":"mcq","question":"What does a scoring classifier output?","options":[["A","A real-valued score for each class indicating likelihood of class membership"],["B","A hard class label for each instance"],["C","A confidence interval for each prediction"],["D","A loss value indicating prediction error"]],"answer":["A"],"note":"A scoring classifier maps instances to R^k (real-valued vectors), with each score indicating likelihood of that class. This differs from hard classification which outputs a single class label.","anchor":"Machine Learning — L2 · Binary Classification"},{"id":"L2-Q10","source":"L2 · Binary Classification","domain":"L2 · Binary Classification","topic":"Margin Concept","type":"multi","question":"In the margin framework for scoring classifiers, which statements are true?","options":[["A","Margin z(x) = c(x) * s_hat(x) where c(x) is +1 for positive and -1 for negative examples"],["B","Positive margins indicate correct predictions"],["C","Negative margins indicate incorrect predictions"],["D","The margin indicates the confidence of the classifier"]],"answer":["A","B","C","D"],"note":"The margin framework defines z(x) = c(x)*s_hat(x) where positive z means correct prediction, negative z means wrong prediction. Larger positive margins = higher confidence in correct prediction.","anchor":"Machine Learning — L2 · Binary Classification"},{"id":"L2-Q11","source":"L2 · Binary Classification","domain":"L2 · Binary Classification","topic":"Loss Functions","type":"mcq","question":"The 0-1 loss function assigns zero loss when the margin is positive and one when negative. Which other loss function also penalizes based on margin magnitude?","options":[["A","Hinge loss"],["B","Exponential loss"],["C","Logistic loss"],["D","All of the above"]],"answer":["D"],"note":"Hinge loss L_h(z) = (1-z) if z≤1, exponential L_exp(z) = exp(-z), and logistic L_log(z) = log(1+exp(-z)) all increase penalty for small/negative margins, rewarding large positive margins.","anchor":"Machine Learning — L2 · Binary Classification"},{"id":"L2-Q12","source":"L2 · Binary Classification","domain":"L2 · Binary Classification","topic":"Class Probability Estimation","type":"open","question":"Describe how class probabilities are calculated from a decision tree leaf, and explain the constraint that must hold for probability estimates across all classes.","options":[],"answer":[],"note":"For a tree leaf with N_spam spam emails and N_ham ham emails, probability of spam = N_spam/(N_spam+N_ham). The key constraint is that probabilities for all classes must sum to 1.0, e.g., P(spam) + P(ham) = 1.0 in binary case.","anchor":"Machine Learning — L2 · Binary Classification"},{"id":"L2-Q13","source":"L2 · Binary Classification","domain":"L2 · Binary Classification","topic":"Cross-Validation Purpose","type":"multi","question":"What problems does k-fold cross-validation help address?","options":[["A","Uncertainty about whether the test set truly represents future data distribution"],["B","Overfitting to a specific train/test split"],["C","Selection bias in hyperparameter tuning"],["D","Need to compare multiple classification algorithms"]],"answer":["A","B","C"],"note":"Cross-validation addresses uncertainty about test set representativeness by testing on multiple folds. It reduces overfitting to a single split and prevents selection bias when tuning hyperparameters. While useful for comparison, that's not its primary purpose.","anchor":"Machine Learning — L2 · Binary Classification"},{"id":"L2-Q14","source":"L2 · Binary Classification","domain":"L2 · Binary Classification","topic":"Overfitting vs Underfitting","type":"mcq","question":"A model achieves 95% accuracy on training data but only 60% on test data. Which phenomenon is this?","options":[["A","Overfitting - the model learned training noise rather than true patterns"],["B","Underfitting - the model is too simple"],["C","Poor generalization that could be either overfitting or underfitting"],["D","Class imbalance affecting performance"]],"answer":["A"],"note":"Large gap between training (95%) and test (60%) accuracy indicates overfitting, where the model memorized training data including noise. Underfitting shows poor performance on both train and test sets.","anchor":"Machine Learning — L2 · Binary Classification"},{"id":"L3-Q1","source":"L3 · Multi-class, Regression, Clustering","domain":"L3 · Multi-class, Regression, Clustering","topic":"One-versus-rest","type":"mcq","question":"In a one-versus-rest (OvR) multi-class classification scheme with 5 classes, how many binary classifiers are trained?","options":[["A","4"],["B","5"],["C","10"],["D","15"]],"answer":["B"],"note":"One-versus-rest trains k classifiers for k classes, one for each class against all others. With 5 classes, exactly 5 OvR classifiers are trained.","anchor":"Machine Learning — L3 · Multi-class, Regression, Clustering"},{"id":"L3-Q2","source":"L3 · Multi-class, Regression, Clustering","domain":"L3 · Multi-class, Regression, Clustering","topic":"One-versus-one","type":"multi","question":"Which statements about one-versus-one (OvO) classifiers are true?","options":[["A","A separate classifier is trained for every pair of classes"],["B","OvO requires k(k-1)/2 classifiers for k classes"],["C","Training data is reduced for each classifier since only two classes are involved"],["D","OvO typically produces faster inference than one-versus-rest"]],"answer":["A","B","C"],"note":"OvO trains classifiers for each pair of classes (requiring k(k-1)/2 models), each using only two-class data. However, inference is slower due to more classifiers needing evaluation.","anchor":"Machine Learning — L3 · Multi-class, Regression, Clustering"},{"id":"L3-Q3","source":"L3 · Multi-class, Regression, Clustering","domain":"L3 · Multi-class, Regression, Clustering","topic":"Multi-class evaluation","type":"mcq","question":"For a 3-class multi-class confusion matrix, how is the overall weighted precision calculated?","options":[["A","Average of all three class precisions equally"],["B","Weighted average based on the number of instances per class"],["C","Only the precision of the majority class"],["D","Macro-average across all classes equally"]],"answer":["B"],"note":"Weighted precision sums per-class precisions multiplied by their class proportions. For a 20% class 1, 30% class 2, 50% class 3 split: 0.20*prec1 + 0.30*prec2 + 0.50*prec3.","anchor":"Machine Learning — L3 · Multi-class, Regression, Clustering"},{"id":"L3-Q4","source":"L3 · Multi-class, Regression, Clustering","domain":"L3 · Multi-class, Regression, Clustering","topic":"Regression residuals","type":"open","question":"What are residuals in regression, and why are they important for evaluating a regression model?","options":[],"answer":[],"note":"Residuals are the differences between actual and predicted values (f(x) - f_hat(x)). They measure model error and are essential for evaluation: loss functions (MSE, MAE) apply to residuals to quantify how well the model fits the data.","anchor":"Machine Learning — L3 · Multi-class, Regression, Clustering"},{"id":"L3-Q5","source":"L3 · Multi-class, Regression, Clustering","domain":"L3 · Multi-class, Regression, Clustering","topic":"Overfitting bias-variance","type":"multi","question":"Select all correct statements about the bias-variance dilemma in regression:","options":[["A","High-complexity models eliminate bias but suffer from high variance"],["B","Low-complexity models have lower variance but may introduce systematic bias"],["C","The bias-variance decomposition shows total error = bias^2 + variance + irreducible error"],["D","Increasing polynomial degree always improves generalization"]],"answer":["A","B","C"],"note":"The bias-variance tradeoff is fundamental: complex models reduce bias but increase variance sensitivity to training data; simple models are stable but potentially biased. The decomposition equation is correct, but higher complexity doesn't guarantee better generalization.","anchor":"Machine Learning — L3 · Multi-class, Regression, Clustering"},{"id":"L3-Q6","source":"L3 · Multi-class, Regression, Clustering","domain":"L3 · Multi-class, Regression, Clustering","topic":"Polynomial fitting","type":"mcq","question":"When fitting polynomials to data with only 5 data points, why is a degree-4 polynomial problematic?","options":[["A","It will have extremely high bias"],["B","It can fit the data perfectly but likely overfits"],["C","It violates the rule that parameters should be considerably less than data points"],["D","It cannot be computed mathematically"]],"answer":["C"],"note":"A degree-4 polynomial has 5 parameters for 5 data points (1:1 ratio). To avoid overfitting, the number of parameters should be considerably less than the number of data points.","anchor":"Machine Learning — L3 · Multi-class, Regression, Clustering"},{"id":"L3-Q7","source":"L3 · Multi-class, Regression, Clustering","domain":"L3 · Multi-class, Regression, Clustering","topic":"Clustering scatter","type":"multi","question":"Which of the following are true about scatter in distance-based clustering?","options":[["A","Within-cluster scatter measures distances between points in the same cluster"],["B","Between-cluster scatter measures distances between cluster exemplars"],["C","A good clustering minimizes total within-cluster scatter relative to overall data scatter"],["D","Scatter can be computed without defining a distance metric"]],"answer":["A","B","C"],"note":"Scatter is a distance-based measure. Within-cluster scatter quantifies cohesion; between-cluster scatter quantifies separation. Good clustering maximizes separation while minimizing cohesion. A distance metric is always required.","anchor":"Machine Learning — L3 · Multi-class, Regression, Clustering"},{"id":"L3-Q8","source":"L3 · Multi-class, Regression, Clustering","domain":"L3 · Multi-class, Regression, Clustering","topic":"Silhouette coefficient","type":"mcq","question":"A data point with silhouette coefficient close to 0 indicates what about its clustering assignment?","options":[["A","The point is well-separated from neighboring clusters"],["B","The point is close to the decision boundary between clusters"],["C","The point is definitely in the wrong cluster"],["D","The point has zero distance to its cluster center"]],"answer":["B"],"note":"Silhouette coefficient near 0 means b≈a (distance to nearest other cluster ≈ distance to own cluster), placing the point on or near the boundary between two clusters, suggesting ambiguous assignment.","anchor":"Machine Learning — L3 · Multi-class, Regression, Clustering"},{"id":"L3-Q9","source":"L3 · Multi-class, Regression, Clustering","domain":"L3 · Multi-class, Regression, Clustering","topic":"Subgroup discovery vs classification","type":"open","question":"Explain the key difference between subgroup discovery and classification in terms of their objectives.","options":[],"answer":[],"note":"Classification maximizes overall prediction accuracy across the entire dataset. Subgroup discovery seeks to find small, statistically unusual population subgroups with unusual class distributions—not predicting labels for all instances, but identifying exceptional regions in the data.","anchor":"Machine Learning — L3 · Multi-class, Regression, Clustering"},{"id":"L3-Q10","source":"L3 · Multi-class, Regression, Clustering","domain":"L3 · Multi-class, Regression, Clustering","topic":"Clustering evaluation","type":"multi","question":"For evaluating clustering without ground truth, which metrics are appropriate?","options":[["A","Silhouette coefficient"],["B","Rand-index with known labels"],["C","Chi-squared test for subgroup discovery"],["D","Davies-Bouldin Index"]],"answer":["A","D"],"note":"Silhouette coefficient and Davies-Bouldin Index are internal validation metrics requiring no ground truth. Rand-index and chi-squared tests require labeled ground truth or a specific subgroup evaluation context.","anchor":"Machine Learning — L3 · Multi-class, Regression, Clustering"},{"id":"L3-Q11","source":"L3 · Multi-class, Regression, Clustering","domain":"L3 · Multi-class, Regression, Clustering","topic":"Multi-class ROC curves","type":"mcq","question":"What is macro-average ROC in multi-class classification?","options":[["A","One ROC curve per class, then average all TPR/FPR values equally"],["B","Aggregated TPR/FPR treating each instance equally across all classes"],["C","ROC curve for the majority class only"],["D","Weighted ROC by class size"]],"answer":["A"],"note":"Macro-average computes TPR and FPR independently for each class, then averages them equally, treating all classes fairly regardless of instance distribution.","anchor":"Machine Learning — L3 · Multi-class, Regression, Clustering"},{"id":"L3-Q12","source":"L3 · Multi-class, Regression, Clustering","domain":"L3 · Multi-class, Regression, Clustering","topic":"Predictive vs descriptive clustering","type":"multi","question":"Which statements correctly distinguish predictive from descriptive clustering?","options":[["A","Predictive clustering learns to generalize to unseen data (X → C)"],["B","Descriptive clustering maps only training data and emphasizes interpretability (D → C)"],["C","Descriptive clustering requires ground truth labels for validation"],["D","Both use the same distance-based clustering algorithms"]],"answer":["A","B","D"],"note":"Predictive clustering maps the instance space to predict labels on new data; descriptive clustering focuses on describing the actual data. Descriptive clustering doesn't require ground truth. Both can use distance-based methods.","anchor":"Machine Learning — L3 · Multi-class, Regression, Clustering"},{"id":"L3-Q13","source":"L3 · Multi-class, Regression, Clustering","domain":"L3 · Multi-class, Regression, Clustering","topic":"Confusion matrix multi-class","type":"open","question":"Given a 3-class confusion matrix, how would you calculate the F1 score and what does it measure?","options":[],"answer":[],"note":"For multi-class, calculate per-class precision and recall, then compute F1 = 2*(precision*recall)/(precision+recall) for each class. Average F1 scores (weighted or unweighted) across classes. F1 balances precision (positive prediction accuracy) and recall (positive identification rate).","anchor":"Machine Learning — L3 · Multi-class, Regression, Clustering"},{"id":"L4-Q1","source":"L4 · Decision Trees","domain":"L4 · Decision Trees","topic":"Tree Structure Components","type":"multi","question":"Which of the following are valid components of a decision tree structure?","options":[["A","Root node"],["B","Internal decision nodes"],["C","Leaf (terminal) nodes"],["D","Edge connections between nodes"],["E","Hidden layers"]],"answer":["A","B","C","D"],"note":"Decision trees consist of a root node (where classification starts), internal decision nodes (where splits occur based on feature values), leaf nodes (where final class predictions are made), and edges connecting them. Hidden layers are part of neural networks, not decision trees.","anchor":"Machine Learning — L4 · Decision Trees"},{"id":"L4-Q2","source":"L4 · Decision Trees","domain":"L4 · Decision Trees","topic":"Tree Growing Algorithm","type":"mcq","question":"In the GrowTree recursive algorithm, what is the primary goal when selecting the best split at each node?","options":[["A","Maximize the depth of the tree"],["B","Maximize information gain or minimize impurity"],["C","Split the dataset into equal-sized groups"],["D","Achieve perfect classification on training data immediately"]],"answer":["B"],"note":"GrowTree selects the best split by maximizing information gain (entropy reduction) or minimizing impurity (Gini, etc.). This greedy approach doesn't aim for equal group sizes or immediate perfect classification, and depth is controlled by stopping criteria, not selection strategy.","anchor":"Machine Learning — L4 · Decision Trees"},{"id":"L4-Q3","source":"L4 · Decision Trees","domain":"L4 · Decision Trees","topic":"Impurity Measures Comparison","type":"multi","question":"Which statements correctly compare different impurity metrics used in decision trees?","options":[["A","Entropy measures disorder using log base 2 and ranges from 0 to 1"],["B","Gini index is symmetric and reaches maximum at uniform class distribution"],["C","sqrt(Gini) is typically used to scale Gini to the 0-1 range"],["D","Minority class error only counts misclassification of the majority class"],["E","All three metrics (entropy, Gini, minority error) are mathematically equivalent"]],"answer":["A","B","C"],"note":"Entropy (0-1 range with log₂), Gini (symmetric, max 0.5 at uniform distribution, sometimes sqrt-scaled to 0-1), and sqrt(Gini) scaling are all correct. Minority class error counts misclassification of minority class, not majority. The metrics are NOT equivalent—they have different sensitivities to class distribution imbalance.","anchor":"Machine Learning — L4 · Decision Trees"},{"id":"L4-Q4","source":"L4 · Decision Trees","domain":"L4 · Decision Trees","topic":"Information Gain Calculation","type":"open","question":"Explain how information gain is calculated for a potential split in a decision tree, and why it reflects split quality.","options":[],"answer":[],"note":"Information gain = entropy(parent) - weighted average of entropy(children). Gain measures how much entropy is reduced by the split. A higher gain means the split better separates classes, reducing disorder more effectively. This greedy criterion drives the GrowTree algorithm to select splits that maximize class purity in child nodes.","anchor":"Machine Learning — L4 · Decision Trees"},{"id":"L4-Q5","source":"L4 · Decision Trees","domain":"L4 · Decision Trees","topic":"Feature Handling","type":"multi","question":"How do decision trees handle different types of features?","options":[["A","Categorical features are used directly as split values"],["B","Continuous features are discretized using thresholds (e.g., age < 25)"],["C","Each categorical level becomes a separate branch from a node"],["D","Continuous features are always binned into equal-width intervals"],["E","Both categorical and continuous features can be split at any split point"]],"answer":["A","B","C"],"note":"Categorical features split directly into branches per category. Continuous features are split using threshold comparisons (binary or multi-way). All split points are tested, not just equal-width bins. Equal-width binning is not mandatory—thresholds are chosen to maximize gain.","anchor":"Machine Learning — L4 · Decision Trees"},{"id":"L4-Q6","source":"L4 · Decision Trees","domain":"L4 · Decision Trees","topic":"Pruning Methods","type":"mcq","question":"What is the primary difference between reduced error pruning (REP) and cost-complexity pruning (CCP)?","options":[["A","REP uses a separate validation set; CCP uses penalty tuning with a parameter alpha"],["B","Both methods require the same computational cost"],["C","REP prunes greedily from leaves; CCP generates a sequence of trees"],["D","CCP cannot handle continuous features"]],"answer":["A"],"note":"Reduced error pruning greedily removes nodes based on error on a validation set. Cost-complexity pruning uses a penalty term (alpha) that trades accuracy vs. tree size, generating a sequence of nested trees. REP is simpler but requires extra validation data; CCP is more flexible for finding optimal tree size.","anchor":"Machine Learning — L4 · Decision Trees"},{"id":"L4-Q7","source":"L4 · Decision Trees","domain":"L4 · Decision Trees","topic":"Class Imbalance in Trees","type":"multi","question":"Which techniques address class imbalance problems in decision trees?","options":[["A","Stratified sampling to maintain class ratios in splits"],["B","Assigning misclassification costs higher to minority class"],["C","Growing deeper trees to memorize minority examples"],["D","Adjusting prior probabilities or class weights"],["E","Pruning minority-class leaves more aggressively"]],"answer":["A","B","D"],"note":"Stratified sampling, class weights/costs, and adjusted priors help balance minority class representation. Simply growing deeper trees leads to overfitting. Aggressive pruning of minority leaves worsens imbalance. Cost-sensitive learning and stratified approaches are standard remedies.","anchor":"Machine Learning — L4 · Decision Trees"},{"id":"L4-Q8","source":"L4 · Decision Trees","domain":"L4 · Decision Trees","topic":"Code Bug Detection","type":"open","question":"A student wrote this pseudocode for computing information gain. Identify the bug: `gain = entropy(parent) - len(left_child)/len(parent)*entropy(left_child) + len(right_child)/len(parent)*entropy(right_child)`. Explain the fix.","options":[],"answer":[],"note":"Bug: The formula uses + (plus) instead of - (minus) before the second term. Correct formula: gain = entropy(parent) - [len(left)/len(parent)*entropy(left) + len(right)/len(parent)*entropy(right)]. The second term is a weighted sum subtracted from parent entropy, not added. This bug would incorrectly compute or even negate gain values.","anchor":"Machine Learning — L4 · Decision Trees"},{"id":"L4-Q9","source":"L4 · Decision Trees","domain":"L4 · Decision Trees","topic":"Regression Trees","type":"multi","question":"Which statements apply to regression trees (trees for continuous output)?","options":[["A","Splits minimize variance reduction in child nodes"],["B","Leaf predictions are the mean (or median) of target values in that leaf"],["C","Impurity is measured as sum of squared deviations from leaf mean"],["D","Categorical features cannot be used in regression trees"],["E","Pruning is not necessary for regression trees"]],"answer":["A","B","C"],"note":"Regression trees minimize variance (sum of squared errors). Leaf values are typically means. Impurity is measured as within-node variance. Categorical features are allowed. Pruning is essential to prevent overfitting regression trees, just as for classification.","anchor":"Machine Learning — L4 · Decision Trees"},{"id":"L4-Q10","source":"L4 · Decision Trees","domain":"L4 · Decision Trees","topic":"Tree Growth Stopping","type":"mcq","question":"Which criterion is NOT typically used as a stopping condition in GrowTree?","options":[["A","Minimum number of instances in a leaf (e.g., >= 5)"],["B","All instances in the node belong to a single class (pure)"],["C","Maximum tree depth reached"],["D","Total number of leaves exceeds a threshold"]],"answer":["D"],"note":"Standard stopping criteria include leaf purity (pure node), minimum leaf size, and maximum depth. Stopping when total leaf count exceeds a threshold is less common because tree size is better controlled via pruning. Growth stopping criteria focus on local node properties, not global tree size.","anchor":"Machine Learning — L4 · Decision Trees"},{"id":"L4-Q11","source":"L4 · Decision Trees","domain":"L4 · Decision Trees","topic":"Tree Bias-Variance","type":"multi","question":"How do tree depth and pruning affect the bias-variance tradeoff?","options":[["A","Deeper trees have lower bias but higher variance"],["B","Pruning increases bias but decreases variance"],["C","Very shallow trees risk underfitting due to high bias"],["D","Pruning always improves test accuracy"],["E","Cross-validation helps select optimal tree complexity"]],"answer":["A","B","C","E"],"note":"Deep unpruned trees fit training data closely (low bias, high variance, overfitting). Pruning simplifies the tree (higher bias, lower variance). Shallow trees may underfit. Pruning doesn't always improve accuracy—only when tree complexity is excessive. Cross-validation is standard for selecting optimal complexity.","anchor":"Machine Learning — L4 · Decision Trees"},{"id":"L4-Q12","source":"L4 · Decision Trees","domain":"L4 · Decision Trees","topic":"Multi-way vs Binary Splits","type":"open","question":"Explain the difference between multi-way splits (k branches for k categorical values) and binary splits (two branches) for categorical features. When might binary splits be preferred?","options":[],"answer":[],"note":"Multi-way splits create one branch per category (e.g., {small, medium, large} → 3 branches). Binary splits group categories ({small, medium} vs {large}). Binary splits are often preferred because they: (1) reduce fragmentation (fewer very small nodes), (2) search more split points for better information gain, (3) create more balanced trees, and (4) are computationally more efficient.","anchor":"Machine Learning — L4 · Decision Trees"},{"id":"L4-Q13","source":"L4 · Decision Trees","domain":"L4 · Decision Trees","topic":"Ensemble Methods with Trees","type":"multi","question":"Which properties characterize Random Forests and Gradient Boosting ensembles of trees?","options":[["A","Random Forests grow trees in parallel with bootstrap samples"],["B","Gradient Boosting grows trees sequentially to correct previous errors"],["C","Random Forests reduce variance by averaging independent trees"],["D","Gradient Boosting reduces bias by combining weak learners"],["E","Random Forests require shallow trees for best performance"]],"answer":["A","B","C","D"],"note":"Random Forests: parallel growth, bootstrap sampling, variance reduction through averaging. Gradient Boosting: sequential, corrects errors iteratively, reduces bias through weak learner combination. Shallow trees work in both, but aren't required (depth is often a hyperparameter). Both are powerful ensemble techniques.","anchor":"Machine Learning — L4 · Decision Trees"},{"id":"L4-Q14","source":"L4 · Decision Trees","domain":"L4 · Decision Trees","topic":"Feature Importance from Trees","type":"mcq","question":"In decision trees, how is feature importance typically measured?","options":[["A","By counting how many times a feature appears in the tree"],["B","By summing information gain (or impurity reduction) across all splits using that feature, weighted by node sample size"],["C","By the depth at which a feature first appears"],["D","Equally for all features that appear in the tree"]],"answer":["B"],"note":"Feature importance sums weighted impurity reductions across all splits using that feature. Features causing large impurity reductions early (affecting large node samples) have higher importance. Simple counts ignore split quality and node size; depth is irrelevant. All features don't have equal importance by definition.","anchor":"Machine Learning — L4 · Decision Trees"},{"id":"L5-Q1","source":"L5 · Linear Models & SVM","domain":"L5 · Linear Models & SVM","topic":"Linear Models","type":"mcq","question":"Which of the following is NOT a property of linear models?","options":[["A","Simple and interpretable"],["B","Parametric with known structure"],["C","Prone to underfitting due to high bias"],["D","Highly resistant to overfitting regardless of data quality"]],"answer":["D"],"note":"Linear models are stable and low-variance, making them less prone to overfitting. However, they are NOT guaranteed to resist overfitting in all cases—they still depend on the data quality and can underfit.","anchor":"Machine Learning — L5 · Linear Models & SVM"},{"id":"L5-Q2","source":"L5 · Linear Models & SVM","domain":"L5 · Linear Models & SVM","topic":"Least-Squares Regression","type":"multi","question":"Which of the following techniques can help address outliers in least-squares regression?","options":[["A","Filter outliers using residuals plot and retrain"],["B","Increase the learning rate to converge faster"],["C","Use total least squares method for noisy data"],["D","Apply regularization to penalize large weights"]],"answer":["A","C","D"],"note":"Least-squares is sensitive to outliers. Solutions include filtering based on residuals, using total least squares (which handles noise in both x and y), and regularization. Increasing learning rate is a parameter for iterative methods like perceptron, not for least-squares.","anchor":"Machine Learning — L5 · Linear Models & SVM"},{"id":"L5-Q3","source":"L5 · Linear Models & SVM","domain":"L5 · Linear Models & SVM","topic":"Linear Functions","type":"open","question":"State the two key properties that define a linear function f, and provide one example of how they combine.","options":[],"answer":[],"note":"Linear functions satisfy additivity f(x₁ + x₂) = f(x₁) + f(x₂) and homogeneity f(αx) = αf(x). Combined: f(αx₁ + βx₂) = αf(x₁) + βf(x₂). These properties enable linear models to use geometric concepts like lines and planes.","anchor":"Machine Learning — L5 · Linear Models & SVM"},{"id":"L5-Q4","source":"L5 · Linear Models & SVM","domain":"L5 · Linear Models & SVM","topic":"Regularised Regression","type":"mcq","question":"In regularised least-squares regression, what does the parameter λ control?","options":[["A","The learning rate of gradient descent"],["B","The trade-off between fitting the data and keeping weights small"],["C","The number of iterations before convergence"],["D","The dimensionality of the feature space"]],"answer":["B"],"note":"λ is the regularisation parameter that balances minimising residuals and penalising large weight magnitudes. Higher λ enforces smaller weights (shrinkage), reducing overfitting at the cost of higher bias.","anchor":"Machine Learning — L5 · Linear Models & SVM"},{"id":"L5-Q5","source":"L5 · Linear Models & SVM","domain":"L5 · Linear Models & SVM","topic":"Support Vectors & Margins","type":"multi","question":"Which statements are true about support vectors in SVMs?","options":[["A","Support vectors are the training examples closest to the decision boundary"],["B","The margin is the distance from the decision boundary to the nearest support vectors"],["C","All training examples are equally important for defining the decision boundary"],["D","Support vectors determine the SVM decision boundary; other examples can be removed without affecting it"]],"answer":["A","B","D"],"note":"Support vectors are the critical instances that define the margin and boundary. The margin is the distance between the boundary and nearest training examples. Not all examples are equally important—only support vectors directly influence the boundary.","anchor":"Machine Learning — L5 · Linear Models & SVM"},{"id":"L5-Q6","source":"L5 · Linear Models & SVM","domain":"L5 · Linear Models & SVM","topic":"Soft Margin SVM","type":"mcq","question":"A low value of the complexity parameter C in soft margin SVM results in which effect?","options":[["A","Stricter penalties on margin violations, leading to smaller margins"],["B","Permitting more margin errors to achieve larger margins"],["C","Faster convergence during training"],["D","Perfect separation on training data with no misclassifications"]],"answer":["B"],"note":"Low C prioritises maximising the margin over minimising errors. High C penalises margin violations heavily, enforcing stricter separation. This is a bias-variance trade-off: low C = high bias, low variance; high C = low bias, high variance.","anchor":"Machine Learning — L5 · Linear Models & SVM"},{"id":"L5-Q7","source":"L5 · Linear Models & SVM","domain":"L5 · Linear Models & SVM","topic":"Perceptron Algorithm","type":"open","question":"Describe the perceptron weight update rule and explain why it adjusts the boundary when a misclassified positive example is encountered.","options":[],"answer":[],"note":"Update rule: w' = w + ηyᵢxᵢ. For a misclassified positive (yᵢ = +1), we add ηxᵢ to w, which increases w·xᵢ and moves the boundary towards the example. For a misclassified negative (yᵢ = -1), we subtract ηxᵢ, moving the boundary away.","anchor":"Machine Learning — L5 · Linear Models & SVM"},{"id":"L5-Q8","source":"L5 · Linear Models & SVM","domain":"L5 · Linear Models & SVM","topic":"SVM vs Perceptron","type":"multi","question":"Which differences between SVMs and perceptrons are correct?","options":[["A","SVMs guarantee finding the maximum-margin boundary; perceptrons find any separating boundary"],["B","Both use the same margin maximisation objective"],["C","SVMs are more robust to outliers due to soft margins"],["D","Perceptrons converge faster because they require fewer iterations"]],"answer":["A","C"],"note":"SVMs explicitly maximise the margin for robustness; perceptrons iteratively find separation without optimising margin width. Soft margin SVMs handle outliers by allowing violations. Perceptron convergence depends on data and learning rate, not necessarily being faster.","anchor":"Machine Learning — L5 · Linear Models & SVM"},{"id":"L5-Q9","source":"L5 · Linear Models & SVM","domain":"L5 · Linear Models & SVM","topic":"Kernel Methods","type":"mcq","question":"The kernel trick enables which capability?","options":[["A","Computing dot products in high-dimensional feature space without explicitly constructing the feature vectors"],["B","Training linear models on non-linearly separable data"],["C","Reducing computational complexity from O(n³) to O(n²)"],["D","All of the above"]],"answer":["D"],"note":"The kernel trick computes κ(xᵢ,xⱼ) = φ(xᵢ)·φ(xⱼ) directly without constructing φ(x). This allows extending linear classifiers to non-linear problems efficiently, avoiding explicit high-dimensional feature mapping.","anchor":"Machine Learning — L5 · Linear Models & SVM"},{"id":"L5-Q10","source":"L5 · Linear Models & SVM","domain":"L5 · Linear Models & SVM","topic":"Polynomial & RBF Kernels","type":"multi","question":"What are properties of polynomial and RBF kernels?","options":[["A","Polynomial kernel of degree p: κ(xᵢ,xⱼ) = (xᵢ·xⱼ + c)ᵖ"],["B","RBF kernel has a bandwidth parameter σ that controls the locality of similarity"],["C","Polynomial kernels can produce decision boundaries of arbitrary polynomial degree"],["D","RBF kernels map data into infinite-dimensional feature space"]],"answer":["A","B","C","D"],"note":"Polynomial κ(xᵢ,xⱼ) = (xᵢ·xⱼ + c)ᵖ with adjustable degree p. RBF κ(xᵢ,xⱼ) = exp(-||xᵢ-xⱼ||²/2σ²) has bandwidth σ controlling locality and implicitly maps to infinite dimensions, enabling complex non-linear boundaries.","anchor":"Machine Learning — L5 · Linear Models & SVM"},{"id":"L5-Q11","source":"L5 · Linear Models & SVM","domain":"L5 · Linear Models & SVM","topic":"Linear Separability & Kernels","type":"mcq","question":"If a dataset is not linearly separable in the original space, which technique can guarantee a linearly separable transformation?","options":[["A","Polynomial kernel of sufficient degree applied with an SVM"],["B","Gaussian (RBF) kernel applied with an SVM"],["C","Increasing the learning rate in perceptron training"],["D","Both A and B are correct"]],"answer":["D"],"note":"Both polynomial and RBF kernels can transform non-linearly separable data into linearly separable spaces. Polynomial kernels map to explicit high-dimensional spaces; RBF maps to implicit infinite-dimensional spaces. Perceptron learning rate only affects convergence speed.","anchor":"Machine Learning — L5 · Linear Models & SVM"},{"id":"L5-Q12","source":"L5 · Linear Models & SVM","domain":"L5 · Linear Models & SVM","topic":"Bias-Variance Trade-off","type":"open","question":"Explain how the soft margin parameter C in SVM represents a bias-variance trade-off, and what happens at extreme values.","options":[],"answer":[],"note":"C trades off margin maximisation (high bias, low variance) against minimising margin errors (low bias, high variance). High C → strict penalties → tight fit to training data (low bias, high variance, overfitting). Low C → large margin → tolerates errors (high bias, low variance, underfitting).","anchor":"Machine Learning — L5 · Linear Models & SVM"},{"id":"L5-Q13","source":"L5 · Linear Models & SVM","domain":"L5 · Linear Models & SVM","topic":"Linear Models","type":"multi","question":"Which advantages does the least-squares method offer for both regression and classification?","options":[["A","Closed-form solution exists, no iterative training required"],["B","Simple to implement and computationally efficient"],["C","Equally robust to outliers and noise in both regression and classification"],["D","Can be easily extended to non-linear problems using feature engineering"]],"answer":["A","B","D"],"note":"Least-squares has a closed-form solution (no iteration needed) and is efficient. However, it is NOT robust to outliers—outliers heavily influence the squared error. It can be extended to non-linear problems via kernels or polynomial features, but requires extra steps.","anchor":"Machine Learning — L5 · Linear Models & SVM"},{"id":"L5-Q14","source":"L5 · Linear Models & SVM","domain":"L5 · Linear Models & SVM","topic":"Feature Space Transformation","type":"mcq","question":"In the polynomial kernel example κ(xᵢ,xⱼ) = (xᵢ·xⱼ + ½)², the feature transformation Φ maps 1D input x to which feature space?","options":[["A","2D space: (x, x²)"],["B","3D space: (x, x², ½)"],["C","2D space: (x, √½)"],["D","Implicit high-dimensional space defined only by the kernel function"]],"answer":["B"],"note":"The polynomial kernel (xᵢ·xⱼ + ½)² = (xᵢ, x²ᵢ, ½)·(xⱼ, x²ⱼ, ½) explicitly shows the 3D feature mapping. The constant ½ becomes a third feature dimension, making the data linearly separable in this transformed space.","anchor":"Machine Learning — L5 · Linear Models & SVM"},{"id":"L7a-Q1","source":"L7a · Features & PCA","domain":"L7a · Features & PCA","topic":"Feature Types","type":"mcq","question":"Which of the following is a characteristic of categorical features?","options":[["A","They can be ordered from lowest to highest"],["B","They do not allow statistical operations beyond mode"],["C","They always involve numerical values"],["D","They require normalization before use in models"]],"answer":["B"],"note":"Categorical/nominal features only allow the mode as a statistical summary; operations like mean or median are not meaningful for categories without an inherent order.","anchor":"Machine Learning — L7a · Features & PCA"},{"id":"L7a-Q2","source":"L7a · Features & PCA","domain":"L7a · Features & PCA","topic":"Feature Statistics","type":"multi","question":"Which statistical measures are appropriate for ordinal features?","options":[["A","Mean and standard deviation"],["B","Median and quantiles"],["C","Mode only"],["D","All measures including mean, median, and mode"]],"answer":["B"],"note":"Ordinal features have ordering but no meaningful scale, so quantiles and median are appropriate, but mean is not.","anchor":"Machine Learning — L7a · Features & PCA"},{"id":"L7a-Q3","source":"L7a · Features & PCA","domain":"L7a · Features & PCA","topic":"Normalization","type":"mcq","question":"What is the main purpose of min-max normalization in feature preprocessing?","options":[["A","To center data around zero"],["B","To scale all features to the same range (e.g., [0,1])"],["C","To remove outliers from the dataset"],["D","To convert categorical variables to numerical ones"]],"answer":["B"],"note":"Min-max normalization scales features to a common range using (value-min)/(max-min), ensuring different features have comparable scales.","anchor":"Machine Learning — L7a · Features & PCA"},{"id":"L7a-Q4","source":"L7a · Features & PCA","domain":"L7a · Features & PCA","topic":"Discretisation","type":"multi","question":"Which discretisation methods can be used to convert quantitative features to ordinal?","options":[["A","Equal-width binning"],["B","Equal-frequency binning"],["C","Information gain-based splitting"],["D","Using only the median value"]],"answer":["A","B","C"],"note":"Equal-width, equal-frequency, and supervised methods like information gain splitting are valid discretisation techniques; using only the median is not.","anchor":"Machine Learning — L7a · Features & PCA"},{"id":"L7a-Q5","source":"L7a · Features & PCA","domain":"L7a · Features & PCA","topic":"PCA","type":"mcq","question":"What does the first principal component in PCA represent?","options":[["A","The direction of minimum variance in the data"],["B","The direction of maximum variance in the data"],["C","The average value of all features"],["D","A randomly chosen orthogonal direction"]],"answer":["B"],"note":"PCA finds directions where data variance is maximized; the first PC is the direction with the highest variance.","anchor":"Machine Learning — L7a · Features & PCA"},{"id":"L7a-Q6","source":"L7a · Features & PCA","domain":"L7a · Features & PCA","topic":"PCA Properties","type":"multi","question":"Which of the following are true about principal components?","options":[["A","They are uncorrelated to each other"],["B","They are computed using eigendecomposition of the covariance matrix"],["C","They require categorical features only"],["D","They preserve 100% of the original variance when all components are used"]],"answer":["A","B","D"],"note":"PCs are uncorrelated, derived from covariance matrix eigenanalysis, and preserve all variance when all components are retained. PCA works on quantitative features, not categorical.","anchor":"Machine Learning — L7a · Features & PCA"},{"id":"L7a-Q7","source":"L7a · Features & PCA","domain":"L7a · Features & PCA","topic":"Feature Engineering","type":"open","question":"Explain why feature engineering and preprocessing are critical steps in the machine learning pipeline before model training.","options":[],"answer":[],"note":"Preprocessing ensures data quality, handles missing values, and normalizes scales. Feature engineering creates meaningful representations that improve model performance and generalization by capturing domain knowledge and reducing noise.","anchor":"Machine Learning — L7a · Features & PCA"},{"id":"L7a-Q8","source":"L7a · Features & PCA","domain":"L7a · Features & PCA","topic":"Curse of Dimensionality","type":"mcq","question":"How does PCA help address the curse of dimensionality?","options":[["A","By removing all features with zero variance"],["B","By reducing the number of features while preserving most variance"],["C","By converting all features to categorical type"],["D","By increasing the dataset size to match feature count"]],"answer":["B"],"note":"PCA reduces dimensionality by projecting data onto fewer principal components that capture the most variance, thereby reducing computational cost and improving model efficiency.","anchor":"Machine Learning — L7a · Features & PCA"},{"id":"L7a-Q9","source":"L7a · Features & PCA","domain":"L7a · Features & PCA","topic":"Feature Transformation","type":"multi","question":"When converting categorical variables using one-hot encoding, what must you consider?","options":[["A","One-hot encoding avoids imposing false ordering on categories"],["B","It can lead to a larger feature space"],["C","The resulting binary features remain uncorrelated"],["D","You should drop one category to avoid multicollinearity"]],"answer":["A","B","D"],"note":"One-hot encoding treats categories as independent (no false order), increases dimensions, and should use the (k-1) rule to prevent perfect multicollinearity in linear models.","anchor":"Machine Learning — L7a · Features & PCA"},{"id":"L7a-Q10","source":"L7a · Features & PCA","domain":"L7a · Features & PCA","topic":"Variance Preservation","type":"mcq","question":"In PCA, if the first 3 principal components explain 85% of the variance, what percentage of variance is lost if you use only these components?","options":[["A","3%"],["B","15%"],["C","85%"],["D","Unable to determine without more information"]],"answer":["B"],"note":"If 3 PCs explain 85% of total variance, the remaining components account for 100% - 85% = 15% of variance that would be lost.","anchor":"Machine Learning — L7a · Features & PCA"},{"id":"L7a-Q11","source":"L7a · Features & PCA","domain":"L7a · Features & PCA","topic":"Normalization Choice","type":"open","question":"Compare when you would use z-score normalization versus min-max normalization, and justify your choice for a dataset with extreme outliers.","options":[],"answer":[],"note":"Z-score centers on mean and divides by std dev, which is sensitive to outliers. Min-max scales to [0,1] but extreme outliers still dominate the range. For outlier-heavy data, z-score might be preferred as it's in standard units, or robust scaling (using median/IQR) is better.","anchor":"Machine Learning — L7a · Features & PCA"},{"id":"L7a-Q12","source":"L7a · Features & PCA","domain":"L7a · Features & PCA","topic":"Data Preprocessing","type":"multi","question":"What are valid steps in a preprocessing pipeline before training a machine learning model?","options":[["A","Data cleaning and handling missing values"],["B","Feature normalization and scaling"],["C","Dimensionality reduction via PCA"],["D","Removing all features with low variance"]],"answer":["A","B","C"],"note":"Data cleaning, normalization, and PCA are standard preprocessing steps. Removing all low-variance features can lose information; selective removal should be based on domain knowledge.","anchor":"Machine Learning — L7a · Features & PCA"},{"id":"L7a-Q13","source":"L7a · Features & PCA","domain":"L7a · Features & PCA","topic":"Supervised vs Unsupervised","type":"mcq","question":"Is PCA a supervised or unsupervised dimensionality reduction technique?","options":[["A","Supervised—it requires labels to find principal components"],["B","Unsupervised—it finds directions of maximum variance without considering target labels"],["C","Semi-supervised—it partially uses label information"],["D","Neither—it is a preprocessing operation, not a learning technique"]],"answer":["B"],"note":"PCA is unsupervised because it finds variance-preserving directions without access to class labels or target values.","anchor":"Machine Learning — L7a · Features & PCA"},{"id":"L7a-Q14","source":"L7a · Features & PCA","domain":"L7a · Features & PCA","topic":"Structured Features","type":"open","question":"Describe two approaches to constructing structured features from raw text data and explain when you might use each.","options":[],"answer":[],"note":"Word frequencies/bag-of-words is simple and fast for basic tasks. N-grams and phrase detection capture local context. More complex methods like embeddings capture semantic meaning. Choice depends on task complexity and available computational resources.","anchor":"Machine Learning — L7a · Features & PCA"},{"id":"L7b-Q1","source":"L7b · Distance Models & KNN","domain":"L7b · Distance Models & KNN","topic":"General","type":"mcq","options":[["A","Symmetry: d(x, y) = d(y, x)"],["B","Triangle inequality: d(x, z) ≤ d(x, y) + d(y, z)"],["C","Reflexivity: d(x, x) = 0 for all x"],["D","Monotonicity: d increases with feature magnitude"]],"answer":["D"],"note":"Valid distance metrics require non-negativity, identity (d(x,x)=0), symmetry, and triangle inequality. Monotonicity is not a universal requirement—metrics can behave non-monotonically with respect to individual feature magnitudes. The Minkowski p-norms satisfy the core properties, but don't mandate monotonic scaling behavior.","anchor":"Machine Learning — L7b · Distance Models & KNN"},{"id":"L7b-Q2","source":"L7b · Distance Models & KNN","domain":"L7b · Distance Models & KNN","topic":"General","type":"multi","options":[["A","Euclidean distance is most influenced by a single outlier pixel differing significantly from others"],["B","Manhattan distance treats all directions equally, unlike Euclidean which emphasizes diagonal differences"],["C","Chebyshev distance will produce the same neighborhoods as Euclidean for k=1 if features are independently uniformly distributed"],["D","For identical datasets, Chebyshev always produces tighter decision boundaries than Manhattan"],["E","In high dimensions, all three metrics converge toward measuring extreme coordinate differences"]],"answer":["A","E"],"note":"Euclidean (L2) squares differences, so outliers have outsized influence. Chebyshev (L∞) focuses on the maximum coordinate difference, and in high dimensions, the max dominates the sum—so all metrics eventually converge to similar behavior. Manhattan (L1) treats axes equally but isn't equivalent to Euclidean's diagonal emphasis. Chebyshev doesn't necessarily produce tighter boundaries than Manhattan universally.","anchor":"Machine Learning — L7b · Distance Models & KNN"},{"id":"L7b-Q3","source":"L7b · Distance Models & KNN","domain":"L7b · Distance Models & KNN","topic":"General","type":"multi","options":[["A","The decision boundary is the perpendicular bisector between the two nearest examples"],["B","Small perturbations in the new point's position can flip its predicted class if it's exactly on the Voronoi edge"],["C","Increasing k to 3 will definitely smooth this sharp boundary by voting across multiple neighbors"],["D","The Voronoi cell for each training example contains all points closer to it than to any other training example"],["E","In very high dimensions, the curse of dimensionality makes the nearest neighbor distance nearly equal to the distance to far neighbors"]],"answer":["B","D","E"],"note":"k=1 creates Voronoi cells (each point owns all space closer to it). Decision boundaries align with Voronoi edges—small moves can flip classification. Larger k does smooth boundaries via majority voting. The curse of dimensionality makes high-dimensional distances collapse toward a common scale, so 'nearest' becomes less meaningful. The perpendicular bisector statement is true for 2D Euclidean but not general.","anchor":"Machine Learning — L7b · Distance Models & KNN"},{"id":"L7b-Q4","source":"L7b · Distance Models & KNN","domain":"L7b · Distance Models & KNN","topic":"General","type":"mcq","options":[["A","Both bias and variance decrease"],["B","Bias increases, variance decreases"],["C","Bias decreases, variance increases"],["D","Both bias and variance increase"]],"answer":["B"],"note":"Small k (like k=1) fits the training data closely—low bias, high variance. Large k averages over many neighbors, smoothing predictions—high bias (underfitting), low variance. The optimal k balances this tradeoff.","anchor":"Machine Learning — L7b · Distance Models & KNN"},{"id":"L7b-Q5","source":"L7b · Distance Models & KNN","domain":"L7b · Distance Models & KNN","topic":"General","type":"multi","options":[["A","Strategy B is guaranteed to find the global optimum faster than Strategy A"],["B","Strategy A may converge to a local optimum with high inertia, while Strategy B is more likely to avoid poor local optima"],["C","Both strategies will converge in the same number of iterations once initialized"],["D","Strategy B requires more computation during initialization but often leads to better final clustering"],["E","Changing the initialization strategy can change the final inertia value without changing the number of iterations"]],"answer":["B","D","E"],"note":"k-means++ improves initialization by spreading seeds far apart, reducing the risk of poor local optima—but no guarantee of global optimum. Both strategies run the same algorithm after initialization, so convergence rate depends on quality of start. Poor initialization (A) often yields higher inertia. Strategy B costs more upfront but typically produces better solutions. Different inertias with same iteration count confirms initialization matters for final quality, not just speed.","anchor":"Machine Learning — L7b · Distance Models & KNN"},{"id":"L7b-Q6","source":"L7b · Distance Models & KNN","domain":"L7b · Distance Models & KNN","topic":"General","type":"multi","options":[["A","Income dominates the distance calculation because its range is much larger"],["B","Clusters will be elongated in the Income direction rather than spherical"],["C","Feature scaling using min-max normalization or z-score standardization will change cluster assignments"],["D","The inertia value is no longer interpretable without scaling normalization"],["E","Hierarchical clustering with Euclidean distance will show the same Income-dominance effect"]],"answer":["A","B","C","E"],"note":"Without scaling, large-range features (Income) dwarf small-range features (Age) in Euclidean distance. This skews clusters toward aligning with Income, creating elongated clusters. Scaling rescales both features to comparable ranges, changing cluster membership. Inertia itself is still a valid sum-of-squares metric, but its interpretation relative to scaled data differs. Hierarchical clustering suffers the same issue when using Euclidean distance. Only (3) is misleading—inertia remains calculable; interpretation context changes.","anchor":"Machine Learning — L7b · Distance Models & KNN"},{"id":"L7b-Q7","source":"L7b · Distance Models & KNN","domain":"L7b · Distance Models & KNN","topic":"General","type":"mcq","options":[["A","k-medoids always converges faster because it uses actual data points instead of geometric means"],["B","k-medoids centroids are guaranteed to be real, interpretable records; k-means centroids are synthetic points that may not represent any actual customer"],["C","k-medoids is immune to the curse of dimensionality while k-means is highly sensitive"],["D","k-medoids can only work with Euclidean distance, making it more robust"]],"answer":["B"],"note":"k-medoids selects actual data points as centers, so results are immediately interpretable. k-means computes geometric centroids that don't exist in the dataset. k-medoids is computationally more expensive (O(n²k) vs O(nk)), not faster. Both suffer curse of dimensionality similarly. k-medoids works with any distance metric, not just Euclidean.","anchor":"Machine Learning — L7b · Distance Models & KNN"},{"id":"L7b-Q8","source":"L7b · Distance Models & KNN","domain":"L7b · Distance Models & KNN","topic":"General","type":"multi","options":[["A","Point 1 is well-clustered; it lies deep within its cluster"],["B","Point 2 is ambiguous; it's roughly equidistant from its own cluster and a neighboring cluster"],["C","Point 3 should be moved to a different cluster to improve the clustering"],["D","Point 4 is significantly closer to a different cluster than its assigned cluster"],["E","The overall silhouette coefficient for the clustering is positive, indicating reasonable cluster quality"]],"answer":["A","B","D"],"note":"Silhouette s_i = (b_i - a_i) / max(a_i, b_i), where a_i = avg within-cluster distance, b_i = min avg to other clusters. Positive s means a_i < b_i (closer to own cluster). s1=0.8 shows tight clustering. s2≈0 means equidistance. s3,s4 negative means points are closer to other clusters—they may be misclustered, but moving them isn't inherent to the silhouette calculation itself (that's post-hoc interpretation). Statement (4) is correct but (3) overstates—silhouette describes fit, not prescribes reassignment. Overall average isn't necessarily positive with mixed scores.","anchor":"Machine Learning — L7b · Distance Models & KNN"},{"id":"L7b-Q9","source":"L7b · Distance Models & KNN","domain":"L7b · Distance Models & KNN","topic":"General","type":"multi","options":[["A","Single linkage can produce 'chain' effects where clusters elongate by merging one edge point at a time"],["B","Complete linkage tends to produce compact, roughly spherical clusters by merging when the farthest pair is closest"],["C","Average linkage is computationally faster than complete linkage because it requires fewer pairwise distance comparisons"],["D","Centroid linkage uses the Euclidean distance between cluster centroids, making it sensitive to the scale of features"],["E","Single linkage is guaranteed to outperform complete linkage in high-dimensional spaces"]],"answer":["A","B","D"],"note":"Single linkage (min distance) can create elongated chains by progressively merging peripheral points. Complete linkage (max distance) avoids this by enforcing tighter clusters. Average linkage isn't computationally faster—all linkages compute pairwise distances; complexity is similar. Centroid linkage measures distance between cluster means, so it inherits scaling sensitivity from the underlying metric. Neither linkage dominates universally in high dimensions; behavior depends on data structure.","anchor":"Machine Learning — L7b · Distance Models & KNN"},{"id":"L7b-Q10","source":"L7b · Distance Models & KNN","domain":"L7b · Distance Models & KNN","topic":"General","type":"mcq","options":[["A","There are two naturally distinct groups in the data separated by a large distance"],["B","The dataset contains one large cluster with many small subclusters"],["C","The algorithm is unstable and produced inconsistent clustering"],["D","The data is too high-dimensional to cluster effectively"]],"answer":["A"],"note":"A tall merge line indicates two well-separated clusters bridged at high distance. Many short lines below indicate tight subclusters within each group. This pattern suggests a natural two-cluster structure (or k-cluster if you see k prominent tall lines). This isn't instability—it's a clear hierarchical structure. High dimensionality would show more gradual merging, not this stark separation.","anchor":"Machine Learning — L7b · Distance Models & KNN"},{"id":"L7b-Q11","source":"L7b · Distance Models & KNN","domain":"L7b · Distance Models & KNN","topic":"General","type":"open","options":[],"answer":[],"note":"The elbow method plots inertia (within-cluster sum of squares) against k. Inertia decreases monotonically as k increases (more clusters → tighter groups → lower inertia). The 'elbow' is the point where the inertia curve bends sharply—adding more clusters beyond this point provides diminishing returns. The elbow suggests a natural number of clusters. Limitations: (1) Not all datasets have obvious elbows. (2) Elbow location is subjective. (3) Inertia doesn't directly measure cluster quality (silhouette or other metrics are more interpretable). (4) High-dimensional data makes elbow detection unreliable. Alternative methods: silhouette analysis, gap statistic, or domain knowledge.","anchor":"Machine Learning — L7b · Distance Models & KNN"},{"id":"L7b-Q12","source":"L7b · Distance Models & KNN","domain":"L7b · Distance Models & KNN","topic":"General","type":"open","options":[],"answer":[],"note":"In high dimensions, most data points become nearly equidistant from a query point. Specifically: (1) The distance to the nearest neighbor approaches the distance to the farthest neighbor—neighborhoods become uninformative. (2) Euclidean distances in d dimensions concentrate around a mean value that grows with √d. (3) The relative difference between nearest and farthest neighbors shrinks, making the 'nearest' neighbor less special. (4) Sparse sampling: finite data becomes increasingly sparse in high dimensions—neighbors are far away. Consequences: k-NN requires much larger k to find meaningful neighbors; majority voting becomes noisy; feature scaling and dimensionality reduction (PCA) become essential. This affects all distance-based methods similarly (k-means, hierarchical clustering).","anchor":"Machine Learning — L7b · Distance Models & KNN"},{"id":"L7b-Q13","source":"L7b · Distance Models & KNN","domain":"L7b · Distance Models & KNN","topic":"General","type":"multi","options":[["A","If k-means inertia is lower, it necessarily produces a better clustering in terms of compactness"],["B","k-means minimizes inertia by definition, so its inertia will always be lower than or equal to any other partitional method with the same k"],["C","Silhouette coefficient directly measures the same optimization objective as inertia"],["D","A clustering can have high inertia but high average silhouette coefficient if clusters are well-separated despite being loose"],["E","Silhouette coefficient accounts for cluster separation, while inertia only measures within-cluster compactness"]],"answer":["B","E"],"note":"k-means minimizes inertia, so its inertia ≤ any other partitional clustering with k clusters. Lower inertia doesn't guarantee better clustering—it only measures tightness. Silhouette s_i = (b_i - a_i) / max(a_i, b_i) balances within-cluster (a_i) and between-cluster (b_i) distances, making it more comprehensive. A loose but well-separated clustering can have high silhouette despite high inertia. Inertia and silhouette optimize different objectives.","anchor":"Machine Learning — L7b · Distance Models & KNN"},{"id":"L7b-Q14","source":"L7b · Distance Models & KNN","domain":"L7b · Distance Models & KNN","topic":"General","type":"multi","options":[["A","Use k-medoids so cluster centers are actual customers they can inspect as prototypes"],["B","Scale features (z-score or min-max) before clustering to prevent high-value customers from dominating distance calculations"],["C","Use hierarchical clustering instead of k-means because dendrograms directly show the optimal k value"],["D","Apply silhouette analysis to both k-means and k-medoids to compare cluster quality, not just inertia"],["E","Start with k=5 clusters because the elbow method is unreliable; use domain knowledge and silhouette scores to refine k"],["F","Use k-means instead of k-medoids because it scales better to 50,000 customers, then document that centroids are synthetic aggregates"]],"answer":["A","B","D","F"],"note":"k-medoids (A) gives interpretable customer prototypes for marketing personas. Scaling (B) prevents monetary value (high range) from dominating. Silhouette (D) evaluates cluster quality better than inertia alone. k-means (F) scales better than k-medoids for large n, with clear caveat that centroids are synthetic. Hierarchical clustering (C) is expensive for 50K points and dendrograms don't automatically reveal k. Starting with k=5 and refining via silhouette (E) is sound practice, not because elbow is universally unreliable, but because domain knowledge improves initial selection.","anchor":"Machine Learning — L7b · Distance Models & KNN"},{"id":"L8-Q1","source":"L8 · Probabilistic Models","domain":"L8 · Probabilistic Models","topic":"MLE vs MAP with Priors","type":"mcq","question":"You're building a spam detector with limited training data. Which estimation approach better incorporates domain knowledge that most emails are legitimate?","options":[["A","Maximum Likelihood Estimation (MLE) - it focuses purely on fitting the data"],["B","Maximum A Posteriori (MAP) - it combines data likelihood with prior beliefs"],["C","Naive Bayes - it assumes feature independence"],["D","Logistic Regression - it directly models decision boundaries"]],"answer":["B"],"note":"MAP incorporates a prior P(Y) reflecting domain knowledge, while MLE ignores priors. MAP is superior when you have informative priors (e.g., P(spam) = 0.1) and limited data.","anchor":"Machine Learning — L8 · Probabilistic Models"},{"id":"L8-Q2","source":"L8 · Probabilistic Models","domain":"L8 · Probabilistic Models","topic":"Bayes Theorem Components","type":"mcq","question":"In Bayes theorem P(Y|X) = P(X|Y)P(Y) / P(X), which component is the likelihood?","options":[["A","P(Y|X) - the posterior probability"],["B","P(X|Y) - the likelihood of observing features given the class"],["C","P(Y) - the prior probability"],["D","P(X) - the evidence or normalization constant"]],"answer":["B"],"note":"The likelihood P(X|Y) quantifies how probable the observed features are under each class hypothesis. It's the core of data-driven learning.","anchor":"Machine Learning — L8 · Probabilistic Models"},{"id":"L8-Q3","source":"L8 · Probabilistic Models","domain":"L8 · Probabilistic Models","topic":"Naive Bayes vs Logistic Regression","type":"mcq","question":"When would you prefer Naive Bayes over Logistic Regression for text classification?","options":[["A","When you have abundant labeled data and need maximum accuracy"],["B","When you need interpretable models, have moderate data, and can tolerate the independence assumption"],["C","When features are highly correlated and you want to capture those relationships"],["D","When you want to minimize training time regardless of accuracy"]],"answer":["B"],"note":"Naive Bayes works well with moderate data and provides interpretable per-word probabilities. Logistic Regression is preferable with large datasets and correlated features. Naive Bayes is computationally efficient and often performs surprisingly well despite its independence assumption.","anchor":"Machine Learning — L8 · Probabilistic Models"},{"id":"L8-Q4","source":"L8 · Probabilistic Models","domain":"L8 · Probabilistic Models","topic":"Gaussian Decision Boundaries","type":"mcq","question":"For a Gaussian mixture model with two classes having equal variances, how does the decision boundary change compared to unequal variances?","options":[["A","It becomes quadratic instead of linear"],["B","It becomes linear instead of quadratic"],["C","It remains unchanged"],["D","It becomes undefined"]],"answer":["B"],"note":"Equal variances simplify the quadratic discriminant to a linear one because the variance terms cancel out in the decision rule, reducing complexity.","anchor":"Machine Learning — L8 · Probabilistic Models"},{"id":"L8-Q5","source":"L8 · Probabilistic Models","domain":"L8 · Probabilistic Models","topic":"MLE and MAP Relationship","type":"multi","question":"Which statements correctly describe the relationship between MLE and MAP estimation?","options":[["A","MAP reduces to MLE when the prior is uniform (non-informative)"],["B","MLE can perform better than MAP with very large datasets despite weaker priors"],["C","MAP always produces better estimates than MLE regardless of data size"],["D","Both MLE and MAP find the mode of a probability distribution"],["E","MAP requires specifying a prior while MLE does not"]],"answer":["A","B","D","E"],"note":"MAP = MLE + prior; with uniform prior they coincide. With large data, likelihood dominates prior so MLE ≈ MAP. Both maximize (log) probability. MAP requires explicit prior specification, MLE doesn't. Option 2 is false: MAP won't always be worse than MLE.","anchor":"Machine Learning — L8 · Probabilistic Models"},{"id":"L8-Q6","source":"L8 · Probabilistic Models","domain":"L8 · Probabilistic Models","topic":"Conditional Independence","type":"multi","question":"What are valid interpretations of conditional independence P(X₁, X₂|Y) = P(X₁|Y)P(X₂|Y)?","options":[["A","Features are independent given knowledge of the class"],["B","Knowing the class makes the features statistically independent"],["C","Features are always independent regardless of the class"],["D","This assumption allows Naive Bayes to decompose the likelihood"],["E","This assumption is never violated in real-world text classification"]],"answer":["A","B","D"],"note":"Conditional independence (given Y) is the core Naive Bayes assumption. It enables factorizing P(X|Y) = ∏P(Xᵢ|Y), dramatically reducing parameters. Options 2 and 4 are false: features can be marginally dependent but conditionally independent, and real text features often violate this assumption.","anchor":"Machine Learning — L8 · Probabilistic Models"},{"id":"L8-Q7","source":"L8 · Probabilistic Models","domain":"L8 · Probabilistic Models","topic":"Multinomial Naive Bayes for Text","type":"multi","question":"For a Multinomial Naive Bayes model trained on email classification, which factors affect the estimated word probabilities P(word|spam)?","options":[["A","The total number of word occurrences in spam emails"],["B","The number of unique spam emails (document count)"],["C","Laplace smoothing to handle unseen words"],["D","The word's frequency relative to other words in spam emails"],["E","The total word count across all spam training documents"]],"answer":["A","C","D","E"],"note":"Multinomial counts word occurrences across all spam documents. P(word|spam) = (count + α) / (total_words + α×vocab_size). Parameter (0) affects numerator, (2) prevents zero probabilities, (3) determines relative importance, (4) affects denominator. Document count alone doesn't determine word probability.","anchor":"Machine Learning — L8 · Probabilistic Models"},{"id":"L8-Q8","source":"L8 · Probabilistic Models","domain":"L8 · Probabilistic Models","topic":"Naive Bayes Training Steps","type":"multi","question":"When training a Naive Bayes classifier, which steps are necessary to estimate parameters?","options":[["A","Estimate the class prior P(Y) from class label frequencies"],["B","Estimate feature likelihoods P(Xᵢ|Y) separately for each feature and class"],["C","Apply Laplace smoothing to prevent zero probabilities"],["D","Use gradient descent to optimize parameters iteratively"],["E","Compute posterior odds ratios for each training example"]],"answer":["A","B","C"],"note":"Naive Bayes has closed-form solutions: count frequencies for P(Y), count feature occurrences per class for P(Xᵢ|Y), and apply smoothing. No gradient descent needed. Posterior odds ratios are useful for interpretation but not required for training.","anchor":"Machine Learning — L8 · Probabilistic Models"},{"id":"L8-Q9","source":"L8 · Probabilistic Models","domain":"L8 · Probabilistic Models","topic":"Conditional Independence Violations in Text","type":"open","question":"Explain why the Naive Bayes conditional independence assumption P(X₁, X₂|Y) = P(X₁|Y)P(X₂|Y) is often violated in practice for text classification, yet the model still works reasonably well. What does this suggest about model design tradeoffs?","options":[],"answer":[],"note":"Naive Bayes assumes conditional independence of features given the class, which is almost always false in text (word co-occurrence patterns matter). Yet it works because: (1) the decision rule is robust to violation magnitude, (2) parameter count is O(vocab×classes) not O(2^vocab), (3) regularization via priors/smoothing helps, and (4) high-dimensional data often exhibits surprising behaviors. This illustrates that 'wrong' simple models beat 'right' complex ones when data is limited.","anchor":"Machine Learning — L8 · Probabilistic Models"},{"id":"L8-Q10","source":"L8 · Probabilistic Models","domain":"L8 · Probabilistic Models","topic":"MAP for Domain Adaptation","type":"open","question":"You observe that a Naive Bayes spam detector trained on historical emails (80% legitimate, 20% spam) performs poorly on new data. Describe how you would use Maximum A Posteriori (MAP) estimation to incorporate prior knowledge that the new user's emails are actually 95% legitimate.","options":[],"answer":[],"note":"MAP enables domain adaptation without retraining. By setting P(Y) to match the new environment, the posterior P(Y|X) shifts toward legitimate emails even when P(X|Y) is similar between classes. This is especially powerful when data distribution changes (concept drift). The prior acts as regularization, pulling decisions toward high-probability classes when evidence is weak.","anchor":"Machine Learning — L8 · Probabilistic Models"},{"id":"L8-Q11","source":"L8 · Probabilistic Models","domain":"L8 · Probabilistic Models","topic":"Generative vs Discriminative Models","type":"open","question":"A student claims: 'Logistic Regression and Naive Bayes are equivalent because both model P(Y|X).' Evaluate this claim. How do their modeling approaches fundamentally differ?","options":[],"answer":[],"note":"Logistic Regression is discriminative: it learns P(Y|X) directly. Naive Bayes is generative: it assumes P(X|Y) follows a specific distribution (Bernoulli, Multinomial, or Gaussian), then inverts via Bayes rule. This means Naive Bayes requires specifying the feature distribution and assumes conditional independence, while Logistic Regression is more flexible. With abundant data, Logistic Regression usually outperforms; with limited data or need for interpretability, Naive Bayes excels.","anchor":"Machine Learning — L8 · Probabilistic Models"},{"id":"L8-Q12","source":"L8 · Probabilistic Models","domain":"L8 · Probabilistic Models","topic":"Evidence Term P(X) in Bayes","type":"open","question":"Explain the role of the evidence term P(X) in Bayes theorem: P(Y|X) = P(X|Y)P(Y) / P(X). Why is it often called the 'normalizing constant'? How would your classification decision change if you ignored it?","options":[],"answer":[],"note":"P(X) is the total probability of observing the data, computed by summing over all classes. For classification, it's irrelevant: arg max_y P(Y|X) = arg max_y P(X|Y)P(Y) because P(X) is independent of y. However, computing P(X) is essential for getting calibrated probabilities: it normalizes the posterior to sum to 1, which matters for confidence estimates and decision thresholds.","anchor":"Machine Learning — L8 · Probabilistic Models"},{"id":"L8-Q13","source":"L8 · Probabilistic Models","domain":"L8 · Probabilistic Models","topic":"Bivariate Gaussian Classifier","type":"multi","question":"Consider a bivariate Gaussian classifier with classes Y=0 and Y=1. Which of the following statements are true?","options":[["A","If Σ₀ = Σ₁ (equal covariances), the decision boundary is linear"],["B","If Σ₀ ≠ Σ₁ (unequal covariances), the decision boundary is quadratic"],["C","The ML decision rule uses only P(X|Y) while the MAP rule incorporates P(Y)"],["D","With equal class priors P(Y=0) = P(Y=1) = 0.5, the ML and MAP boundaries coincide"],["E","The decision boundary can be obtained by setting P(Y=0|X) = P(Y=1|X)"]],"answer":["A","B","C","D","E"],"note":"All true. (0,1): Equal variance → linear, unequal → quadratic due to the quadratic term in the log-likelihood. (2): ML is arg max P(X|Y), MAP is arg max P(X|Y)P(Y). (3): Equal priors eliminate P(Y) differences. (4): This indifference threshold is exactly where the posterior probability flips from one class to the other.","anchor":"Machine Learning — L8 · Probabilistic Models"},{"id":"L8-Q14","source":"L8 · Probabilistic Models","domain":"L8 · Probabilistic Models","topic":"Laplace Smoothing","type":"mcq","question":"In the context of Naive Bayes training, why is Laplace smoothing (adding α to counts) crucial for text classification?","options":[["A","It increases the learned probability values to make them larger"],["B","It prevents zero probabilities for words unseen in training, avoiding infinite log-likelihoods"],["C","It makes all word probabilities equal regardless of observed frequency"],["D","It ensures the model assigns 50% probability to each class"]],"answer":["B"],"note":"Without smoothing, P(word|class) = 0 for unseen words, making log P(word|class) = -∞. Laplace smoothing avoids this by adding pseudocounts: P(word|class) = (count + α) / (total + α×vocab_size). This allows the model to handle new words gracefully.","anchor":"Machine Learning — L8 · Probabilistic Models"},{"id":"L9-Q1","source":"L9 · Ensembles","domain":"L9 · Ensembles","topic":"Bootstrap Sampling","type":"multi","question":"Which of the following statements about bootstrap sampling are correct?","options":[["A","Bootstrap sampling draws samples with replacement from original dataset"],["B","Bootstrap samples have same size as original dataset"],["C","Bootstrap is always stratified to preserve class distributions"],["D","Bootstrap aggregating (bagging) reduces variance by averaging predictions"],["E","Each bootstrap sample is guaranteed to exclude certain original instances"]],"answer":["A","B","D"],"note":"Bootstrap samples size with replacement to match original size, making some instances repeated and others absent. Bagging applies multiple models to bootstrap samples and averages predictions to reduce variance. Stratification is optional, not mandatory.","anchor":"Machine Learning — L9 · Ensembles"},{"id":"L9-Q2","source":"L9 · Ensembles","domain":"L9 · Ensembles","topic":"Random Forest","type":"multi","question":"Which characteristics define Random Forest ensembles?","options":[["A","Trees are built on bootstrap samples of the dataset"],["B","At each split, only a random subset of features is considered"],["C","Feature subsampling reduces correlation between trees"],["D","All features must be used at every node for consistency"],["E","Final prediction is majority vote (classification) or average (regression)"],["F","Random Forest requires global optimization of feature selection"]],"answer":["A","B","C","E"],"note":"Random Forests combine bootstrap aggregation with random feature subsampling to decorrelate trees. At each node, only m features (e.g., sqrt(d) for classification) are available, reducing correlation and improving ensemble diversity. Local randomization avoids global optimization.","anchor":"Machine Learning — L9 · Ensembles"},{"id":"L9-Q3","source":"L9 · Ensembles","domain":"L9 · Ensembles","topic":"AdaBoost","type":"multi","question":"Which statements accurately describe boosting algorithms like AdaBoost?","options":[["A","Boosting weights misclassified instances higher in subsequent rounds"],["B","Boosting trains weak learners sequentially, not independently"],["C","AdaBoost error rate is product of individual weak learner error rates"],["D","Boosting combines predictions using weighted majority vote"],["E","Boosting always requires balanced class distributions"],["F","Each weak learner focuses on instances difficult for previous learners"]],"answer":["A","B","D","F"],"note":"Boosting trains learners sequentially, increasing weights for misclassified instances. AdaBoost combines predictions as weighted majority vote where weights depend on learner accuracy. Error rate follows multiplicative bound under margin theory. No requirement for balanced data; boosting adapts automatically.","anchor":"Machine Learning — L9 · Ensembles"},{"id":"L9-Q4","source":"L9 · Ensembles","domain":"L9 · Ensembles","topic":"Bagging vs Boosting","type":"multi","question":"What are the key differences between bagging and boosting for bias-variance reduction?","options":[["A","Bagging primarily reduces variance; boosting primarily reduces bias"],["B","Bagging uses parallel training; boosting uses sequential training"],["C","Bagging works best with stable learners; boosting works best with unstable learners"],["D","Bagging and boosting both reduce variance equally effectively"],["E","Boosting can lead to overfitting if weak learners are too strong"],["F","Bagging is computationally expensive due to sequential training"]],"answer":["A","B","C","E"],"note":"Bagging (parallel) reduces variance via averaging; boosting (sequential) reduces bias by focusing on hard instances. Bagging works best with high-variance learners like deep trees; boosting with weak learners. Strong learners in boosting risk overfitting. Bagging parallelizes, making it computationally efficient.","anchor":"Machine Learning — L9 · Ensembles"},{"id":"L9-Q5","source":"L9 · Ensembles","domain":"L9 · Ensembles","topic":"Stacking","type":"multi","question":"In the context of stacking, which statements are correct?","options":[["A","Level-0 models are base learners trained on original dataset"],["B","Level-1 model (meta-model) learns from Level-0 predictions as features"],["C","Stacking requires k-fold cross-validation to avoid overfitting"],["D","Level-1 always uses simple linear regression as meta-model"],["E","Stacking can combine diverse base learner types"],["F","Train/test split is not necessary for stacking Level-0 models"]],"answer":["A","B","C","E"],"note":"Stacking uses cross-validated predictions from diverse base learners as meta-features for Level-1 model. k-fold CV prevents data leakage. Meta-model can be any learner, not restricted to linear regression. Diverse base learners (trees, SVM, NB) improve meta-learning.","anchor":"Machine Learning — L9 · Ensembles"},{"id":"L9-Q6","source":"L9 · Ensembles","domain":"L9 · Ensembles","topic":"Bias-Variance Tradeoff","type":"multi","question":"Which aspects of the bias-variance tradeoff are correctly described?","options":[["A","Bias measures systematic error from model assumptions"],["B","Variance measures sensitivity to training data fluctuations"],["C","Test error decomposes as: bias² + variance + irreducible error"],["D","Complex models typically have high bias and low variance"],["E","Bagging reduces variance without increasing bias significantly"],["F","Boosting reduces bias by iteratively correcting errors"]],"answer":["A","B","C","E","F"],"note":"Bias-variance decomposition shows test error = bias² + variance + noise. Complex models have low bias, high variance; simple models opposite. Bagging averages to reduce variance with minimal bias increase. Boosting reduces bias by sequentially correcting mispredictions.","anchor":"Machine Learning — L9 · Ensembles"},{"id":"L9-Q7","source":"L9 · Ensembles","domain":"L9 · Ensembles","topic":"Paired t-test Degrees of Freedom","type":"mcq","question":"In a paired t-test comparing two algorithms on a single dataset with 5-fold cross-validation, what are the degrees of freedom?","options":[["A","df = 4 (number of folds minus 1)"],["B","df = 5 (number of folds)"],["C","df = 10 (total test samples)"],["D","df = 9 (total samples across folds minus 1)"]],"answer":["A"],"note":"Paired t-test has df = k-1 where k is number of paired measurements (folds). With 5-fold CV, df = 5-1 = 4. This tests if mean performance difference is significant.","anchor":"Machine Learning — L9 · Ensembles"},{"id":"L9-Q8","source":"L9 · Ensembles","domain":"L9 · Ensembles","topic":"Friedman Test Statistic","type":"mcq","question":"In the Friedman test with 5 algorithms evaluated on 10 datasets, what is the test statistic under null hypothesis (all algorithms rank equally)?","options":[["A","χ²_F ≈ 12n(k-1)/(k(k+1)) × sum of squared rank deviations"],["B","χ²_F = (12×10×4)/(5×6) × sum of squared deviations ≈ 16"],["C","t-statistic with df = 49"],["D","F-statistic with df₁=4, df₂=36"]],"answer":["B"],"note":"Friedman test χ²_F = (12n(k-1))/(k(k+1)) × Σ(R_j - R̄)² where n=datasets, k=algorithms. With k=5, n=10: χ²_F = (12×10×4)/(5×6) × variance = 16. Compare to χ²(4) critical value (~9.49 at α=0.05).","anchor":"Machine Learning — L9 · Ensembles"},{"id":"L9-Q9","source":"L9 · Ensembles","domain":"L9 · Ensembles","topic":"Wilcoxon Signed-Rank Test","type":"mcq","question":"Which distribution is used for Wilcoxon's signed-rank test with 15 datasets?","options":[["A","t-distribution with df=14"],["B","Normal approximation (z-test) since n=15 > 10"],["C","Wilcoxon exact distribution table lookup"],["D","χ² distribution with df=15"]],"answer":["B"],"note":"Wilcoxon test uses exact distribution for small n, but normal approximation (z-test) is recommended for n > 10 due to asymptotic normality. With n=15, use z~N(0,1) approximation.","anchor":"Machine Learning — L9 · Ensembles"},{"id":"L9-Q10","source":"L9 · Ensembles","domain":"L9 · Ensembles","topic":"Nemenyi Critical Difference","type":"mcq","question":"In post-hoc Nemenyi test, the critical difference CD = q_α × sqrt(k(k+1)/(6n)) for comparing 4 algorithms on 12 datasets with α=0.05 is approximately:","options":[["A","CD ≈ 2.67 (q_α ≈ 2.57 from Studentized range distribution)"],["B","CD ≈ 3.85 (q_α ≈ 3.75 from t-distribution)"],["C","CD ≈ 1.92 (q_α ≈ 1.88 from normal)"],["D","CD ≈ 4.20 (q_α ≈ 4.10 from Tukey HSD)"]],"answer":["A"],"note":"Nemenyi uses q_α from Studentized range distribution (table values). For k=4, α=0.05: q_α ≈ 2.57. CD = 2.57 × sqrt(4×5/(6×12)) = 2.57 × 0.995 ≈ 2.56-2.67. Algorithms rank difference > CD are significantly different.","anchor":"Machine Learning — L9 · Ensembles"},{"id":"L9-Q11","source":"L9 · Ensembles","domain":"L9 · Ensembles","topic":"Bootstrap Sampling and Variance Reduction","type":"open","question":"Explain the bootstrap sampling process and why it enables bagging to reduce variance. How does the size and overlap of bootstrap samples relate to the reduction in ensemble variance?","options":[],"answer":[],"note":"Bootstrap sampling draws n samples with replacement from original dataset D (n instances). Each bootstrap sample B_i has size n but contains ~63.2% unique instances; ~36.8% are duplicates or absent. Bagging trains k models on k independent bootstrap samples, then averages predictions. Averaging reduces variance by factor ~1/k when predictions are uncorrelated. Variance reduction = Var(B) - Var(1/k * Σ predictions). Larger k increases variance reduction (asymptotic limit). Overlap in bootstrap samples (due to replacement) prevents complete de-correlation, but random sampling still decorrelates substantially.","anchor":"Machine Learning — L9 · Ensembles"},{"id":"L9-Q12","source":"L9 · Ensembles","domain":"L9 · Ensembles","topic":"AdaBoost Algorithm Workflow","type":"open","question":"Describe the AdaBoost algorithm workflow: how weights evolve, how error rates are calculated, and why the multiplicative weight update rule leads to exponentially better performance with weak learners. Include the mathematical relationship between individual weak learner accuracy and ensemble error rate.","options":[],"answer":[],"note":"AdaBoost: (1) Initialize equal weights w_i=1/n for all instances. (2) Train weak learner h_t on weighted dataset; compute weighted error ε_t = Σ w_i·I(h_t(x_i)≠y_i). (3) Compute learner weight α_t = ln((1-ε_t)/ε_t). (4) Update weights: w_i ← w_i·exp(-α_t·y_i·h_t(x_i)), renormalize. (5) Repeat T rounds. Final prediction: sign(Σ α_t·h_t(x)). Multiplicative weight update focuses next learner on misclassified instances. Ensemble error rate ≤ Π sqrt(ε_t(1-ε_t)) (product bound). If each weak learner has accuracy > 50% (ε_t < 0.5), product shrinks exponentially: error ≤ exp(-2·T·γ²) where γ = 0.5 - max(ε_t). This exponential advantage explains boosting's power.","anchor":"Machine Learning — L9 · Ensembles"},{"id":"L9-Q13","source":"L9 · Ensembles","domain":"L9 · Ensembles","topic":"Experimental Design for Algorithm Comparison","type":"open","question":"In a scenario where you need to compare 6 machine learning algorithms on 15 different datasets with statistical significance testing, outline the complete experimental design: sampling strategy, cross-validation setup, which statistical test to use, and how to interpret results for algorithm ranking.","options":[],"answer":[],"note":"Experimental design: (1) Data sampling: Each dataset split into 10 folds for cross-validation. Repeat 5 times with different random seeds to handle stochasticity. (2) Training: For each fold and repeat, train all 6 algorithms, record test accuracy. (3) Statistical testing: Use Friedman test (non-parametric, handles multiple datasets/algorithms). H₀: all algorithms rank equally. Compute mean rank R_j for each algorithm across 15 datasets. χ²_F = (12×15×5)/(6×7) × Σ(R_j - 3.5)² (critical value ~11.07 at α=0.05, df=5). (4) If Friedman rejects H₀, use post-hoc Nemenyi test: CD = q_α × sqrt(6×7/(6×15)) ≈ 2.92. Rank differences > CD indicate significant difference. Plot critical difference diagram with algorithms ranked; overlapping error bars = no significant difference.","anchor":"Machine Learning — L9 · Ensembles"},{"id":"L9-Q14","source":"L9 · Ensembles","domain":"L9 · Ensembles","topic":"Stacking vs Random Forest","type":"open","question":"Compare stacking and Random Forest as ensemble methods. Discuss their differences in base learner diversity, training methodology (parallel vs. sequential), meta-learning mechanisms, and when you would choose one over the other.","options":[],"answer":[],"note":"Stacking vs Random Forest: (1) Base learner diversity: RF uses same algorithm (decision tree) with random feature subsets; stacking uses diverse algorithms (SVM, NB, trees, etc.). (2) Training: RF parallel (no information sharing); stacking uses cross-validation to avoid data leakage (k-fold for Level-0). (3) Meta-learning: RF uses voting/averaging; stacking trains meta-model (Level-1) on Level-0 predictions. (4) Variance reduction: RF reduces via averaging on correlated ensemble; stacking leverages algorithm diversity. (5) When to choose: RF for speed, interpretability, single algorithm preference; stacking for maximum performance when diverse learners available. Stacking incurs meta-model training overhead but exploits complementary strengths. RF excels with limited training data due to parallelization; stacking more data-efficient with k-fold CV.","anchor":"Machine Learning — L9 · Ensembles"},{"id":"L10-Q1","source":"L10 · Neural Networks","domain":"L10 · Neural Networks","topic":"History of Neural Networks","type":"mcq","question":"Who is credited with establishing the foundational concept of neurons through anatomical studies in the early 1900s?","options":[["A","Warren McCulloch"],["B","Santiago Ramón y Cajal"],["C","Frank Rosenblatt"],["D","Geoffrey Hinton"]],"answer":["B"],"note":"Santiago Ramón y Cajal conducted pioneering anatomical studies of the nervous system in the early 1900s and established the concept of discrete neurons communicating through synapses.","anchor":"Machine Learning — L10 · Neural Networks"},{"id":"L10-Q2","source":"L10 · Neural Networks","domain":"L10 · Neural Networks","topic":"McCulloch-Pitts Neuron","type":"multi","question":"Which of the following are characteristics of the McCulloch-Pitts neuron model?","options":[["A","Uses a step function as activation function"],["B","Can learn weights through training"],["C","Takes binary inputs and produces binary outputs"],["D","Requires continuous activation functions"]],"answer":["A","C"],"note":"The McCulloch-Pitts neuron uses a step function for activation and processes binary inputs/outputs. However, it has fixed weights and cannot learn; weights must be manually set.","anchor":"Machine Learning — L10 · Neural Networks"},{"id":"L10-Q3","source":"L10 · Neural Networks","domain":"L10 · Neural Networks","topic":"Perceptron vs Logistic Regression","type":"multi","question":"Which statements correctly distinguish the perceptron from logistic regression?","options":[["A","Perceptron uses step activation while logistic regression uses sigmoid"],["B","Logistic regression outputs probabilities between 0 and 1"],["C","Perceptron is suitable for multi-class classification"],["D","Both use the same loss function for optimization"]],"answer":["A","B"],"note":"The perceptron uses a step function for hard classification (0/1), while logistic regression uses sigmoid activation for probabilistic outputs. Logistic regression naturally models class probabilities. Neither is designed for multi-class tasks independently.","anchor":"Machine Learning — L10 · Neural Networks"},{"id":"L10-Q4","source":"L10 · Neural Networks","domain":"L10 · Neural Networks","topic":"Backpropagation Mechanism","type":"open","question":"Explain how backpropagation uses the chain rule to compute gradients through a multi-layer neural network. Why is the chain rule necessary, and how does it enable efficient gradient computation?","options":[],"answer":[],"note":"Backpropagation applies the chain rule of calculus to compute how changes in final layer parameters affect the loss function. For nested function composition (layer outputs feed into next layer), dz/dx = (dz/dy) * (dy/dx). This recursive application through layers is necessary because parameters are not directly connected to the loss; gradients must propagate backwards. The chain rule enables efficient computation in O(n) time compared to numerical differentiation which requires O(n²) loss evaluations.","anchor":"Machine Learning — L10 · Neural Networks"},{"id":"L10-Q5","source":"L10 · Neural Networks","domain":"L10 · Neural Networks","topic":"Activation Functions","type":"mcq","question":"Which activation function is computationally most efficient and addresses the vanishing gradient problem common with sigmoid and tanh?","options":[["A","Sigmoid function"],["B","Hyperbolic tangent (tanh)"],["C","Rectified Linear Unit (ReLU)"],["D","Linear activation"]],"answer":["C"],"note":"ReLU (f(x) = max(0, x)) is computationally efficient requiring only a simple comparison and has a gradient of either 0 or 1, avoiding the small gradients produced by sigmoid's derivative (max 0.25) or tanh's derivative (max 1.0).","anchor":"Machine Learning — L10 · Neural Networks"},{"id":"L10-Q6","source":"L10 · Neural Networks","domain":"L10 · Neural Networks","topic":"Output Layer and Loss Functions","type":"multi","question":"Select the correct pairings of output activation function with appropriate loss function for different tasks:","options":[["A","Regression task: linear output with Mean Squared Error (MSE) loss"],["B","Binary classification: sigmoid output with cross-entropy loss"],["C","Multi-class classification: softmax output with categorical cross-entropy loss"],["D","All classification tasks: linear output with binary cross-entropy loss"]],"answer":["A","B","C"],"note":"Task-specific output activations and loss functions are critical: regression uses linear output with MSE (measures difference magnitude), binary classification uses sigmoid with cross-entropy (probabilistic), and multi-class uses softmax with categorical cross-entropy. Linear outputs are inappropriate for classification tasks.","anchor":"Machine Learning — L10 · Neural Networks"},{"id":"L10-Q7","source":"L10 · Neural Networks","domain":"L10 · Neural Networks","topic":"Universal Approximation","type":"mcq","question":"What does the Universal Approximation Theorem state about neural networks?","options":[["A","A single neuron can approximate any function"],["B","A feedforward network with sufficient hidden units can approximate any continuous function"],["C","Neural networks can only approximate linear functions"],["D","Approximation requires infinitely many layers"]],"answer":["B"],"note":"The Universal Approximation Theorem proves that a feedforward neural network with a single hidden layer containing sufficient units can approximate any continuous function on a compact domain. This provides theoretical justification for using neural networks for complex function approximation.","anchor":"Machine Learning — L10 · Neural Networks"},{"id":"L10-Q8","source":"L10 · Neural Networks","domain":"L10 · Neural Networks","topic":"Gradient Descent and Learning Rate","type":"multi","question":"Which of the following correctly describe the effects and considerations of learning rate in gradient descent?","options":[["A","A learning rate that is too small causes oscillations and divergence"],["B","A learning rate that is too large results in slow convergence"],["C","The learning rate is a critical hyperparameter affecting convergence"],["D","The optimal learning rate is always the same across different problems"]],"answer":["C"],"note":"Learning rate is critical: too small causes slow convergence, too large causes oscillation/divergence. A well-tuned learning rate enables stable, efficient convergence. Optimal values vary by problem, dataset, and network architecture; requires tuning or adaptive methods.","anchor":"Machine Learning — L10 · Neural Networks"},{"id":"L10-Q9","source":"L10 · Neural Networks","domain":"L10 · Neural Networks","topic":"Training Strategies","type":"mcq","question":"When training a large dataset with 1 million samples, which approach typically provides the best balance between computational efficiency and stable convergence?","options":[["A","Batch gradient descent using all 1 million samples per step"],["B","Stochastic gradient descent with single samples"],["C","Mini-batch gradient descent with batches of 32-256 samples"],["D","Gradient descent with random sample selection"]],"answer":["C"],"note":"Mini-batch gradient descent balances computational efficiency (parallelizable operations) with gradient stability. Batch GD is computationally expensive per update; SGD is noisy and slow. Mini-batches leverage modern hardware while maintaining sufficient gradient signal.","anchor":"Machine Learning — L10 · Neural Networks"},{"id":"L10-Q10","source":"L10 · Neural Networks","domain":"L10 · Neural Networks","topic":"Network Architecture Design","type":"multi","question":"What design decisions are important when building a multi-layer perceptron for image classification?","options":[["A","Input layer size should match image dimensions (e.g., 784 for 28×28 images)"],["B","Hidden layer width determines network capacity and representational power"],["C","Adding more layers always improves generalization"],["D","Output layer configuration depends on number of classes (softmax for multi-class)"]],"answer":["A","B","D"],"note":"Input size matches problem dimensionality (784 neurons for flattened 28×28 images). Hidden layer width (number of units) controls capacity for learning representations. Deeper networks have higher capacity but require regularization to avoid overfitting; more layers alone do not guarantee improvement. Output layer must match task: 1 sigmoid for binary, K softmax units for K-class classification.","anchor":"Machine Learning — L10 · Neural Networks"},{"id":"L10-Q11","source":"L10 · Neural Networks","domain":"L10 · Neural Networks","topic":"Representation Learning","type":"open","question":"How do hidden layers in neural networks enable automatic feature extraction, and how does this concept differ from traditional manual feature engineering in machine learning?","options":[],"answer":[],"note":"Hidden layers learn intermediate representations of input data automatically during training through backpropagation. Early layers capture low-level features (edges, textures), while deeper layers combine these into high-level concepts (shapes, objects). This automatic feature learning removes the burden of manual feature engineering where practitioners previously designed features by domain expertise. Neural networks learn task-relevant features directly from data, often discovering non-obvious patterns humans might miss.","anchor":"Machine Learning — L10 · Neural Networks"},{"id":"L10-Q12","source":"L10 · Neural Networks","domain":"L10 · Neural Networks","topic":"Modern Neural Network Architectures","type":"multi","question":"Which neural network architectures are designed for specific problem types?","options":[["A","Convolutional Neural Networks (CNNs) for image data with spatial structure"],["B","Recurrent Neural Networks (RNNs) for sequential data like time series or text"],["C","Autoencoders for unsupervised feature learning and dimensionality reduction"],["D","All architectures perform equally well on all data types"]],"answer":["A","B","C"],"note":"CNN architecture uses convolutional layers to exploit spatial structure in images. RNNs maintain hidden state to process sequential dependencies in time series and text. Autoencoders compress data into bottleneck layer for unsupervised representation learning. Each architecture is optimized for specific data characteristics; no universal architecture excels at all tasks.","anchor":"Machine Learning — L10 · Neural Networks"},{"id":"L10-Q13","source":"L10 · Neural Networks","domain":"L10 · Neural Networks","topic":"Non-linearity in Neural Networks","type":"mcq","question":"Why is non-linear activation essential for neural networks to learn complex patterns?","options":[["A","Non-linear activations enable the network to learn only linear decision boundaries"],["B","Composition of linear functions remains linear, limiting expressiveness without non-linearity"],["C","Non-linear activations increase computational complexity unnecessarily"],["D","Linear networks are sufficient for all practical machine learning problems"]],"answer":["B"],"note":"A network composed of purely linear layers (y = Wx) remains linear regardless of depth, as matrix multiplication is associative. Non-linear activation functions break this linearity, allowing the network to learn curved decision boundaries and approximate arbitrary non-linear functions. Without non-linearity, deep networks provide no advantage over shallow linear models.","anchor":"Machine Learning — L10 · Neural Networks"},{"id":"L10-Q14","source":"L10 · Neural Networks","domain":"L10 · Neural Networks","topic":"Training and Evaluation Workflow","type":"multi","question":"Which steps are essential in the neural network training and evaluation process?","options":[["A","Split data into training, validation, and test sets"],["B","Initialize weights randomly rather than to zero"],["C","Perform hyperparameter tuning using the test set"],["D","Report evaluation metrics on the test set only, not during training"]],"answer":["A","B","D"],"note":"Proper workflow requires data splitting to prevent overfitting and enable unbiased evaluation. Random initialization breaks symmetry and enables diverse feature learning (zero initialization causes all neurons to learn identical features). Test set must remain unseen until final evaluation; using it for tuning causes overfitting to test data. Validation set (separate from test) is used for hyperparameter selection.","anchor":"Machine Learning — L10 · Neural Networks"},{"id":"L11-Q1","source":"L11 · Explainable AI / LIME","domain":"L11 · Explainable AI / LIME","topic":"Core Requirements of xAI","type":"multi","question":"Which of the following are core requirements for explainable AI (xAI) according to the lecture?","options":[["A","Producing human-understandable justifications for model predictions"],["B","Increasing model accuracy above 99% at all times"],["C","Verifying that models operate as intended without hidden biases"],["D","Enabling debugging of model failures and unexpected behaviors"],["E","Ensuring AI systems can be made trustworthy and aligned with human values"]],"answer":["A","C","D","E"],"note":"xAI focuses on interpretability, bias detection, debugging, and alignment. High accuracy alone is not a requirement for explainability.","anchor":"Machine Learning — L11 · Explainable AI / LIME"},{"id":"L11-Q2","source":"L11 · Explainable AI / LIME","domain":"L11 · Explainable AI / LIME","topic":"LIME Characteristics","type":"multi","question":"LIME (Local Interpretable Model-agnostic Explanations) exhibits which of the following characteristics?","options":[["A","Works as a black-box method without requiring access to model internals"],["B","Provides explanations for individual predictions (local explanations)"],["C","Uses a surrogate model trained on perturbed samples weighted by proximity"],["D","Requires complete retraining of the original model to generate explanations"],["E","Balances local fidelity with interpretability through a loss function"]],"answer":["A","B","C","E"],"note":"LIME is model-agnostic, local, uses weighted surrogate models, and trades off fidelity vs interpretability. It does NOT require retraining the original model.","anchor":"Machine Learning — L11 · Explainable AI / LIME"},{"id":"L11-Q3","source":"L11 · Explainable AI / LIME","domain":"L11 · Explainable AI / LIME","topic":"Gradient-Based Attribution Methods","type":"multi","question":"Which feature attribution methods fall into the gradient-based category of explainability?","options":[["A","Saliency maps"],["B","LIME and SHAP surrogate models"],["C","Integrated gradients"],["D","Layer-wise Relevance Propagation (LRP)"],["E","Class Activation Mapping (CAM)"]],"answer":["A","C"],"note":"Gradient-based methods use backpropagation to compute feature importance. Saliency maps and integrated gradients are gradient-based. LIME/SHAP are surrogate-based; LRP and CAM are different decomposition/activation methods.","anchor":"Machine Learning — L11 · Explainable AI / LIME"},{"id":"L11-Q4","source":"L11 · Explainable AI / LIME","domain":"L11 · Explainable AI / LIME","topic":"Interpretability vs Explainability","type":"multi","question":"Which of these statements correctly describe the relationship between interpretability and explainability in xAI?","options":[["A","Interpretability refers to understanding the mechanics of how a model maps inputs to outputs"],["B","Explainability means producing justifications for specific predictions"],["C","Interpretability and explainability are identical concepts"],["D","A model can be interpretable but not necessarily explainable"],["E","Explainability methods can be applied post-hoc to black-box models"]],"answer":["A","B","E"],"note":"Interpretability is about understanding model mechanics; explainability is about justifying predictions. They are distinct concepts. Post-hoc methods like LIME apply to black-boxes.","anchor":"Machine Learning — L11 · Explainable AI / LIME"},{"id":"L11-Q5","source":"L11 · Explainable AI / LIME","domain":"L11 · Explainable AI / LIME","topic":"LIME Limitations","type":"multi","question":"Which of the following are limitations or disadvantages of using LIME for explainability?","options":[["A","LIME explanations can be unstable due to randomness in the sampling process"],["B","LIME is too slow to use in real-time applications"],["C","Adversaries can manipulate LIME explanations through strategic input perturbations"],["D","LIME only works for images and not for text or tabular data"],["E","LIME requires access to the internal weights of the black-box model"]],"answer":["A","C"],"note":"LIME has stability issues and can be exploited by adversaries. LIME works across data types, is model-agnostic, and doesn't need internals.","anchor":"Machine Learning — L11 · Explainable AI / LIME"},{"id":"L11-Q6","source":"L11 · Explainable AI / LIME","domain":"L11 · Explainable AI / LIME","topic":"Inherently Interpretable Models","type":"multi","question":"In the context of xAI, which of the following are examples of inherently interpretable models?","options":[["A","Decision trees"],["B","Linear regression and logistic regression"],["C","Support Vector Machines (SVMs)"],["D","Logical models and rule-based systems"],["E","Deep neural networks"]],"answer":["A","B","D"],"note":"Decision trees, linear models, and logical systems are intrinsically interpretable. SVMs and neural networks are considered black-boxes and require post-hoc explanation methods.","anchor":"Machine Learning — L11 · Explainable AI / LIME"},{"id":"L11-Q7","source":"L11 · Explainable AI / LIME","domain":"L11 · Explainable AI / LIME","topic":"Local vs Global Explanations","type":"mcq","question":"What is the primary difference between local and global explainability methods?","options":[["A","Local methods explain individual predictions while global methods explain overall model behavior"],["B","Global methods are more accurate than local methods"],["C","Local methods require training data while global methods do not"],["D","Global methods only work for classification while local methods work for any task"]],"answer":["A"],"note":"Local explanations target specific instances (e.g., LIME), while global methods characterize the model's overall decision-making process (e.g., probing, mechanistic interpretability).","anchor":"Machine Learning — L11 · Explainable AI / LIME"},{"id":"L11-Q8","source":"L11 · Explainable AI / LIME","domain":"L11 · Explainable AI / LIME","topic":"LIME Loss Function","type":"mcq","question":"In LIME, what is the purpose of the locality-aware loss function L(f,g,πx) = Σz∈Z πx(z)(f(z) - g(z'))² + Ω(g)?","options":[["A","To maximize the global accuracy of the surrogate model across the entire input space"],["B","To balance local fidelity (surrogate accuracy near the instance) with interpretability (model simplicity)"],["C","To penalize the original model for making incorrect predictions"],["D","To ensure the surrogate model is never simplified using regularization"]],"answer":["B"],"note":"The loss function weights errors by proximity (πx) to ensure local accuracy near the instance of interest, while Ω(g) regularizes model complexity for interpretability. This balances two competing goals.","anchor":"Machine Learning — L11 · Explainable AI / LIME"},{"id":"L11-Q9","source":"L11 · Explainable AI / LIME","domain":"L11 · Explainable AI / LIME","topic":"Super-Pixels in LIME for Images","type":"mcq","question":"When applying LIME to image classification, what are super-pixels used for?","options":[["A","To increase the resolution of the input image"],["B","To represent interpretable components that can be turned on or off during perturbation"],["C","To replace the neural network with a simpler convolutional model"],["D","To extract raw pixel values for direct model interpretation"]],"answer":["B"],"note":"Super-pixels segment images into interpretable regions. LIME perturbs super-pixels (on/off) rather than individual pixels, making explanations human-understandable by showing which regions matter for the prediction.","anchor":"Machine Learning — L11 · Explainable AI / LIME"},{"id":"L11-Q10","source":"L11 · Explainable AI / LIME","domain":"L11 · Explainable AI / LIME","topic":"LIME Algorithm Steps","type":"open","question":"Describe the key steps of the LIME algorithm for explaining a black-box model's prediction on a single input instance. Include how the algorithm generates perturbed samples and trains the surrogate model.","options":[],"answer":[],"note":"LIME creates a local dataset by perturbing the input, querying the model, and weighting samples by proximity. A simple surrogate (e.g., linear model) is fit to this local weighted dataset, and its learned weights explain which features drove the original prediction. Key steps: (1) start with instance x and interpretable representation x', (2) generate perturbed versions, (3) obtain black-box predictions on perturbations, (4) weight samples by proximity to x, (5) train interpretable surrogate on weighted dataset, (6) use surrogate weights as explanation.","anchor":"Machine Learning — L11 · Explainable AI / LIME"},{"id":"L11-Q11","source":"L11 · Explainable AI / LIME","domain":"L11 · Explainable AI / LIME","topic":"Model-Specific vs Model-Agnostic Methods","type":"open","question":"Explain the difference between model-specific and model-agnostic explainability methods. Provide one example of each and discuss when you would choose one approach over the other.","options":[],"answer":[],"note":"Model-specific methods exploit model architecture and require access to internals (weights, gradients, activations) — e.g., saliency maps, integrated gradients, LRP for neural networks. Model-agnostic methods query the model as a black-box — e.g., LIME, SHAP, counterfactuals. Use model-specific when you have access and need precision; use model-agnostic for unknown or proprietary models, or for universal applicability across architectures.","anchor":"Machine Learning — L11 · Explainable AI / LIME"},{"id":"L11-Q12","source":"L11 · Explainable AI / LIME","domain":"L11 · Explainable AI / LIME","topic":"Fairness and Bias Detection","type":"open","question":"In the context of fairness and bias detection, explain how explainability methods can help identify and prevent discriminatory behavior in machine learning models. Give a specific example.","options":[],"answer":[],"note":"Explainability exposes hidden biases by revealing which features influence decisions. It can detect if sensitive attributes (race, gender) are used directly or indirectly as proxies (redlining). Example: a loan approval model where LIME reveals postal code (acting as a race proxy) heavily drives denials despite legal prohibition — this surfaces unlawful discrimination. Enables stakeholders to audit models, ensure regulatory compliance (e.g., EU AI Act), and debug disparate impact across demographic groups.","anchor":"Machine Learning — L11 · Explainable AI / LIME"},{"id":"L11-Q13","source":"L11 · Explainable AI / LIME","domain":"L11 · Explainable AI / LIME","topic":"Criticisms of Explainability","type":"multi","question":"Which of the following are valid criticisms or challenges of explainability in machine learning?","options":[["A","Explanations may not reveal the true decision-making process, only a plausible narrative"],["B","Users may overtrust explanations and miss model failures"],["C","Explanations are always 100% accurate representations of model logic"],["D","Post-hoc explanations cannot guarantee fidelity to the original model"],["E","Generating explanations adds significant computational overhead"]],"answer":["A","B","D","E"],"note":"Explanations can be misleading, lead to over-trust, lack guaranteed fidelity, and cost computation time. The claim that explanations are 100% accurate is false — they are approximations, not absolute truths.","anchor":"Machine Learning — L11 · Explainable AI / LIME"},{"id":"L11-Q14","source":"L11 · Explainable AI / LIME","domain":"L11 · Explainable AI / LIME","topic":"Global Explainability Methods","type":"multi","question":"Which global explainability methods and concepts are discussed in the lecture?","options":[["A","Probing: training supervised models on hidden layer representations"],["B","Mechanistic interpretability: identifying causal circuits and neuron roles"],["C","Concept-based explanability using TCAVs (Testing with Concept Activation Vectors)"],["D","LIME and SHAP surrogate models applied at the global level"],["E","Causal interventions to understand feature importance in the model"]],"answer":["A","B","C","E"],"note":"Probing, mechanistic interpretability, TCAVs, and causal interventions are global methods. LIME/SHAP are primarily local methods, not global.","anchor":"Machine Learning — L11 · Explainable AI / LIME"}];
+    </script>
+    <script>
+(function () {
+  const questions = window.ML_QUESTIONS || [];
+  const storageKey = "mlQuizLab:v1";
+
+  const els = {
+    totalCount: document.getElementById("total-count"),
+    topicList: document.getElementById("topic-list"),
+    topicPicker: document.getElementById("topic-picker"),
+    clearTopics: document.getElementById("clear-topics"),
+    scopeAll: document.getElementById("scope-all"),
+    scopeSpecific: document.getElementById("scope-specific"),
+    shuffle: document.getElementById("shuffle-toggle"),
+    start: document.getElementById("start-session"),
+    sessionTitle: document.getElementById("session-title"),
+    score: document.getElementById("stat-score"),
+    progress: document.getElementById("stat-progress"),
+    streak: document.getElementById("stat-streak"),
+    progressLabel: document.getElementById("progress-label"),
+    questionPosition: document.getElementById("question-position"),
+    progressBar: document.getElementById("progress-bar"),
+    topic: document.getElementById("question-topic"),
+    bookmark: document.getElementById("bookmark-button"),
+    reset: document.getElementById("reset-progress"),
+    questionText: document.getElementById("question-text"),
+    source: document.getElementById("source-line"),
+    options: document.getElementById("options-list"),
+    submit: document.getElementById("submit-button"),
+    answerPanel: document.getElementById("answer-panel"),
+    answerResult: document.getElementById("answer-result"),
+    answerChoice: document.getElementById("answer-choice"),
+    answerNote: document.getElementById("answer-note"),
+    answerAnchor: document.getElementById("answer-anchor"),
+    prev: document.getElementById("prev-button"),
+    reveal: document.getElementById("reveal-button"),
+    next: document.getElementById("next-button"),
+    summaryCard: document.getElementById("summary-card"),
+    newSession: document.getElementById("new-session"),
+    summaryStats: document.getElementById("summary-stats"),
+    topicPerformance: document.getElementById("topic-performance"),
+    missedList: document.getElementById("missed-list"),
+    reviewGrid: document.getElementById("review-grid"),
+    reviewAll: document.getElementById("review-all"),
+    reviewMissed: document.getElementById("review-missed"),
+    reviewBookmarked: document.getElementById("review-bookmarked"),
+  };
+
+  const state = {
+    scope: "all",
+    selectedDomains: new Set(),
+    shuffle: true,
+    session: [],
+    index: 0,
+    answers: {}, // id -> array of chosen letters (or "OPEN" sentinel for open Qs)
+    pending: {}, // id -> Set of letters chosen but not yet submitted (multi)
+    revealed: {},
+    completed: false,
+    reviewFilter: "all",
+    saved: loadSaved(),
+  };
+
+  function loadSaved() {
+    try {
+      return JSON.parse(localStorage.getItem(storageKey)) || { incorrect: {}, bookmarked: {}, attempts: {} };
+    } catch {
+      return { incorrect: {}, bookmarked: {}, attempts: {} };
+    }
+  }
+
+  function saveSaved() {
+    localStorage.setItem(storageKey, JSON.stringify(state.saved));
+  }
+
+  questions.forEach((q) => {
+    q.domain = q.domain || q.source || "General";
+  });
+
+  const domains = [...new Set(questions.map((q) => q.domain))].sort((a, b) => a.localeCompare(b));
+
+  function shuffleArray(items) {
+    const copy = [...items];
+    for (let i = copy.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
+  }
+
+  function matchingQuestions() {
+    if (state.scope === "all" || state.selectedDomains.size === 0) return [...questions];
+    return questions.filter((q) => state.selectedDomains.has(q.domain));
+  }
+
+  function makeSession() {
+    let list = matchingQuestions();
+    if (state.shuffle) list = shuffleArray(list);
+    state.session = list;
+    state.index = 0;
+    state.answers = {};
+    state.pending = {};
+    state.revealed = {};
+    state.completed = false;
+    render();
+  }
+
+  function currentQuestion() {
+    return state.session[state.index];
+  }
+
+  function sameSet(a, b) {
+    if (a.length !== b.length) return false;
+    const setB = new Set(b);
+    return a.every((x) => setB.has(x));
+  }
+
+  function isCorrect(q) {
+    if (q.type === "open") return false; // open questions are self-graded, never auto-scored
+    const chosen = state.answers[q.id];
+    if (!chosen) return false;
+    return sameSet(chosen, q.answer);
+  }
+
+  function answered(q) {
+    return Boolean(state.answers[q.id]);
+  }
+
+  function labelText(q, label) {
+    const opt = q.options.find((item) => item[0] === label);
+    return opt ? opt[1] : label;
+  }
+
+  function correctText(q) {
+    return q.answer.map((l) => `${l}. ${labelText(q, l)}`).join("  ·  ");
+  }
+
+  function scoreStats() {
+    const gradable = state.session.filter((q) => q.type !== "open");
+    const ans = gradable.filter((q) => answered(q)).length;
+    let correct = 0;
+    for (const q of gradable) if (isCorrect(q)) correct += 1;
+    let streak = 0;
+    for (let i = state.index; i >= 0; i -= 1) {
+      const q = state.session[i];
+      if (!q || q.type === "open" || !answered(q)) continue;
+      if (!isCorrect(q)) break;
+      streak += 1;
+    }
+    return { answered: ans, correct, streak, total: gradable.length, score: ans ? Math.round((correct / ans) * 100) : 0 };
+  }
+
+  function recordAttempt(q) {
+    state.saved.attempts[q.id] = (state.saved.attempts[q.id] || 0) + 1;
+    if (isCorrect(q)) delete state.saved.incorrect[q.id];
+    else state.saved.incorrect[q.id] = true;
+    saveSaved();
+  }
+
+  // mcq: single click commits. multi: toggle into pending until Submit. open: handled by reveal.
+  function chooseOption(label) {
+    const q = currentQuestion();
+    if (!q || state.completed || state.revealed[q.id]) return;
+    if (q.type === "multi") {
+      const set = state.pending[q.id] || new Set();
+      if (set.has(label)) set.delete(label);
+      else set.add(label);
+      state.pending[q.id] = set;
+      render();
+      return;
+    }
+    state.answers[q.id] = [label];
+    state.revealed[q.id] = true;
+    recordAttempt(q);
+    render();
+  }
+
+  function submitMulti() {
+    const q = currentQuestion();
+    if (!q || q.type !== "multi") return;
+    const set = state.pending[q.id] || new Set();
+    state.answers[q.id] = [...set].sort();
+    state.revealed[q.id] = true;
+    recordAttempt(q);
+    render();
+  }
+
+  function revealAnswer() {
+    const q = currentQuestion();
+    if (!q) return;
+    if (q.type === "open" && !state.answers[q.id]) state.answers[q.id] = ["OPEN"];
+    state.revealed[q.id] = true;
+    render();
+  }
+
+  function finishSession() {
+    state.completed = true;
+    state.session.forEach((q) => {
+      state.revealed[q.id] = true;
+    });
+    render();
+    els.summaryCard.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function renderDomains() {
+    els.topicList.innerHTML = "";
+    domains.forEach((domain) => {
+      const count = questions.filter((q) => q.domain === domain).length;
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = `topic-chip${state.selectedDomains.has(domain) ? " active" : ""}`;
+      button.textContent = `${domain} · ${count}`;
+      button.addEventListener("click", () => {
+        if (state.selectedDomains.has(domain)) state.selectedDomains.delete(domain);
+        else state.selectedDomains.add(domain);
+        renderDomains();
+        makeSession();
+      });
+      els.topicList.appendChild(button);
+    });
+    els.topicPicker.classList.toggle("hidden", state.scope !== "specific");
+    els.scopeAll.classList.toggle("active", state.scope === "all");
+    els.scopeSpecific.classList.toggle("active", state.scope === "specific");
+  }
+
+  function renderQuestion() {
+    const q = currentQuestion();
+    els.options.innerHTML = "";
+    els.submit.classList.add("hidden");
+
+    if (!q) {
+      els.topic.textContent = "No matching questions";
+      els.questionText.textContent = "No questions match the current lecture selection.";
+      els.source.textContent = "Choose every question or select at least one lecture.";
+      els.answerPanel.classList.add("hidden");
+      els.bookmark.textContent = "☆";
+      return;
+    }
+
+    const typeLabel = q.type === "multi" ? "Select all that apply" : q.type === "open" ? "Open answer" : "Single answer";
+    els.topic.textContent = `${q.domain} · ${typeLabel}`;
+    els.questionText.textContent = q.question;
+    els.source.textContent = `${q.id} · ${q.topic} · ${q.source}`;
+    els.bookmark.textContent = state.saved.bookmarked[q.id] ? "★" : "☆";
+
+    const committed = state.answers[q.id];
+    const revealed = state.completed || state.revealed[q.id];
+    const pending = state.pending[q.id] || new Set();
+
+    q.options.forEach(([label, text]) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "option-button";
+      const chosen = committed ? committed.includes(label) : pending.has(label);
+      if (chosen) button.classList.add("selected");
+      if (revealed && q.answer.includes(label)) button.classList.add("correct");
+      if (revealed && chosen && !q.answer.includes(label)) button.classList.add("incorrect");
+      button.innerHTML = `<span class="option-letter">${label}</span><span>${text}</span>`;
+      button.addEventListener("click", () => chooseOption(label));
+      els.options.appendChild(button);
+    });
+
+    if (q.type === "multi" && !revealed) {
+      els.submit.classList.remove("hidden");
+      els.submit.disabled = pending.size === 0;
+    }
+
+    if (revealed) {
+      els.answerPanel.classList.remove("hidden", "good", "bad");
+      if (q.type === "open") {
+        els.answerResult.textContent = "Model answer";
+        els.answerChoice.textContent = "";
+      } else {
+        const ok = isCorrect(q);
+        els.answerPanel.classList.add(ok ? "good" : "bad");
+        els.answerResult.textContent = answered(q) ? (ok ? "Correct" : "Not quite") : "Answer revealed";
+        els.answerChoice.textContent = `Correct: ${correctText(q)}`;
+      }
+      els.answerNote.textContent = q.note ? `Why: ${q.note}` : "";
+      els.answerAnchor.textContent = q.anchor;
+    } else {
+      els.answerPanel.classList.add("hidden");
+    }
+  }
+
+  function renderStats() {
+    const stats = scoreStats();
+    const total = state.session.length;
+    const position = total ? state.index + 1 : 0;
+    const scopeText = state.scope === "all" ? "Every question" : state.selectedDomains.size ? `${state.selectedDomains.size} lectures` : "Lecture specific";
+    els.sessionTitle.textContent = `${scopeText} · ${state.shuffle ? "Randomized" : "In order"}`;
+    els.score.textContent = `${stats.score}%`;
+    els.progress.textContent = `${stats.answered} / ${stats.total}`;
+    els.streak.textContent = stats.streak;
+    els.progressLabel.textContent = total
+      ? state.completed
+        ? `Complete · ${stats.correct} correct · ${stats.total - stats.correct} review`
+        : `${stats.correct} correct · ${stats.total - stats.answered} remaining (gradable)`
+      : "Ready";
+    els.questionPosition.textContent = `${position} of ${total}`;
+    const done = state.session.filter((q) => state.revealed[q.id]).length;
+    els.progressBar.style.width = total ? `${(done / total) * 100}%` : "0%";
+    els.prev.disabled = state.index <= 0;
+    els.next.textContent = state.index >= total - 1 ? "Finish →" : "Next →";
+  }
+
+  function renderSummary() {
+    if (!state.completed) {
+      els.summaryCard.classList.add("hidden");
+      return;
+    }
+    els.summaryCard.classList.remove("hidden");
+    const stats = scoreStats();
+    const gradable = state.session.filter((q) => q.type !== "open");
+    const missed = gradable.filter((q) => answered(q) && !isCorrect(q));
+    const unanswered = gradable.filter((q) => !answered(q));
+    const openCount = state.session.length - gradable.length;
+
+    els.summaryStats.innerHTML = [
+      ["Score", `${stats.score}%`],
+      ["Correct", `${stats.correct}/${stats.total}`],
+      ["Missed", String(missed.length)],
+      ["Unanswered", String(unanswered.length)],
+      ["Open (self-grade)", String(openCount)],
+    ]
+      .map(([label, value]) => `<div class="summary-stat"><strong>${value}</strong><span>${label}</span></div>`)
+      .join("");
+
+    const byDomain = new Map();
+    gradable.forEach((q) => {
+      if (!byDomain.has(q.domain)) byDomain.set(q.domain, { total: 0, correct: 0, missed: 0, unanswered: 0 });
+      const row = byDomain.get(q.domain);
+      row.total += 1;
+      if (!answered(q)) row.unanswered += 1;
+      else if (isCorrect(q)) row.correct += 1;
+      else row.missed += 1;
+    });
+
+    const domainRows = [...byDomain.entries()]
+      .map(([domain, row]) => ({ domain, ...row, accuracy: row.total ? row.correct / row.total : 0 }))
+      .sort((a, b) => a.accuracy - b.accuracy || b.total - a.total);
+
+    els.topicPerformance.innerHTML = domainRows
+      .map((row) => {
+        const pct = Math.round(row.accuracy * 100);
+        return `<div class="topic-row">
+          <div class="topic-row-head"><span>${row.domain}</span><strong>${pct}%</strong></div>
+          <small>${row.correct}/${row.total} correct · ${row.missed} missed · ${row.unanswered} unanswered</small>
+          <div class="mini-track"><span style="width:${pct}%"></span></div>
+        </div>`;
+      })
+      .join("");
+
+    els.missedList.innerHTML = missed.length
+      ? missed
+          .map(
+            (q) => `<div class="missed-row">
+              <div class="missed-row-head"><span>${q.id}</span><strong>${q.domain}</strong></div>
+              <small>${q.question}</small>
+            </div>`
+          )
+          .join("")
+      : `<div class="missed-row"><div class="missed-row-head"><span>No missed answered questions</span></div><small>Unanswered & open questions are tracked separately above.</small></div>`;
+  }
+
+  function renderReview() {
+    els.reviewGrid.innerHTML = "";
+    const visible = state.session.filter((q) => {
+      if (state.reviewFilter === "missed") return q.type !== "open" && answered(q) && !isCorrect(q);
+      if (state.reviewFilter === "bookmarked") return state.saved.bookmarked[q.id];
+      return true;
+    });
+    visible.forEach((q) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "review-item";
+      if (q.id === currentQuestion()?.id) button.classList.add("current");
+      if (q.type !== "open" && isCorrect(q)) button.classList.add("correct");
+      if (q.type !== "open" && answered(q) && !isCorrect(q)) button.classList.add("incorrect");
+      if (state.saved.bookmarked[q.id]) button.classList.add("bookmarked");
+      button.innerHTML = `${q.id}<small>${q.domain}</small>`;
+      button.addEventListener("click", () => {
+        const idx = state.session.findIndex((item) => item.id === q.id);
+        if (idx >= 0) {
+          state.index = idx;
+          render();
+        }
+      });
+      els.reviewGrid.appendChild(button);
+    });
+  }
+
+  function render() {
+    els.totalCount.textContent = questions.length;
+    renderQuestion();
+    renderStats();
+    renderSummary();
+    renderReview();
+  }
+
+  function bindEvents() {
+    els.scopeAll.addEventListener("click", () => {
+      state.scope = "all";
+      renderDomains();
+      makeSession();
+    });
+    els.scopeSpecific.addEventListener("click", () => {
+      state.scope = "specific";
+      renderDomains();
+      makeSession();
+    });
+    els.clearTopics.addEventListener("click", () => {
+      state.selectedDomains.clear();
+      renderDomains();
+      makeSession();
+    });
+    els.shuffle.addEventListener("change", (event) => {
+      state.shuffle = event.target.checked;
+    });
+    els.start.addEventListener("click", makeSession);
+    els.submit.addEventListener("click", submitMulti);
+    els.newSession.addEventListener("click", () => {
+      makeSession();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+    els.prev.addEventListener("click", () => {
+      state.index = Math.max(0, state.index - 1);
+      render();
+    });
+    els.next.addEventListener("click", () => {
+      if (state.index >= state.session.length - 1) finishSession();
+      else {
+        state.index = Math.min(Math.max(0, state.session.length - 1), state.index + 1);
+        render();
+      }
+    });
+    els.reveal.addEventListener("click", revealAnswer);
+    els.bookmark.addEventListener("click", () => {
+      const q = currentQuestion();
+      if (!q) return;
+      if (state.saved.bookmarked[q.id]) delete state.saved.bookmarked[q.id];
+      else state.saved.bookmarked[q.id] = true;
+      saveSaved();
+      render();
+    });
+    els.reset.addEventListener("click", () => {
+      state.saved = { incorrect: {}, bookmarked: {}, attempts: {} };
+      saveSaved();
+      render();
+    });
+    els.reviewAll.addEventListener("click", () => {
+      state.reviewFilter = "all";
+      renderReview();
+    });
+    els.reviewMissed.addEventListener("click", () => {
+      state.reviewFilter = "missed";
+      renderReview();
+    });
+    els.reviewBookmarked.addEventListener("click", () => {
+      state.reviewFilter = "bookmarked";
+      renderReview();
+    });
+    document.addEventListener("keydown", (event) => {
+      const q = currentQuestion();
+      if (event.key >= "1" && event.key <= "9") {
+        const opt = q?.options[Number(event.key) - 1];
+        if (opt) chooseOption(opt[0]);
+      }
+      if (event.key === "Enter" && q?.type === "multi" && !state.revealed[q.id]) submitMulti();
+      if (event.key === "ArrowRight") els.next.click();
+      if (event.key === "ArrowLeft") els.prev.click();
+      if (event.key.toLowerCase() === "r") revealAnswer();
+    });
+  }
+
+  renderDomains();
+  bindEvents();
+  makeSession();
+})();
+
+    </script>
+  </body>
+</html>

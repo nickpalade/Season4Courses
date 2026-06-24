@@ -1,0 +1,138 @@
+[
+  {
+    "id": 1,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "TD update structure",
+    "prompt": "In Q(s,a) ← Q(s,a) + α[target − Q(s,a)], what is the bracketed quantity called?",
+    "options": [
+      "The TD error",
+      "The eligibility trace",
+      "The discounted return",
+      "The advantage estimate"
+    ],
+    "correct": [0],
+    "explanation": "target − Q(s,a) is the temporal-difference error — the surprise in the estimate. An eligibility trace tracks recent states, the return is the full G_t, and the advantage is q(s,a) − v(s)."
+  },
+  {
+    "id": 2,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "SARSA update",
+    "prompt": "What is the correct SARSA update?",
+    "options": [
+      "Q(sₜ,aₜ) ← Q(sₜ,aₜ) + α[Rₜ₊₁ + γ·Q(sₜ₊₁,aₜ₊₁) − Q(sₜ,aₜ)]",
+      "Q(sₜ,aₜ) ← Q(sₜ,aₜ) + α[Rₜ₊₁ + γ·maxₐ Q(sₜ₊₁,a) − Q(sₜ,aₜ)]",
+      "Q(sₜ,aₜ) ← Q(sₜ,aₜ) + α[Rₜ₊₁ + γ·Σₐ π(a|sₜ₊₁)Q(sₜ₊₁,a) − Q(sₜ,aₜ)]",
+      "Q(sₜ,aₜ) ← Q(sₜ,aₜ) + α[Gₜ − Q(sₜ,aₜ)]"
+    ],
+    "correct": [0],
+    "explanation": "SARSA is on-policy and uses the action aₜ₊₁ actually taken next. The max version is Q-learning, the Σπ version is Expected SARSA, and the Gₜ version is Monte Carlo."
+  },
+  {
+    "id": 3,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "Q-learning target",
+    "prompt": "Which target term identifies the Q-learning update?",
+    "options": [
+      "maxₐ' Q(sₜ₊₁,a') — the best next action's value",
+      "Q(sₜ₊₁,aₜ₊₁) — the actual next action's value",
+      "Σₐ' π(a'|sₜ₊₁)Q(sₜ₊₁,a') — the policy-weighted next value",
+      "Gₜ — the full episode return"
+    ],
+    "correct": [0],
+    "explanation": "Q-learning bootstraps off the maximum next-action value regardless of what is done — making it off-policy. The other terms identify SARSA, Expected SARSA, and Monte Carlo."
+  },
+  {
+    "id": 4,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "On-policy vs off-policy",
+    "prompt": "Why is SARSA on-policy while Q-learning is off-policy?",
+    "options": [
+      "SARSA learns the value of the followed (exploring) policy; Q-learning learns the greedy one",
+      "SARSA bootstraps, while Q-learning waits for the full return",
+      "SARSA is off-policy, while Q-learning is on-policy",
+      "SARSA needs a model, while Q-learning is model-free"
+    ],
+    "correct": [0],
+    "explanation": "SARSA's target uses the action its own ε-greedy policy actually takes, so it evaluates that behaviour; Q-learning's max evaluates the greedy policy while exploring. Both bootstrap and both are model-free, and the on/off-policy labels are not reversed."
+  },
+  {
+    "id": 5,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Expected SARSA",
+    "prompt": "How does Expected SARSA's target differ from ordinary SARSA's?",
+    "options": [
+      "It averages over next actions via Σπ instead of one sampled action",
+      "It takes the maximum next-action value instead of the policy average",
+      "It uses the full Monte Carlo return instead of a one-step target",
+      "It samples two next actions and averages their values"
+    ],
+    "correct": [0],
+    "explanation": "Expected SARSA weights every next action by the policy, removing the variance of SARSA's single random next action. Taking the max would be Q-learning, and the full return would be Monte Carlo."
+  },
+  {
+    "id": 6,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "TD vs MC and DP",
+    "prompt": "In what sense do TD methods combine the best of MC and DP?",
+    "options": [
+      "Model-free sampling like MC, with bootstrapped incremental updates like DP",
+      "Full-distribution updates like MC, while needing a model like DP",
+      "Complete-episode returns like DP, with no bootstrapping like MC",
+      "Random exploration like DP, with greedy planning like MC"
+    ],
+    "correct": [0],
+    "explanation": "TD samples experience without a model (MC's strength) but bootstraps every step from the next estimate (DP's strength). The other options swap which method contributes which property."
+  },
+  {
+    "id": 7,
+    "type": "mcq",
+    "difficulty": "hard",
+    "topic": "Cliff-walking behaviour",
+    "prompt": "On cliff-walking, SARSA learns a safe path away from the edge while Q-learning learns the optimal path right along it. Why?",
+    "options": [
+      "SARSA values the followed ε-greedy policy, so the risky edge looks worse",
+      "Q-learning uses a higher exploration rate, so it avoids the edge",
+      "SARSA discounts future reward more heavily than Q-learning does",
+      "Q-learning's max target makes it more cautious near penalties"
+    ],
+    "correct": [0],
+    "explanation": "SARSA evaluates the actually-followed exploring policy, so the chance of randomly stepping off the cliff lowers the edge path's value — it stays safe. Q-learning evaluates the greedy policy and ignores those exploratory falls, so it prefers the optimal edge path. Both use the same γ and exploration."
+  },
+  {
+    "id": 8,
+    "type": "mcq",
+    "difficulty": "hard",
+    "topic": "Identify the method",
+    "prompt": "An update uses the target Rₜ₊₁ + γ·Σₐ' π(a'|sₜ₊₁)Q(sₜ₊₁,a'). Which method is it, and what is its advantage over the sampled-action version?",
+    "options": [
+      "Expected SARSA — lower variance by averaging over next actions",
+      "Q-learning — removes bias by taking the max over next actions",
+      "SARSA — simpler, since it uses one sampled next action",
+      "Monte Carlo — unbiased, since it uses the full return"
+    ],
+    "correct": [0],
+    "explanation": "The Σ over actions weighted by π is Expected SARSA; averaging instead of sampling the next action removes the variance from that random choice. The max term would be Q-learning, and the full return would be Monte Carlo."
+  },
+  {
+    "id": 9,
+    "type": "multi",
+    "difficulty": "medium",
+    "topic": "Classifying Q-learning",
+    "prompt": "Which characteristics apply to standard one-step Q-learning?",
+    "options": [
+      "It is off-policy",
+      "It bootstraps from the next state's estimate",
+      "It uses the maximum next-action value in its target",
+      "It is model-free",
+      "It must wait for the episode to end before updating"
+    ],
+    "correct": [0, 1, 2, 3],
+    "explanation": "Q-learning is off-policy, bootstrapping, max-based, and model-free, and it updates every step. Waiting for the episode to end is a Monte Carlo property, not Q-learning's."
+  }
+]

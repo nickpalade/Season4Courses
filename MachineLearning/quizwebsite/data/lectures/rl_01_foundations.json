@@ -1,0 +1,138 @@
+[
+  {
+    "id": 1,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "Machine learning families",
+    "prompt": "Which learning paradigm improves behaviour from a reward signal, with no labelled examples of the correct action?",
+    "options": [
+      "Reinforcement learning",
+      "Supervised learning",
+      "Unsupervised learning",
+      "Semi-supervised learning"
+    ],
+    "correct": [0],
+    "explanation": "RL has no labels — only an evaluative reward. Supervised learning is given the correct label per input, unsupervised learning has no target at all, and semi-supervised mixes a few labels with unlabelled data."
+  },
+  {
+    "id": 2,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "Agent-environment loop",
+    "prompt": "On each step of the RL loop, what does the environment return to the agent after its action?",
+    "options": [
+      "A reward and the next state",
+      "A reward and the next action to take",
+      "A target label and the next state",
+      "A value estimate and the next state"
+    ],
+    "correct": [0],
+    "explanation": "The loop is action → (reward, next state). The environment never hands back the action to take (that is the agent's job) nor a target label or value — those would defeat the point of learning from reward."
+  },
+  {
+    "id": 3,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "Objective of RL",
+    "prompt": "Trial-and-error RL ultimately tries to maximise which quantity?",
+    "options": [
+      "Expected long-term cumulative reward",
+      "The largest single reward available",
+      "The immediate reward at each step",
+      "The average reward across all states"
+    ],
+    "correct": [0],
+    "explanation": "RL maximises expected discounted return over time — a good move may forgo immediate payoff for a larger total. Chasing the single biggest reward or the immediate reward is short-sighted, and an unweighted average over states is not the return."
+  },
+  {
+    "id": 4,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Non-benefit of RL",
+    "prompt": "Three of these are genuine strengths of reinforcement learning. Which one is NOT?",
+    "options": [
+      "Stable, reliably convergent learning",
+      "Autonomous improvement from experience",
+      "Surpassing demonstrated human strategies",
+      "Solving tasks no expert can demonstrate"
+    ],
+    "correct": [0],
+    "explanation": "Stability is RL's weakness — value estimates can diverge (the deadly triad). The other three are real advantages: it improves on its own, can beat human play, and needs only a reward rather than demonstrations."
+  },
+  {
+    "id": 5,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Supervised vs reinforcement",
+    "prompt": "Which statement correctly distinguishes supervised learning from reinforcement learning?",
+    "options": [
+      "Supervised gives the correct output per example; RL gives only a scalar reward",
+      "Supervised gives only a scalar reward; RL gives the correct output per example",
+      "Both give the correct output, but RL delivers it with a delay",
+      "Both give only a scalar reward, but supervised also discounts it"
+    ],
+    "correct": [0],
+    "explanation": "Supervised learning provides the target for each example; RL provides only an evaluative reward that never states the best action. The other options swap or conflate these signals."
+  },
+  {
+    "id": 6,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "The deadly triad",
+    "prompt": "Which three ingredients form the 'deadly triad' that can make value estimates diverge?",
+    "options": [
+      "Bootstrapping, function approximation, and off-policy learning",
+      "Bootstrapping, on-policy learning, and exploration",
+      "Function approximation, discounting, and importance sampling",
+      "Sampling, exploration, and reward shaping"
+    ],
+    "correct": [0],
+    "explanation": "The instability triad is bootstrapping + function approximation + off-policy learning; any two are usually safe, all three together can diverge. The other triples mix real RL terms but are not the named combination."
+  },
+  {
+    "id": 7,
+    "type": "mcq",
+    "difficulty": "hard",
+    "topic": "AlphaGo and exploration",
+    "prompt": "AlphaGo's 'move 37' against Lee Sedol is most often cited to show that RL can:",
+    "options": [
+      "Discover strong strategies humans would not have played",
+      "Converge faster than supervised pre-training does",
+      "Reach expert-level play without any tree search",
+      "Match, though not exceed, top human performance"
+    ],
+    "correct": [0],
+    "explanation": "Move 37 looked alien yet was strong — RL exploring beyond human strategy and exceeding it. It still relied on MCTS, its point was surpassing (not merely matching) experts, and convergence speed is not what the example illustrates."
+  },
+  {
+    "id": 8,
+    "type": "mcq",
+    "difficulty": "hard",
+    "topic": "Credit assignment",
+    "prompt": "Why is credit assignment fundamentally harder in RL than in supervised learning?",
+    "options": [
+      "Rewards may be delayed, so an outcome must be traced to earlier actions",
+      "Rewards are continuous, so no discrete target exists for each action",
+      "Rewards are noisier than supervised labels on every single step",
+      "Rewards arrive per action, making each step solvable on its own"
+    ],
+    "correct": [0],
+    "explanation": "A reward can arrive many steps after the action that earned it, so the agent must decide which earlier choices deserve credit. Supervised learning gives an immediate per-example target, sidestepping this — the last option describes that easy case, not RL."
+  },
+  {
+    "id": 9,
+    "type": "multi",
+    "difficulty": "medium",
+    "topic": "Benefits of RL",
+    "prompt": "Select all statements that are genuine benefits of reinforcement learning.",
+    "options": [
+      "It learns autonomously from its own experience",
+      "It can solve tasks without expert demonstrations",
+      "It can surpass the human baseline it started from",
+      "It improves stably and monotonically every step",
+      "It no longer needs a reward signal once a policy is found"
+    ],
+    "correct": [0, 1, 2],
+    "explanation": "Autonomy, learning without demonstrations, and beating human baselines are real strengths. Monotonic stability is false (deadly triad), and the reward signal defines the objective — it is needed throughout training."
+  }
+]

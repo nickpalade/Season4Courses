@@ -1,0 +1,123 @@
+[
+  {
+    "id": 1,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "What model-based RL models",
+    "prompt": "Model-based reinforcement learning learns or uses a model of which function?",
+    "options": [
+      "The transition function",
+      "The value function",
+      "The discount function",
+      "The state function"
+    ],
+    "correct": [0],
+    "explanation": "A model captures the dynamics — the transition function (and reward) — so the agent can plan by simulating outcomes. The value function is computed, not modelled, and there is no 'discount' or 'state' function to model."
+  },
+  {
+    "id": 2,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "Tabular model from counts",
+    "prompt": "What is the correct estimate of a tabular dynamics model p(s'|s,a) from observed counts n?",
+    "options": [
+      "p(s'|s,a) = n(s,a,s') / n(s,a)",
+      "p(s'|s,a) = n(a,s') / n(s,a)",
+      "p(s'|s,a) = n(s',a) / n(s')",
+      "p(s'|s,a) = n(s,a) / n(s,a,s')"
+    ],
+    "correct": [0],
+    "explanation": "Of all times action a was taken in s, the fraction landing in s' estimates the probability: n(s,a,s') / n(s,a). The other ratios mismatch or invert the counts."
+  },
+  {
+    "id": 3,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Prioritized sweeping",
+    "prompt": "What is the correct priority expression for prioritized sweeping with Q-learning backups?",
+    "options": [
+      "|r + γ·maxₐ' Q(s',a') − Q(s,a)|",
+      "r + γ·maxₐ' Q(s',a') − Q(s,a)",
+      "|r + γ·maxₐ' Q(s',a')|",
+      "r + γ·maxₐ' Q(s',a')"
+    ],
+    "correct": [0],
+    "explanation": "Priority is the absolute TD error: the magnitude of surprise sets the order, so the sign is removed and the −Q(s,a) baseline kept. The other forms keep the sign or drop the baseline."
+  },
+  {
+    "id": 4,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "DP vs Q-learning updates",
+    "prompt": "Which statement correctly contrasts Dynamic Programming and Q-learning?",
+    "options": [
+      "DP uses expected updates and needs a distributional model; Q-learning uses sample updates",
+      "DP uses sample updates; Q-learning uses expected updates and needs a distributional model",
+      "DP uses expected updates; Q-learning also needs a distributional model",
+      "Both use sample updates and neither needs a model"
+    ],
+    "correct": [0],
+    "explanation": "DP sweeps the full transition distribution (expected updates → needs the model); Q-learning updates from single sampled transitions (no model). The other options swap or misattribute the model requirement."
+  },
+  {
+    "id": 5,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Why prioritize by TD error",
+    "prompt": "Why does prioritized sweeping rank states by the magnitude of their TD error?",
+    "options": [
+      "A large error marks a big value change to propagate to predecessor states",
+      "A large error marks a converged state that needs no further update",
+      "A small error marks the state most likely to change next sweep",
+      "The error size measures how many successor states a state has"
+    ],
+    "correct": [0],
+    "explanation": "A big absolute TD error signals a surprising, significant value change worth updating first, after which it propagates backward to predecessors. Large error means not-yet-converged, and error size has nothing to do with successor count."
+  },
+  {
+    "id": 6,
+    "type": "mcq",
+    "difficulty": "hard",
+    "topic": "Backup classification",
+    "prompt": "On the axes policy (on/off-policy) and width (sample/expected), which classification of Q-learning is correct?",
+    "options": [
+      "Off-policy (uses max) and sample (one real transition)",
+      "On-policy (uses the actual action) and expected (full distribution)",
+      "Off-policy (uses max) and expected (full distribution)",
+      "On-policy (uses the actual action) and sample (one real transition)"
+    ],
+    "correct": [0],
+    "explanation": "Q-learning's max makes it off-policy, and updating from a single sampled transition makes it a sample backup — which is why it needs no model. Expected backups characterise DP."
+  },
+  {
+    "id": 7,
+    "type": "mcq",
+    "difficulty": "hard",
+    "topic": "Dyna integration",
+    "prompt": "In a Dyna-style architecture, how are real and simulated experience combined?",
+    "options": [
+      "Each real step updates both values and the model, which then generates simulated updates",
+      "Real experience trains the model, and a separate model-free learner ignores it",
+      "Simulated transitions update the model while real ones update the values",
+      "The model is queried only at decision time, never to update values"
+    ],
+    "correct": [0],
+    "explanation": "Dyna interleaves learning and planning: each real step updates the value function and the model, then the model is sampled for extra simulated backups. Real experience is not discarded, and values learn from both real and simulated transitions."
+  },
+  {
+    "id": 8,
+    "type": "multi",
+    "difficulty": "medium",
+    "topic": "Model-based RL facts",
+    "prompt": "Which statements about model-based RL are correct?",
+    "options": [
+      "It models the transition (and reward) function",
+      "A tabular model can be estimated as p(s'|s,a) = n(s,a,s')/n(s,a)",
+      "Prioritized sweeping orders updates by absolute TD error",
+      "It lets the agent plan by simulating outcomes",
+      "It cannot be combined with model-free value updates"
+    ],
+    "correct": [0, 1, 2, 3],
+    "explanation": "Model-based RL models dynamics, estimates transitions from counts, can prioritise by |TD error|, and plans via simulation. The last claim is false — Dyna explicitly combines model-based planning with model-free updates."
+  }
+]

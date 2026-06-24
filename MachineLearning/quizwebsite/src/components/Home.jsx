@@ -1,4 +1,14 @@
 import { useState } from "react";
+import {
+  IconArrow,
+  IconPractice,
+  IconExam,
+  IconFlag,
+  IconResume,
+  IconTarget,
+  IconLayers,
+  IconTrend,
+} from "./icons.jsx";
 
 export default function Home({
   quiz,
@@ -8,13 +18,15 @@ export default function Home({
   onStart,
   onResume,
   onReset,
+  onClearFlags,
+  onReviewAttempt,
   onBack,
   history,
 }) {
   const allTopics = [...new Set(questions.map((q) => q.topic))].sort();
   const [topics, setTopics] = useState(new Set());
   const [shuffle, setShuffle] = useState(false);
-  const [shuffleAnswers, setShuffleAnswers] = useState(false);
+  const [shuffleAnswers, setShuffleAnswers] = useState(true);
   const filteredCount = topics.size
     ? questions.filter((q) => topics.has(q.topic)).length
     : questions.length;
@@ -39,8 +51,8 @@ export default function Home({
   return (
     <section className="home-panel">
       <div className="home-header">
-        <button className="link" onClick={onBack}>
-          ← Back to library
+        <button className="link link-icon" onClick={onBack}>
+          <IconArrow size={15} /> Back to library
         </button>
         <div className="home-quiz-title">
           <strong>{quiz.title}</strong>
@@ -50,14 +62,17 @@ export default function Home({
 
       <div className="study-board">
         <div>
+          <span className="stat-icon"><IconTarget size={20} /></span>
           <span className="stat-value">{filteredCount}</span>
           <span className="stat-label">in current set</span>
         </div>
         <div>
+          <span className="stat-icon"><IconLayers size={20} /></span>
           <span className="stat-value">{allTopics.length}</span>
           <span className="stat-label">topics</span>
         </div>
         <div>
+          <span className="stat-icon"><IconTrend size={20} /></span>
           <span className="stat-value">{history.length ? `${averageScore}%` : "--"}</span>
           <span className="stat-label">average</span>
         </div>
@@ -77,10 +92,12 @@ export default function Home({
       )}
       <div className="modes">
         <button className="mode-btn" onClick={() => start("practice")}>
+          <span className="mode-icon"><IconPractice size={24} /></span>
           <span className="big">Practice</span>
           <span className="small">Instant feedback and explanation</span>
         </button>
         <button className="mode-btn" onClick={() => start("exam")}>
+          <span className="mode-icon"><IconExam size={24} /></span>
           <span className="big">Mock Exam</span>
           <span className="small">No spoilers until the end</span>
         </button>
@@ -90,6 +107,7 @@ export default function Home({
           disabled={flagged.size === 0}
           title={flagged.size === 0 ? "No flagged questions" : ""}
         >
+          <span className="mode-icon"><IconFlag size={24} /></span>
           <span className="big">Review Flagged ({flagged.size})</span>
           <span className="small">Only the questions you marked</span>
         </button>
@@ -133,6 +151,11 @@ export default function Home({
           />
           Shuffle answers
         </label>
+        {flagged.size > 0 && (
+          <button className="link" onClick={onClearFlags}>
+            Clear flags ({flagged.size})
+          </button>
+        )}
         <button className="link" onClick={onReset}>
           Reset this quiz
         </button>
@@ -140,13 +163,21 @@ export default function Home({
 
       {history.length > 0 && (
         <div className="history">
-          <h3>Recent attempts</h3>
-          {history.slice(-5).reverse().map((a, i) => (
+          <h3>Past attempts</h3>
+          {[...history].reverse().map((a, i) => (
             <div key={i} className="row-item">
               <span>{a.date} - {a.mode}</span>
               <strong>
                 {a.score}/{a.total} ({Math.round((a.score / a.total) * 100)}%)
               </strong>
+              {(a.result || i === 0) && (
+                <button
+                  className="link"
+                  onClick={() => onReviewAttempt(a.result ? a.id : null)}
+                >
+                  Review answers
+                </button>
+              )}
             </div>
           ))}
         </div>

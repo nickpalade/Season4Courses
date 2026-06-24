@@ -1,0 +1,123 @@
+[
+  {
+    "id": 1,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "MCTS phases",
+    "prompt": "What is the correct order of the four phases of Monte Carlo Tree Search?",
+    "options": [
+      "Selection, Expansion, Simulation, Back-up",
+      "Selection, Expansion, Back-up, Simulation",
+      "Selection, Simulation, Expansion, Back-up",
+      "Selection, Simulation, Back-up, Expansion"
+    ],
+    "correct": [0],
+    "explanation": "MCTS descends the tree (Selection), adds a node (Expansion), rolls out to a result (Simulation), then propagates statistics upward (Back-up). Back-up must come last, once a result exists to propagate."
+  },
+  {
+    "id": 2,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "BFS downside",
+    "prompt": "What is a downside of breadth-first search?",
+    "options": [
+      "It does not consider the cost of every edge",
+      "It can never find a solution at all",
+      "It cannot be applied to deterministic domains",
+      "It explores depth-first, ignoring breadth"
+    ],
+    "correct": [0],
+    "explanation": "BFS treats all edges equally, so on a weighted graph it finds the fewest-edges path, not the cheapest. It does find solutions, works on deterministic domains, and explores breadth-first by definition."
+  },
+  {
+    "id": 3,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Sample-based search benefit",
+    "prompt": "What is a benefit of sample-based search over classic/heuristic search?",
+    "options": [
+      "In stochastic problems it needs no explicit analytic transition model",
+      "In larger problems it fully escapes the curse of dimensionality",
+      "With finite compute it guarantees the exact optimal solution",
+      "In problems with many actions it must visit every action at the root"
+    ],
+    "correct": [0],
+    "explanation": "Sample-based search only needs a generative model that samples next states — no explicit distribution. It does not fully escape dimensionality, guarantees optimality only with infinite compute, and deliberately avoids visiting every action."
+  },
+  {
+    "id": 4,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "UCT uncertainty",
+    "prompt": "In UCT tree search, how does the uncertainty estimate of a state-action value scale with visits n(s,a)?",
+    "options": [
+      "∼ 1/√n(s,a)",
+      "∼ √n(s,a)",
+      "∼ 1/n(s,a)",
+      "∼ n(s,a)"
+    ],
+    "correct": [0],
+    "explanation": "UCT's exploration bonus is ∝ √(ln N / n(s,a)), so uncertainty shrinks on the order of 1/√n(s,a) as a node is visited more — the same form as the UCB bandit bonus."
+  },
+  {
+    "id": 5,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "UCT selection",
+    "prompt": "During the Selection phase, UCT chooses children by balancing:",
+    "options": [
+      "Estimated value (exploitation) against an uncertainty bonus (exploration)",
+      "Only the estimated value, ignoring how often a child was visited",
+      "Only the visit counts, ignoring the estimated value",
+      "The node's depth against its branching factor"
+    ],
+    "correct": [0],
+    "explanation": "UCT applies a UCB rule in the tree: it picks the child maximising value plus an exploration bonus favouring less-visited nodes. Ignoring either term breaks the exploration-exploitation balance."
+  },
+  {
+    "id": 6,
+    "type": "mcq",
+    "difficulty": "hard",
+    "topic": "Simulation phase",
+    "prompt": "What is the purpose of the Simulation (rollout) phase in MCTS?",
+    "options": [
+      "Estimate a new node's value by playing out to a terminal result",
+      "Add every state visited in the rollout permanently to the tree",
+      "Recompute the UCT exploration constant for the whole tree",
+      "Decide which existing child of the root to descend into"
+    ],
+    "correct": [0],
+    "explanation": "After expansion, a rollout to termination gives a cheap value estimate for the new node, which Back-up then propagates. Rollout states are not stored, the constant is fixed, and descending children is the Selection phase."
+  },
+  {
+    "id": 7,
+    "type": "mcq",
+    "difficulty": "hard",
+    "topic": "BFS vs cost-aware search",
+    "prompt": "On a weighted graph with some far-costlier edges, why might BFS return a worse path than uniform-cost search?",
+    "options": [
+      "BFS minimises the number of edges, which need not be the cheapest cost",
+      "BFS always expands the most expensive edge first",
+      "BFS cannot reach goal nodes deep in the graph",
+      "BFS needs a heuristic that weighted graphs cannot supply"
+    ],
+    "correct": [0],
+    "explanation": "BFS optimises path length in edges, ignoring weights, so a 2-edge expensive path can beat a 3-edge cheap one. Uniform-cost search expands by accumulated cost and finds the cheapest path. BFS needs no heuristic and can reach deep goals."
+  },
+  {
+    "id": 8,
+    "type": "multi",
+    "difficulty": "medium",
+    "topic": "Search and planning facts",
+    "prompt": "Which statements about search and sample-based planning are correct?",
+    "options": [
+      "The MCTS phase order is Selection → Expansion → Simulation → Back-up",
+      "UCT's uncertainty scales as 1/√n(s,a)",
+      "Sample-based search needs only a generative (sampling) model",
+      "BFS ignores edge costs",
+      "BFS finds the cheapest path on weighted graphs"
+    ],
+    "correct": [0, 1, 2, 3],
+    "explanation": "The first four are correct. BFS finds the fewest-edges path, not the cheapest on weighted graphs — that is precisely its downside."
+  }
+]

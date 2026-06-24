@@ -1,0 +1,123 @@
+[
+  {
+    "id": 1,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "When DP applies",
+    "prompt": "Dynamic Programming can solve an MDP only when the agent has:",
+    "options": [
+      "The full transition and reward model",
+      "A long stream of sampled episodes but no model",
+      "A value-function approximator only",
+      "A simulator that can sample next states"
+    ],
+    "correct": [0],
+    "explanation": "DP is a planning method needing the exact model (transition probabilities and rewards). Learning from sampled episodes is MC/TD, and a pure sampling simulator is not enough for DP's expected updates."
+  },
+  {
+    "id": 2,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "Convergence guarantee",
+    "prompt": "What is correct about tabular Dynamic Programming?",
+    "options": [
+      "It finds a global solution and is guaranteed to converge to the optimum",
+      "It finds a global solution but is not guaranteed to converge",
+      "It finds only a local solution but is guaranteed to converge",
+      "It finds a local solution and is not guaranteed to converge"
+    ],
+    "correct": [0],
+    "explanation": "With a full model and a finite tabular state space, DP provably converges to the global optimum. There is no local-optimum trap in the tabular case."
+  },
+  {
+    "id": 3,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Policy iteration",
+    "prompt": "What are the two alternating steps of policy iteration?",
+    "options": [
+      "Evaluate the policy's values, then act greedily w.r.t. them",
+      "Sample full episodes, then average their returns",
+      "Roll out random trajectories, then back up the results",
+      "Add an exploration bonus, then decay it over sweeps"
+    ],
+    "correct": [0],
+    "explanation": "Policy iteration alternates evaluation (compute v_π) and improvement (greedy w.r.t. v_π) until stable. Averaging sampled returns is MC; rollouts and bonuses belong to search and bandit methods."
+  },
+  {
+    "id": 4,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Expected updates",
+    "prompt": "DP uses 'expected' updates. What does that involve?",
+    "options": [
+      "Summing over all next states, so it needs the transition probabilities",
+      "Updating from one sampled transition, so it needs no model",
+      "Averaging complete-episode returns, so it needs whole episodes",
+      "Updating only the highest-error state, so it needs a priority queue"
+    ],
+    "correct": [0],
+    "explanation": "An expected update sums over every next state weighted by P(s'|s,a), which requires the actual probabilities. Single-sample updates are TD/Q-learning, return-averaging is MC, and priority queues belong to prioritized sweeping."
+  },
+  {
+    "id": 5,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Value iteration",
+    "prompt": "How does value iteration differ from policy iteration?",
+    "options": [
+      "It repeatedly applies the max-based Bellman update, then reads the greedy policy",
+      "It fully evaluates the current policy between each improvement step",
+      "It learns purely from sampled transitions without a model",
+      "It averages Monte Carlo returns to set each state's value"
+    ],
+    "correct": [0],
+    "explanation": "Value iteration folds improvement into evaluation by applying the Bellman optimality (max) backup until convergence, then extracting the greedy policy. Full evaluation between improvements is policy iteration; both are model-based, not sample-based."
+  },
+  {
+    "id": 6,
+    "type": "mcq",
+    "difficulty": "hard",
+    "topic": "Backup classification",
+    "prompt": "On the axes policy (on/off-policy) and width (sample/expected), how is the value-iteration backup classified?",
+    "options": [
+      "Off-policy and expected over the dynamics",
+      "On-policy and expected over the dynamics",
+      "Off-policy and sample over the dynamics",
+      "On-policy and sample over the dynamics"
+    ],
+    "correct": [0],
+    "explanation": "Value iteration uses max over actions (off-policy / greedy) and sums over the full transition distribution (expected). That 'expected' width is what forces a full distributional model."
+  },
+  {
+    "id": 7,
+    "type": "mcq",
+    "difficulty": "hard",
+    "topic": "DP practicality",
+    "prompt": "Despite its optimality guarantee, why is Dynamic Programming often impractical?",
+    "options": [
+      "Full expected sweeps over all states need the exact model and do not scale",
+      "Its convergence to the optimum is not actually guaranteed",
+      "It cannot be applied once the rewards are stochastic",
+      "It requires sampled episodes that may never terminate"
+    ],
+    "correct": [0],
+    "explanation": "DP must sweep every state with full expected backups and needs the exact model — both break down as the state space explodes. Its convergence is guaranteed, it handles stochastic rewards, and it uses no sampled episodes."
+  },
+  {
+    "id": 8,
+    "type": "multi",
+    "difficulty": "medium",
+    "topic": "Properties of DP",
+    "prompt": "Which properties hold for tabular Dynamic Programming?",
+    "options": [
+      "It requires a complete model of the environment",
+      "It uses expected (full-distribution) updates",
+      "It is guaranteed to converge to the global optimum",
+      "It can learn directly from sampled experience without a model",
+      "It scales easily to very large state spaces"
+    ],
+    "correct": [0, 1, 2],
+    "explanation": "DP needs the full model, uses expected backups, and converges to the global optimum. It cannot learn model-free (that is MC/TD), and it scales badly because it sweeps all states (curse of dimensionality)."
+  }
+]

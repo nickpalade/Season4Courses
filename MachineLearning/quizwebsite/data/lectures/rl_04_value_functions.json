@@ -1,0 +1,138 @@
+[
+  {
+    "id": 1,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "State vs action value",
+    "prompt": "What does the action value q(s,a) represent?",
+    "options": [
+      "Expected return after taking a in s, then following the policy",
+      "Expected return from s when following the policy throughout",
+      "The immediate reward received for taking a in s",
+      "The probability the policy assigns to a in s"
+    ],
+    "correct": [0],
+    "explanation": "q(s,a) is the expected return for committing to a now and following π afterwards. The second describes v(s); the third is the immediate reward; the fourth is the policy probability π(a|s)."
+  },
+  {
+    "id": 2,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "Bellman equation",
+    "prompt": "The Bellman equation is best described as:",
+    "options": [
+      "A recursive relation of a state's value to its successors' values",
+      "A recursive relation of a state's reward to its successors' rewards",
+      "An iterative relation of a state's reward to neighbouring rewards",
+      "An iterative relation among the values of unrelated states"
+    ],
+    "correct": [0],
+    "explanation": "Bellman expresses value now as reward plus the discounted value of the next state — a recursion over values, not rewards, and it links neighbouring (not unrelated) states."
+  },
+  {
+    "id": 3,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "Optimal value vs policy",
+    "prompt": "Which statement about optimal value functions and policies is correct?",
+    "options": [
+      "There is one optimal value function, but possibly many optimal policies",
+      "There is one optimal policy, but possibly many optimal value functions",
+      "There is exactly one optimal value function and one optimal policy",
+      "There are many optimal value functions and many optimal policies"
+    ],
+    "correct": [0],
+    "explanation": "v* is a unique set of best-achievable values. When actions tie for the best value, either choice is optimal, so several optimal policies can share that one v*."
+  },
+  {
+    "id": 4,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Curse of dimensionality",
+    "prompt": "The curse of dimensionality (state-space sense) is the fact that:",
+    "options": [
+      "The number of states grows exponentially with the number of variables",
+      "The number of variables grows exponentially with the number of states",
+      "The number of states grows polynomially with the number of variables",
+      "The state-vector length grows polynomially with the number of states"
+    ],
+    "correct": [0],
+    "explanation": "Each added variable with k values multiplies the state count by k — exponential in the number of variables. This breaks tabular methods and motivates function approximation."
+  },
+  {
+    "id": 5,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Bellman intuition",
+    "prompt": "In words, v(s) = Σ_a π(a|s) Σ_s' P(s'|s,a)[r + γ·v(s')] says a state's value equals:",
+    "options": [
+      "The expected immediate reward plus the discounted value of the next state",
+      "The sum of every reward collected during the whole episode",
+      "The maximum single reward reachable from that state",
+      "The difference between the start-state and goal-state values"
+    ],
+    "correct": [0],
+    "explanation": "Bellman decomposes value into 'reward now + discounted value of where you land', averaged over the policy and transition dynamics. It is an expectation, not a raw sum, a max, or a difference of values."
+  },
+  {
+    "id": 6,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Why multiple optimal policies",
+    "prompt": "Why can one optimal value function v* correspond to more than one optimal policy?",
+    "options": [
+      "When several actions tie for the best value, choosing any is optimal",
+      "Because v* is only approximate and shifts between runs",
+      "Because each policy induces its own distinct v*",
+      "Because optimal policies are required to be stochastic"
+    ],
+    "correct": [0],
+    "explanation": "Ties in action values mean different greedy choices all achieve v*, giving multiple optimal policies. v* itself is unique and exact, it is shared (not per-policy), and optimal policies need not be stochastic."
+  },
+  {
+    "id": 7,
+    "type": "mcq",
+    "difficulty": "hard",
+    "topic": "Optimality vs expectation equation",
+    "prompt": "How does the Bellman optimality equation for v* differ from the expectation equation for v_π?",
+    "options": [
+      "It takes a max over actions instead of averaging over the policy's actions",
+      "It replaces the discount factor γ with 1",
+      "It drops the transition probabilities P(s'|s,a) from the sum",
+      "It maximises over successor states instead of over actions"
+    ],
+    "correct": [0],
+    "explanation": "The optimality equation uses max_a instead of Σ_a π(a|s)·, because v* assumes greedy action selection. It keeps γ, keeps the transition sum, and the max is over actions, not successor states."
+  },
+  {
+    "id": 8,
+    "type": "mcq",
+    "difficulty": "hard",
+    "topic": "Consequence of dimensionality",
+    "prompt": "A robot's state gains three new binary sensors. How does the tabular state count change?",
+    "options": [
+      "It multiplies by 2³ = 8, pushing toward function approximation",
+      "It increases by 3, so a slightly larger table suffices",
+      "It is unchanged, since binary sensors carry little information",
+      "It multiplies by 3² = 9 across the three sensors"
+    ],
+    "correct": [0],
+    "explanation": "Three binary variables multiply the space by 2³ = 8 — exponential blow-up, not additive growth or 3². Enumerating every state quickly becomes infeasible, which is why approximators replace tables."
+  },
+  {
+    "id": 9,
+    "type": "multi",
+    "difficulty": "medium",
+    "topic": "Value function facts",
+    "prompt": "Which statements about value functions are correct?",
+    "options": [
+      "v(s) is the expected return from s under a given policy",
+      "q(s,a) fixes the first action, then follows the policy",
+      "The Bellman equation links a state's value to its successors'",
+      "The optimal value function v* is unique for a given MDP",
+      "Each optimal policy induces its own distinct v*"
+    ],
+    "correct": [0, 1, 2, 3],
+    "explanation": "v(s) and q(s,a) are defined under a policy, Bellman is the value-to-successor recursion, and v* is unique per MDP. v* belongs to the MDP — many optimal policies share the same v*, contradicting the last option."
+  }
+]

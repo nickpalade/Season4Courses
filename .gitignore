@@ -1,0 +1,53 @@
+# Dependencies
+node_modules/
+
+# Build output and tool caches
+dist/
+build/
+.vite/
+.cache/
+coverage/
+.nyc_output/
+
+# Environment and local configuration
+.env
+.env.*
+!.env.example
+*.local
+
+# Logs and runtime files
+*.log
+logs/
+*.pid
+*.pid.lock
+
+# Test artifacts
+playwright-report/
+test-results/
+blob-report/
+
+# LaTeX build artifacts (keep .tex source and intentionally exported PDFs)
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.lot
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+
+# Editor and OS metadata
+.vscode/
+.idea/
+*.code-workspace
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local AI tool state
+.claude/
+.codex/

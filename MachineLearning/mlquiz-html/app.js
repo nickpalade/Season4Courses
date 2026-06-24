@@ -1,6 +1,6 @@
 (function () {
-  const questions = window.RMAI_QUESTIONS || [];
-  const storageKey = "rmaiQuizLab:v2";
+  const questions = window.ML_QUESTIONS || [];
+  const storageKey = "mlQuizLab:v1";
 
   const els = {
     totalCount: document.getElementById("total-count"),
@@ -24,6 +24,7 @@
     questionText: document.getElementById("question-text"),
     source: document.getElementById("source-line"),
     options: document.getElementById("options-list"),
+    submit: document.getElementById("submit-button"),
     answerPanel: document.getElementById("answer-panel"),
     answerResult: document.getElementById("answer-result"),
     answerChoice: document.getElementById("answer-choice"),
@@ -49,7 +50,8 @@
     shuffle: true,
     session: [],
     index: 0,
-    answers: {},
+    answers: {}, // id -> array of chosen letters (or "OPEN" sentinel for open Qs)
+    pending: {}, // id -> Set of letters chosen but not yet submitted (multi)
     revealed: {},
     completed: false,
     reviewFilter: "all",
@@ -68,21 +70,8 @@
     localStorage.setItem(storageKey, JSON.stringify(state.saved));
   }
 
-  const SOURCE_DOMAINS = {
-    "L1 Slides": "L1 · Scientific Thinking & Research Design",
-    "L3 Slides": "L3 · Data Simulation & Modelling",
-    "L4 Slides": "L4 · Data Analysis & Prediction",
-    "L5 Slides": "L5 · Open & Reproducible Research",
-    "Week 2 Slides": "W2 · Data Collection & Measurement",
-    "Week 6 Slides": "W6 · Research Ethics",
-  };
-
-  function domainFor(q) {
-    return SOURCE_DOMAINS[q.source] || q.source || "General";
-  }
-
   questions.forEach((q) => {
-    q.domain = domainFor(q);
+    q.domain = q.domain || q.source || "General";
   });
 
   const domains = [...new Set(questions.map((q) => q.domain))].sort((a, b) => a.localeCompare(b));
@@ -107,6 +96,7 @@
     state.session = list;
     state.index = 0;
     state.answers = {};
+    state.pending = {};
     state.revealed = {};
     state.completed = false;
     render();
@@ -116,55 +106,86 @@
     return state.session[state.index];
   }
 
-  function answerText(q) {
-    const opt = q.options.find((item) => item[0] === q.answer);
-    return opt ? opt[1] : "";
+  function sameSet(a, b) {
+    if (a.length !== b.length) return false;
+    const setB = new Set(b);
+    return a.every((x) => setB.has(x));
   }
 
-  function optionText(q, label) {
+  function isCorrect(q) {
+    if (q.type === "open") return false; // open questions are self-graded, never auto-scored
+    const chosen = state.answers[q.id];
+    if (!chosen) return false;
+    return sameSet(chosen, q.answer);
+  }
+
+  function answered(q) {
+    return Boolean(state.answers[q.id]);
+  }
+
+  function labelText(q, label) {
     const opt = q.options.find((item) => item[0] === label);
-    return opt ? opt[1] : "";
+    return opt ? opt[1] : label;
   }
 
-  function cleanExplanation(note) {
-    if (!note) return "Review the source topic for the rule being tested, then compare the correct option against the distractors.";
-    return note
-      .replace(/^Correct answer:\s*[^.]+\.?\s*/i, "")
-      .replace(/\s*Added from .*$/i, "")
-      .trim();
+  function correctText(q) {
+    return q.answer.map((l) => `${l}. ${labelText(q, l)}`).join("  ·  ");
   }
 
   function scoreStats() {
-    const answered = Object.keys(state.answers).length;
+    const gradable = state.session.filter((q) => q.type !== "open");
+    const ans = gradable.filter((q) => answered(q)).length;
     let correct = 0;
-    for (const q of state.session) {
-      if (state.answers[q.id] === q.answer) correct += 1;
-    }
+    for (const q of gradable) if (isCorrect(q)) correct += 1;
     let streak = 0;
     for (let i = state.index; i >= 0; i -= 1) {
       const q = state.session[i];
-      if (!q || !state.answers[q.id]) continue;
-      if (state.answers[q.id] !== q.answer) break;
+      if (!q || q.type === "open" || !answered(q)) continue;
+      if (!isCorrect(q)) break;
       streak += 1;
     }
-    return { answered, correct, streak, score: answered ? Math.round((correct / answered) * 100) : 0 };
+    return { answered: ans, correct, streak, total: gradable.length, score: ans ? Math.round((correct / ans) * 100) : 0 };
   }
 
-  function selectAnswer(label) {
-    const q = currentQuestion();
-    if (!q || state.completed) return;
-    state.answers[q.id] = label;
-    state.revealed[q.id] = true;
+  function recordAttempt(q) {
     state.saved.attempts[q.id] = (state.saved.attempts[q.id] || 0) + 1;
-    if (label === q.answer) delete state.saved.incorrect[q.id];
+    if (isCorrect(q)) delete state.saved.incorrect[q.id];
     else state.saved.incorrect[q.id] = true;
     saveSaved();
+  }
+
+  // mcq: single click commits. multi: toggle into pending until Submit. open: handled by reveal.
+  function chooseOption(label) {
+    const q = currentQuestion();
+    if (!q || state.completed || state.revealed[q.id]) return;
+    if (q.type === "multi") {
+      const set = state.pending[q.id] || new Set();
+      if (set.has(label)) set.delete(label);
+      else set.add(label);
+      state.pending[q.id] = set;
+      render();
+      return;
+    }
+    state.answers[q.id] = [label];
+    state.revealed[q.id] = true;
+    recordAttempt(q);
+    render();
+  }
+
+  function submitMulti() {
+    const q = currentQuestion();
+    if (!q || q.type !== "multi") return;
+    const set = state.pending[q.id] || new Set();
+    state.answers[q.id] = [...set].sort();
+    state.revealed[q.id] = true;
+    recordAttempt(q);
     render();
   }
 
   function revealAnswer() {
     const q = currentQuestion();
     if (!q) return;
+    if (q.type === "open" && !state.answers[q.id]) state.answers[q.id] = ["OPEN"];
     state.revealed[q.id] = true;
     render();
   }
@@ -202,45 +223,57 @@
   function renderQuestion() {
     const q = currentQuestion();
     els.options.innerHTML = "";
+    els.submit.classList.add("hidden");
 
     if (!q) {
       els.topic.textContent = "No matching questions";
-      els.questionText.textContent = "No questions match the current domain selection.";
-      els.source.textContent = "Choose every question or select at least one domain.";
+      els.questionText.textContent = "No questions match the current lecture selection.";
+      els.source.textContent = "Choose every question or select at least one lecture.";
       els.answerPanel.classList.add("hidden");
       els.bookmark.textContent = "☆";
       return;
     }
 
-    els.topic.textContent = q.domain;
+    const typeLabel = q.type === "multi" ? "Select all that apply" : q.type === "open" ? "Open answer" : "Single answer";
+    els.topic.textContent = `${q.domain} · ${typeLabel}`;
     els.questionText.textContent = q.question;
     els.source.textContent = `${q.id} · ${q.topic} · ${q.source}`;
     els.bookmark.textContent = state.saved.bookmarked[q.id] ? "★" : "☆";
 
-    const selected = state.answers[q.id];
+    const committed = state.answers[q.id];
     const revealed = state.completed || state.revealed[q.id];
+    const pending = state.pending[q.id] || new Set();
 
     q.options.forEach(([label, text]) => {
       const button = document.createElement("button");
       button.type = "button";
       button.className = "option-button";
-      if (selected === label) button.classList.add("selected");
-      if (revealed && label === q.answer) button.classList.add("correct");
-      if (revealed && selected === label && selected !== q.answer) button.classList.add("incorrect");
+      const chosen = committed ? committed.includes(label) : pending.has(label);
+      if (chosen) button.classList.add("selected");
+      if (revealed && q.answer.includes(label)) button.classList.add("correct");
+      if (revealed && chosen && !q.answer.includes(label)) button.classList.add("incorrect");
       button.innerHTML = `<span class="option-letter">${label}</span><span>${text}</span>`;
-      button.addEventListener("click", () => selectAnswer(label));
+      button.addEventListener("click", () => chooseOption(label));
       els.options.appendChild(button);
     });
 
+    if (q.type === "multi" && !revealed) {
+      els.submit.classList.remove("hidden");
+      els.submit.disabled = pending.size === 0;
+    }
+
     if (revealed) {
       els.answerPanel.classList.remove("hidden", "good", "bad");
-      if (selected) els.answerPanel.classList.add(selected === q.answer ? "good" : "bad");
-      els.answerResult.textContent = selected ? (selected === q.answer ? "Correct" : "Not quite") : "Answer revealed";
-      els.answerChoice.textContent =
-        selected && selected !== q.answer
-          ? `You chose ${selected}. ${optionText(q, selected)} Correct answer: ${q.answer}. ${answerText(q)}`
-          : `Correct answer: ${q.answer}. ${answerText(q)}`;
-      els.answerNote.textContent = `Why: ${cleanExplanation(q.note)}`;
+      if (q.type === "open") {
+        els.answerResult.textContent = "Model answer";
+        els.answerChoice.textContent = "";
+      } else {
+        const ok = isCorrect(q);
+        els.answerPanel.classList.add(ok ? "good" : "bad");
+        els.answerResult.textContent = answered(q) ? (ok ? "Correct" : "Not quite") : "Answer revealed";
+        els.answerChoice.textContent = `Correct: ${correctText(q)}`;
+      }
+      els.answerNote.textContent = q.note ? `Why: ${q.note}` : "";
       els.answerAnchor.textContent = q.anchor;
     } else {
       els.answerPanel.classList.add("hidden");
@@ -251,18 +284,19 @@
     const stats = scoreStats();
     const total = state.session.length;
     const position = total ? state.index + 1 : 0;
-    const scopeText = state.scope === "all" ? "Every question" : state.selectedDomains.size ? `${state.selectedDomains.size} domains` : "Domain specific";
+    const scopeText = state.scope === "all" ? "Every question" : state.selectedDomains.size ? `${state.selectedDomains.size} lectures` : "Lecture specific";
     els.sessionTitle.textContent = `${scopeText} · ${state.shuffle ? "Randomized" : "In order"}`;
     els.score.textContent = `${stats.score}%`;
-    els.progress.textContent = `${stats.answered} / ${total}`;
+    els.progress.textContent = `${stats.answered} / ${stats.total}`;
     els.streak.textContent = stats.streak;
     els.progressLabel.textContent = total
       ? state.completed
-        ? `Complete · ${stats.correct} correct · ${total - stats.correct} review`
-        : `${stats.correct} correct · ${total - stats.answered} remaining`
+        ? `Complete · ${stats.correct} correct · ${stats.total - stats.correct} review`
+        : `${stats.correct} correct · ${stats.total - stats.answered} remaining (gradable)`
       : "Ready";
     els.questionPosition.textContent = `${position} of ${total}`;
-    els.progressBar.style.width = total ? `${(stats.answered / total) * 100}%` : "0%";
+    const done = state.session.filter((q) => state.revealed[q.id]).length;
+    els.progressBar.style.width = total ? `${(done / total) * 100}%` : "0%";
     els.prev.disabled = state.index <= 0;
     els.next.textContent = state.index >= total - 1 ? "Finish →" : "Next →";
   }
@@ -272,28 +306,30 @@
       els.summaryCard.classList.add("hidden");
       return;
     }
-
     els.summaryCard.classList.remove("hidden");
     const stats = scoreStats();
-    const missed = state.session.filter((q) => state.answers[q.id] && state.answers[q.id] !== q.answer);
-    const unanswered = state.session.filter((q) => !state.answers[q.id]);
+    const gradable = state.session.filter((q) => q.type !== "open");
+    const missed = gradable.filter((q) => answered(q) && !isCorrect(q));
+    const unanswered = gradable.filter((q) => !answered(q));
+    const openCount = state.session.length - gradable.length;
 
     els.summaryStats.innerHTML = [
       ["Score", `${stats.score}%`],
-      ["Correct", `${stats.correct}/${state.session.length}`],
+      ["Correct", `${stats.correct}/${stats.total}`],
       ["Missed", String(missed.length)],
       ["Unanswered", String(unanswered.length)],
+      ["Open (self-grade)", String(openCount)],
     ]
       .map(([label, value]) => `<div class="summary-stat"><strong>${value}</strong><span>${label}</span></div>`)
       .join("");
 
     const byDomain = new Map();
-    state.session.forEach((q) => {
+    gradable.forEach((q) => {
       if (!byDomain.has(q.domain)) byDomain.set(q.domain, { total: 0, correct: 0, missed: 0, unanswered: 0 });
       const row = byDomain.get(q.domain);
       row.total += 1;
-      if (!state.answers[q.id]) row.unanswered += 1;
-      else if (state.answers[q.id] === q.answer) row.correct += 1;
+      if (!answered(q)) row.unanswered += 1;
+      else if (isCorrect(q)) row.correct += 1;
       else row.missed += 1;
     });
 
@@ -321,13 +357,13 @@
             </div>`
           )
           .join("")
-      : `<div class="missed-row"><div class="missed-row-head"><span>No missed answered questions</span></div><small>Unanswered questions are counted separately above.</small></div>`;
+      : `<div class="missed-row"><div class="missed-row-head"><span>No missed answered questions</span></div><small>Unanswered & open questions are tracked separately above.</small></div>`;
   }
 
   function renderReview() {
     els.reviewGrid.innerHTML = "";
     const visible = state.session.filter((q) => {
-      if (state.reviewFilter === "missed") return state.answers[q.id] && state.answers[q.id] !== q.answer;
+      if (state.reviewFilter === "missed") return q.type !== "open" && answered(q) && !isCorrect(q);
       if (state.reviewFilter === "bookmarked") return state.saved.bookmarked[q.id];
       return true;
     });
@@ -336,8 +372,8 @@
       button.type = "button";
       button.className = "review-item";
       if (q.id === currentQuestion()?.id) button.classList.add("current");
-      if (state.answers[q.id] === q.answer) button.classList.add("correct");
-      if (state.answers[q.id] && state.answers[q.id] !== q.answer) button.classList.add("incorrect");
+      if (q.type !== "open" && isCorrect(q)) button.classList.add("correct");
+      if (q.type !== "open" && answered(q) && !isCorrect(q)) button.classList.add("incorrect");
       if (state.saved.bookmarked[q.id]) button.classList.add("bookmarked");
       button.innerHTML = `${q.id}<small>${q.domain}</small>`;
       button.addEventListener("click", () => {
@@ -379,6 +415,7 @@
       state.shuffle = event.target.checked;
     });
     els.start.addEventListener("click", makeSession);
+    els.submit.addEventListener("click", submitMulti);
     els.newSession.addEventListener("click", () => {
       makeSession();
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -421,11 +458,12 @@
       renderReview();
     });
     document.addEventListener("keydown", (event) => {
-      if (event.key >= "1" && event.key <= "4") {
-        const q = currentQuestion();
+      const q = currentQuestion();
+      if (event.key >= "1" && event.key <= "9") {
         const opt = q?.options[Number(event.key) - 1];
-        if (opt) selectAnswer(opt[0]);
+        if (opt) chooseOption(opt[0]);
       }
+      if (event.key === "Enter" && q?.type === "multi" && !state.revealed[q.id]) submitMulti();
       if (event.key === "ArrowRight") els.next.click();
       if (event.key === "ArrowLeft") els.prev.click();
       if (event.key.toLowerCase() === "r") revealAnswer();

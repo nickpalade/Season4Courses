@@ -1,6 +1,6 @@
 # Research Methods AI — Study Guide
 
-A plain-language summary of every slide deck behind the 202-question quiz
+A plain-language summary of every slide deck behind the 100-question quiz
 (`context/index.html`). Read a section, then take that source's questions.
 Each question's title is tagged `[EASY]`, `[MID]`, or `[HARD]`.
 

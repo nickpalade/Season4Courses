@@ -1,0 +1,138 @@
+[
+  {
+    "id": 1,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "Actor-critic",
+    "prompt": "What is the most correct name for a method that learns both a policy and a value function?",
+    "options": [
+      "An actor-critic method",
+      "The REINFORCE method",
+      "A double-learning method",
+      "A model-based method"
+    ],
+    "correct": [0],
+    "explanation": "Actor-critic: the actor is the policy choosing actions, the critic is the value function evaluating them. REINFORCE learns only a policy, double learning uses two value estimators, and model-based methods learn dynamics."
+  },
+  {
+    "id": 2,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "Stochastic gradient descent",
+    "prompt": "How is stochastic gradient descent best described?",
+    "options": [
+      "Make small steps in the direction of the negative gradient",
+      "Try a random-direction step and undo it if error increased",
+      "Eliminate the entire error for each example at once",
+      "Use second-order curvature from the Hessian matrix"
+    ],
+    "correct": [0],
+    "explanation": "SGD is a first-order method taking small steps along the negative gradient, one or a few samples at a time. It is not random search, not a one-shot exact solver, and uses no Hessian."
+  },
+  {
+    "id": 3,
+    "type": "mcq",
+    "difficulty": "easy",
+    "topic": "AlphaGo networks",
+    "prompt": "Which neural networks did AlphaGo include?",
+    "options": [
+      "A policy network and a value network",
+      "A policy network only",
+      "A value network only",
+      "Neither a policy nor a value network"
+    ],
+    "correct": [0],
+    "explanation": "AlphaGo combined a policy network (move priors — where to search) and a value network (how good a position is) with MCTS. Both were essential."
+  },
+  {
+    "id": 4,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Policy gradient statements",
+    "prompt": "(S1) Policy-gradient methods directly learn a parameterized policy, while action-value methods learn values from which a policy is derived. (S2) Policy-gradient methods enable selecting actions with arbitrary probabilities. Which is correct?",
+    "options": [
+      "Both S1 and S2 are correct",
+      "Only S1 is correct",
+      "Only S2 is correct",
+      "Both S1 and S2 are incorrect"
+    ],
+    "correct": [0],
+    "explanation": "S1 distinguishes policy-based from value-based methods correctly; S2 is also true — a parameterized policy can output any action distribution, including continuous and arbitrarily-weighted stochastic ones."
+  },
+  {
+    "id": 5,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Actor and critic roles",
+    "prompt": "In an actor-critic method, what does the critic contribute to the actor?",
+    "options": [
+      "A lower-variance learning signal for updating the policy",
+      "The exploration noise added to each chosen action",
+      "The environment model used to simulate rollouts",
+      "The replay buffer of past transitions"
+    ],
+    "correct": [0],
+    "explanation": "The critic's value estimate replaces noisy full returns with a lower-variance signal (e.g. a TD error / advantage) guiding the actor's updates. It is not the exploration noise, a model, or a replay buffer."
+  },
+  {
+    "id": 6,
+    "type": "mcq",
+    "difficulty": "medium",
+    "topic": "Why function approximation",
+    "prompt": "Why is function approximation needed in large RL problems instead of a value table?",
+    "options": [
+      "The state space is too large to tabulate, so values must generalise across states",
+      "Lookup tables cannot represent stochastic policies",
+      "Approximation guarantees convergence that tables lack",
+      "Tables require a model whereas approximators do not"
+    ],
+    "correct": [0],
+    "explanation": "Under the curse of dimensionality there are far too many states to tabulate, so an approximator must generalise from seen to unseen states. Tables can store policies and need no model, and approximation actually weakens convergence guarantees."
+  },
+  {
+    "id": 7,
+    "type": "mcq",
+    "difficulty": "hard",
+    "topic": "Policy-based vs value-based",
+    "prompt": "For a continuous action space (e.g. a steering angle), why are policy-gradient methods often preferred over value-greedy methods?",
+    "options": [
+      "A parameterized policy emits actions directly, avoiding an argmax over a continuous range",
+      "Value methods cannot handle delayed rewards in continuous tasks",
+      "Policy gradients converge to the global optimum in continuous spaces",
+      "Continuous actions make bootstrapping unnecessary"
+    ],
+    "correct": [0],
+    "explanation": "Value-greedy methods need argmax over actions, intractable over a continuous range; a policy emits a distribution directly. Value methods do handle delayed rewards, policy gradients only reach local optima, and bootstrapping is still useful."
+  },
+  {
+    "id": 8,
+    "type": "mcq",
+    "difficulty": "hard",
+    "topic": "AlphaGo integration",
+    "prompt": "How did AlphaGo combine its two networks with Monte Carlo Tree Search?",
+    "options": [
+      "The policy network supplied move priors to guide search; the value network scored positions",
+      "The value network supplied move priors; the policy network scored positions",
+      "Both networks were used only after self-play, not during search",
+      "The networks chose moves directly, with MCTS only breaking ties"
+    ],
+    "correct": [0],
+    "explanation": "The policy network gave move priors that focused the tree search, while the value network evaluated positions (in place of full rollouts) — both guiding MCTS. The roles are not swapped, and the networks were used during search, not just after."
+  },
+  {
+    "id": 9,
+    "type": "multi",
+    "difficulty": "medium",
+    "topic": "Policy and approximation facts",
+    "prompt": "Which statements about policy-based methods and function approximation are correct?",
+    "options": [
+      "Policy gradients learn a parameterized policy directly",
+      "Actor-critic methods learn both a policy and a value function",
+      "SGD takes small steps along the negative gradient",
+      "Policy gradients can represent arbitrary action probabilities",
+      "Function approximation is needed only when the state space is tiny"
+    ],
+    "correct": [0, 1, 2, 3],
+    "explanation": "The first four are correct. Function approximation is needed when the state space is large (curse of dimensionality), not tiny — small spaces can use tables."
+  }
+]
