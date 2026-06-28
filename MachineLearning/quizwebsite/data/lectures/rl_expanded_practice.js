@@ -1,3 +1,9 @@
+import buildRl08 from "./rl_expanded_practice_08.js";
+import buildRl09 from "./rl_expanded_practice_09.js";
+import buildRl10 from "./rl_expanded_practice_10.js";
+import buildRl11 from "./rl_expanded_practice_11.js";
+import buildRl12 from "./rl_expanded_practice_12.js";
+
 const q = (id, difficulty, topic, title, options, correct, explanation, type = "mcq") => ({
   id,
   type,
@@ -287,6 +293,135 @@ data.rl06 = [
     "To force all action values to become equal",
   ], 1, "Greediness drives improvement, but continued coverage is needed so competing actions remain estimable."),
 ];
+
+data.rl07 = [
+  direct("rle_07_01", "easy", "One-step TD update", "Q(S,A)=4, the reward is 2, gamma=0.5, and the selected next action has value 6. With alpha=0.25, what is the SARSA update?", [
+    "3.50, after treating the reward as the complete target",
+    "5.00, after replacing the estimate by the TD target",
+    "4.25, because the target is 5 and the TD error is 1",
+    "4.50, because the next action contributes half its value",
+  ], 2, "SARSA's target is 2 + 0.5 x 6 = 5; therefore Q becomes 4 + 0.25 x (5 - 4) = 4.25."),
+  direct("rle_07_02", "easy", "TD error", "The current action value is 2 and its one-step TD target is 5. What is the TD error?", [
+    "3, obtained from target minus current estimate",
+    "7, obtained by adding target and current estimate",
+    "2.5, obtained by averaging both quantities",
+    "10, obtained by multiplying both quantities",
+  ], 0, "The TD error is target - current estimate, so delta = 5 - 2 = 3."),
+  direct("rle_07_03", "easy", "Incremental learning", "Why can one-step TD control learn before an episode finishes?", [
+    "It already knows every later reward in the episode",
+    "It computes an exact expectation from a known transition and reward model",
+    "It treats the immediate reward as the entire return",
+    "It forms a target from the reward and a next-state action estimate",
+  ], 3, "Bootstrapping supplies an immediate one-step target without waiting for the full return."),
+  direct("rle_07_04", "easy", "Terminal transition", "A transition enters a terminal state and gives reward -4. What is the one-step TD target?", [
+    "-4 plus gamma times the largest action value stored for that terminal state",
+    "-4, because the terminal successor contributes no future value",
+    "Zero, because terminal transitions are excluded from updates",
+    "The complete return from the following episode",
+  ], 1, "At termination there is no next action value to bootstrap from, so the target is just the observed reward."),
+  direct("rle_07_05", "easy", "SARSA target", "An epsilon-greedy agent actually selects Right in the next state. Which next value appears in its SARSA target?", [
+    "The average value of every available next action",
+    "Q(next state, Right), even if Right is not greedy",
+    "The maximum next-action value regardless of the selection",
+    "The state value before the transition occurred",
+  ], 1, "SARSA is on-policy and bootstraps from the action actually selected by its behavior policy."),
+  direct("rle_07_06", "easy", "SARSA name", "Which observed sequence gives SARSA its name?", [
+    "State, action, return, next state, greedy action",
+    "State, action, reward, same state, same action",
+    "State value, action value, reward, state value, action value",
+    "State, action, reward, next state, next action",
+  ], 3, "SARSA uses the tuple state-action-reward-state-action in its one-step update."),
+  direct("rle_07_07", "medium", "Q-learning calculation", "Q(S,A)=1, reward=-1, gamma=0.9, max next Q=4, and alpha=0.5. What is the updated value?", [
+    "1.8, because the target is 2.6 and the TD error is 1.6",
+    "2.6, because Q is always replaced by its target",
+    "0.8, because the negative reward is applied without bootstrapping",
+    "2.3, because alpha is applied only to the next-state value",
+  ], 0, "The target is -1 + 0.9 x 4 = 2.6, giving 1 + 0.5 x (2.6 - 1) = 1.8."),
+  direct("rle_07_08", "medium", "Off-policy control", "The behavior takes an exploratory action, but the update uses max_a Q(S',a). Why is this Q-learning update off-policy?", [
+    "It waits for a return produced by a different episode",
+    "It evaluates sampled returns from another behavior policy using importance ratios",
+    "It evaluates a greedy target while behavior can remain exploratory",
+    "It updates a state value instead of an action value",
+  ], 2, "The max target represents greedy action selection, which can differ from the exploratory behavior policy."),
+  direct("rle_07_09", "medium", "Expected SARSA calculation", "At S', a policy chooses actions with probabilities 0.8 and 0.2; their Q-values are 5 and 1. With reward 0 and gamma=1, what is the Expected SARSA target?", [
+    "5.0, because only the greedy action is evaluated",
+    "3.0, because both action values are averaged uniformly",
+    "1.0, because the less likely action controls the target",
+    "4.2, from 0.8(5) + 0.2(1)",
+  ], 3, "Expected SARSA weights each next-action value by its probability under the target policy."),
+  direct("rle_07_10", "medium", "Expected versus sampled SARSA", "Why can Expected SARSA's target vary less than ordinary SARSA's target at the same next state?", [
+    "It removes all randomness in rewards and transitions",
+    "It replaces the current policy by a deterministic greedy target before every update",
+    "It averages next-action values instead of sampling one next action",
+    "It uses a complete episode return rather than bootstrapping",
+  ], 2, "Taking the policy-weighted expectation removes the randomness caused by sampling one next action."),
+  direct("rle_07_11", "medium", "Greedy expected target", "What does Expected SARSA become when its target policy assigns probability one to a greedy action?", [
+    "Ordinary SARSA with an action sampled from a uniformly random policy",
+    "Q-learning, because the expectation reduces to the maximum value",
+    "Monte Carlo control using the complete sampled return",
+    "Policy evaluation using a known transition model",
+  ], 1, "For a deterministic greedy target policy, the expected next value is max_a Q(S',a), the Q-learning target."),
+  direct("rle_07_12", "medium", "Epsilon-greedy expectation", "Two actions have Q-values 10 and 2. Under epsilon-greedy with epsilon=0.2, their probabilities are 0.9 and 0.1. What expected next value is used?", [
+    "9.2, from 0.9(10) + 0.1(2)",
+    "6.0, from an unweighted average of both values",
+    "10.0, because epsilon never enters an expected target",
+    "8.0, from subtracting epsilon times the smaller value",
+  ], 0, "The expected value under the stated policy is 9 + 0.2 = 9.2."),
+  direct("rle_07_13", "medium", "SARSA versus Q-learning", "At S', Q(Left)=8 and Q(Right)=2, but exploration selects Right. With reward 1 and gamma=0.5, which pair of targets is correct?", [
+    "SARSA uses 2; Q-learning uses 5",
+    "SARSA uses 5; Q-learning uses 2",
+    "Both methods use 2 because Right was selected",
+    "Both methods use 5 because Left is greedy",
+  ], 0, "SARSA uses 1 + 0.5 x Q(S',Right) = 2; Q-learning uses 1 + 0.5 x max Q(S',a) = 5."),
+  direct("rle_07_14", "hard", "Step size", "The TD error is -6. How does changing alpha from 0.1 to 0.5 affect this single update?", [
+    "The update changes from -6 to -3 because alpha affects the target",
+    "The update direction reverses because alpha exceeds the discount factor",
+    "The value change grows in magnitude from -0.6 to -3",
+    "The value change is unchanged because alpha affects only convergence",
+  ], 2, "The applied correction is alpha times the TD error: -0.6 versus -3."),
+  direct("rle_07_15", "hard", "Bootstrapping", "A next-action estimate is badly overvalued. What can happen to its predecessor under a one-step TD update?", [
+    "Nothing, because TD targets contain observed rewards only",
+    "The predecessor is updated only after the episode terminates",
+    "The error disappears because alpha exactly cancels all successor-action estimates",
+    "The inflated estimate can enter the target and propagate backward",
+  ], 3, "A bootstrapped target uses the current successor estimate, so estimation errors can influence predecessors."),
+  direct("rle_07_16", "hard", "Terminal handling", "Which implementation bug would invent value after an episode has ended?", [
+    "Using the final reward as the terminal transition's target",
+    "Adding gamma times a stored Q-value for the terminal state",
+    "Setting the terminal successor contribution to zero",
+    "Updating the preceding state-action pair one final time",
+  ], 1, "Terminal states have no future action value; bootstrapping from one adds a fictitious continuation."),
+  direct("rle_07_17", "medium", "Off-policy Expected SARSA", "Behavior selects an action worth 2, while the target policy gives probabilities 0.75 and 0.25 to next-action values 6 and 2. With reward 1 and gamma=0.5, what target does Expected SARSA use?", [
+    "2, because the action selected by behavior determines the target",
+    "4, because both action values receive equal weight before discounting",
+    "3.5, because the target-policy expectation is 5",
+    "4, because Expected SARSA always takes the maximum next value",
+  ], 2, "The target-policy expectation is 0.75 x 6 + 0.25 x 2 = 5, so the TD target is 1 + 0.5 x 5 = 3.5."),
+  direct("rle_07_18", "hard", "Changing exploration", "An on-policy SARSA agent reduces epsilon during training. What changes in the value function it is learning?", [
+    "Nothing; SARSA always evaluates a deterministic greedy policy regardless of its behavior",
+    "Its target policy changes because the followed behavior policy changes",
+    "Only the reward function changes when epsilon is reduced",
+    "The update becomes model-based once epsilon reaches zero",
+  ], 1, "SARSA learns about its current behavior policy, so changing exploration also changes the policy being evaluated."),
+  direct("rle_07_19", "hard", "Generalized policy iteration", "How is generalized policy iteration expressed in TD control?", [
+    "TD evaluation updates action values while policy improvement makes behavior greedier",
+    "A transition and reward model are alternately estimated from data and used for full planning sweeps",
+    "Complete returns are averaged before each individual action",
+    "Policy evaluation stops permanently before improvement begins",
+  ], 0, "TD control interleaves approximate policy evaluation with policy improvement rather than fully separating them."),
+  direct("rle_07_20", "hard", "N-step SARSA", "What replaces the one-step target in n-step SARSA?", [
+    "Only the largest action value encountered during the next n states",
+    "An expectation over every transition allowed by the environment model",
+    "The complete undiscounted return from the rest of the episode in all cases",
+    "The next n rewards followed by a bootstrapped action value if nonterminal",
+  ], 3, "N-step SARSA uses an n-step return: discounted rewards for n steps, then a bootstrap term when the trajectory continues."),
+];
+
+data.rl08 = buildRl08(direct);
+data.rl09 = buildRl09(direct);
+data.rl10 = buildRl10(direct);
+data.rl11 = buildRl11(direct);
+data.rl12 = buildRl12(direct);
 
 const moreTopics = {
   rl06: ["Monte Carlo Methods","returns from complete episodes","first-visit versus every-visit estimates","no bootstrapping","episode termination","exploring starts","on-policy MC control","epsilon-soft policies","high variance returns","sample averages","model-free evaluation","delayed updates","ordinary returns","policy improvement","coverage of state-action pairs","prediction versus control","stochastic episodes","full-return targets","GLIE intuition","MC limitations","episode-level credit assignment"],
