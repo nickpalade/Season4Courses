@@ -49,6 +49,9 @@ const one = (id, d, topic, title, correct, a, b, c, explanation) => {
 const many = (id, d, topic, title, options, correct, explanation) =>
   q(id, d, topic, title, options, correct, explanation, "multi");
 
+const direct = (id, d, topic, title, options, correct, explanation) =>
+  q(id, d, topic, title, options, [correct], explanation);
+
 const data = {
   rl01: [
     one("rle_01_01","easy","RL signal","What makes reward feedback different from a supervised label?","Reward evaluates the taken behaviour without naming the correct action","Reward is a one-hot target for every possible action","Reward is available before the agent acts","Reward removes the need for exploration","A reward says how good the outcome was, not which action should have been selected."),
@@ -162,6 +165,129 @@ const data = {
   ],
 };
 
+data.rl06 = [
+  direct("rle_06_01", "easy", "Discounted return", "An episode pays rewards 2, 4, and 8 after a visit. With gamma = 0.5, what return is assigned to that visit?", [
+    "4, because later rewards are averaged",
+    "14, because discounting starts after termination",
+    "6, from 2 + 0.5(4) + 0.25(8)",
+    "3.5, from discounting every reward once",
+  ], 2, "The return from the visit is 2 + 0.5 x 4 + 0.5^2 x 8 = 6."),
+  direct("rle_06_02", "easy", "First-visit MC", "A state S occurs twice in one episode, at t=1 and t=4. Which sample does first-visit MC use for S?", [
+    "Only the return calculated from t=1",
+    "Only the reward received exactly at t=1",
+    "The average of the t=1 and t=4 rewards",
+    "Only the return calculated from t=4",
+  ], 0, "First-visit MC uses the return following the first occurrence of S in that episode."),
+  direct("rle_06_03", "easy", "Every-visit MC", "The same state appears three times in an episode. How many return samples can every-visit MC add for that state?", [
+    "One, because an episode supplies one state sample",
+    "Two, because the final occurrence is terminal",
+    "Four, including the return before the episode starts",
+    "Three, one return following each occurrence",
+  ], 3, "Every-visit MC treats the return after each of the three occurrences as a sample."),
+  direct("rle_06_04", "easy", "Episode updates", "At time t the final reward has not yet occurred. What prevents a standard Monte Carlo update at that moment?", [
+    "The behavior policy has not been made greedy yet",
+    "The complete return from time t is still unknown",
+    "The transition probabilities have not been enumerated",
+    "The next-state value has not converged yet",
+  ], 1, "Standard MC needs the complete sampled return, which is only known after the remaining rewards arrive."),
+  direct("rle_06_05", "easy", "Model-free learning", "A simulator can generate full episodes but will not reveal transition probabilities. Which evaluation method still applies directly?", [
+    "Policy evaluation by exact Bellman sweeps",
+    "Value iteration over a fully known transition matrix",
+    "Monte Carlo evaluation from sampled returns",
+    "Backward induction over a known game tree",
+  ], 2, "MC evaluation needs sampled episodes and rewards, not an explicit transition model."),
+  direct("rle_06_06", "easy", "Action values", "Why does MC control estimate q(s,a) rather than only v(s) when no environment model is available?", [
+    "q(s,a) makes a sampled return deterministic once its first action is fixed",
+    "q(s,a) removes the need to visit each action",
+    "q(s,a) can be computed before any episode ends",
+    "q(s,a) compares actions without one-step lookahead through a model",
+  ], 3, "Without a model, state values alone do not reveal the consequences of each action; action values do."),
+  direct("rle_06_07", "medium", "Incremental mean", "After five visits, an estimate is 8. The sixth observed return is 2. Using the sample-average update, what is the new estimate?", [
+    "7, because 8 + (1/6)(2 - 8) = 7",
+    "5, because the old estimate and new return are averaged",
+    "6, because the return is divided by the visit count",
+    "7.2, because the step size remains one fifth",
+  ], 0, "With six total samples, the step size is 1/6, so the update is 8 - 1 = 7."),
+  direct("rle_06_08", "medium", "Exploring starts", "A card-game simulator can reset to any legal hand and force the opening action. Which MC assumption can this implement?", [
+    "A one-step bootstrap from every successor hand",
+    "Exploring starts over state-action pairs",
+    "A deterministic policy after the first episode",
+    "An exact expectation over all card draws",
+  ], 1, "Resetting to arbitrary state-action pairs implements exploring starts and gives each pair a chance to be sampled."),
+  direct("rle_06_09", "medium", "Coverage", "An MC agent always chooses action Left in state S. What is the immediate learning problem?", [
+    "Returns from Left become bootstrapped estimates",
+    "The value of S cannot be estimated at all",
+    "Right becomes optimal merely because it is untried",
+    "There are no return samples for q(S, Right)",
+  ], 3, "MC cannot compare an action for which the behavior policy supplies no returns."),
+  direct("rle_06_10", "medium", "Epsilon-soft policy", "There are four actions and an epsilon-greedy policy uses epsilon = 0.2. What probability does each non-greedy action receive?", [
+    "0.20, because epsilon is assigned to every action",
+    "0.80, because greedy probability is shared equally",
+    "0.05, from the random 0.2 split across four actions",
+    "0.25, because epsilon-greedy is uniform over actions",
+  ], 2, "The random component chooses uniformly among four actions, giving each action 0.2/4 = 0.05 from that component."),
+  direct("rle_06_11", "medium", "Policy improvement", "After estimating q(S,a), action B has the largest value. What is the policy-improvement step in MC with exploring starts?", [
+    "Make B greedy in S for the next policy",
+    "Delete samples collected under the previous policy",
+    "Replace q(S,B) with the immediate reward",
+    "Average B with the least-visited action",
+  ], 0, "MC ES alternates return-based action-value estimation with greedy improvement."),
+  direct("rle_06_12", "medium", "On-policy control", "In on-policy epsilon-soft MC control, which policy generates episodes and is also improved?", [
+    "A separate uniformly random behavior policy",
+    "An unknown optimal policy used only for scoring",
+    "A greedy target policy that never explores",
+    "The same epsilon-soft policy being evaluated",
+  ], 3, "On-policy control learns about the policy that generates its experience while gradually improving that policy."),
+  direct("rle_06_13", "medium", "Variance", "Two episodes pass through S but then follow very different random paths. What feature of MC is exposed by their very different targets?", [
+    "High variance from using whole sampled returns",
+    "Bias caused by bootstrapping from a learned successor-state estimate",
+    "Dependence on a known transition matrix",
+    "Failure to include rewards after leaving S",
+  ], 0, "Whole returns include all downstream randomness, so MC targets can vary substantially."),
+  direct("rle_06_14", "medium", "Discounting", "Keeping an episode fixed, gamma is reduced from 1 to 0.4. Which change should you expect in an early-state MC return?", [
+    "Terminal rewards receive more weight than before",
+    "The return becomes a one-step bootstrap target",
+    "Distant rewards contribute less to the return",
+    "The visit changes from first-visit to every-visit",
+  ], 2, "A smaller discount factor reduces the contribution of rewards far after the state visit."),
+  direct("rle_06_15", "hard", "First vs every visit", "In a continuing loop converted into short episodes, one state repeats frequently near each cutoff. Which choice most changes how that episode is weighted?", [
+    "Replacing q values with a complete transition and reward model",
+    "Choosing first-visit rather than every-visit MC",
+    "Making the reward function deterministic",
+    "Computing returns backward instead of forward",
+  ], 1, "Every-visit contributes several correlated samples from that episode; first-visit contributes only one for the state."),
+  direct("rle_06_16", "hard", "Truncation", "A rollout is stopped after 100 steps even though the task has not terminated. Treating the cutoff as terminal causes what problem for plain MC?", [
+    "It silently adds an exploring start at step 100",
+    "It turns all earlier updates into expected backups",
+    "It gives later actions a probability of exactly zero",
+    "It omits rewards that could occur beyond the cutoff",
+  ], 3, "A truncated rollout does not contain the natural complete return, so future reward beyond the cutoff is lost unless handled separately."),
+  direct("rle_06_17", "hard", "Nonstationarity", "Why can averaging every historical return equally be slow after the environment changes?", [
+    "MC then starts using learned successor-state estimates as update labels",
+    "Old returns retain substantial influence on the estimate",
+    "Recent episodes are counted more than once",
+    "The discount factor increases after each visit",
+  ], 1, "The ordinary sample average forgets old experience slowly; a constant step size can track changes more responsively."),
+  direct("rle_06_18", "hard", "Episode-level credit", "Only the final move earns reward, but an earlier state-action pair consistently appears in successful episodes. How does MC assign it credit?", [
+    "By backing up the estimated value of the next state",
+    "By assigning it only the immediate reward observed on its own time step",
+    "By using the final reward as part of its later return",
+    "By querying the model for its causal contribution",
+  ], 2, "The return following the earlier pair includes the delayed final reward, allowing episode-level credit assignment."),
+  direct("rle_06_19", "hard", "Sample versus expectation", "DP and MC evaluate the same fixed policy. For one state, what distinguishes their backup targets?", [
+    "DP uses a model-based expectation; MC uses a sampled return",
+    "DP uses only terminal rewards; MC uses only immediate rewards",
+    "DP is model-free; MC enumerates successor probabilities",
+    "DP requires exploration; MC requires none for evaluation",
+  ], 0, "DP computes an expectation from the model, whereas MC observes complete returns from sampled trajectories."),
+  direct("rle_06_20", "hard", "Control convergence", "Why must exploration persist while an on-policy MC controller becomes increasingly greedy?", [
+    "To keep the behavior policy identical to the final greedy target policy",
+    "To keep relevant state-action pairs sampled during improvement",
+    "To replace sampled returns with Bellman targets",
+    "To force all action values to become equal",
+  ], 1, "Greediness drives improvement, but continued coverage is needed so competing actions remain estimable."),
+];
+
 const moreTopics = {
   rl06: ["Monte Carlo Methods","returns from complete episodes","first-visit versus every-visit estimates","no bootstrapping","episode termination","exploring starts","on-policy MC control","epsilon-soft policies","high variance returns","sample averages","model-free evaluation","delayed updates","ordinary returns","policy improvement","coverage of state-action pairs","prediction versus control","stochastic episodes","full-return targets","GLIE intuition","MC limitations","episode-level credit assignment"],
   rl07: ["Temporal-Difference Control","TD target","bootstrapping","SARSA update","Q-learning update","Expected SARSA","on-policy learning","off-policy learning","TD error","one-step updates","bias-variance tradeoff","epsilon-greedy behavior","learning during episodes","max backup","policy being evaluated","control from q-values","sample efficiency","terminal transition handling","step-size effects","TD versus MC","online value propagation"],
@@ -173,6 +299,7 @@ const moreTopics = {
 };
 
 for (const [key, [label, ...concepts]] of Object.entries(moreTopics)) {
+  if (data[key]) continue;
   data[key] = concepts.map((concept, i) => {
     const n = String(i + 1).padStart(2, "0");
     const difficulty = i < 6 ? "easy" : i < 14 ? "medium" : "hard";
