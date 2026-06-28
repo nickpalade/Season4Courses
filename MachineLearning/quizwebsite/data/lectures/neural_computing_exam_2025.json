@@ -1,0 +1,146 @@
+[
+  {
+    "id": "nc-exam-2025-q1",
+    "type": "multi",
+    "topic": "Biological and artificial neurons",
+    "prompt": "In the McCulloch-Pitts model of an artificial neuron, how is the neuron's output determined?",
+    "options": [
+      "By integrating over time and applying a sigmoid function.",
+      "By summing weighted inputs and comparing to a threshold.",
+      "By calculating average spike rate over all inputs.",
+      "By maximizing input entropy across all synapses."
+    ],
+    "correct": [1],
+    "explanation": "Correct answer from Exam2025_solutions_Brightspace: B."
+  },
+  {
+    "id": "nc-exam-2025-q2",
+    "type": "multi",
+    "topic": "Hopfield networks",
+    "prompt": "Which of the following are true about Hamming distance and its role in Hopfield Networks?",
+    "options": [
+      "The Hamming distance counts the number of differing bits between two binary vectors.",
+      "Hopfield Networks always converge to the stored pattern with the maximum Hamming distance.",
+      "The network retrieves the pattern with the smallest Hamming distance to the test input.",
+      "Hamming distance can be used to measure similarity between a test input and stored patterns."
+    ],
+    "correct": [0, 2, 3],
+    "explanation": "Correct answers from Exam2025_solutions_Brightspace: A, C, and D."
+  },
+  {
+    "id": "nc-exam-2025-q3",
+    "type": "multi",
+    "topic": "Hopfield networks",
+    "prompt": "What conditions must a stored pattern satisfy?",
+    "options": [
+      "The update rule applied to each unit must leave the pattern unchanged.",
+      "The Hamming distance to all other patterns must be zero.",
+      "The sign of the weighted sum of inputs to each neuron must match its state.",
+      "The pattern must be orthogonal to all others in the network."
+    ],
+    "correct": [0, 2],
+    "explanation": "Correct answers from Exam2025_solutions_Brightspace: A and C."
+  },
+  {
+    "id": "nc-exam-2025-q4",
+    "type": "multi",
+    "topic": "Perceptrons",
+    "prompt": "What does the margin represent in the perceptron learning rule?",
+    "options": [
+      "The maximum distance between any two misclassified points.",
+      "The distance between the separating hyperplane and the closest correctly classified point.",
+      "The number of updates until convergence.",
+      "The angle between the target vector and the current weight vector."
+    ],
+    "correct": [1],
+    "explanation": "Correct answer from Exam2025_solutions_Brightspace: B."
+  },
+  {
+    "id": "nc-exam-2025-q5",
+    "type": "multi",
+    "topic": "Deep learning",
+    "prompt": "In what scenario is a deep learning model generally preferred over a traditional machine learning model?",
+    "options": [
+      "You are building a credit risk model using structured tabular data like income, credit history, and age, with around 2000 samples and a need for model interpretability.",
+      "You are tasked with classifying medical X-ray images into diagnostic categories. You have access to tens of thousands of labeled images, but no handcrafted features are available.",
+      "You are designing a tool to analyze time-series sensor data from wearable devices (e.g., heart rate, motion, temperature) to detect abnormal health events. The dataset consists of millions of continuous readings.",
+      "You are developing a churn prediction model for a telecom provider using billing data, contract length, and customer service history from about 5000 customers."
+    ],
+    "correct": [1, 2],
+    "explanation": "Correct answers from Exam2025_solutions_Brightspace: B and C."
+  },
+  {
+    "id": "nc-exam-2025-q6",
+    "type": "multi",
+    "topic": "Backpropagation",
+    "prompt": "Consider these training strategies in the backpropagation algorithm applied to a neural network on a dataset with 10,000 samples: Strategy 1 updates once after computing gradients on all samples; Strategy 2 updates 10,000 times per epoch using one sample at each step; Strategy 3 splits the dataset into groups of 64 samples and updates after each group. Which statements are correct?",
+    "options": [
+      "Strategy 1 performs only one parameter update per epoch.",
+      "Strategy 2 ensures maximum stability of gradient estimates.",
+      "Strategy 3 is commonly used because it provides a good trade-off between efficiency and convergence speed.",
+      "Strategy 1 is typically referred to as stochastic gradient descent."
+    ],
+    "correct": [0, 2],
+    "explanation": "Correct answers from Exam2025_solutions_Brightspace: A and C."
+  },
+  {
+    "id": "nc-exam-2025-q7",
+    "type": "multi",
+    "topic": "Convolution output size",
+    "prompt": "In a convolutional neural network (CNN) with kernel size (Hk, Wk), input image size (Hin, Win), and padding size (Hp, Wp), how is the output image size computed?",
+    "options": [
+      "(Hin - Hk - Hp + 1, Win - Wk - Wp + 1)",
+      "(Hin - Hk + Hp - 1, Win - Wk + Wp - 1)",
+      "(Hin - Hk + Hp, Win - Wk + Wp)",
+      "(Hin - Hk + Hp + 1, Win - Wk + Wp + 1)"
+    ],
+    "correct": [3],
+    "explanation": "Correct answer from Exam2025_solutions_Brightspace: D."
+  },
+  {
+    "id": "nc-exam-2025-q8",
+    "type": "multi",
+    "topic": "Convolutional neural networks",
+    "prompt": "Which of the following statements are true about CNNs?",
+    "options": [
+      "CNNs are preferred over multi-layer perceptron for image recognition tasks because they preserve spatial information.",
+      "Kernels in CNN models are also weights which will be learned via back-propagation process.",
+      "A multi-layer perceptron is not used in CNNs because they would involve learning too many kernel parameters and do not preserve spatial information.",
+      "Convolution on a RGB image implies the usage of multiple channels, sharing the same 2D learned filter."
+    ],
+    "correct": [0, 1],
+    "explanation": "Correct answers from Exam2025_solutions_Brightspace: A and B."
+  },
+  {
+    "id": "nc-exam-2025-q9",
+    "type": "multi",
+    "topic": "LSTM networks",
+    "prompt": "At time step t, the LSTM cell processes the inputs x_t and h_{t-1}. What is the function of the forget gate in this step?",
+    "image": {
+      "src": "/question-assets/neural-computing/exam-2025-q9-lstm.png",
+      "alt": "LSTM cell diagram with the forget gate highlighted."
+    },
+    "options": [
+      "It decides how much of the previous hidden state h_{t-1} should be passed to the output.",
+      "It determines how much of the previous cell state should be kept.",
+      "It resets the hidden state h_t to zero for the next time step.",
+      "It multiplies C_{t-1} elementwise with a sigmoid gate output to control memory flow."
+    ],
+    "correct": [1, 3],
+    "explanation": "Correct answers from Exam2025_solutions_Brightspace: B and D."
+  },
+  {
+    "id": "nc-exam-2025-q10",
+    "type": "multi",
+    "topic": "Autoencoders",
+    "prompt": "Which of the following statements are correct about autoencoders?",
+    "options": [
+      "The decoder is used to obtain a latent low-dimensional representation of the data.",
+      "Unlike standard convolution, transposed convolution spreads each input pixel value over a larger area by reversing the process. It can be visualized as inserting zeros between elements in the input and then applying the standard convolution.",
+      "The latent space can be used to sample and generate new data.",
+      "Autoencoders are composed by two subnetworks: a generator and a discriminator."
+    ],
+    "correct": [1, 2],
+    "explanation": "Correct answers from Exam2025_solutions_Brightspace: B and C."
+  }
+]

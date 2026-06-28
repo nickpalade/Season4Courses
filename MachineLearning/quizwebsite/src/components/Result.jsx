@@ -11,12 +11,45 @@ function ScoreTag({ score }) {
   return <span className={`score-tag ${cls}`}>{label}</span>;
 }
 
+function QuestionFigure({ image }) {
+  if (!image?.src) return null;
+  return (
+    <figure className="question-figure review-figure">
+      <img src={image.src} alt={image.alt || "Question figure"} />
+    </figure>
+  );
+}
+
 // Renders one question's full breakdown: your pick, the correct answer, why.
 function ReviewItem({ q, n, answer }) {
   const a = answer || {};
   const score = a.score ?? 0;
   const selected = a.selected || [];
   const correctSet = new Set(q.correct || []);
+
+  if (q.ungraded) {
+    return (
+      <div className="review-item">
+        <div className="review-head">
+          <span className="review-num">{n}</span>
+          <span className="review-topic">{q.topic}</span>
+          <span className="score-tag">Unscored</span>
+        </div>
+        <div className="review-prompt">{q.prompt}</div>
+        <QuestionFigure image={q.image} />
+        <ul className="review-opts">
+          {q.options.map((opt, i) => (
+            <li key={i} className="review-opt">
+              <span className="review-mark">{letter(i)}</span>
+              <span>{opt}</span>
+              {selected.includes(i) && <span className="review-yours">your pick</span>}
+            </li>
+          ))}
+        </ul>
+        <div className="review-why">No verified answer key is available for this question.</div>
+      </div>
+    );
+  }
 
   return (
     <div className={`review-item ${score === 1 ? "ok" : score > 0 ? "part" : "miss"}`}>
@@ -26,6 +59,7 @@ function ReviewItem({ q, n, answer }) {
         <ScoreTag score={score} />
       </div>
       <div className="review-prompt">{q.prompt}</div>
+      <QuestionFigure image={q.image} />
 
       {q.type === "open" ? (
         <div className="review-open">
@@ -66,17 +100,20 @@ function ReviewItem({ q, n, answer }) {
 
 export default function Result({ answers, pool, mode, onRetryMissed, onHome, onLibrary }) {
   const [missedOnly, setMissedOnly] = useState(false);
-  const total = pool.length;
-  const raw = pool.reduce((s, q) => s + (answers[q.id]?.score || 0), 0);
+  const gradedPool = pool.filter((q) => !q.ungraded);
+  const total = gradedPool.length;
+  const raw = gradedPool.reduce((s, q) => s + (answers[q.id]?.score || 0), 0);
   const pct = total ? (raw / total) * 100 : 0;
-  const missedQs = pool.filter((q) => (answers[q.id]?.score || 0) < 1);
+  const missedQs = gradedPool.filter((q) => (answers[q.id]?.score || 0) < 1);
   const missed = missedQs.length;
 
   const byTopic = {};
   pool.forEach((q) => {
     if (!byTopic[q.topic]) byTopic[q.topic] = { score: 0, total: 0 };
-    byTopic[q.topic].total++;
-    byTopic[q.topic].score += answers[q.id]?.score || 0;
+    if (!q.ungraded) {
+      byTopic[q.topic].total++;
+      byTopic[q.topic].score += answers[q.id]?.score || 0;
+    }
   });
 
   const shown = missedOnly ? missedQs : pool;
@@ -85,8 +122,11 @@ export default function Result({ answers, pool, mode, onRetryMissed, onHome, onL
     <section className="result-panel">
       <h2>Result</h2>
       <div className="score-summary">
-        <div className="big">{raw.toFixed(1)} / {total}</div>
-        <div className="muted">{pct.toFixed(0)}% · mode: {mode} · {missed} to review</div>
+        <div className="big">{total ? `${raw.toFixed(1)} / ${total}` : "Answer log"}</div>
+        <div className="muted">
+          {total ? `${pct.toFixed(0)}% · ${missed} to review` : "No verified answer key — responses are not scored"}
+          {` · mode: ${mode}`}
+        </div>
       </div>
 
       <h3>By topic</h3>
@@ -94,7 +134,7 @@ export default function Result({ answers, pool, mode, onRetryMissed, onHome, onL
         {Object.entries(byTopic).map(([t, s]) => (
           <div key={t} className="row-item topic-score">
             <span>{t}</span>
-            <strong>{s.score.toFixed(1)} / {s.total}</strong>
+            <strong>{s.total ? `${s.score.toFixed(1)} / ${s.total}` : "Unscored"}</strong>
           </div>
         ))}
       </div>

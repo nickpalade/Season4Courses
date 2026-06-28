@@ -1,0 +1,142 @@
+[
+  {
+    "id": "nc-retake-2024-q1",
+    "type": "multi",
+    "topic": "Biological and artificial neurons",
+    "prompt": "Regarding the biological neuron and the McCulloch-Pitts model, which of the following descriptions are correct?",
+    "options": [
+      "Dendrites of a biological neuron receive incoming signals, similar to the input nodes in the McCulloch-Pitts model.",
+      "The axon of a biological neuron transmits signals to other neurons, which is analogous to the bias term in the McCulloch-Pitts model.",
+      "Synaptic strength of the biological neuron is represented by the weights in the McCulloch-Pitts model.",
+      "Spikes, or action potentials, in a biological neuron are analogous to the output of the step function in the McCulloch-Pitts model."
+    ],
+    "correct": [0, 2, 3],
+    "explanation": "Correct answers from Retake2024_solutions: A, C, and D."
+  },
+  {
+    "id": "nc-retake-2024-q2",
+    "type": "multi",
+    "topic": "Hopfield networks",
+    "prompt": "What statements are true about the stability condition for the Hopfield Network?",
+    "options": [
+      "A pattern is an attractor of the network if the weight on the edges are inversely proportional to the product of the node states.",
+      "The condition for a stored pattern to be stable is that the node state of the evolving pattern is equal the node state of the stored pattern, for each node.",
+      "Stability is obtained if wij = (1/N) * xi_i * xi_j.",
+      "Being a stable pattern and being an attractor for a network cannot be coexisting conditions."
+    ],
+    "correct": [1, 2],
+    "explanation": "Correct answers from Retake2024_solutions: B and C."
+  },
+  {
+    "id": "nc-retake-2024-q3",
+    "type": "multi",
+    "topic": "Hebbian learning",
+    "prompt": "Which of the following statements is true about Hebbian learning?",
+    "options": [
+      "Hebb's rule says that the weight between two neurons should be decreased if they are activated simultaneously.",
+      "The learning rate in Hebbian learning is usually larger than one.",
+      "The Hebbian learning process will always stabilize after passing the training set several times.",
+      "None of the above."
+    ],
+    "correct": [3],
+    "explanation": "Correct answer from Retake2024_solutions: D."
+  },
+  {
+    "id": "nc-retake-2024-q4",
+    "type": "multi",
+    "topic": "Multi-layer perceptrons",
+    "prompt": "Which of the following statements are true about multi-layer perceptron (MLP)?",
+    "options": [
+      "MLPs consist of an input layer, one or more hidden layers, and an output layer.",
+      "Each neuron in an MLP applies a linear activation function to its inputs.",
+      "MLPs are capable of approximating any continuous function given sufficient neurons and layers.",
+      "MLPs are inherently able to handle sequential data without modification."
+    ],
+    "correct": [0, 2],
+    "explanation": "Correct answers from Retake2024_solutions: A and C."
+  },
+  {
+    "id": "nc-retake-2024-q5",
+    "type": "multi",
+    "topic": "Backpropagation",
+    "prompt": "Which of the following statements are true regarding the backpropagation algorithm?",
+    "options": [
+      "Back-propagation updates weights by minimizing the output values directly.",
+      "Back-propagation requires labeled data to compute the loss function.",
+      "The back-propagation algorithm operates only on feedforward neural networks.",
+      "Back-propagation can be used without computing gradients."
+    ],
+    "correct": [1],
+    "explanation": "Correct answer from Retake2024_solutions: B."
+  },
+  {
+    "id": "nc-retake-2024-q6",
+    "type": "multi",
+    "topic": "LSTM networks",
+    "prompt": "Which of the following statements are true regarding the long short-term memory networks?",
+    "options": [
+      "Use an extended version of the back-propagation algorithm for training.",
+      "Use the ReLU activation function.",
+      "The functionality of the cell state is to allow vanishing gradients.",
+      "LSTMs leverage gating mechanisms (input gate, forget gate, output gate) to control the flow of information and gradients."
+    ],
+    "correct": [0, 3],
+    "explanation": "Correct answers from Retake2024_solutions: A and D."
+  },
+  {
+    "id": "nc-retake-2024-q7",
+    "type": "multi",
+    "topic": "Recurrent neural networks",
+    "prompt": "Which of the following statements are true regarding RNNs?",
+    "options": [
+      "RNNs are capable of memorizing data.",
+      "RNNs do not contain cycles in the network.",
+      "The output of a RNN is a constant given a constant input.",
+      "Hidden states summarize all inputs a RNN receives in the history."
+    ],
+    "correct": [0, 3],
+    "explanation": "Correct answers from Retake2024_solutions: A and D."
+  },
+  {
+    "id": "nc-retake-2024-q8",
+    "type": "multi",
+    "topic": "Convolution",
+    "prompt": "Which of the following tasks would be more suitable to use convolution operation?",
+    "options": [
+      "Forecast the probability of raining, provide a weather history.",
+      "Classify images containing dogs from cats.",
+      "Solving the XOR problem.",
+      "Generate text from images (figure captioning)."
+    ],
+    "correct": [1],
+    "explanation": "Correct answer from Retake2024_solutions: B."
+  },
+  {
+    "id": "nc-retake-2024-q9",
+    "type": "multi",
+    "topic": "Image data",
+    "prompt": "Which of the following statements are true about the image data?",
+    "options": [
+      "Image data are usually represented by tensors/matrix.",
+      "Colored image input also contains three (RGB) channels.",
+      "Flattening the image incurs no information loss.",
+      "Performing pooling operation on images incurs information loss."
+    ],
+    "correct": [0, 1, 3],
+    "explanation": "Correct answers from Retake2024_solutions: A, B, and D."
+  },
+  {
+    "id": "nc-retake-2024-q10",
+    "type": "multi",
+    "topic": "Convolution output size",
+    "prompt": "Please calculate the size of the output image (assuming the stride is two) for a given input image and kernel size. Case (1): input size 8x8, kernel size 4x4; Case (2): input size 15x15, kernel size 5x5.",
+    "options": [
+      "For case 1, if no padding, the size of the output matrix is 3x3.",
+      "For case 2, if no padding, the size of the output volume is 6x6.",
+      "For case 1, if the padding size is (1, 1), the size of the output volume is 4x4.",
+      "For case 2, if the padding size is (2, 2), the size of the output volume is 7x7."
+    ],
+    "correct": [0, 1, 2],
+    "explanation": "Correct answers from Retake2024_solutions: A, B, and C."
+  }
+]

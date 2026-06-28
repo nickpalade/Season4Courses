@@ -1,0 +1,150 @@
+[
+  {
+    "id": "nc-retake-2025-q1",
+    "type": "multi",
+    "topic": "Biological and artificial neurons",
+    "prompt": "In the McCulloch-Pitts model, what do synaptic weights represent?",
+    "options": [
+      "Strength of the connection between two neurons.",
+      "The direction of ion flow.",
+      "Whether an input is excitatory or inhibitory.",
+      "A parameter determining the impact of an input on the neuron's output."
+    ],
+    "correct": [0, 2, 3],
+    "explanation": "Correct answers from Retake2025_Neural_Computing_solutions: A, C, and D."
+  },
+  {
+    "id": "nc-retake-2025-q2",
+    "type": "multi",
+    "topic": "Hopfield networks",
+    "prompt": "Which of the following statements about Hopfield Networks as associative memory systems are correct?",
+    "options": [
+      "Stored patterns act as attractors in the network's state space.",
+      "They require supervised learning with labelled data.",
+      "They can handle incomplete or noisy input patterns.",
+      "They retrieve stored patterns based on similarity to input patterns."
+    ],
+    "correct": [0, 2, 3],
+    "explanation": "Correct answers from Retake2025_Neural_Computing_solutions: A, C, and D."
+  },
+  {
+    "id": "nc-retake-2025-q3",
+    "type": "multi",
+    "topic": "Hebbian learning",
+    "prompt": "Which of the following statements is wrong about Hebbian Learning?",
+    "options": [
+      "Hebbian learning guarantees that all stored patterns in a Hopfield network can be perfectly retrieved without error, regardless of the number of patterns.",
+      "Hebbian learning can be summarized by the phrase \"neurons that fire together, wire together.\"",
+      "Hebbian Learning provides a simple way to set the weights so that the desired patterns become energy minima (attractors) of the network dynamics.",
+      "Hebbian learning strengthens the connection between two neurons that are active at the same time."
+    ],
+    "correct": [0],
+    "explanation": "Correct answer from Retake2025_Neural_Computing_solutions: A."
+  },
+  {
+    "id": "nc-retake-2025-q4",
+    "type": "multi",
+    "topic": "Perceptrons",
+    "prompt": "What does the figure in the source PDF illustrate?",
+    "image": {
+      "src": "/question-assets/neural-computing/retake-2025-q4-perceptron.png",
+      "alt": "Three perceptron classification diagrams showing samples, a decision boundary, and weight updates."
+    },
+    "options": [
+      "The computation of the margin of the decision boundary in linear binary classification through the perceptron learning algorithm.",
+      "The Hopfield network convergence dynamics towards attractors.",
+      "A supervised learning task.",
+      "The adjustment of the decision boundary after each update step."
+    ],
+    "correct": [2, 3],
+    "explanation": "Correct answers from Retake2025_Neural_Computing_solutions: C and D. The source PDF includes a figure for this question."
+  },
+  {
+    "id": "nc-retake-2025-q5",
+    "type": "multi",
+    "topic": "Deep learning",
+    "prompt": "In what scenario is a deep learning model generally preferred over a traditional machine learning model?",
+    "options": [
+      "You are predicting housing prices using structured data including number of rooms, location, and area size, with 3000 training samples.",
+      "You are building a speech recognition system to transcribe recorded conversations into text, with thousands of hours of audio data available but no manually extracted features.",
+      "You are building a sentiment analysis model to determine whether customer reviews are positive or negative. Your dataset consists of 1500 text reviews, each already converted into simple bag-of-words numerical representations.",
+      "You are designing an autonomous driving system that interprets real-time video feeds from multiple cameras to detect pedestrians and other vehicles, using a dataset of millions of labeled images and videos."
+    ],
+    "correct": [1, 3],
+    "explanation": "Correct answers from Retake2025_Neural_Computing_solutions: B and D."
+  },
+  {
+    "id": "nc-retake-2025-q6",
+    "type": "multi",
+    "topic": "Pooling",
+    "prompt": "Given the following 4 x 4 feature map, if you apply average pooling with a 2 x 2 filter and stride 2, what are the values of the pooled output?",
+    "image": {
+      "src": "/question-assets/neural-computing/retake-2025-q6-feature-map.png",
+      "alt": "4 by 4 feature map with rows 1 2 3 0, 4 5 6 1, 7 8 9 2, and 0 1 2 3."
+    },
+    "options": [
+      "[5, 6, 8, 9]",
+      "[3, 2.5, 4, 4]",
+      "[4, 3, 7, 3]",
+      "None of the above."
+    ],
+    "correct": [1],
+    "explanation": "Correct answer from Retake2025_Neural_Computing_solutions: B. The source PDF includes a figure for the input feature map."
+  },
+  {
+    "id": "nc-retake-2025-q7",
+    "type": "multi",
+    "topic": "Recurrent neural networks",
+    "prompt": "In an RNN, if the tanh activation function were replaced with ReLU, what is a possible consequence?",
+    "options": [
+      "The hidden states will remain bounded between -1 and 1.",
+      "The vanishing gradient problem would worsen.",
+      "The network may suffer from exploding activations due to unbounded ReLU outputs.",
+      "The output will become a probability between 0 and 1."
+    ],
+    "correct": [2],
+    "explanation": "Correct answer from Retake2025_Neural_Computing_solutions: C."
+  },
+  {
+    "id": "nc-retake-2025-q8",
+    "type": "multi",
+    "topic": "Backpropagation through time",
+    "prompt": "Which of the following statements about Backpropagation Through Time (BPTT) are correct?",
+    "options": [
+      "During BPTT, the unfolded RNN is treated similarly to a multi-layer neural network.",
+      "BPTT involves unfolding the RNN in time during the forward pass.",
+      "BPTT treats the unfolded RNN as a convolutional neural network for training.",
+      "Weight updates are calculated for each time step and then combined."
+    ],
+    "correct": [0, 1, 3],
+    "explanation": "Correct answers from Retake2025_Neural_Computing_solutions: A, B, and D."
+  },
+  {
+    "id": "nc-retake-2025-q9",
+    "type": "multi",
+    "topic": "Vanishing gradients",
+    "prompt": "What is the vanishing gradient problem caused by in RNNs?",
+    "options": [
+      "By the multiplicative nature of the backpropagation algorithm through time.",
+      "By large enough singular values of the weight matrix.",
+      "By the forget gate in the case of LSTMs.",
+      "The use of activation functions with derivatives less than 1."
+    ],
+    "correct": [0, 3],
+    "explanation": "Correct answers from Retake2025_Neural_Computing_solutions: A and D."
+  },
+  {
+    "id": "nc-retake-2025-q10",
+    "type": "multi",
+    "topic": "Universal approximation",
+    "prompt": "What does the Universal Approximation Theorem state?",
+    "options": [
+      "Suppose we have a function f(x) that we would like to compute within some desired accuracy epsilon > 0. It is guaranteed that by using enough hidden layers we can always find a neural network whose output g(x) satisfies |g(x) - f(x)| < epsilon for all inputs x.",
+      "Any continuous function f: [0,1]^n -> [0,1] can be approximated with arbitrary precision by a neural network with at least 1 hidden layer with a finite number of weights.",
+      "Suppose we have a function f(x) that we would like to compute within some desired accuracy epsilon > 0. It is guaranteed that by using enough hidden neurons we can always find a neural network whose output g(x) satisfies |g(x) - f(x)| < epsilon for all inputs x.",
+      "None of the above."
+    ],
+    "correct": [1, 2],
+    "explanation": "Correct answers from Retake2025_Neural_Computing_solutions: B and C."
+  }
+]

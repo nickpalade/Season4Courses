@@ -13,6 +13,7 @@ import l11 from "../data/lectures/11_xai_lime.json";
 import cogsci from "../data/lectures/cogsci_intro.json";
 import cogsci2 from "../data/lectures/cogsci_test2.json";
 import rlPast from "../data/lectures/rl_past.json";
+import rlExpanded from "../data/lectures/rl_expanded_practice.js";
 import rl01 from "../data/lectures/rl_01_foundations.json";
 import rl02 from "../data/lectures/rl_02_bandits.json";
 import rl03 from "../data/lectures/rl_03_mdp.json";
@@ -25,8 +26,48 @@ import rl09 from "../data/lectures/rl_09_psych_neuro.json";
 import rl10 from "../data/lectures/rl_10_model_based.json";
 import rl11 from "../data/lectures/rl_11_search_planning.json";
 import rl12 from "../data/lectures/rl_12_policy_approx.json";
+import neuralExam2024 from "../data/lectures/neural_computing_exam_2024.json";
+import neuralRetake2024 from "../data/lectures/neural_computing_retake_2024.json";
+import neuralExam2025 from "../data/lectures/neural_computing_exam_2025.json";
+import neuralRetake2025 from "../data/lectures/neural_computing_retake_2025.json";
+import neuralExam from "../data/lectures/neural_computing_exam_2026.json";
 
 export const QUIZZES = [
+  {
+    id: "neural_exam_2025",
+    title: "Neural Computing — Exam 2025 MCQs",
+    subtitle: "Ten multiple-choice questions with verified answers from Exam2025_solutions_Brightspace.",
+    group: "Neural Computing",
+    questions: neuralExam2025,
+  },
+  {
+    id: "neural_retake_2025",
+    title: "Neural Computing — Retake 2025 MCQs",
+    subtitle: "Ten multiple-choice questions with verified answers from Retake2025_Neural_Computing_solutions.",
+    group: "Neural Computing",
+    questions: neuralRetake2025,
+  },
+  {
+    id: "neural_exam_2024",
+    title: "Neural Computing — Exam 2024 MCQs",
+    subtitle: "Ten multiple-choice questions with verified answers from Exam2024_solutions.",
+    group: "Neural Computing",
+    questions: neuralExam2024,
+  },
+  {
+    id: "neural_retake_2024",
+    title: "Neural Computing — Retake 2024 MCQs",
+    subtitle: "Ten multiple-choice questions with verified answers from Retake2024_solutions.",
+    group: "Neural Computing",
+    questions: neuralRetake2024,
+  },
+  {
+    id: "neural_exam_2026",
+    title: "Neural Computing — Exam 2026 MCQs",
+    subtitle: "Ten multiple-choice questions from 2634fd.pdf. No answer key has been inferred.",
+    group: "Neural Computing",
+    questions: neuralExam,
+  },
   {
     id: "past",
     title: "Past Paper",
@@ -215,6 +256,90 @@ export const QUIZZES = [
     subtitle: "Policy gradients, actor-critic, SGD, function approximation, AlphaGo.",
     group: "Reinforcement Learning",
     questions: rl12,
+  },
+  {
+    id: "rle01",
+    title: "Expanded RL Practice 1 - Foundations",
+    subtitle: "20 extra questions on RL feedback, objectives, exploration, credit assignment, and AlphaGo.",
+    group: "RL Expanded Practice",
+    questions: rlExpanded.rl01,
+  },
+  {
+    id: "rle02",
+    title: "Expanded RL Practice 2 - Multi-armed Bandits",
+    subtitle: "20 extra questions on exploration, UCB, epsilon-greedy, optimism, regret, and stationarity.",
+    group: "RL Expanded Practice",
+    questions: rlExpanded.rl02,
+  },
+  {
+    id: "rle03",
+    title: "Expanded RL Practice 3 - Markov Decision Processes",
+    subtitle: "20 extra questions on MDP components, Markov state, return, discounting, and policies.",
+    group: "RL Expanded Practice",
+    questions: rlExpanded.rl03,
+  },
+  {
+    id: "rle04",
+    title: "Expanded RL Practice 4 - Value Functions & Optimality",
+    subtitle: "20 extra questions on v, q, Bellman equations, optimality, backups, and approximation.",
+    group: "RL Expanded Practice",
+    questions: rlExpanded.rl04,
+  },
+  {
+    id: "rle05",
+    title: "Expanded RL Practice 5 - Dynamic Programming",
+    subtitle: "20 extra questions on policy iteration, value iteration, expected backups, and DP limits.",
+    group: "RL Expanded Practice",
+    questions: rlExpanded.rl05,
+  },
+  {
+    id: "rle06",
+    title: "Expanded RL Practice 6 - Monte Carlo Methods",
+    subtitle: "20 extra questions on episode returns, first-visit estimates, MC control, and variance.",
+    group: "RL Expanded Practice",
+    questions: rlExpanded.rl06,
+  },
+  {
+    id: "rle07",
+    title: "Expanded RL Practice 7 - Temporal-Difference Control",
+    subtitle: "20 extra questions on SARSA, Q-learning, Expected SARSA, TD error, and bootstrapping.",
+    group: "RL Expanded Practice",
+    questions: rlExpanded.rl07,
+  },
+  {
+    id: "rle08",
+    title: "Expanded RL Practice 8 - Off-policy & Importance Sampling",
+    subtitle: "20 extra questions on target/behavior policies, importance sampling, and double learning.",
+    group: "RL Expanded Practice",
+    questions: rlExpanded.rl08,
+  },
+  {
+    id: "rle09",
+    title: "Expanded RL Practice 9 - Psychology & Neuroscience",
+    subtitle: "20 extra questions on prediction error, conditioning, dopamine, blocking, and stimulus traces.",
+    group: "RL Expanded Practice",
+    questions: rlExpanded.rl09,
+  },
+  {
+    id: "rle10",
+    title: "Expanded RL Practice 10 - Model-based RL",
+    subtitle: "20 extra questions on learned models, Dyna, prioritized sweeping, planning, and model error.",
+    group: "RL Expanded Practice",
+    questions: rlExpanded.rl10,
+  },
+  {
+    id: "rle11",
+    title: "Expanded RL Practice 11 - Search & Sample-based Planning",
+    subtitle: "20 extra questions on BFS, rollouts, MCTS phases, UCT, and search backups.",
+    group: "RL Expanded Practice",
+    questions: rlExpanded.rl11,
+  },
+  {
+    id: "rle12",
+    title: "Expanded RL Practice 12 - Policy Methods & Approximation",
+    subtitle: "20 extra questions on policy gradients, actor-critic, SGD, function approximation, and AlphaGo.",
+    group: "RL Expanded Practice",
+    questions: rlExpanded.rl12,
   },
 ];
 

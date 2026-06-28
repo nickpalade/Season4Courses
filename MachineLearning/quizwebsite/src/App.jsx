@@ -333,21 +333,14 @@ export default function App() {
       <header className="topbar">
         <div className="topbar-inner">
           <div className="brand">
-            <span className="brand-mark" aria-hidden="true">
-              <IconDescent size={16} />
-            </span>
-            <span className="brand-name">GRADIENT</span>
+            <span className="brand-name">ans<sup>*</sup></span>
             <span className="brand-crumb">
               <IconChevronRight size={13} aria-hidden="true" />
-              {selectedQuiz ? selectedQuiz.title : "ML Exam Lab"}
+              {selectedQuiz ? selectedQuiz.title : "Machine Learning"}
             </span>
           </div>
           <div className="topbar-right">
-            <span className="topbar-badge">
-              <IconBookmark size={15} filled aria-hidden="true" />
-              <b>{selectedQuiz ? flagged.size : QUIZZES.length}</b>
-              <small>{selectedQuiz ? "flagged" : "quizzes"}</small>
-            </span>
+            <span className="topbar-status" aria-label="Exam navigation">⌕ &nbsp; ◉ &nbsp; ? &nbsp; P</span>
           </div>
         </div>
       </header>

@@ -8,6 +8,16 @@ function formatElapsed(secs) {
   return `${m}:${String(s).padStart(2, "0")}`;
 }
 
+function formatAnsweredAt(value) {
+  return new Intl.DateTimeFormat(undefined, {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(new Date(value));
+}
+
 export default function Quiz({
   pool,
   mode,
@@ -61,10 +71,12 @@ export default function Quiz({
 
   const currentAnswer = answers[q.id] || {};
   const selected = currentAnswer.selected || [];
+  const crossed = currentAnswer.crossed || [];
   const openText = currentAnswer.text || "";
   const submitted = Boolean(currentAnswer.submitted);
   const revealed = revealedQuestionId === q.id;
   const selfGrade = currentAnswer.score ?? null;
+  const answeredAt = currentAnswer.answeredAt;
   const isFlagged = flagged.has(q.id);
   const isMulti = q.type === "multi";
   const isFirst = idx === 0;
@@ -73,6 +85,10 @@ export default function Quiz({
   const correctSet = new Set(q.correct);
   const answeredCount = pool.filter((item) => answers[item.id]?.submitted).length;
   const canReveal = mode !== "exam"; // exam mode = no spoilers
+  const questionTitle = q.title
+    ? [q.title, q.prompt].filter(Boolean).join(" ")
+    : q.prompt || q.description;
+  const questionBody = q.title ? q.description : null;
 
   // Keyboard shortcuts: ← / → navigate, 1-9 pick an option, Enter submits or
   // advances, F flags. Disabled while typing in the open-answer textarea.
@@ -95,9 +111,11 @@ export default function Quiz({
         else finish();
       } else if (k.toLowerCase() === "f") {
         toggleFlag();
-      } else if (q.type !== "open" && /^[1-9]$/.test(k)) {
-        const i = Number(k) - 1;
-        if (i < q.options.length) toggleOpt(i);
+      } else if (q.type !== "open" && /^Digit[1-9]$/.test(e.code)) {
+        const i = Number(e.code.slice(-1)) - 1;
+        if (i < q.options.length) {
+          toggleOpt(i);
+        }
       }
     }
     window.addEventListener("keydown", onKey);
@@ -121,29 +139,60 @@ export default function Quiz({
     setFlagged(next);
   }
 
+  function toggleCrossed(i) {
+    if (submitted) return;
+    const nextSelected = selected.filter((value) => value !== i);
+    const next = crossed.includes(i)
+      ? crossed.filter((value) => value !== i)
+      : [...crossed, i];
+    saveCurrent({ selected: nextSelected, crossed: next });
+  }
+
   function toggleOpt(i) {
     if (submitted) return;
     setSubmitWarning("");
     if (q.type === "mcq") {
-      saveCurrent({ selected: [i] });
+      const nextSelected = selected.includes(i) ? [] : [i];
+      saveCurrent({
+        selected: nextSelected,
+        crossed: crossed.filter((value) => value !== i),
+      });
       return;
     }
-    const next = selected.includes(i) ? selected.filter((x) => x !== i) : [...selected, i];
-    saveCurrent({ selected: next });
+    const next = selected.includes(i)
+      ? selected.filter((x) => x !== i)
+      : [...selected, i];
+    saveCurrent({
+      selected: next,
+      crossed: crossed.filter((value) => value !== i),
+    });
   }
 
   function submit() {
     setSubmitWarning("");
     if (q.type === "open") {
-      saveCurrent({ submitted: true });
+      saveCurrent({ submitted: true, answeredAt: new Date().toISOString() });
       return;
     }
     if (selected.length === 0) {
       setSubmitWarning("Choose at least one option before submitting.");
       return;
     }
+    if (q.ungraded) {
+      saveCurrent({
+        selected: [...selected],
+        submitted: true,
+        answeredAt: new Date().toISOString(),
+      });
+      return;
+    }
     const nextScore = scoreMulti(selected, q.correct, q.options.length);
-    saveCurrent({ selected: [...selected], score: nextScore, submitted: true });
+    saveCurrent({
+      selected: [...selected],
+      score: nextScore,
+      submitted: true,
+      answeredAt: new Date().toISOString(),
+    });
     if (mode === "practice" && nextScore < 1) {
       const next = new Set(flagged);
       next.add(q.id);
@@ -152,7 +201,13 @@ export default function Quiz({
   }
 
   function gradeOpen(g) {
-    saveCurrent({ score: g, open: true, text: openText, submitted: true });
+    saveCurrent({
+      score: g,
+      open: true,
+      text: openText,
+      submitted: true,
+      answeredAt: currentAnswer.answeredAt || new Date().toISOString(),
+    });
   }
 
   function goTo(nextIdx) {
@@ -210,7 +265,7 @@ export default function Quiz({
   }
 
   return (
-    <section className="quiz-panel">
+    <section className={`quiz-panel mode-${mode}`}>
       <div
         className="bar"
         role="progressbar"
@@ -248,11 +303,22 @@ export default function Quiz({
         </div>
       </div>
 
+      {isMulti && (
+        <div className="multi-select-intro">
+          <h2>Multi-select</h2>
+          <p>
+            To get the full mark you need to select all correct answers and none of the incorrect
+            answers. Multiple (or no) answers can be correct.
+          </p>
+        </div>
+      )}
+
       <div className="q-block">
         <span className="q-points">1.0p</span>
         <span className="q-index">{idx + 1}</span>
         <div className="q-content">
-          <h2 className="prompt" tabIndex={-1} ref={promptRef}>{q.prompt}</h2>
+          <h2 className="prompt" tabIndex={-1} ref={promptRef}>{questionTitle}</h2>
+          {questionBody && <p className="muted">{questionBody}</p>}
           <div className="q-tags">
             <span className="q-topic">{q.topic}</span>
             {q.difficulty && (
@@ -260,6 +326,12 @@ export default function Quiz({
             )}
             {isMulti && <span className="pill">multiple answers</span>}
           </div>
+
+          {q.image?.src && (
+            <figure className="question-figure">
+              <img src={q.image.src} alt={q.image.alt || "Question figure"} />
+            </figure>
+          )}
 
           {q.type === "open" ? (
         <textarea
@@ -269,22 +341,36 @@ export default function Quiz({
           disabled={submitted}
         />
       ) : (
-        <div className="options" role={isMulti ? "group" : "radiogroup"}>
+        <div className={`options ${isMulti ? "multi-options" : ""}`} role={isMulti ? "group" : "radiogroup"}>
           {q.options.map((opt, i) => {
             const picked = selected.includes(i);
             return (
-              <button
+              <div
                 key={i}
-                type="button"
-                className={`${optClass(i)} ${picked ? "picked" : ""}`}
-                onClick={() => toggleOpt(i)}
-                disabled={submitted}
-                role={isMulti ? "checkbox" : "radio"}
-                aria-checked={picked}
+                className={`${optClass(i)} ${picked ? "picked" : ""}${crossed.includes(i) ? " crossed" : ""}`}
               >
-                <span className="option-mark" aria-hidden="true" />
-                <span className="option-text">{opt}</span>
-              </button>
+                <button
+                  type="button"
+                  className="option-mark-button"
+                  onClick={() => toggleOpt(i)}
+                  disabled={submitted}
+                  role={isMulti ? "checkbox" : "radio"}
+                  aria-checked={picked}
+                  aria-label={`${picked ? "Deselect" : "Select"} option: ${opt}`}
+                >
+                  <span className="option-mark" aria-hidden="true" />
+                </button>
+                <button
+                  type="button"
+                  className="option-text-button"
+                  onClick={() => toggleCrossed(i)}
+                  disabled={submitted}
+                  aria-pressed={crossed.includes(i)}
+                  aria-label={`${crossed.includes(i) ? "Restore" : "Cross out"} option text: ${opt}`}
+                >
+                  <span className="option-text">{opt}</span>
+                </button>
+              </div>
             );
           })}
         </div>
@@ -333,7 +419,14 @@ export default function Quiz({
         </div>
       )}
 
-      {submitted && q.type !== "open" && mode === "practice" && (
+      {submitted && q.ungraded && (
+        <div className="feedback" role="status" aria-live="polite">
+          <div className="label">Answer recorded</div>
+          <div>No verified answer key is available for this question, so it is not scored.</div>
+        </div>
+      )}
+
+      {submitted && !q.ungraded && q.type !== "open" && mode === "practice" && (
         <div className={"feedback " + (score === 1 ? "good" : score === 0 ? "bad" : "")} role="status" aria-live="polite">
           <div className="label">
             {score === 1 ? "Correct" : score > 0 ? `Partial (${(score * 100).toFixed(0)}%)` : "Incorrect"}
@@ -342,7 +435,9 @@ export default function Quiz({
         </div>
       )}
 
-          <div className="updated-note">Updated 3 weeks ago</div>
+          <div className="updated-note">
+            {answeredAt ? `Answered ${formatAnsweredAt(answeredAt)}` : "Not answered yet"}
+          </div>
         </div>
       </div>
 
@@ -392,7 +487,7 @@ export default function Quiz({
                 onClick={() => goTo(i)}
                 title={`Go to question ${i + 1}`}
               >
-                {i + 1}
+                <span className="q-nav-num-face">{i + 1}</span>
               </button>
             );
           })}

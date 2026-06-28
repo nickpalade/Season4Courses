@@ -69,7 +69,9 @@ textarea { font: inherit; }
 button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
-.opt:focus-visible {
+.opt:focus-visible,
+.option-mark-button:focus-visible,
+.option-text-button:focus-visible {
   outline: 3px solid var(--purple-line);
   outline-offset: 2px;
 }
@@ -543,6 +545,27 @@ section {
   padding: 3px 10px;
 }
 
+.question-figure {
+  margin: 14px 0 18px;
+  max-width: min(100%, 760px);
+}
+
+.question-figure img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 360px;
+  object-fit: contain;
+}
+
+.review-figure {
+  margin: 12px 0 14px;
+}
+
+.review-figure img {
+  max-height: 260px;
+}
+
 /* ============ OPTIONS (ANS radio rows) ============ */
 
 .options { display: grid; gap: 4px; }
@@ -550,24 +573,50 @@ section {
 .opt {
   display: grid;
   grid-template-columns: 26px 1fr;
-  align-items: start;
+  align-items: center;
   gap: 13px;
   background: transparent;
   border: 0;
   border-radius: 8px;
   color: var(--slate);
-  cursor: pointer;
+  cursor: default;
   padding: 12px 12px;
   text-align: left;
-  transition: background 120ms ease;
 }
-.opt:hover:not(:disabled) { background: #faf9ff; }
 .opt:disabled { cursor: default; }
+
+.option-mark-button,
+.option-text-button {
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+.option-mark-button:disabled,
+.option-text-button:disabled {
+  cursor: default;
+}
+.option-mark-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  align-self: center;
+}
+.option-text-button {
+  min-width: 0;
+}
 
 .option-mark {
   width: 22px;
   height: 22px;
-  margin-top: 1px;
+  margin-top: 0;
   border: 2px solid #c2c2d4;
   border-radius: 50%;
   background: #fff;
@@ -575,7 +624,7 @@ section {
   position: relative;
   transition: border-color 120ms ease;
 }
-.opt:hover:not(:disabled) .option-mark { border-color: var(--purple); }
+.option-mark-button:hover:not(:disabled) .option-mark { border-color: var(--purple); }
 
 .opt.picked .option-mark,
 .opt.sel .option-mark {
@@ -595,6 +644,8 @@ section {
   line-height: 1.5;
   padding-top: 1px;
 }
+.opt.crossed { color: #7d8795; }
+.opt.crossed .option-text { text-decoration: line-through; text-decoration-thickness: 1.5px; }
 
 /* practice-mode correctness (ANS exam itself hides this) */
 .opt.correct, .opt.expected { background: var(--green-soft); }
@@ -1028,4 +1079,208 @@ textarea:focus { border-color: var(--purple); }
   .home-header { flex-direction: column; align-items: flex-start; }
   .home-quiz-title { align-items: flex-start; text-align: left; }
   .quiz-grid { grid-template-columns: 1fr; }
+}
+
+/* ============ ANS DIGITAL TEST SHELL ============
+   The active assessment deliberately uses a viewport-locked layout: only the
+   question workspace scrolls; the header and question navigator never move. */
+.brand-name {
+  color: #fff;
+  font-family: Georgia, serif;
+  font-size: 35px;
+  font-weight: 800;
+  letter-spacing: -0.08em;
+  line-height: 1;
+}
+.brand-name sup { color: #ffd15c; font: 700 18px/1 system-ui, sans-serif; vertical-align: top; }
+.topbar-status { font-size: 22px; letter-spacing: 9px; color: #fff; white-space: nowrap; }
+
+.app-shell:has(.quiz-panel) { padding-bottom: 0; }
+.app-shell:has(.quiz-panel) .topbar {
+  position: fixed; inset: 0 0 auto; z-index: 30; height: 65px;
+  background: #071b62; pointer-events: none;
+}
+.app-shell:has(.quiz-panel) .topbar-inner {
+  width: 100%; height: 65px; padding: 0 14px;
+}
+.app-shell:has(.quiz-panel) .topbar-status { display: none; }
+.app-shell:has(.quiz-panel) .brand-crumb { color: #fff; font-size: 16px; font-weight: 600; }
+.app-shell:has(.quiz-panel) .subbar {
+  position: fixed; top: 65px; right: 0; left: 0; z-index: 30;
+  height: 45px; padding: 10px 16px;
+  background: #fff; border-bottom: 2px solid #7045ff; color: #633bff;
+  font-weight: 500; letter-spacing: .08em;
+}
+.app-shell:has(.quiz-panel) .app { width: 100%; margin: 0; padding: 0; }
+.app-shell:has(.quiz-panel) .quiz-panel {
+  position: fixed; inset: 110px 0 0; z-index: 1;
+  display: block; overflow-y: auto;
+  background: #fff; border: 0; border-radius: 0; box-shadow: none;
+  padding: 48px clamp(30px, 10.1vw, 158px) 112px;
+}
+.app-shell:has(.quiz-panel) .quiz-panel > .bar { display: none; }
+.app-shell:has(.quiz-panel) .q-topline {
+  min-height: 38px; border: 0; padding: 0; margin: 0 0 26px;
+}
+.app-shell:has(.quiz-panel) .q-eyebrow {
+  color: #15233e; font-size: 18px; font-weight: 500;
+}
+.app-shell:has(.quiz-panel) .q-answered,
+.app-shell:has(.quiz-panel) .q-timer,
+.app-shell:has(.quiz-panel) .q-exit { display: none; }
+.app-shell:has(.quiz-panel) .bookmark { color: #14233e; padding: 3px; }
+.app-shell:has(.quiz-panel) .bookmark:hover { color: #633bff; background: transparent; }
+.app-shell:has(.quiz-panel) .q-block { grid-template-columns: 36px 18px minmax(0, 1fr); gap: 4px 10px; }
+.app-shell:has(.quiz-panel) .q-points { color: #273f61; font-weight: 400; }
+.app-shell:has(.quiz-panel) .q-index { color: #14233e; font-size: 16px; font-weight: 400; }
+.app-shell:has(.quiz-panel) .multi-select-intro {
+  max-width: 1120px;
+  margin: 0 0 12px 40px;
+}
+.app-shell:has(.quiz-panel) .multi-select-intro h2 {
+  margin: 0 0 24px;
+  color: #1f2d3f;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+.app-shell:has(.quiz-panel) .multi-select-intro p {
+  margin: 0 0 4px;
+  color: #404b5a;
+  font-size: 15px;
+  font-style: italic;
+  line-height: 1.55;
+}
+.app-shell:has(.quiz-panel) .prompt {
+  max-width: 980px; color: #14233e; font-size: 16px; font-weight: 400; line-height: 1.5;
+}
+.app-shell:has(.quiz-panel) .q-tags { display: none; }
+.app-shell:has(.quiz-panel) .question-figure {
+  max-width: min(100%, 760px);
+  margin: 18px 0 20px;
+}
+.app-shell:has(.quiz-panel) .question-figure img {
+  max-height: 330px;
+}
+.app-shell:has(.quiz-panel) .options { gap: 9px; margin-top: 16px; }
+.app-shell:has(.quiz-panel) .opt { max-width: 780px; padding: 7px 10px; gap: 13px; color: #14233e; }
+.app-shell:has(.quiz-panel) .option-mark { width: 24px; height: 24px; border-color: #858585; border-width: 2px; }
+.app-shell:has(.quiz-panel) .option-mark-button:hover:not(:disabled) .option-mark {
+  border-color: #633bff;
+  box-shadow: 0 0 0 5px #f3efff;
+}
+.app-shell:has(.quiz-panel) .multi-options {
+  gap: 14px;
+  margin-top: 18px;
+}
+.app-shell:has(.quiz-panel) .multi-options .opt {
+  grid-template-columns: 20px minmax(0, 1fr);
+  max-width: 860px;
+  gap: 13px;
+  padding: 6px 10px;
+}
+.app-shell:has(.quiz-panel) .multi-options .option-mark {
+  width: 17px;
+  height: 17px;
+  margin-top: 0;
+  border: 2px solid #4b4f55;
+  border-radius: 2px;
+}
+.app-shell:has(.quiz-panel) .multi-options .option-text {
+  color: #4d5765;
+  font-size: 16px;
+  line-height: 1.45;
+}
+.app-shell:has(.quiz-panel) .opt.picked .option-mark,
+.app-shell:has(.quiz-panel) .opt.sel .option-mark { border-color: #633bff; }
+.app-shell:has(.quiz-panel) .opt.picked .option-mark::after,
+.app-shell:has(.quiz-panel) .opt.sel .option-mark::after { background: #633bff; inset: 4px; }
+.app-shell:has(.quiz-panel) .multi-options .opt.picked .option-mark,
+.app-shell:has(.quiz-panel) .multi-options .opt.sel .option-mark {
+  background: #633bff;
+  border-color: #633bff;
+}
+.app-shell:has(.quiz-panel) .multi-options .opt.picked .option-mark::after,
+.app-shell:has(.quiz-panel) .multi-options .opt.sel .option-mark::after {
+  content: "";
+  inset: auto;
+  left: 4px;
+  top: 0;
+  width: 5px;
+  height: 10px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  border-radius: 0;
+  background: transparent;
+  transform: rotate(45deg);
+}
+.app-shell:has(.quiz-panel) .option-text { font-size: 16px; padding-top: 1px; }
+.app-shell:has(.quiz-panel) .opt.crossed { background: transparent; color: #7d8795; }
+.app-shell:has(.quiz-panel) .updated-note { max-width: 1220px; margin-top: 25px; color: #68788f; }
+.app-shell:has(.quiz-panel) .feedback,
+.app-shell:has(.quiz-panel) .warning { max-width: 900px; margin: 20px 0; }
+
+/* ANS places submission in the top chrome, not in the reading flow. */
+.app-shell:has(.quiz-panel.mode-exam) .actions {
+  position: fixed; top: 7px; right: 46px; z-index: 40; margin: 0;
+}
+.app-shell:has(.quiz-panel.mode-exam) .actions .secondary-action { display: none; }
+.app-shell:has(.quiz-panel.mode-exam) .actions button:not(.secondary-action) {
+  min-width: 104px; padding: 11px 20px; border-radius: 11px;
+  background: #ffb99b; color: #071b62; font-size: 16px; font-weight: 500;
+}
+.app-shell:has(.quiz-panel.mode-practice) .actions {
+  position: relative; z-index: auto; top: auto; right: auto;
+  justify-content: flex-end; gap: 10px;
+  margin: 32px 0 0; padding: 20px 0 0; border-top: 1px solid #e1e4e9;
+}
+.app-shell:has(.quiz-panel.mode-practice) .right-actions { gap: 10px; }
+.app-shell:has(.quiz-panel.mode-practice) .actions .secondary-action {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 112px; min-height: 46px; padding: 10px 20px;
+  border: 1px solid #dce1e9; border-radius: 7px; background: #fff; color: #14233e;
+  font-size: 15px; font-weight: 600;
+}
+.app-shell:has(.quiz-panel.mode-practice) .actions .secondary-action:hover:not(:disabled) {
+  background: #f5f4ff; border-color: #bfb1ff; color: #4927d4;
+}
+.app-shell:has(.quiz-panel.mode-practice) .actions button:not(.secondary-action) {
+  min-width: 112px; min-height: 46px; padding: 10px 20px; border-radius: 7px;
+  background: #ffb99b; color: #071b62; font-size: 15px; font-weight: 600;
+}
+.app-shell:has(.quiz-panel) .q-nav {
+  position: fixed; right: 0; bottom: 0; left: 0; z-index: 30;
+  height: 94px; margin: 0; padding: 22px clamp(16px, 4vw, 59px) 15px;
+  border: 0; border-radius: 0; background: #f5f5f5; gap: 13px;
+}
+.app-shell:has(.quiz-panel) .q-nav-scroll { gap: 8px; padding: 0 5px 3px; }
+.app-shell:has(.quiz-panel) .q-nav-num {
+  display: grid; place-items: center; min-width: 53px; height: 52px; padding: 6px;
+  border: 0; border-radius: 8px; background: #fff; color: #24405f; font-weight: 400;
+}
+.app-shell:has(.quiz-panel) .q-nav-num-face {
+  display: grid; place-items: center; width: 100%; height: 100%; border: 1px solid #d6dde6;
+  border-radius: 4px; background: #fff; font-variant-numeric: tabular-nums;
+}
+.app-shell:has(.quiz-panel) .q-nav-num.current {
+  background: #fff; border-color: #fff; box-shadow: none; color: #fff;
+}
+.app-shell:has(.quiz-panel) .q-nav-num.answered { background: #fff; border-color: #fff; }
+.app-shell:has(.quiz-panel) .q-nav-num.answered .q-nav-num-face { background: #ffd7c3; border-color: #ffd7c3; }
+.app-shell:has(.quiz-panel) .q-nav-num.current {
+  background: #fff; border-color: #fff; box-shadow: none; color: #fff;
+}
+.app-shell:has(.quiz-panel) .q-nav-num.current .q-nav-num-face {
+  background: #633bff; border-color: #633bff; box-shadow: inset 0 -4px 0 #fff;
+}
+.app-shell:has(.quiz-panel) .q-nav-arrows { gap: 10px; }
+.app-shell:has(.quiz-panel) .q-nav-arrows button {
+  width: 38px; height: 44px; border: 0; background: transparent; color: #14233e; border-radius: 0;
+}
+@media (max-width: 760px) {
+  .app-shell:has(.quiz-panel) .brand-crumb { display: none; }
+  .app-shell:has(.quiz-panel) .topbar-status { font-size: 15px; letter-spacing: 4px; }
+  .app-shell:has(.quiz-panel) .quiz-panel { padding: 30px 20px 112px; }
+  .app-shell:has(.quiz-panel) .q-nav { padding: 22px 11px 13px; }
+  .app-shell:has(.quiz-panel) .q-nav-num { min-width: 42px; }
 }

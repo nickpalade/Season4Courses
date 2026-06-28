@@ -41,18 +41,33 @@ log("breadcrumb:", JSON.stringify(crumb));
 // 3) Start Practice
 await page.getByRole("button", { name: /Practice/ }).first().click();
 await page.waitForSelector(".q-block");
+const practiceControls = await page.locator(".mode-practice .actions button").allTextContents();
+for (const label of ["Previous", "Reveal answer", "Submit", "Next"]) {
+  if (!practiceControls.some((text) => text.trim() === label)) {
+    throw new Error(`Practice control missing: ${label}`);
+  }
+}
 await shot("03-quiz-start");
 
 // nav footer numbers
 const navNums = await page.locator(".q-nav-num").count();
 log("navigator numbers:", navNums);
 
-// 4) Pick first option + submit
-await page.locator(".opt").first().click();
+// 4) Cross out first option via text, then pick it via its checkbox/radio control + submit
+await page.locator(".option-text-button").first().click();
+await page.waitForTimeout(100);
+if (!(await page.locator(".opt").first().evaluate((el) => el.classList.contains("crossed")))) {
+  throw new Error("Text click did not eliminate an option");
+}
+await page.locator(".option-text-button").first().click();
+await page.locator(".option-mark-button").first().click();
 await page.waitForTimeout(150);
 await shot("04-option-picked");
 await page.getByRole("button", { name: "Submit" }).click();
 await page.waitForSelector(".feedback");
+if (!/^Answered /.test(await page.locator(".updated-note").innerText())) {
+  throw new Error("Submitted question does not show an answer timestamp");
+}
 await shot("05-feedback");
 
 // 5) Bookmark toggles state (Q may be auto-flagged in practice, so test the flip)
@@ -78,7 +93,7 @@ for (let i = 0; i < total; i++) {
   await page.waitForTimeout(50);
   const submitBtn = page.getByRole("button", { name: "Submit" });
   if (!(await submitBtn.count())) continue; // already submitted
-  const opt = page.locator(".opt").first();
+  const opt = page.locator(".option-mark-button").first();
   const textarea = page.locator("textarea");
   if (await opt.count()) {
     await opt.click();
